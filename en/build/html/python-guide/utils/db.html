@@ -1,0 +1,1101 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Vector Database Utilities" href="vdb.html"><link rel="prev" title="Miscellaneous Utilities" href="basic/misc_utils.html">
+        <link rel="prefetch" href="../../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Database Utilities - AgentHeaven Doc</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven is in active development. Features may change. 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">AgentHeaven Doc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/philosophy.html">Philosophy &amp; Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/architecture.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/learning.html">Learning AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a><input aria-label="Toggle navigation of Getting Started" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/installation.html">Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/setup.html">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/5min-quickstart.html">5min Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/60min-tutorial.html">60min Tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../configuration/index.html">Configuration</a><input aria-label="Toggle navigation of Configuration" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/core.html">Core Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/llm.html">LLM Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/database.html">Database Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/vdb.html">Vector Database Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Main Guide (Python)</a><input aria-label="Toggle navigation of Main Guide (Python)" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="basic/index.html">Basic Utilities</a><input aria-label="Toggle navigation of Basic Utilities" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="basic/config_utils.html">Configuration Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="basic/hash_utils.html">Hashing Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="basic/parallel_utils.html">Multi-Thread Parallelization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="basic/jinja_utils.html">Template Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="basic/serialize_utils.html">Serialization Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="basic/str_utils.html">String Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="basic/misc_utils.html">Miscellaneous Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Database Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vdb.html">Vector Database Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ukf/index.html">UKF (Unified Knowledge Format)</a><input aria-label="Toggle navigation of UKF (Unified Knowledge Format)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/data-types.html">UKF Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/builtin-templates.html">Built-in Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../klengine/index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../klengine/base.html">BaseKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klengine/facet.html">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klengine/daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klengine/vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../toolspec/index.html">ToolSpec</a><input aria-label="Toggle navigation of ToolSpec" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../toolspec/base.html">ToolSpec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolspec/builtins.html">Built-in ToolSpecs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../agent.html">Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cli-guide/index.html">CLI Guide</a><input aria-label="Toggle navigation of CLI Guide" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/repo-management.html">Repo Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/llm-inference.html">LLM Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/llm-session.html">LLM Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/prompt-management.html">Prompt Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/knowledge-management.html">Knowledge Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui-guide/index.html">GUI Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../example-applications/index.html">Example Applications</a><input aria-label="Toggle navigation of Example Applications" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../example-applications/nl2sql-system.html">NL2SQL System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../contribution/index.html">Contribution</a><input aria-label="Toggle navigation of Contribution" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/overview.html">Contribution Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/for_developers.html">Guide for Developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/feature_workflow.html">Feature Addition Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/srs.html">Simple SRS</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../contribution/ar/index.html">Allocated Requirements (AR)</a><input aria-label="Toggle navigation of Allocated Requirements (AR)" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/base_ukf.html">BaseUKF - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/cache.html">Cache - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/llm.html">LLM - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/prompts.html">Prompts - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/database.html">Database - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/klstore.html">KLStore - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/klengine.html">KLEngine - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/klbase.html">KLBase - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/agent.html">Agent - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/sie.html">Structured Information Extraction (SIE) - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/cli.html">Command Line Interface (CLI) - Allocated Requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api_index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api/ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../community/index.html">Community &amp; Support</a><input aria-label="Toggle navigation of Community &amp; Support" class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" role="switch" type="checkbox"/><label for="toctree-checkbox-36"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../community/resources.html">Community Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/en/source/python-guide/utils/db.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/en/source/python-guide/utils/db.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="database-utilities">
+<h1>Database Utilities<a class="headerlink" href="#database-utilities" title="Link to this heading">¶</a></h1>
+<p>This guide shows how to interact with databases in AgentHeaven using the unified Database interface with SQLAlchemy backend and YAML configuration support.</p>
+<section id="database-architecture">
+<h2>1. Database Architecture<a class="headerlink" href="#database-architecture" title="Link to this heading">¶</a></h2>
+<p>AgentHeaven provides a universal database connector built on <a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy</a> that offers a clean, intuitive interface for database operations across different providers, and uses fallback to SQL queries with <a class="reference external" href="https://sqlglot.com/">SQLGlot</a> SQL transpilation for robustness. The Database class uses YAML configuration for connection management and supports multiple database backends.</p>
+<p><strong>Currently tested backends:</strong></p>
+<ul class="simple">
+<li><p>PostgreSQL</p></li>
+<li><p>MySQL</p></li>
+<li><p>DuckDB</p></li>
+<li><p>SQLite</p></li>
+</ul>
+<p>Similar to <code class="docutils literal notranslate"><span class="pre">LLM</span></code>, the <code class="docutils literal notranslate"><span class="pre">Database</span></code> should be used as instances, which, in normal circumstances store only the config/parameters to connect to a database, and not the connection itself.</p>
+<p>All database connections use the standard <a class="reference external" href="https://docs.sqlalchemy.org/en/20/core/engines.html">SQLAlchemy URLs</a> format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">dialect</span><span class="o">&gt;+&lt;</span><span class="n">driver</span><span class="o">&gt;</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">username</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">password</span><span class="o">&gt;@&lt;</span><span class="n">host</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;/&lt;</span><span class="n">database</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To create a Database instance, provide the <code class="docutils literal notranslate"><span class="pre">provider</span></code> name defined in your YAML config along with any connection parameters (recommended), or manually specify all connection parameters directly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">Database</span>
+
+<span class="c1"># Create database instances using YAML configuration</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;:memory:&quot;</span><span class="p">)</span>
+<span class="n">pg_db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;pg&quot;</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;mydb&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Tip:</strong> AgentHeaven resolves these provider entries at runtime through <code class="docutils literal notranslate"><span class="pre">resolve_db_config</span></code> with defaults from the YAML config. For detailed configuration options, see the <a class="reference internal" href="../../configuration/database.html"><span class="std std-doc">Database Configuration</span></a> guide.</p>
+</div></blockquote>
+<br/>
+</section>
+<section id="database-connection">
+<h2>2. Database Connection<a class="headerlink" href="#database-connection" title="Link to this heading">¶</a></h2>
+<section id="basic-connection">
+<h3>2.1. Basic Connection<a class="headerlink" href="#basic-connection" title="Link to this heading">¶</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">connect()</span></code> to start a persistent database connection, and use <code class="docutils literal notranslate"><span class="pre">close()</span></code> to end it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">Database</span>
+
+<span class="c1"># Initialize with immediate connection</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;test.db&quot;</span><span class="p">,</span> <span class="n">connect</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Or connect later</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;test.db&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="c1"># Check connection status</span>
+<span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">connected</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Database is connected&quot;</span><span class="p">)</span>
+
+<span class="c1"># Close connection</span>
+<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice the transaction handling behavior during close: by default, <code class="docutils literal notranslate"><span class="pre">commit=True</span></code>, so transactions will be committed by default. When setting <code class="docutils literal notranslate"><span class="pre">commit=False</span></code>, transactions will be rolled back instead.</p>
+<p>During connection, use <code class="docutils literal notranslate"><span class="pre">db.conn</span></code> as a property to access the connection object.</p>
+<br/>
+</section>
+<section id="context-manager-recommended">
+<h3>2.2. Context Manager (Recommended)<a class="headerlink" href="#context-manager-recommended" title="Link to this heading">¶</a></h3>
+<p>The Database class supports context manager usage for automatic transaction handling:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Automatic transaction management</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;test.db&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">db</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO users (name) VALUES (:name)&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">})</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;UPDATE users SET active = TRUE WHERE name = :name&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">})</span>
+    <span class="c1"># Automatically commits on success, rolls back on exception</span>
+</pre></div>
+</div>
+<p>It automatically runs <code class="docutils literal notranslate"><span class="pre">commit()</span></code> on success, and <code class="docutils literal notranslate"><span class="pre">rollback()</span></code> on exception when exiting the context manager.</p>
+<br/>
+</section>
+<section id="manual-transaction-control">
+<h3>2.3. Manual Transaction Control<a class="headerlink" href="#manual-transaction-control" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;test.db&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO users (name) VALUES (:name)&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">},</span> <span class="n">autocommit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;UPDATE users SET active = TRUE WHERE name = :name&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">},</span> <span class="n">autocommit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="sql-execution">
+<h2>3. SQL Execution<a class="headerlink" href="#sql-execution" title="Link to this heading">¶</a></h2>
+<section id="raw-sql-execution">
+<h3>3.1. Raw SQL Execution<a class="headerlink" href="#raw-sql-execution" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">execute</span></code> method handles raw SQL queries with parameter binding:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple query</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users&quot;</span><span class="p">)</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+
+<span class="c1"># Parameterized query with named parameters</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE id = :id&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+
+<span class="c1"># Insert with parameters</span>
+<span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO users (name, email) VALUES (:name, :email)&quot;</span><span class="p">,</span> 
+          <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;alice@example.com&quot;</span><span class="p">},</span> 
+          <span class="n">autocommit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Reserved transpilation flag — planned for future cross-dialect support</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users LIMIT 10&quot;</span><span class="p">,</span> <span class="n">transpile</span><span class="o">=</span><span class="s2">&quot;postgresql&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">transpile</span></code> argument is currently reserved. The runtime ignores it today but keeps the placeholder for upcoming SQL dialect conversions.</p>
+</div></blockquote>
+<br/>
+</section>
+<section id="sqlalchemy-orm-execution">
+<h3>3.2. SQLAlchemy ORM Execution<a class="headerlink" href="#sqlalchemy-orm-execution" title="Link to this heading">¶</a></h3>
+<p>For SQLAlchemy ORM operations, use the <code class="docutils literal notranslate"><span class="pre">orm_execute</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">select</span><span class="p">,</span> <span class="n">insert</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">delete</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">text</span>
+
+<span class="c1"># Select statement</span>
+<span class="n">stmt</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">users_table</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">users_table</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">orm_execute</span><span class="p">(</span><span class="n">stmt</span><span class="p">)</span>
+
+<span class="c1"># Insert statement</span>
+<span class="n">stmt</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">users_table</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;alice@example.com&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">orm_execute</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">autocommit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Update statement</span>
+<span class="n">stmt</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">users_table</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">users_table</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">orm_execute</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">autocommit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Delete statement</span>
+<span class="n">stmt</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">users_table</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">users_table</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">orm_execute</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">autocommit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="auto-commit">
+<h3>3.3. Auto-Commit<a class="headerlink" href="#auto-commit" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">execute</span></code> and <code class="docutils literal notranslate"><span class="pre">orm_execute</span></code> methods accept an <code class="docutils literal notranslate"><span class="pre">autocommit</span></code> flag. When <code class="docutils literal notranslate"><span class="pre">autocommit=True</span></code>, AgentHeaven executes the statement and commits it immediately while keeping the connection open for subsequent work. This is convenient for one-off DDL/DML operations that should not depend on an outer transaction.</p>
+<p>Specifically, when setting <code class="docutils literal notranslate"><span class="pre">autocommit=True</span></code>:</p>
+<ul class="simple">
+<li><p>If there is an active connection with a pending transaction outside a context manager, that transaction is committed first to ensure a clean state.</p></li>
+<li><p>The statement is executed using the active connection (opening one if needed).</p></li>
+<li><p>The statement is committed immediately after execution.</p></li>
+<li><p>The connection remains open and ready for reuse.</p></li>
+<li><p>If currently inside a context manager (of the same db), attempting to use autocommit mode will raise a <code class="docutils literal notranslate"><span class="pre">DatabaseError</span></code>.</p></li>
+</ul>
+<p>Notice that when the SQL fails on an active connection with a transaction, the entire transaction will be rolled back. Therefore, it is generally not recommended to use autocommit together with any active transaction. If you need an operation that always commits independently, call <code class="docutils literal notranslate"><span class="pre">execute(...,</span> <span class="pre">autocommit=True)</span></code> on a separate <code class="docutils literal notranslate"><span class="pre">Database</span></code> instance (make sure your database backend supports parallelism) or outside of <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">db:</span></code> blocks.</p>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># One-off commit (safe outside a context manager, and preferably outside any transactions)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO users (name) VALUES (:name)&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">},</span> <span class="n">autocommit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Inside a context manager: do NOT use autocommit=True</span>
+<span class="k">with</span> <span class="n">db</span><span class="p">:</span>
+    <span class="c1"># WRONG: this will raise DatabaseError</span>
+    <span class="c1"># db.execute(&quot;INSERT INTO users (name) VALUES (:name)&quot;, params={&quot;name&quot;: &quot;Bob&quot;}, autocommit=True)</span>
+
+    <span class="c1"># Correct: use autocommit=False (default) and let context manager commit on exit</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO users (name) VALUES (:name)&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">},</span> <span class="n">autocommit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># No need to call db.commit() - the context manager handles it</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="sqlresponse-class">
+<h3>3.4. SQLResponse Class<a class="headerlink" href="#sqlresponse-class" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Database</span></code>’s <code class="docutils literal notranslate"><span class="pre">execute</span></code> functions by default return a <code class="docutils literal notranslate"><span class="pre">SQLResponse</span></code> object for query statements. The <code class="docutils literal notranslate"><span class="pre">SQLResponse</span></code> class is an enhanced wrapper around SQLAlchemy’s <code class="docutils literal notranslate"><span class="pre">CursorResult</span></code> that provides convenient data access methods.</p>
+<section id="basic-usage">
+<h4>3.4.1. Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT id, name, email FROM users&quot;</span><span class="p">)</span>
+
+<span class="c1"># Access result properties</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Row count: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">row_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last row ID: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">lastrowid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fetch data as generator of dictionaries</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="data-access-methods">
+<h4>3.4.2. Data Access Methods<a class="headerlink" href="#data-access-methods" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT id, name, email FROM users LIMIT 5&quot;</span><span class="p">)</span>
+
+<span class="c1"># Index-based access</span>
+<span class="n">first_row</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>           <span class="c1"># First row as dict</span>
+<span class="n">first_three</span> <span class="o">=</span> <span class="n">result</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>        <span class="c1"># First 3 rows as list</span>
+<span class="n">column_data</span> <span class="o">=</span> <span class="n">result</span><span class="p">[:,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="c1"># All names as list</span>
+<span class="n">single_cell</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="c1"># First user&#39;s name</span>
+
+<span class="c1"># Convert to different formats</span>
+<span class="n">dict_list</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_list</span><span class="p">(</span><span class="n">row_fmt</span><span class="o">=</span><span class="s2">&quot;dict&quot;</span><span class="p">)</span>   <span class="c1"># List of dictionaries</span>
+<span class="n">tuple_list</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_list</span><span class="p">(</span><span class="n">row_fmt</span><span class="o">=</span><span class="s2">&quot;tuple&quot;</span><span class="p">)</span> <span class="c1"># List of tuples</span>
+
+<span class="c1"># Get length</span>
+<span class="n">total_rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="resource-management">
+<h4>3.4.3. Resource Management<a class="headerlink" href="#resource-management" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM large_table&quot;</span><span class="p">)</span>
+<span class="c1"># ... process data ...</span>
+<span class="n">result</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># Explicitly close the cursor</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+</section>
+<section id="utilities">
+<h2>4. Utilities<a class="headerlink" href="#utilities" title="Link to this heading">¶</a></h2>
+<section id="implementation">
+<h3>4.1. Implementation<a class="headerlink" href="#implementation" title="Link to this heading">¶</a></h3>
+<p>The Database class implements a dual-approach system:</p>
+<ol class="arabic simple">
+<li><p><strong>Primary SQLAlchemy Interface</strong>: Uses SQLAlchemy’s reflection and inspection APIs for database metadata operations.</p></li>
+<li><p><strong>SQL Fallback</strong>: Falls back to raw SQL queries when SQLAlchemy operations fail or are not supported. It first attempts to find built-in SQLs in <code class="docutils literal notranslate"><span class="pre">resources</span></code> that is guaranteed to be correct, then attempts to use SQLGlot upon missing dialects.</p></li>
+</ol>
+<p>This approach prioritizes the robust ORM approach provided by SQLAlchemy, and ensures maximum compatibility across different database backends through built-in SQLs or SQLGlot transpilation.</p>
+<p>Here is the pseudo code of the implementaiton of utilities:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pseudo-code example of automatic fallback in action</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">db_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Try SQLAlchemy inspection first</span>
+        <span class="n">inspector</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">inspector</span><span class="o">.</span><span class="n">get_table_names</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="c1"># Fall back to raw SQL</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
+</pre></div>
+</div>
+</section>
+<section id="database-inspection">
+<h3>4.2. Database Inspection<a class="headerlink" href="#database-inspection" title="Link to this heading">¶</a></h3>
+<section id="table-information">
+<h4>4.2.1. Table Information<a class="headerlink" href="#table-information" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get all table names</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">db_tabs</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tables: </span><span class="si">{</span><span class="n">tables</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get all view names  </span>
+<span class="n">views</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">db_views</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Views: </span><span class="si">{</span><span class="n">views</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="column-information">
+<h4>4.2.2. Column Information<a class="headerlink" href="#column-information" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get column names for a table</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">tab_cols</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User columns: </span><span class="si">{</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get primary key columns</span>
+<span class="n">primary_keys</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">tab_pks</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Primary keys: </span><span class="si">{</span><span class="n">primary_keys</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get foreign key information</span>
+<span class="n">foreign_keys</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">tab_fks</span><span class="p">(</span><span class="s2">&quot;orders&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">fk</span> <span class="ow">in</span> <span class="n">foreign_keys</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FK: </span><span class="si">{</span><span class="n">fk</span><span class="p">[</span><span class="s1">&#39;col_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">fk</span><span class="p">[</span><span class="s1">&#39;tab_ref&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">fk</span><span class="p">[</span><span class="s1">&#39;col_ref&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get column type</span>
+<span class="n">column_type</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">col_type</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;created_at&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;created_at type: </span><span class="si">{</span><span class="n">column_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="data-analysis">
+<h3>4.3. Data Analysis<a class="headerlink" href="#data-analysis" title="Link to this heading">¶</a></h3>
+<section id="row-counting">
+<h4>4.3.1. Row Counting<a class="headerlink" href="#row-counting" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get total row count for a table</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">row_count</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total users: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="column-values">
+<h4>4.3.2. Column Values<a class="headerlink" href="#column-values" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get distinct values in a column</span>
+<span class="n">distinct_statuses</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">col_distincts</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User statuses: </span><span class="si">{</span><span class="n">distinct_statuses</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get all values (including duplicates)</span>
+<span class="n">all_names</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">col_enums</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All user names: </span><span class="si">{</span><span class="n">all_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get non-null values only</span>
+<span class="n">active_emails</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">col_nonnulls</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Active email addresses: </span><span class="si">{</span><span class="n">active_emails</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="frequencies">
+<h4>4.3.3. Frequencies<a class="headerlink" href="#frequencies" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get value frequencies for a column</span>
+<span class="n">status_frequencies</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">col_freqs</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">status_frequencies</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">freq</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">freq</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> users&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get top K most frequent values</span>
+<span class="n">top_domains</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">col_freqk</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;email_domain&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">domain</span> <span class="ow">in</span> <span class="n">top_domains</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">domain</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">domain</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> users&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="data-manipulation">
+<h3>4.4. Data Manipulation<a class="headerlink" href="#data-manipulation" title="Link to this heading">¶</a></h3>
+<p>Notice that all data manipulation utilities commit any pending transaction before they run <strong>only when the database is not currently inside a context manager</strong>, ensuring <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">db:</span></code> blocks keep full control of their own transactions.</p>
+<section id="clear-table-data">
+<h4>4.4.1. Clear Table Data<a class="headerlink" href="#clear-table-data" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove all rows from a table (keeps structure)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">clear_tab</span><span class="p">(</span><span class="s2">&quot;temp_data&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All temp data cleared&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="drop-objects">
+<h4>4.4.2. Drop Objects<a class="headerlink" href="#drop-objects" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop a table completely</span>
+<span class="n">db</span><span class="o">.</span><span class="n">drop_tab</span><span class="p">(</span><span class="s2">&quot;old_table&quot;</span><span class="p">)</span>
+
+<span class="c1"># Drop a view</span>
+<span class="n">db</span><span class="o">.</span><span class="n">drop_view</span><span class="p">(</span><span class="s2">&quot;old_view&quot;</span><span class="p">)</span>
+
+<span class="c1"># Clear all data from all tables</span>
+<span class="n">db</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="reset">
+<h4>4.4.3. Reset<a class="headerlink" href="#reset" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop the entire database</span>
+<span class="n">db</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+
+<span class="c1"># Reinitialize the database</span>
+<span class="c1"># This is achieved by dropping the database and starting a new connection</span>
+<span class="n">db</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">connect</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+</section>
+<section id="result-display">
+<h2>5. Result Display<a class="headerlink" href="#result-display" title="Link to this heading">¶</a></h2>
+<p>AgentHeaven uses the <code class="docutils literal notranslate"><span class="pre">prettytable</span></code> package to visualize tables (for both humans and LLMs).</p>
+<section id="table-formatting">
+<h3>5.1. Table Formatting<a class="headerlink" href="#table-formatting" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">table_display</span></code> function provides formatted output for query results:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">table_display</span>
+
+<span class="c1"># Display query results</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT id, name, email, created_at FROM users&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_display</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_rows</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;MARKDOWN&quot;</span><span class="p">))</span>
+
+<span class="c1"># Display with custom schema</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;New York&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;London&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_display</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;SINGLE_BORDER&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="display-options">
+<h3>5.2. Display Options<a class="headerlink" href="#display-options" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Various display styles</span>
+<span class="n">styles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DEFAULT&quot;</span><span class="p">,</span> <span class="s2">&quot;MARKDOWN&quot;</span><span class="p">,</span> <span class="s2">&quot;PLAIN_COLUMNS&quot;</span><span class="p">,</span> <span class="s2">&quot;MSWORD_FRIENDLY&quot;</span><span class="p">,</span> 
+          <span class="s2">&quot;ORGMODE&quot;</span><span class="p">,</span> <span class="s2">&quot;SINGLE_BORDER&quot;</span><span class="p">,</span> <span class="s2">&quot;DOUBLE_BORDER&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">styles</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2"> Style:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">table_display</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_rows</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">))</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="type-adapters-for-ukf">
+<h2>6. Type Adapters for UKF<a class="headerlink" href="#type-adapters-for-ukf" title="Link to this heading">¶</a></h2>
+<p>AgentHeaven uses a powerful type adapter system to bridge the gap between the abstract <strong>Unified Knowledge Format (UKF)</strong> types and the concrete data types of different database backends. This allows developers to work with consistent UKF types (e.g., <code class="docutils literal notranslate"><span class="pre">UKFIdType</span></code>, <code class="docutils literal notranslate"><span class="pre">UKFJsonType</span></code>) across their application, while AgentHeaven automatically handles the mapping to appropriate SQL types (e.g., <code class="docutils literal notranslate"><span class="pre">VARCHAR</span></code>, <code class="docutils literal notranslate"><span class="pre">JSONB</span></code>, <code class="docutils literal notranslate"><span class="pre">TEXT</span></code>) for the specific database in use.</p>
+<section id="architecture">
+<h3>6.1. Architecture<a class="headerlink" href="#architecture" title="Link to this heading">¶</a></h3>
+<p>As explained in the <a class="reference internal" href="../../introduction/architecture.html"><span class="std std-doc">main architecture guide</span></a>, every field in a <code class="docutils literal notranslate"><span class="pre">BaseUKF</span></code> schema is associated with a <strong>UKF Type</strong>. The database utility leverages a set of custom SQLAlchemy <code class="docutils literal notranslate"><span class="pre">TypeDecorator</span></code> classes to map these UKF types to backend-specific SQL types.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">DatabaseJsonType</span></code> is a custom type decorator that:</p>
+<ul class="simple">
+<li><p>Maps to <code class="docutils literal notranslate"><span class="pre">JSONB</span></code> on PostgreSQL for native JSON support.</p></li>
+<li><p>Maps to <code class="docutils literal notranslate"><span class="pre">TEXT</span></code> on SQLite and MySQL, storing the data as a JSON string.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> MySQL and Microsoft SQL have JSON types, but they do not faithfully preserve very large integers during JSON serialization (e.g. &gt;53 bits or MySQL’s 64-bit limits). To avoid silent precision loss we treat them as string-backed JSON below.</p>
+</div></blockquote>
+<p>This mapping is handled transparently by the <code class="docutils literal notranslate"><span class="pre">Database</span></code> class and SQLAlchemy, ensuring that developers can write portable code without worrying about backend-specific implementation details.</p>
+<blockquote>
+<div><p><strong>Tip:</strong> For more details about built-in type adapters, see <a class="reference internal" href="../ukf/data-types.html"><span class="std std-doc">UKF Data Types</span></a>.</p>
+</div></blockquote>
+<br/>
+</section>
+<section id="built-in-type-adapters">
+<h3>6.2. Built-in Type Adapters<a class="headerlink" href="#built-in-type-adapters" title="Link to this heading">¶</a></h3>
+<p>AgentHeaven provides several built-in type adapters in <code class="docutils literal notranslate"><span class="pre">ahvn.utils.db.types</span></code>:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DatabaseIdType</span></code></strong>: Represents a UKF ID, typically stored as a <code class="docutils literal notranslate"><span class="pre">VARCHAR</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DatabaseTextType</span></code></strong>: For general-purpose text.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DatabaseIntegerType</span></code></strong>: For integer values.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DatabaseBooleanType</span></code></strong>: For boolean flags.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DatabaseTimestampType</span></code></strong>: Handles timezone-aware timestamps, storing them as native <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> types where supported (e.g., PostgreSQL) or as <code class="docutils literal notranslate"><span class="pre">BigInteger</span></code> (Unix timestamp) for others (e.g., SQLite).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DatabaseJsonType</span></code></strong>: A versatile type for storing JSON data, with automatic adaptation for native <code class="docutils literal notranslate"><span class="pre">JSON</span></code>/<code class="docutils literal notranslate"><span class="pre">JSONB</span></code> or <code class="docutils literal notranslate"><span class="pre">TEXT</span></code> fallback.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">DatabaseVectorType</span></code></strong>: Specifically for vector embeddings. It uses native array types on backends with <code class="docutils literal notranslate"><span class="pre">pgvector</span></code> support (PostgreSQL) and falls back to JSON storage on others.</p></li>
+</ul>
+<p>These adapters are used when defining ORM models that inherit from <code class="docutils literal notranslate"><span class="pre">ExportableEntity</span></code>, ensuring that UKF data is stored efficiently and correctly across different database systems.</p>
+<blockquote>
+<div><p><strong>Tip:</strong> For more details about built-in type adapters, see <a class="reference internal" href="../ukf/data-types.html"><span class="std std-doc">UKF Data Types</span></a>.</p>
+</div></blockquote>
+<br/>
+</section>
+</section>
+<section id="further-exploration">
+<h2>Further Exploration<a class="headerlink" href="#further-exploration" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Tip:</strong> For more information about database configuration in AgentHeaven, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../configuration/database.html"><span class="std std-doc">Database Configuration</span></a> - Relational Database connection and storage configuration</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Tip:</strong> For related functionality, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../ukf/data-types.html"><span class="std std-doc">UKF Data Types</span></a> - Data type mappings between UKF, Pydantic, and various databases</p></li>
+<li><p><a class="reference internal" href="../cache.html"><span class="std std-doc">Cache</span></a> - Cache system implementation and usage</p></li>
+<li><p><a class="reference internal" href="../klstore/database.html"><span class="std std-doc">DatabaseKLStore</span></a> - KLStore backed by relational databases</p></li>
+<li><p><a class="reference internal" href="../klengine/facet.html"><span class="std std-doc">FacetKLEngine</span></a> - Knowledge retrieval engine using faceted search on relational databases</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Tip:</strong> For more information about utilities in AgentHeaven, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../index.html"><span class="std std-doc">Utilities</span></a> - All Python utilities for convenience</p></li>
+</ul>
+</div></blockquote>
+<br/>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="vdb.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Vector Database Utilities</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="basic/misc_utils.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Miscellaneous Utilities</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Database Utilities</a><ul>
+<li><a class="reference internal" href="#database-architecture">1. Database Architecture</a></li>
+<li><a class="reference internal" href="#database-connection">2. Database Connection</a><ul>
+<li><a class="reference internal" href="#basic-connection">2.1. Basic Connection</a></li>
+<li><a class="reference internal" href="#context-manager-recommended">2.2. Context Manager (Recommended)</a></li>
+<li><a class="reference internal" href="#manual-transaction-control">2.3. Manual Transaction Control</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sql-execution">3. SQL Execution</a><ul>
+<li><a class="reference internal" href="#raw-sql-execution">3.1. Raw SQL Execution</a></li>
+<li><a class="reference internal" href="#sqlalchemy-orm-execution">3.2. SQLAlchemy ORM Execution</a></li>
+<li><a class="reference internal" href="#auto-commit">3.3. Auto-Commit</a></li>
+<li><a class="reference internal" href="#sqlresponse-class">3.4. SQLResponse Class</a><ul>
+<li><a class="reference internal" href="#basic-usage">3.4.1. Basic Usage</a></li>
+<li><a class="reference internal" href="#data-access-methods">3.4.2. Data Access Methods</a></li>
+<li><a class="reference internal" href="#resource-management">3.4.3. Resource Management</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#utilities">4. Utilities</a><ul>
+<li><a class="reference internal" href="#implementation">4.1. Implementation</a></li>
+<li><a class="reference internal" href="#database-inspection">4.2. Database Inspection</a><ul>
+<li><a class="reference internal" href="#table-information">4.2.1. Table Information</a></li>
+<li><a class="reference internal" href="#column-information">4.2.2. Column Information</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-analysis">4.3. Data Analysis</a><ul>
+<li><a class="reference internal" href="#row-counting">4.3.1. Row Counting</a></li>
+<li><a class="reference internal" href="#column-values">4.3.2. Column Values</a></li>
+<li><a class="reference internal" href="#frequencies">4.3.3. Frequencies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-manipulation">4.4. Data Manipulation</a><ul>
+<li><a class="reference internal" href="#clear-table-data">4.4.1. Clear Table Data</a></li>
+<li><a class="reference internal" href="#drop-objects">4.4.2. Drop Objects</a></li>
+<li><a class="reference internal" href="#reset">4.4.3. Reset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#result-display">5. Result Display</a><ul>
+<li><a class="reference internal" href="#table-formatting">5.1. Table Formatting</a></li>
+<li><a class="reference internal" href="#display-options">5.2. Display Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#type-adapters-for-ukf">6. Type Adapters for UKF</a><ul>
+<li><a class="reference internal" href="#architecture">6.1. Architecture</a></li>
+<li><a class="reference internal" href="#built-in-type-adapters">6.2. Built-in Type Adapters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-exploration">Further Exploration</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=9dc39874"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

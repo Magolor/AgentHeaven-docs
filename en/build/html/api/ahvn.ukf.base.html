@@ -1,0 +1,1748 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="ahvn.ukf.types module" href="ahvn.ukf.types.html"><link rel="prev" title="ahvn.ukf.templates.db.tab_ukft module" href="ahvn.ukf.templates.db.tab_ukft.html">
+        <link rel="prefetch" href="../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>ahvn.ukf.base module - AgentHeaven Doc</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven is in active development. Features may change. 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">AgentHeaven Doc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/philosophy.html">Philosophy &amp; Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/architecture.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/learning.html">Learning AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><input aria-label="Toggle navigation of Getting Started" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/setup.html">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/5min-quickstart.html">5min Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/60min-tutorial.html">60min Tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../configuration/index.html">Configuration</a><input aria-label="Toggle navigation of Configuration" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/core.html">Core Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/llm.html">LLM Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/database.html">Database Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/vdb.html">Vector Database Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python-guide/index.html">Main Guide (Python)</a><input aria-label="Toggle navigation of Main Guide (Python)" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../python-guide/utils/basic/index.html">Basic Utilities</a><input aria-label="Toggle navigation of Basic Utilities" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/config_utils.html">Configuration Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/hash_utils.html">Hashing Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/parallel_utils.html">Multi-Thread Parallelization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/jinja_utils.html">Template Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/serialize_utils.html">Serialization Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/str_utils.html">String Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/misc_utils.html">Miscellaneous Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/utils/db.html">Database Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/utils/vdb.html">Vector Database Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/cache.html">Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/ukf/index.html">UKF (Unified Knowledge Format)</a><input aria-label="Toggle navigation of UKF (Unified Knowledge Format)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/data-types.html">UKF Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/builtin-templates.html">Built-in Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/klengine/index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/base.html">BaseKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/facet.html">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/toolspec/index.html">ToolSpec</a><input aria-label="Toggle navigation of ToolSpec" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/toolspec/base.html">ToolSpec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/toolspec/builtins.html">Built-in ToolSpecs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/agent.html">Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cli-guide/index.html">CLI Guide</a><input aria-label="Toggle navigation of CLI Guide" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/repo-management.html">Repo Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-inference.html">LLM Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-session.html">LLM Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/prompt-management.html">Prompt Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/knowledge-management.html">Knowledge Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gui-guide/index.html">GUI Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../example-applications/index.html">Example Applications</a><input aria-label="Toggle navigation of Example Applications" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../example-applications/nl2sql-system.html">NL2SQL System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contribution/index.html">Contribution</a><input aria-label="Toggle navigation of Contribution" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/overview.html">Contribution Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/for_developers.html">Guide for Developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/feature_workflow.html">Feature Addition Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/srs.html">Simple SRS</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../contribution/ar/index.html">Allocated Requirements (AR)</a><input aria-label="Toggle navigation of Allocated Requirements (AR)" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/base_ukf.html">BaseUKF - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/cache.html">Cache - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/llm.html">LLM - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/prompts.html">Prompts - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/database.html">Database - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/klstore.html">KLStore - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/klengine.html">KLEngine - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/klbase.html">KLBase - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/agent.html">Agent - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/sie.html">Structured Information Extraction (SIE) - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contribution/ar/cli.html">Command Line Interface (CLI) - Allocated Requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" checked="" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" checked="" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../community/index.html">Community &amp; Support</a><input aria-label="Toggle navigation of Community &amp; Support" class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" role="switch" type="checkbox"/><label for="toctree-checkbox-36"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community/resources.html">Community Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/en/source/api/ahvn.ukf.base.rst?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/en/source/api/ahvn.ukf.base.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="ahvn-ukf-base-module">
+<h1>ahvn.ukf.base module<a class="headerlink" href="#ahvn-ukf-base-module" title="Link to this heading">¶</a></h1>
+<p>Universal Knowledge Framework (UKF) base module.</p>
+<p>This module provides the core <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUKF</span></code> model and a small set of
+utility functions used throughout the UKF implementation:</p>
+<ul class="simple">
+<li><p>Tag helpers: parsing, grouping and membership checks (<code class="docutils literal notranslate"><span class="pre">tag_s</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_v</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_t</span></code>, <code class="docutils literal notranslate"><span class="pre">ptags</span></code>, <code class="docutils literal notranslate"><span class="pre">gtags</span></code>, <code class="docutils literal notranslate"><span class="pre">has_tag</span></code>)</p></li>
+<li><p>Relation helpers: check relation entries (<code class="docutils literal notranslate"><span class="pre">has_related</span></code>)</p></li>
+<li><p>Versioning helper: <code class="docutils literal notranslate"><span class="pre">next_ver</span></code></p></li>
+<li><p>Default no-op trigger/composer helpers used as safe defaults</p></li>
+</ul>
+<p>The data model is implemented with Pydantic and is intended to represent a
+piece of knowledge with rich metadata, provenance, tagging and simple
+relationship modelling. Most public functions and methods in this module use
+Google-style docstrings describing arguments, return values and raised
+exceptions.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ahvn.ukf.base.</span></span><span class="sig-name descname"><span class="pre">default_trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kl</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#default_trigger"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Default trigger used as a noop predicate.</p>
+<p>The default trigger always returns True and can be used as a safe
+placeholder when no custom trigger function is supplied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kl</strong> (<em>BaseUKF</em>) – Knowledge object being evaluated (unused).</p></li>
+<li><p><strong>**kwargs</strong> – Additional context parameters (ignored).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Always True.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ahvn.ukf.base.</span></span><span class="sig-name descname"><span class="pre">default_composer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kl</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#default_composer"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Default content composer that returns the raw <code class="docutils literal notranslate"><span class="pre">content</span></code> string.</p>
+<p>This function is intended as a safe default for the <code class="docutils literal notranslate"><span class="pre">content_composers</span></code>
+mapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kl</strong> (<em>BaseUKF</em>) – Knowledge object to compose (only <code class="docutils literal notranslate"><span class="pre">kl.content</span></code> is used).</p></li>
+<li><p><strong>**kwargs</strong> – Additional composition parameters (ignored).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">kl</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ahvn.ukf.base.</span></span><span class="sig-name descname"><span class="pre">BaseUKF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Base model for knowledge items in the Universal Knowledge Framework (UKF).</p>
+<p>This Pydantic model provides a comprehensive structure for representing knowledge units
+with detailed metadata, content management, provenance tracking, and relationship modeling.
+Each attribute includes comprehensive descriptions to guide users unfamiliar with UKF
+in correctly filling knowledge records from source documents and information.</p>
+<p>The model is organized into logical sections:</p>
+<p><strong>Metadata</strong>: Core identification and classification fields (name, type, version, etc.)
+<strong>Content</strong>: The actual knowledge and supporting structured data
+<strong>Provenance</strong>: Origin tracking and ownership information
+<strong>Retrieval</strong>: Search, classification, and access control attributes
+<strong>Relationships</strong>: Connections to other knowledge items and permissions
+<strong>Lifecycle</strong>: Time-sensitive attributes for expiration and deprecation
+<strong>System</strong>: Extensible fields for application-specific data and runtime statistics</p>
+<p>All field descriptions include practical examples and clear guidance on appropriate values,
+making this model self-documenting for users creating knowledge items from documents,
+conversations, or other information sources.</p>
+<p>For detailed attribute guidance, refer to the comprehensive field descriptions in the
+model definition below.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><em>UKFMediumTextType</em></a>)</p></li>
+<li><p><strong>notes</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><em>UKFMediumTextType</em></a>)</p></li>
+<li><p><strong>short_description</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><em>UKFMediumTextType</em></a>)</p></li>
+<li><p><strong>description</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><em>UKFMediumTextType</em></a>)</p></li>
+<li><p><strong>type</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><em>UKFShortTextType</em></a>)</p></li>
+<li><p><strong>version</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><em>UKFShortTextType</em></a>)</p></li>
+<li><p><strong>version_notes</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><em>UKFMediumTextType</em></a>)</p></li>
+<li><p><strong>variant</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><em>UKFShortTextType</em></a>)</p></li>
+<li><p><strong>variant_notes</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><em>UKFMediumTextType</em></a>)</p></li>
+<li><p><strong>content</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFLongTextType" title="ahvn.ukf.types.UKFLongTextType"><em>UKFLongTextType</em></a>)</p></li>
+<li><p><strong>content_resources</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><em>UKFJsonType</em></a>)</p></li>
+<li><p><strong>content_composers</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><em>UKFJsonType</em></a>)</p></li>
+<li><p><strong>source</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><em>UKFShortTextType</em></a>)</p></li>
+<li><p><strong>parents</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><em>UKFJsonType</em></a>)</p></li>
+<li><p><strong>creator</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><em>UKFShortTextType</em></a>)</p></li>
+<li><p><strong>owner</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><em>UKFShortTextType</em></a>)</p></li>
+<li><p><strong>workspace</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><em>UKFShortTextType</em></a>)</p></li>
+<li><p><strong>collection</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><em>UKFShortTextType</em></a>)</p></li>
+<li><p><strong>tags</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFTagsType" title="ahvn.ukf.types.UKFTagsType"><em>UKFTagsType</em></a>)</p></li>
+<li><p><strong>synonyms</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFSynonymsType" title="ahvn.ukf.types.UKFSynonymsType"><em>UKFSynonymsType</em></a>)</p></li>
+<li><p><strong>triggers</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><em>UKFJsonType</em></a>)</p></li>
+<li><p><strong>priority</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFIntegerType" title="ahvn.ukf.types.UKFIntegerType"><em>UKFIntegerType</em></a>)</p></li>
+<li><p><strong>related</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFRelatedType" title="ahvn.ukf.types.UKFRelatedType"><em>UKFRelatedType</em></a>)</p></li>
+<li><p><strong>auths</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFAuthsType" title="ahvn.ukf.types.UKFAuthsType"><em>UKFAuthsType</em></a>)</p></li>
+<li><p><strong>timefluid</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFBooleanType" title="ahvn.ukf.types.UKFBooleanType"><em>UKFBooleanType</em></a>)</p></li>
+<li><p><strong>timestamp</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFTimestampType" title="ahvn.ukf.types.UKFTimestampType"><em>UKFTimestampType</em></a>)</p></li>
+<li><p><strong>last_verified</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFTimestampType" title="ahvn.ukf.types.UKFTimestampType"><em>UKFTimestampType</em></a>)</p></li>
+<li><p><strong>expiration</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFDurationType" title="ahvn.ukf.types.UKFDurationType"><em>UKFDurationType</em></a>)</p></li>
+<li><p><strong>inactive_mark</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFBooleanType" title="ahvn.ukf.types.UKFBooleanType"><em>UKFBooleanType</em></a>)</p></li>
+<li><p><strong>metadata</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><em>UKFJsonType</em></a>)</p></li>
+<li><p><strong>profile</strong> (<a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><em>UKFJsonType</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFMediumTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">notes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFMediumTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">short_description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFMediumTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFMediumTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFShortTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFShortTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">version_notes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFMediumTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">variant</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFShortTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">variant_notes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFMediumTextType" title="ahvn.ukf.types.UKFMediumTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFMediumTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">content</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFLongTextType" title="ahvn.ukf.types.UKFLongTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFLongTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">content_resources</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFJsonType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">content_composers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFJsonType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">source</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFShortTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">parents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFJsonType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">creator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFShortTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">owner</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFShortTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">workspace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFShortTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">collection</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFShortTextType" title="ahvn.ukf.types.UKFShortTextType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFShortTextType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">tags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFTagsType" title="ahvn.ukf.types.UKFTagsType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFTagsType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">synonyms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFSynonymsType" title="ahvn.ukf.types.UKFSynonymsType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFSynonymsType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">triggers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFJsonType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">priority</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFIntegerType" title="ahvn.ukf.types.UKFIntegerType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFIntegerType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">related</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFRelatedType" title="ahvn.ukf.types.UKFRelatedType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFRelatedType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">auths</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFAuthsType" title="ahvn.ukf.types.UKFAuthsType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFAuthsType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">timefluid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFBooleanType" title="ahvn.ukf.types.UKFBooleanType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFBooleanType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFTimestampType" title="ahvn.ukf.types.UKFTimestampType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFTimestampType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">last_verified</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFTimestampType" title="ahvn.ukf.types.UKFTimestampType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFTimestampType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">expiration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFDurationType" title="ahvn.ukf.types.UKFDurationType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFDurationType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inactive_mark</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFBooleanType" title="ahvn.ukf.types.UKFBooleanType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFBooleanType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">metadata</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFJsonType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">profile</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ahvn.ukf.types.html#ahvn.ukf.types.UKFJsonType" title="ahvn.ukf.types.UKFJsonType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UKFJsonType</span></code></a></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">id_field</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'id'</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">external_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('name',</span> <span class="pre">'notes',</span> <span class="pre">'short_description',</span> <span class="pre">'description',</span> <span class="pre">'type',</span> <span class="pre">'version',</span> <span class="pre">'version_notes',</span> <span class="pre">'variant',</span> <span class="pre">'variant_notes',</span> <span class="pre">'content',</span> <span class="pre">'content_resources',</span> <span class="pre">'content_composers',</span> <span class="pre">'source',</span> <span class="pre">'parents',</span> <span class="pre">'creator',</span> <span class="pre">'owner',</span> <span class="pre">'workspace',</span> <span class="pre">'collection',</span> <span class="pre">'tags',</span> <span class="pre">'synonyms',</span> <span class="pre">'triggers',</span> <span class="pre">'priority',</span> <span class="pre">'related',</span> <span class="pre">'auths',</span> <span class="pre">'timefluid',</span> <span class="pre">'timestamp',</span> <span class="pre">'last_verified',</span> <span class="pre">'expiration',</span> <span class="pre">'inactive_mark',</span> <span class="pre">'metadata',</span> <span class="pre">'profile')</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">internal_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('_id',</span> <span class="pre">'_content_hash',</span> <span class="pre">'_slots')</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">property_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'id_str',</span> <span class="pre">'content_hash',</span> <span class="pre">'content_hash_str',</span> <span class="pre">'expiration_timestamp',</span> <span class="pre">'is_inactive',</span> <span class="pre">'is_active')</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">identity_hash_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('type',</span> <span class="pre">'name',</span> <span class="pre">'version',</span> <span class="pre">'variant',</span> <span class="pre">'source',</span> <span class="pre">'creator',</span> <span class="pre">'owner',</span> <span class="pre">'workspace',</span> <span class="pre">'collection',</span> <span class="pre">'tags',</span> <span class="pre">'timefluid')</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">content_hash_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('content',</span> <span class="pre">'content_resources')</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('tags',</span> <span class="pre">'synonyms',</span> <span class="pre">'related',</span> <span class="pre">'auths')</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">json_func_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('content_composers',</span> <span class="pre">'triggers')</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">json_data_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('content_resources',</span> <span class="pre">'parents',</span> <span class="pre">'metadata',</span> <span class="pre">'profile')</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar[ConfigDict]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'validate_assignment':</span> <span class="pre">True,</span> <span class="pre">'validate_default':</span> <span class="pre">True}</span></em></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><em>Set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_synonyms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">synonyms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_synonyms"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>synonyms</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><em>Set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_related</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">related</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_related"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Notice that the related is reversed:
+Since Set does not support Dict (relation_resources) as items, the relation tuples should actually be
+deserialized (str -&gt; json) during <cite>serialize_related</cite> (export from Python object to JSON).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]]]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>related</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><em>Set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><em>Tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> | </em><em>None</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em><em>]</em><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_auths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auths</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_auths"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>auths</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><em>Set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><em>Tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_triggers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">triggers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_triggers"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>triggers</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><em>Callable</em></a><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_content_composers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">composers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_content_composers"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>composers</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><em>Callable</em></a><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_content_composers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.validate_content_composers"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Validate and deserialize content composers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><em>datetime</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_last_verified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_last_verified"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><em>datetime</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_expiration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_expiration"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.14)"><em>timedelta</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">serialize_expiration_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.serialize_expiration_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><em>datetime</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.deserialize_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Backward compatibility method - validation is now handled by UKFTagsType.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.14)"><em>Iterable</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize_synonyms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.deserialize_synonyms"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Backward compatibility method - validation is now handled by UKFSynonymsType.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.14)"><em>Iterable</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize_related</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.deserialize_related"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Backward compatibility method - validation is now handled by UKFRelatedType.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.14)"><em>Iterable</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize_auths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.deserialize_auths"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Backward compatibility method - validation is now handled by UKFAuthsType.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.14)"><em>Iterable</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize_triggers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.deserialize_triggers"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Backward compatibility method - deserialize function dictionaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize_content_composers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.deserialize_content_composers"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Backward compatibility method - deserialize function dictionaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em></dt>
+<dd><p>Compute a deterministic integer identifier for the item.</p>
+<p>The identifier is computed by hashing a selection of identity fields
+(see <a href="#id1"><span class="problematic" id="id2">:pyattr:`identity_hash_fields`</span></a>) and cached on the instance. The
+cached value is cleared by <code class="xref py py-meth docutils literal notranslate"><span class="pre">_resetinternal_fields()</span></code> when needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Integer hash value derived from identity fields.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em></dt>
+<dd><p>Return the <code class="docutils literal notranslate"><span class="pre">id</span></code> value formatted as a zero-padded string.</p>
+<p>Uses <cite>fmt_hash</cite> to produce a fixed-width, human-safe string
+representation of the integer id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Zero-padded string version of <a href="#id3"><span class="problematic" id="id4">:pyattr:`id`</span></a>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">content_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em></dt>
+<dd><p>Compute a hash of the content-related fields for change detection.</p>
+<p>The hash covers <a href="#id5"><span class="problematic" id="id6">:pyattr:`content`</span></a> and <a href="#id7"><span class="problematic" id="id8">:pyattr:`content_resources`</span></a> and
+is cached on the instance. Cache is invalidated by
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">_resetinternal_fields()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Integer hash representing the content state.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">content_hash_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em></dt>
+<dd><p>Return the content hash formatted as a zero-padded string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>String representation produced by <cite>fmt_hash</cite> for</dt><dd><p><a href="#id9"><span class="problematic" id="id10">:pyattr:`content_hash`</span></a>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">expiration_timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><span class="pre">datetime</span></a></em></dt>
+<dd><p>Compute the UTC timestamp when the item expires.</p>
+<p>If <a href="#id11"><span class="problematic" id="id12">:pyattr:`expiration`</span></a> is negative the function returns a distant
+future sentinel (year 2500) indicating no automatic expiration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>UTC datetime when the item becomes expired.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)">datetime.datetime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slots</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.14)"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em></dt>
+<dd><p>Return a mapping from tag slots to their set of values.</p>
+<p>Parses <a href="#id13"><span class="problematic" id="id14">:pyattr:`tags`</span></a> and groups values by slot name (the left-hand
+side of a <code class="docutils literal notranslate"><span class="pre">[SLOT:value]</span></code> tag). The result is cached in the private
+attribute <a href="#id15"><span class="problematic" id="id16">:pyattr:`_slots`</span></a> for efficiency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mapping of slot name to set of values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, Set[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">has_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ANY_OF'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.has_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Check whether this item’s tags satisfy a named condition for <code class="docutils literal notranslate"><span class="pre">slot</span></code>.</p>
+<p>This is a convenience wrapper around the module-level <code class="xref py py-func docutils literal notranslate"><span class="pre">has_tag()</span></code>
+that uses this instance’s <a href="#id17"><span class="problematic" id="id18">:pyattr:`tags`</span></a> set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slot</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Tag slot to check.</p></li>
+<li><p><strong>operator</strong> (<em>TagOperator</em>) – Operator to apply (see module-level
+<code class="xref py py-func docutils literal notranslate"><span class="pre">has_tag()</span></code> for supported operators).</p></li>
+<li><p><strong>value</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Iterable</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Values to compare
+against for non-unary operators.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the condition holds for this item’s tags.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">has_related</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subject_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_to_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.has_related"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return True if any relation on this item satisfies the provided filters.</p>
+<p>This is a thin wrapper around the module-level <code class="xref py py-func docutils literal notranslate"><span class="pre">has_related()</span></code> that
+operates on <a href="#id19"><span class="problematic" id="id20">:pyattr:`related`</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subject_id</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>]</em><em>]</em>) – Filter for
+subject id(s).</p></li>
+<li><p><strong>relation</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>]</em><em>]</em>) – Filter for relation
+name(s).</p></li>
+<li><p><strong>object_id</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>]</em><em>]</em>) – Filter for object
+id(s).</p></li>
+<li><p><strong>relation_id</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>]</em><em>]</em>) – Filter for
+relation id(s).</p></li>
+<li><p><strong>related_to_id</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>]</em><em>]</em>) – Matches when
+either subject or object id is included in this set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True when a matching relation exists.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_inactive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em></dt>
+<dd><p>Return True when the item is considered inactive.</p>
+<p>An item is inactive when either <a href="#id21"><span class="problematic" id="id22">:pyattr:`inactive_mark`</span></a> is True or the
+current UTC time is past the value returned by
+<a href="#id23"><span class="problematic" id="id24">:pyattr:`expiration_timestamp`</span></a> (when expiration is enabled).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True when the item is inactive.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_active</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em></dt>
+<dd><p>Return True when the item is active (not inactive).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Negation of <a href="#id25"><span class="problematic" id="id26">:pyattr:`is_inactive`</span></a>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_composer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.set_composer"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Add or update a content composer in <a href="#id27"><span class="problematic" id="id28">:pyattr:`content_composers`</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Name of the composer.</p></li>
+<li><p><strong>composer</strong> (<em>Callable</em>) – Callable that takes a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUKF</span></code>
+instance and returns a string representation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is empty or <code class="docutils literal notranslate"><span class="pre">composer</span></code> is not callable.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">composer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.text"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return a text representation produced by a composer.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">composer</span></code> parameter may be a callable or the name of a composer
+in <a href="#id29"><span class="problematic" id="id30">:pyattr:`content_composers`</span></a>. If <code class="docutils literal notranslate"><span class="pre">composer</span></code> is not found the raw
+<a href="#id31"><span class="problematic" id="id32">:pyattr:`content`</span></a> string is returned. Any exceptions raised by a
+composer are logged and the raw content is returned as a fallback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>composer</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>Callable</em><em>]</em><em>]</em>) – Composer name or callable.</p></li>
+<li><p><strong>**kwargs</strong> – Passed through to the composer callable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Composed or raw textual representation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.__eq__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Equality comparison using <a href="#id33"><span class="problematic" id="id34">:pyattr:`id`</span></a>.</p>
+<p>Two instances are considered equal when they are instances of the same
+class and their computed <a href="#id35"><span class="problematic" id="id36">:pyattr:`id`</span></a> values are identical.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>Any</em>) – Object to compare.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True when objects represent the same knowledge id.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.__lt__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Ordering comparison used for sorting by priority.</p>
+<p>The implementation treats higher <a href="#id37"><span class="problematic" id="id38">:pyattr:`priority`</span></a> values as “less”
+to allow reverse-priority ordering when using Python’s default
+ascending sort.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>BaseUKF</em>) – Other item to compare.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True when this item should sort before <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.__hash__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return a hash derived from <a href="#id39"><span class="problematic" id="id40">:pyattr:`id`</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Integer hash value.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return a compact multi-line human readable representation.</p>
+<p>The representation shows a truncated content preview and a short form
+of the string id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Readable summary of the object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.__repr__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return the same value as <code class="xref py py-meth docutils literal notranslate"><span class="pre">__str__()</span></code> for interactive display.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Serialize the model to a plain dictionary for storage or transport.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary serialization excluding internal fields.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUKF</span></code> instance from a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>Any</em><em>]</em>) – Dictionary produced by <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_dict()</span></code> or an
+external source.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Validated model instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BaseUKF</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ukf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ukf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.from_ukf"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUKF</span></code> instance from another instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ukf</strong> (<em>BaseUKF</em>) – Instance of the same or a derived class.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Validated model instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BaseUKF</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_inactive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.set_inactive"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Mark the item as inactive by setting <a href="#id41"><span class="problematic" id="id42">:pyattr:`inactive_mark`</span></a> to True.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">unset_inactive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.unset_inactive"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Clear the manual inactive flag by setting <a href="#id43"><span class="problematic" id="id44">:pyattr:`inactive_mark`</span></a> to False.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">update_triggers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">triggers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.update_triggers"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Merge new trigger callables into the <a href="#id45"><span class="problematic" id="id46">:pyattr:`triggers`</span></a> mapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>triggers</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>Callable</em><em>]</em><em>, </em><em>optional</em>) – Mapping of name to callable
+to add or update. If None no changes are made.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">triggers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contexts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggregate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ALL'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Evaluate one or more named triggers with optional context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>triggers</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – Names of triggers to evaluate. If
+None or empty, an empty result is returned (or <code class="docutils literal notranslate"><span class="pre">True</span></code> when
+aggregated as described below).</p></li>
+<li><p><strong>contexts</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>]</em><em>, </em><em>optional</em>) – Mapping from trigger name to a
+context dict passed as keyword arguments to the trigger.</p></li>
+<li><p><strong>aggregate</strong> (<em>Literal</em><em>[</em><em>&quot;ANY&quot;</em><em>, </em><em>&quot;ALL&quot;</em><em>, </em><em>False</em><em>]</em>) – If <code class="docutils literal notranslate"><span class="pre">False</span></code> the
+function returns a dictionary of individual boolean results.
+If <code class="docutils literal notranslate"><span class="pre">&quot;ALL&quot;</span></code> the function returns <code class="docutils literal notranslate"><span class="pre">True</span></code> only if all
+evaluated triggers return <code class="docutils literal notranslate"><span class="pre">True</span></code>. If <code class="docutils literal notranslate"><span class="pre">&quot;ANY&quot;</span></code> the
+function returns <code class="docutils literal notranslate"><span class="pre">True</span></code> when any trigger returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Individual results or an aggregated
+boolean depending on <code class="docutils literal notranslate"><span class="pre">aggregate</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a>], <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">scalar_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.scalar_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Check whether scalar fields match the provided values.</p>
+<p>Values provided in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> may be scalars or iterables. For
+iterables membership is tested, otherwise equality is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – Field names and expected values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True when all provided conditions evaluate to True.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – When a requested field is not allowed for scalar
+    matching (see <a href="#id47"><span class="problematic" id="id48">:pyattr:`_scalar_fields`</span></a>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">updates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return a deep-copied model updated with <code class="docutils literal notranslate"><span class="pre">updates</span></code>.</p>
+<p>The returned instance has internal caches reset so identity and
+content hashes are recomputed on demand.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**updates</strong> – Field values to override in the cloned instance.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New instance with the requested updates applied.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BaseUKF</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">derive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">updates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.derive"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create a derived item with incremented version and provenance.</p>
+<p>The derived copy has its <a href="#id49"><span class="problematic" id="id50">:pyattr:`version`</span></a> bumped using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">next_ver()</span></code>, <a href="#id51"><span class="problematic" id="id52">:pyattr:`source`</span></a> set to <code class="docutils literal notranslate"><span class="pre">&quot;derived&quot;</span></code> and the
+original id recorded in <a href="#id53"><span class="problematic" id="id54">:pyattr:`parents`</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**updates</strong> – Additional field updates to apply to the derived item.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Derived instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BaseUKF</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">link</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'object'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'related'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_kid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation_resources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_link</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.link"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Add a lightweight relation between this item and <code class="docutils literal notranslate"><span class="pre">kl</span></code>.</p>
+<p>Relation tuples are inserted into <a href="#id55"><span class="problematic" id="id56">:pyattr:`related`</span></a> using the
+serialized form for <code class="docutils literal notranslate"><span class="pre">relation_resources</span></code>. The <code class="docutils literal notranslate"><span class="pre">dir</span></code> parameter
+controls whether this item is the subject, object or both.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kl</strong> (<em>BaseUKF</em>) – Target knowledge item.</p></li>
+<li><p><strong>dir</strong> (<em>Literal</em><em>[</em><em>&quot;subject&quot;</em><em>,</em><em>&quot;object&quot;</em><em>,</em><em>&quot;both&quot;</em><em>]</em>) – Direction of the
+relation where <code class="docutils literal notranslate"><span class="pre">&quot;object&quot;</span></code> means <code class="docutils literal notranslate"><span class="pre">self</span> <span class="pre">-&gt;</span> <span class="pre">kl</span></code>.</p></li>
+<li><p><strong>rel</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Relation name.</p></li>
+<li><p><strong>rel_kid</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em>) – Optional relation id.</p></li>
+<li><p><strong>relation_resources</strong> (<em>Optional</em><em>[</em><em>Any</em><em>]</em>) – Additional relation metadata.</p></li>
+<li><p><strong>inv_link</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – When True also add reciprocal entries on <code class="docutils literal notranslate"><span class="pre">kl</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">list_object_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.list_object_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return object ids for relations where this item is the subject.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rel</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – If provided, only relations matching this
+relation name are included.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sequence of object ids.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">list_subject_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.list_subject_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return subject ids for relations where this item is the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rel</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Optional relation name filter.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sequence of subject ids.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">grant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authority</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.grant"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Grant an authority by adding [user:authority] tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – User identifier.</p></li>
+<li><p><strong>authority</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Permission or role string.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">revoke</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authority</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.revoke"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Remove an authority by removing [user:authority] tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – User identifier.</p></li>
+<li><p><strong>authority</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Permission or role string.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">has_authority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authority</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.has_authority"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return True when [user:authority] tag is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – User identifier.</p></li>
+<li><p><strong>authority</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Authority string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the authority is granted to the user.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">add_synonyms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">synonyms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.add_synonyms"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Append new synonyms into the <a href="#id57"><span class="problematic" id="id58">:pyattr:`synonyms`</span></a> set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>synonyms</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Iterable of synonym strings to add.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">model_post_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em><span class="sig-paren">)</span></dt>
+<dd><p>This function is meant to behave like a BaseModel method to initialise private attributes.</p>
+<p>It takes context as an argument since that’s what pydantic-core passes when calling it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></span>) – The BaseModel instance.</p></li>
+<li><p><strong>context</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – The context.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">remove_synonyms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">synonyms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/ukf/base.html#BaseUKF.remove_synonyms"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Remove synonyms from the <a href="#id59"><span class="problematic" id="id60">:pyattr:`synonyms`</span></a> set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>synonyms</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – Iterable of synonym strings to remove.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="ahvn.ukf.types.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">ahvn.ukf.types module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="ahvn.ukf.templates.db.tab_ukft.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">ahvn.ukf.templates.db.tab_ukft module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=9dc39874"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

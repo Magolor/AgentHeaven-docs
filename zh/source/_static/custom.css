@@ -1,0 +1,1699 @@
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Custom CSS for AgentHeaven Documentation - Tech Red Theme */
+
+/* Color scheme - Tech Red Theme with GitHub Soft Dark backgrounds */
+:root {
+    /* Keep primary colors unchanged */
+    --main-color: rgb(199,0,11);
+    --sub-color: rgb(211,57,65);
+    --aux1: rgb(196,0,84);
+    --aux2: rgb(127,0,1);
+    --aux3: rgb(237,109,0);
+    --aux4: rgb(52,200,0);
+    --aux5: rgb(98,178,48);
+    --aux6: rgb(48,181,197);
+    
+    /* Replace dark backgrounds with GitHub Soft Dark */
+    --tech-black: #0d1117;      /* GitHub Soft Dark canvas-default */
+    --deep-black: #010409;      /* GitHub Soft Dark canvas-overlay */
+    --card-bg: #161b22;         /* GitHub Soft Dark canvas-subtle */
+    --code-bg: #161b22;         /* GitHub Soft Dark code background */
+    --border-color: #30363d;    /* GitHub Soft Dark border-default */
+    --text-muted: #7d8590;      /* GitHub Soft Dark fg-muted */
+    
+    /* Update existing color variables */
+    --ahvn-primary: var(--main-color);
+    --ahvn-secondary: var(--sub-color);
+    --ahvn-accent: var(--aux4);
+    --ahvn-warning: var(--aux3);
+    --ahvn-danger: var(--main-color);
+    --ahvn-success: var(--aux4);
+}
+
+/* Global font styling - Using Inter as primary open-source font */
+body,
+html,
+.furo-main-content,
+.furo-sidebar,
+.furo-header,
+h1, h2, h3, h4, h5, h6,
+p, div, span, a, li, ul, ol,
+.admonition,
+.btn, button, .button,
+.language-switch,
+.py.class > dt,
+.py.method > dt,
+.py.function > dt,
+input, textarea, select,
+.toctree-wrapper {
+    font-family: 'Inter', 'Source Sans Pro', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Ensure code blocks and inline code keep Consolas monospace fonts */
+/* Universal code font rule - applies to ALL elements within code contexts */
+.highlight,
+.highlight *,
+code,
+code *,
+pre,
+pre *,
+.literal-block,
+.literal-block *,
+kbd,
+samp,
+tt,
+.highlight .line-numbers,
+.highlight table.highlighttable .linenos pre,
+.highlight ol.linenums {
+    font-family: 'Consolas', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace !important;
+}
+
+/* Global body styling with flowing background */
+body {
+    background-color: var(--deep-black) !important;
+    color: #e6edf3 !important;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Flowing Background Animation Container */
+.flowing-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -10;
+    overflow: hidden;
+}
+
+/* Individual flowing circles - DEBUG VERSION WITH HIGH VISIBILITY */
+.flow-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.9;
+    animation: flow-movement 20s linear infinite;
+    border: 3px solid #ff0000; /* Debug border */
+}
+
+.flow-circle.large {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(199,0,11,0.9) 0%, rgba(199,0,11,0.7) 40%, rgba(199,0,11,0.3) 70%);
+    animation-duration: 35s;
+}
+
+.flow-circle.medium {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(211,57,65,0.8) 0%, rgba(211,57,65,0.6) 40%, rgba(211,57,65,0.2) 70%);
+    animation-duration: 20s;
+}
+
+.flow-circle.small {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(196,0,84,0.7) 0%, rgba(196,0,84,0.5) 40%, rgba(196,0,84,0.1) 70%);
+    animation-duration: 15s;
+}
+
+/* Flow movement animation - Fixed to prevent clipping */
+@keyframes flow-movement {
+    0% {
+        transform: translateX(0) translateY(0px) scale(0.8);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(50vw) translateY(-50px) scale(1.2);
+    }
+    95% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(calc(100vw + 600px)) translateY(50px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+.furo-sidebar-brand,
+#furo-main-content,
+.furo-footer,
+.furo-sidebar {
+    background-color: transparent !important;
+}
+
+/* Sidebar styling */
+.furo-sidebar {
+    background-color: rgba(22, 27, 34, 0.9) !important;
+    position: fixed !important; /* Fixed positioning for independent scrolling */
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    width: 280px !important;
+    z-index: 1000 !important;
+    overflow-y: auto !important;
+    box-shadow: 
+        0 0 15px rgba(199,0,11, 0.15),
+        inset -3px 0 0 var(--main-color) !important;
+}
+
+.furo-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    z-index: 1;
+}
+
+/* Main content area */
+#furo-main-content {  /* Target the article by ID instead of class */
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 15px !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    width: 80% !important; /* 100% - 10% - 10% = 80% */
+    position: relative !important;
+    z-index: 1 !important; /* Keep content below sidebar */
+    max-width: none !important; /* Remove any max-width constraints */
+    /* Remove shadow/border effects to keep container borderless */
+    box-shadow: none !important;
+    /* Ensure proper content width and margins */
+    box-sizing: border-box !important;
+    /* Force margin application with higher specificity */
+    flex: 0 0 auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+}
+
+#furo-main-content::before {
+    /* Remove gradient background to keep container transparent */
+    display: none !important;
+}
+
+/* Header styling */
+.furo-header {
+    background-color: rgba(22, 27, 34, 0.9) !important;
+    position: relative !important;
+    box-shadow: 
+        0 0 10px rgba(199,0,11, 0.15),
+        inset 0 -3px 0 var(--main-color) !important;
+}
+
+.furo-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    z-index: 1;
+}
+
+/* Logo and branding with red glow */
+.sidebar-logo {
+    max-height: 3rem;
+    margin: 1rem 0;
+    filter: drop-shadow(0 0 8px rgba(199,0,11, 0.5));
+}
+
+/* Tech-style buttons */
+.btn, button, .button {
+    background-color: var(--tech-black) !important;
+    border: none !important;
+    padding: 12px 30px !important;
+    border-radius: 30px !important;
+    font-weight: 600 !important;
+    color: #e6edf3 !important;
+    cursor: pointer !important;
+    position: relative !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease !important;
+    box-shadow: 
+        0 0 4px rgba(199,0,11, 0.2),
+        0 0 0 3px var(--main-color) !important;
+}
+
+.btn::before, button::before, .button::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    border-radius: 33px;
+    z-index: -1;
+}
+
+.btn:hover, button:hover, .button:hover {
+    background-color: var(--main-color) !important;
+    color: #e6edf3 !important;
+    box-shadow: 0 0 8px rgba(199,0,11, 0.4) !important;
+}
+
+/* Language switcher with tech styling */
+.language-switch {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+.language-switch a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    background: var(--tech-black);
+    border: none;
+    border-radius: 25px;
+    color: #e6edf3;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 4px rgba(199,0,11, 0.2),
+        0 0 0 3px var(--main-color);
+}
+
+.language-switch a::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    border-radius: 28px;
+    z-index: -1;
+}
+
+.language-switch a:hover {
+    background: var(--main-color);
+    color: #e6edf3;
+    box-shadow: 0 0 8px rgba(199,0,11, 0.4);
+}
+
+.language-switch a.current {
+    background: var(--main-color);
+    color: #e6edf3;
+    box-shadow: 0 0 8px rgba(199,0,11, 0.4);
+}
+
+/* Tech-style admonitions with glowing borders */
+.admonition {
+    background-color: var(--card-bg) !important;
+    border: none !important;
+    border-radius: 15px !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+    color: #e6edf3 !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 
+        0 0 6px rgba(199,0,11, 0.3),
+        0 0 0 3px var(--main-color) !important;
+}
+
+.admonition::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    border-radius: 18px;
+    z-index: -1;
+}
+
+.admonition:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(199,0,11, 0.5) !important;
+}
+
+.admonition.tip {
+    border-color: var(--aux4) !important;
+    box-shadow: 0 0 6px rgba(52,200,0, 0.3) !important;
+}
+
+.admonition.tip:hover {
+    box-shadow: 0 0 15px rgba(52,200,0, 0.5) !important;
+}
+
+.admonition.warning {
+    border-color: var(--aux3) !important;
+    box-shadow: 0 0 6px rgba(237,109,0, 0.3) !important;
+}
+
+.admonition.warning:hover {
+    box-shadow: 0 0 15px rgba(237,109,0, 0.5) !important;
+}
+
+.admonition.danger {
+    border-color: var(--main-color) !important;
+    box-shadow: 0 0 6px rgba(199,0,11, 0.3) !important;
+}
+
+.admonition.danger:hover {
+    box-shadow: 0 0 15px rgba(199,0,11, 0.5) !important;
+}
+
+.admonition.note {
+    border-color: var(--sub-color) !important;
+    box-shadow: 0 0 6px rgba(211,57,65, 0.3) !important;
+}
+
+.admonition.note:hover {
+    box-shadow: 0 0 15px rgba(211,57,65, 0.5) !important;
+}
+
+.admonition-title {
+    color: #e6edf3 !important;
+    font-weight: 600 !important;
+}
+
+/* Tech-style code blocks with Consolas font and GitHub Soft Dark theme */
+.highlight {
+    border-radius: 15px !important;
+    overflow: hidden !important;
+    border: none !important;
+    background-color: var(--code-bg) !important; /* GitHub Soft Dark canvas-subtle */
+    margin: 8px 0 !important; /* Reduced margin */
+    position: relative !important;
+    box-shadow: 
+        0 0 10px rgba(199,0,11, 0.15),
+        0 0 0 3px var(--main-color) !important;
+}
+
+.highlight::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    border-radius: 18px;
+    z-index: -1;
+}
+
+/* Code block wrapper for copy button positioning */
+.highlight-container,
+.code-block-wrapper,
+div.highlight {
+    position: relative !important;
+}
+
+.highlight pre code {
+    font-family: 'Consolas', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace !important;
+    padding: 0.5rem 0.75rem 0.5rem 1.5rem !important; /* Reduced padding for compact code blocks */
+    margin: 0 !important;
+    background: var(--code-bg) !important; /* GitHub Soft Dark canvas-subtle */
+    overflow-x: auto !important;
+    color: #e6edf3 !important; /* GitHub Soft Dark fg-default */
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    counter-reset: line !important;
+    position: relative !important;
+}
+
+/* Line numbers styling - Only for documentation generator output */
+.highlight pre::before {
+    display: none !important; /* No CSS-only line numbers */
+}
+
+/* Enhanced line numbering for code blocks */
+.highlight {
+    counter-reset: line-number !important;
+    position: relative !important;
+}
+
+.highlight pre {
+    counter-reset: line-number !important;
+    position: relative !important;
+    white-space: pre !important;
+    line-height: 1.4 !important;
+}
+
+/* Simple working line numbers using background positioning */
+.highlight pre {
+    background-image: 
+        linear-gradient(to right, rgba(13, 17, 23, 0.9) 2.5rem, transparent 2.5rem) !important;
+    background-size: 100% 100% !important;
+    background-position: 0 0, 0 1.5rem !important;
+    background-repeat: no-repeat, repeat !important;
+}
+
+/* Add line numbers using CSS generated content - REMOVED HARDCODED APPROACH */
+.highlight pre::before {
+    display: none !important; /* Disable hardcoded line numbers */
+}
+
+/* Add separate styling for all pre elements to ensure Consolas */
+.highlight pre,
+code,
+pre,
+.literal-block {
+    font-family: 'Consolas', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace !important;
+    padding: 0.5rem 0.75rem 0.5rem 1.5rem !important; /* Reduced padding for compact code blocks */
+    margin: 0 !important;
+    background: var(--code-bg) !important; /* GitHub Soft Dark canvas-subtle */
+    overflow-x: auto !important;
+    color: #e6edf3 !important; /* GitHub Soft Dark fg-default */
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    counter-reset: line !important;
+    position: relative !important;
+    -moz-tab-size: 4 !important;
+    tab-size: 4 !important;
+}
+
+.highlight pre code {
+    font-family: 'Consolas', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace !important;
+    display: block !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    position: relative !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
+
+/* Automatic line numbering using CSS counters */
+.highlight pre[data-linenos="true"] {
+    counter-reset: line-number !important;
+}
+
+.highlight pre[data-linenos="true"] code .line,
+.highlight pre[data-linenos="true"] .line {
+    counter-increment: line-number !important;
+    display: block !important;
+    position: relative !important;
+}
+
+.highlight pre[data-linenos="true"] code .line::before,
+.highlight pre[data-linenos="true"] .line::before {
+    content: counter(line-number) !important;
+    position: absolute !important;
+    left: -2.5rem !important;
+    width: 2rem !important;
+    text-align: right !important;
+    color: #7d8590 !important;
+    font-size: 12px !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    padding-right: 0.5rem !important;
+}
+
+/* GitHub Soft Dark color scheme for syntax highlighting */
+/* Ensure all syntax highlighted elements use Consolas font */
+.highlight .c,    /* Comment */
+.highlight .cm,   /* Comment.Multiline */
+.highlight .cp,   /* Comment.Preproc */
+.highlight .c1,   /* Comment.Single */
+.highlight .cs,   /* Comment.Special */
+.highlight .k,    /* Keyword */
+.highlight .kc,   /* Keyword.Constant */
+.highlight .kd,   /* Keyword.Declaration */
+.highlight .kn,   /* Keyword.Namespace */
+.highlight .kp,   /* Keyword.Pseudo */
+.highlight .kr,   /* Keyword.Reserved */
+.highlight .kt,   /* Keyword.Type */
+.highlight .s,    /* String */
+.highlight .sb,   /* String.Backtick */
+.highlight .sc,   /* String.Char */
+.highlight .sd,   /* String.Doc */
+.highlight .s2,   /* String.Double */
+.highlight .se,   /* String.Escape */
+.highlight .sh,   /* String.Heredoc */
+.highlight .si,   /* String.Interpol */
+.highlight .sx,   /* String.Other */
+.highlight .sr,   /* String.Regex */
+.highlight .s1,   /* String.Single */
+.highlight .ss,   /* String.Symbol */
+.highlight .n,    /* Name */
+.highlight .na,   /* Name.Attribute */
+.highlight .nb,   /* Name.Builtin */
+.highlight .nc,   /* Name.Class */
+.highlight .no,   /* Name.Constant */
+.highlight .nd,   /* Name.Decorator */
+.highlight .ni,   /* Name.Entity */
+.highlight .ne,   /* Name.Exception */
+.highlight .nf,   /* Name.Function */
+.highlight .nl,   /* Name.Label */
+.highlight .nn,   /* Name.Namespace */
+.highlight .nx,   /* Name.Other */
+.highlight .py,   /* Name.Property */
+.highlight .nt,   /* Name.Tag */
+.highlight .nv,   /* Name.Variable */
+.highlight .ow,   /* Operator.Word */
+.highlight .w,    /* Text.Whitespace */
+.highlight .bp,   /* Name.Builtin.Pseudo */
+.highlight .m,    /* Literal.Number */
+.highlight .mf,   /* Literal.Number.Float */
+.highlight .mh,   /* Literal.Number.Hex */
+.highlight .mi,   /* Literal.Number.Integer */
+.highlight .mo,   /* Literal.Number.Oct */
+.highlight .o,    /* Operator */
+.highlight .p {   /* Punctuation */
+    font-family: 'Consolas', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace !important;
+}
+
+.highlight .c,    /* Comment */
+.highlight .cm,   /* Comment.Multiline */
+.highlight .cp,   /* Comment.Preproc */
+.highlight .c1,   /* Comment.Single */
+.highlight .cs {  /* Comment.Special */
+    color: #7d8590 !important; /* GitHub Soft Dark comment */
+    font-style: italic !important;
+}
+
+/* Make all keywords italic as well */
+.highlight .k,    /* Keyword */
+.highlight .kc,   /* Keyword.Constant */
+.highlight .kd,   /* Keyword.Declaration */
+.highlight .kn,   /* Keyword.Namespace */
+.highlight .kp,   /* Keyword.Pseudo */
+.highlight .kr,   /* Keyword.Reserved */
+.highlight .kt {  /* Keyword.Type */
+    font-style: italic !important;
+}
+
+.highlight .k,    /* Keyword */
+.highlight .kc,   /* Keyword.Constant */
+.highlight .kd,   /* Keyword.Declaration */
+.highlight .kn,   /* Keyword.Namespace */
+.highlight .kp,   /* Keyword.Pseudo */
+.highlight .kr,   /* Keyword.Reserved */
+.highlight .kt {  /* Keyword.Type */
+    color: #ff7b72 !important; /* GitHub Soft Dark keyword */
+    font-weight: bold !important;
+}
+
+.highlight .s,    /* String */
+.highlight .sb,   /* String.Backtick */
+.highlight .sc,   /* String.Char */
+.highlight .sd,   /* String.Doc */
+.highlight .s2,   /* String.Double */
+.highlight .se,   /* String.Escape */
+.highlight .sh,   /* String.Heredoc */
+.highlight .si,   /* String.Interpol */
+.highlight .sx,   /* String.Other */
+.highlight .sr,   /* String.Regex */
+.highlight .s1,   /* String.Single */
+.highlight .ss {  /* String.Symbol */
+    color: #a5d6ff !important; /* GitHub Soft Dark string */
+}
+
+.highlight .n,    /* Name */
+.highlight .na,   /* Name.Attribute */
+.highlight .nb,   /* Name.Builtin */
+.highlight .nc,   /* Name.Class */
+.highlight .no,   /* Name.Constant */
+.highlight .nd,   /* Name.Decorator */
+.highlight .ni,   /* Name.Entity */
+.highlight .ne,   /* Name.Exception */
+.highlight .nf,   /* Name.Function */
+.highlight .nl,   /* Name.Label */
+.highlight .nn,   /* Name.Namespace */
+.highlight .nx,   /* Name.Other */
+.highlight .py,   /* Name.Property */
+.highlight .nt,   /* Name.Tag */
+.highlight .nv,   /* Name.Variable */
+.highlight .ow,   /* Operator.Word */
+.highlight .w,    /* Text.Whitespace */
+.highlight .bp {  /* Name.Builtin.Pseudo */
+    color: #e6edf3 !important; /* GitHub Soft Dark default text */
+}
+
+.highlight .m,    /* Literal.Number */
+.highlight .mf,   /* Literal.Number.Float */
+.highlight .mh,   /* Literal.Number.Hex */
+.highlight .mi,   /* Literal.Number.Integer */
+.highlight .mo {  /* Literal.Number.Oct */
+    color: #79c0ff !important; /* GitHub Soft Dark number */
+}
+
+.highlight .o {   /* Operator */
+    color: #ff7b72 !important; /* GitHub Soft Dark operator */
+}
+
+.highlight .p {   /* Punctuation */
+    color: #e6edf3 !important; /* GitHub Soft Dark default */
+}
+
+.highlight .nf {  /* Name.Function */
+    color: #d2a8ff !important; /* GitHub Soft Dark function */
+}
+
+.highlight .nc {  /* Name.Class */
+    color: #ffa657 !important; /* GitHub Soft Dark class */
+}
+
+.highlight .kn {  /* Keyword.Namespace */
+    color: #ff7b72 !important; /* GitHub Soft Dark import */
+}
+
+.highlight .nb {  /* Name.Builtin */
+    color: #79c0ff !important; /* GitHub Soft Dark builtin */
+}
+
+/* Inline code styling with Consolas */
+code:not(.highlight pre code) {
+    font-family: 'Consolas', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace !important;
+    background-color: #21262d !important; /* GitHub Soft Dark canvas-inset */
+    color: #e6edf3 !important; /* GitHub Soft Dark text */
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--border-color) !important;
+    font-size: 0.9em !important;
+}
+
+/* Copy button styling with icon - Fixed for single button display */
+.copybtn {
+    background-color: var(--tech-black) !important;
+    border: 2px solid var(--main-color) !important;
+    color: #e6edf3 !important;
+    border-radius: 20px !important;
+    padding: 8px 12px !important;
+    transition: all 0.3s ease !important;
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    z-index: 10 !important;
+    min-width: 40px !important;
+    min-height: 35px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+.copybtn:hover {
+    background-color: var(--main-color) !important;
+    box-shadow: 0 0 8px rgba(199,0,11, 0.4) !important;
+}
+
+.copybtn .copybtn-tooltip {
+    background-color: var(--tech-black) !important;
+    border: 1px solid var(--main-color) !important;
+    color: #e6edf3 !important;
+    border-radius: 5px !important;
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+}
+
+/* Ensure only one copy button per code block */
+.highlight .copybtn:not(:first-of-type) {
+    display: none !important;
+}
+
+/* Ensure copy button stays within bounds on smaller screens */
+@media (max-width: 768px) {
+    .copybtn {
+        top: 5px !important;
+        right: 5px !important;
+        min-width: 35px !important;
+        min-height: 30px !important;
+        padding: 6px 10px !important;
+    }
+}
+
+/* Tech-style API documentation with glowing frames */
+.py.class > dt {
+    background: var(--card-bg) !important;
+    border: none !important;
+    border-radius: 15px !important;
+    padding: 1rem !important;
+    margin: 1.5rem 0 0.5rem 0 !important;
+    color: #e6edf3 !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 
+        0 0 8px rgba(52,200,0, 0.3),
+        0 0 0 3px var(--aux4) !important;
+}
+
+.py.class > dt::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--aux4), var(--main-color));
+    border-radius: 18px;
+    z-index: -1;
+}
+
+.py.class > dt:hover {
+    box-shadow: 0 0 15px rgba(52,200,0, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+.py.method > dt,
+.py.function > dt {
+    background: var(--card-bg) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 0.75rem !important;
+    margin: 1rem 0 !important;
+    color: #e6edf3 !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 
+        0 0 6px rgba(211,57,65, 0.3),
+        0 0 0 3px var(--sub-color) !important;
+}
+
+.py.method > dt::before,
+.py.function > dt::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--sub-color), var(--main-color));
+    border-radius: 13px;
+    z-index: -1;
+}
+
+.py.method > dt:hover,
+.py.function > dt:hover {
+    box-shadow: 0 0 12px rgba(211,57,65, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* API content styling */
+.py.class dd,
+.py.method dd,
+.py.function dd {
+    background-color: rgba(22, 27, 34, 0.5) !important;
+    border-left: none !important;
+    padding: 1rem !important;
+    margin: 0.5rem 0 1rem 0 !important;
+    color: #e6edf3 !important;
+    border-radius: 0 10px 10px 0 !important;
+    position: relative !important;
+}
+
+.py.class dd::before,
+.py.method dd::before,
+.py.function dd::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    z-index: 1;
+}
+
+/* API Reference function name and links styling */
+.py.method > dt,
+.py.function > dt,
+.py.class > dt {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+/* Function signature content (left side) */
+.py.method > dt > *:not(.viewcode-link):not(.headerlink),
+.py.function > dt > *:not(.viewcode-link):not(.headerlink),
+.py.class > dt > *:not(.viewcode-link):not(.headerlink) {
+    flex: 1 !important;
+    margin-right: 1rem !important;
+}
+
+/* Source and header links (right side) */
+.py.method > dt .viewcode-link,
+.py.function > dt .viewcode-link,
+.py.class > dt .viewcode-link {
+    margin-left: auto !important;
+    margin-right: 0.5rem !important;
+    flex-shrink: 0 !important;
+}
+
+.py.method > dt .headerlink,
+.py.function > dt .headerlink,
+.py.class > dt .headerlink {
+    margin-left: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+/* Style the viewcode link */
+.viewcode-link {
+    background: rgba(0, 0, 0, 0.3) !important;
+    color: var(--text-muted) !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 4px !important;
+    font-size: 0.8rem !important;
+    text-decoration: none !important;
+    border: 1px solid var(--border-color) !important;
+    transition: all 0.3s ease !important;
+}
+
+.viewcode-link:hover {
+    background: var(--main-color) !important;
+    color: #e6edf3 !important;
+    border-color: var(--main-color) !important;
+}
+
+/* Header link styling */
+.headerlink {
+    color: var(--text-muted) !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    padding: 0.25rem !important;
+    opacity: 0.7 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.headerlink:hover {
+    opacity: 1 !important;
+    color: var(--main-color) !important;
+}
+
+/* Tech-style tables with glowing borders */
+table.docutils {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    margin: 2rem 0 !important;
+    background-color: var(--card-bg) !important;
+    border: none !important;
+    border-radius: 15px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    box-shadow: 
+        0 0 10px rgba(199,0,11, 0.3),
+        0 0 0 3px var(--main-color) !important;
+}
+
+table.docutils::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    border-radius: 18px;
+    z-index: -1;
+}
+
+table.docutils th,
+table.docutils td {
+    border: none !important;
+    border-bottom: 2px solid var(--main-color) !important;
+    padding: 1rem !important;
+    text-align: left !important;
+    color: #e6edf3 !important;
+    position: relative !important;
+}
+
+table.docutils th::after,
+table.docutils td::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    z-index: 1;
+}
+
+table.docutils th {
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color)) !important;
+    font-weight: 600 !important;
+    color: #e6edf3 !important;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
+}
+
+table.docutils tr:hover {
+    background-color: rgba(199,0,11, 0.1) !important;
+}
+
+/* Tech-style grid cards with enhanced glow effects */
+.sd-card {
+    background: var(--card-bg) !important;
+    border: none !important;
+    border-radius: 15px !important;
+    color: #e6edf3 !important;
+    margin: 20px 0 !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 
+        0 0 6px rgba(199,0,11, 0.3),
+        0 0 0 3px var(--main-color) !important;
+}
+
+.sd-card::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    border-radius: 18px;
+    z-index: -1;
+}
+
+.sd-card:hover {
+    transform: translateY(-10px) !important;
+    border-color: var(--main-color) !important;
+    box-shadow: 0 0 20px rgba(199,0,11, 0.5) !important;
+}
+
+.sd-card-header {
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color)) !important;
+    color: #e6edf3 !important;
+    padding: 1.5rem !important;
+    border-radius: 11px 11px 0 0 !important;
+    font-weight: 600 !important;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
+}
+
+/* General link styling */
+a {
+    color: var(--sub-color) !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease !important;
+}
+
+a:hover {
+    color: var(--main-color) !important;
+    text-decoration: underline !important;
+}
+
+/* Sidebar navigation links */
+.furo-sidebar .toctree-wrapper a {
+    color: var(--text-muted) !important;
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+    border-radius: 4px;
+    padding: 5px 10px;
+    display: block;
+}
+
+.furo-sidebar .toctree-wrapper a:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #e6edf3 !important;
+    text-decoration: none !important;
+}
+
+/* Active/current page link in sidebar */
+.furo-sidebar .toctree-wrapper .current > a {
+    background-color: rgba(199, 0, 11, 0.2) !important;
+    color: #e6edf3 !important;
+    font-weight: 600;
+}
+
+/* Ensure all content is dark */
+html[data-theme="light"] body {
+    background-color: var(--deep-black) !important;
+    color: #e6edf3 !important;
+}
+
+html[data-theme="light"] .furo-sidebar {
+    background-color: rgba(22, 27, 34, 0.9) !important;
+}
+
+html[data-theme="light"] .furo-header {
+    background-color: rgba(22, 27, 34, 0.9) !important;
+}
+
+html[data-theme="light"] .admonition {
+    background-color: var(--card-bg) !important;
+    color: #e6edf3 !important;
+}
+
+html[data-theme="light"] .highlight {
+    background-color: var(--code-bg) !important;
+}
+
+html[data-theme="light"] code:not(.highlight pre code) {
+    background-color: #21262d !important;
+    color: #e6edf3 !important;
+}
+
+html[data-theme="light"] table.docutils {
+    background-color: var(--card-bg) !important;
+}
+
+html[data-theme="light"] table.docutils th,
+html[data-theme="light"] table.docutils td {
+    color: #e6edf3 !important;
+}
+
+html[data-theme="light"] .sd-card {
+    background: var(--card-bg) !important;
+    color: #e6edf3 !important;
+}
+
+.sd-card-body {
+    padding: 1.5rem !important;
+    color: #e6edf3 !important;
+}
+
+.sd-card-text {
+    color: #e6edf3 !important;
+}
+
+/* Tech-style navigation with red glow effects */
+.bd-sidebar-primary .bd-sidenav .active > .reference {
+    color: var(--main-color) !important;
+    background-color: rgba(199,0,11, 0.18) !important;
+    font-weight: 600 !important;
+    text-shadow: 0 0 5px rgba(199,0,11, 0.5) !important;
+    box-shadow: inset 3px 0 0 var(--main-color) !important;
+}
+
+.bd-sidebar-primary .bd-sidenav .reference {
+    color: #e6edf3 !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+.bd-sidebar-primary .bd-sidenav .reference:hover {
+    color: #e6edf3 !important;
+    background-color: rgba(199,0,11, 0.2) !important;
+    box-shadow: 0 0 8px rgba(199,0,11, 0.3) !important;
+}
+
+/* Main content headings - White text */
+h1, h2, h3, h4, h5, h6 {
+    color: #e6edf3fff !important;
+    text-shadow: 0 0 5px rgba(199,0,11, 0.3) !important;
+    font-weight: 600 !important;
+}
+
+/* Text elements - All white */
+p, li, span, div, article, section {
+    color: #e6edf3fff !important;
+}
+
+/* Blockquote styling for consistent dark tips */
+blockquote {
+    background-color: rgba(22, 27, 34, 0.85) !important;
+    border-left: 4px solid var(--aux4) !important;
+    color: #e6edf3fff !important;
+    padding: 1rem 1.5rem !important;
+    margin: 1.5rem 0 !important;
+    border-radius: 0 12px 12px 0 !important;
+    box-shadow: 0 0 10px rgba(199,0,11, 0.15) !important;
+}
+
+blockquote p {
+    color: inherit !important;
+    margin: 0 !important;
+}
+
+/* Strong emphasis - Keep white but add slight glow */
+strong, b {
+    color: #e6edf3fff !important;
+    text-shadow: 0 0 2px rgba(255,255,255, 0.3) !important;
+}
+
+/* Links */
+a {
+    color: var(--sub-color) !important;
+    transition: all 0.3s ease !important;
+}
+
+a:hover {
+    color: var(--main-color) !important;
+    text-shadow: 0 0 5px rgba(199,0,11, 0.5) !important;
+}
+
+/* External and Internal Reference Links - Highlighted in Red */
+.reference.external,
+.reference.internal {
+    color: var(--main-color) !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.reference.external:hover,
+.reference.internal:hover {
+    color: var(--sub-color) !important;
+    text-shadow: 0 0 8px rgba(199,0,11, 0.7) !important;
+    text-decoration: underline !important;
+}
+
+/* External link icon styling - exclude sidebar, headers, and brand areas */
+.reference.external:not(.sidebar-tree .reference):not(.sidebar-drawer .reference):not(.sidebar-brand):not(.brand .reference):not(.headerlink):not(h1 .reference):not(h2 .reference):not(h3 .reference):not(h4 .reference):not(h5 .reference):not(h6 .reference)::after {
+    content: "↗";
+    font-size: 0.8em !important;
+    margin-left: 0.2em !important;
+    opacity: 0.7 !important;
+    color: var(--main-color) !important;
+}
+
+/* Internal link indicator - exclude sidebar, headers, and brand areas */
+.reference.internal:not(.sidebar-tree .reference):not(.sidebar-drawer .reference):not(.sidebar-brand):not(.brand .reference):not(.headerlink):not(h1 .reference):not(h2 .reference):not(h3 .reference):not(h4 .reference):not(h5 .reference):not(h6 .reference)::before {
+    content: "🔗";
+    font-size: 0.8em !important;
+    margin-right: 0.2em !important;
+    opacity: 0.7 !important;
+    color: var(--main-color) !important;
+}
+
+/* Tech-style search with red glow */
+.bd-search .icon {
+    color: var(--main-color) !important;
+    filter: drop-shadow(0 0 3px rgba(199,0,11, 0.5)) !important;
+}
+
+.bd-search input[type="search"] {
+    background-color: var(--tech-black) !important;
+    border: none !important;
+    border-radius: 25px !important;
+    color: #e6edf3 !important;
+    padding: 10px 20px !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 
+        0 0 6px rgba(199,0,11, 0.3),
+        0 0 0 3px var(--main-color) !important;
+}
+
+.bd-search input[type="search"]::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    border-radius: 28px;
+    z-index: -1;
+}
+
+.bd-search input[type="search"]:focus {
+    border-color: var(--sub-color) !important;
+    box-shadow: 0 0 15px rgba(199,0,11, 0.5) !important;
+    outline: none !important;
+}
+
+.bd-search input[type="search"]::placeholder {
+    color: rgba(255,255,255,0.6) !important;
+}
+
+/* Tech-style footer with red glow */
+.bd-footer {
+    background: var(--card-bg) !important;
+    margin-top: 3rem !important;
+    padding: 2rem !important;
+    color: #e6edf3 !important;
+    position: relative !important;
+    box-shadow: 
+        0 0 10px rgba(199,0,11, 0.15),
+        inset 0 3px 0 var(--main-color) !important;
+}
+
+.bd-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+    z-index: 1;
+}
+
+.bd-footer p, .bd-footer a {
+    color: #e6edf3 !important;
+}
+
+.bd-footer a:hover {
+    color: var(--main-color) !important;
+    text-shadow: 0 0 5px rgba(199,0,11, 0.5) !important;
+}
+
+/* Enhanced dark mode with GitHub Soft Dark styling */
+[data-theme="dark"] {
+    --color-api-background: var(--card-bg);
+    --color-api-function-background: var(--card-bg);
+    --color-code-background: var(--code-bg);
+    --color-background-primary: var(--deep-black);
+    --color-background-secondary: var(--card-bg);
+    --color-foreground: #e6edf3;
+}
+
+/* Light mode overrides to maintain GitHub Soft Dark theme */
+[data-theme="light"] {
+    --color-api-background: var(--card-bg);
+    --color-api-function-background: var(--card-bg);
+    --color-code-background: var(--code-bg);
+    --color-background-primary: var(--deep-black);
+    --color-background-secondary: var(--card-bg);
+    --color-foreground: #e6edf3;
+}
+
+/* Force dark tech theme regardless of system preference */
+html {
+    background-color: var(--deep-black) !important;
+    color-scheme: dark !important;
+}
+
+.furo-main,
+.furo-content,
+article {
+    background-color: dark !important;
+    color: #e6edf3 !important;
+}
+
+/* Remove theme switcher buttons completely */
+.theme-toggle-container,
+.theme-toggle-header,
+.theme-toggle-content,
+.theme-toggle,
+.theme-toggle-button,
+button.theme-toggle,
+.theme-toggle-header .theme-toggle,
+.theme-toggle-content .theme-toggle {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* Responsive design with tech styling */
+@media (max-width: 768px) {
+    .language-switch {
+        position: relative;
+        top: auto;
+        right: auto;
+        text-align: center;
+        margin: 1rem 0;
+    }
+    
+    .sd-col-12 {
+        margin-bottom: 1rem;
+    }
+    
+    #furo-main-content {
+        margin: 10px !important;
+    }
+    
+    /* Mobile-friendly card adjustments */
+    .sd-card {
+        margin: 10px 0 !important;
+    }
+    
+    .sd-card:hover {
+        transform: translateY(-5px) !important; /* Reduced hover effect on mobile */
+    }
+}
+
+/* Print styles with tech elements removed */
+@media print {
+    .language-switch,
+    .bd-sidebar-primary,
+    .bd-header,
+    body::before,
+    body::after {
+        display: none !important;
+    }
+    
+    .bd-main {
+        margin-left: 0 !important;
+    }
+    
+    /* Print-friendly colors */
+    * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        border-color: #ccc !important;
+    }
+}
+
+/* JavaScript-based line numbering support */
+.highlight-linenums .highlight {
+    position: relative !important;
+}
+
+.highlight-linenums .highlight pre {
+    padding-left: 4rem !important;
+}
+
+.highlight-linenums .linenos {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 3.5rem !important;
+    height: 100% !important;
+    background: rgba(13, 17, 23, 0.9) !important;
+    border-right: none !important;
+    padding: 1.5rem 0.5rem !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    color: #7d8590 !important;
+    text-align: right !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+
+
+.highlight-linenums .linenos pre {
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    color: inherit !important;
+}
+
+/* Line number hover effects */
+.highlight:hover .linenos {
+    background: rgba(13, 17, 23, 1) !important;
+}
+
+/* Enhanced support for Pygments line number tables */
+.highlight .linenodiv {
+    background: rgba(13, 17, 23, 0.9) !important;
+    border-right: none !important;
+    padding-right: 0.5rem !important;
+    width: 3.5rem !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: 100% !important;
+    z-index: 1 !important;
+}
+
+.highlight .linenodiv pre {
+    background: transparent !important;
+    color: #7d8590 !important;
+    text-align: right !important;
+    font-size: 12px !important;
+    padding: 1.5rem 0.5rem !important;
+    margin: 0 !important;
+    border: none !important;
+    line-height: 1.4 !important;
+}
+
+/* Code table layout for line numbers - This is the main approach for Sphinx */
+.highlight table.highlighttable {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    table-layout: fixed !important;
+}
+
+.highlight table.highlighttable tbody,
+.highlight table.highlighttable tr {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.highlight table.highlighttable td {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    vertical-align: top !important;
+}
+
+.highlight table.highlighttable td.linenos {
+    width: 3.5rem !important;
+    min-width: 3.5rem !important;
+    max-width: 3.5rem !important;
+    background: rgba(13, 17, 23, 0.9) !important;
+    border-right: none !important;
+    position: relative !important;
+}
+
+
+
+.highlight table.highlighttable td.code {
+    width: calc(100% - 3.5rem) !important;
+    background: var(--code-bg) !important;
+}
+
+.highlight table.highlighttable pre {
+    margin: 0 !important;
+    padding: 0.5rem 0.75rem !important;
+    white-space: pre !important;
+    overflow-x: auto !important;
+}
+
+.highlight table.highlighttable .linenos pre {
+    color: #7d8590 !important;
+    text-align: right !important;
+    font-size: 12px !important;
+    background: transparent !important;
+    padding: 1.5rem 0.5rem !important;
+    white-space: pre !important;
+    line-height: 1.4 !important;
+}
+
+/* Support for line numbers in different formats */
+.highlight .linenos .linenumber {
+    display: block !important;
+    line-height: 1.4 !important;
+    color: #7d8590 !important;
+    text-align: right !important;
+}
+
+/* Alternative line numbering using ordered lists */
+.highlight ol.linenums {
+    list-style: none !important;
+    counter-reset: linenumber !important;
+    margin: 0 !important;
+    padding: 1.5rem 0.5rem !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 3.5rem !important;
+    height: 100% !important;
+    background: rgba(13, 17, 23, 0.9) !important;
+    border-right: none !important;
+    color: #7d8590 !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    text-align: right !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+}
+
+
+
+.highlight ol.linenums li {
+    counter-increment: linenumber !important;
+    line-height: 1.4 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.highlight ol.linenums li::before {
+    content: counter(linenumber) !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: right !important;
+    color: #7d8590 !important;
+}
+
+/* JavaScript line numbering is now automatically included via html_js_files in conf.py */
+/*
+JavaScript features automatically loaded when Sphinx builds the HTML:
+
+1. Line Numbering (line-numbers.js):
+   - Counts actual number of lines in each code block
+   - Adds appropriate line numbers (no fixed limit)
+   - Handles dynamic content and responsive layouts
+   - Skips single-line code blocks
+   - Works with all documentation generators
+
+2. Mouse Spotlight (mouse-spotlight.js):
+   - Creates a dim dark red spotlight that follows the mouse cursor
+   - Large blur radius for subtle effect
+   - Fades in/out based on mouse movement
+   - Uses very subtle colors to enhance readability without distraction
+   - Automatically hides when mouse leaves the page
+*/
+
+/* CSS support for JavaScript-generated line numbers */
+.highlight.has-line-numbers {
+    position: relative !important;
+}
+
+/* Match line numbers font size and line height to code content */
+.highlight .line-numbers {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 2.5rem !important;
+    background: rgba(13, 17, 23, 0.9) !important;
+    border-right: none !important;
+    padding: 0.5rem 0.5rem !important; /* Match code block vertical padding */
+    font-size: 14px !important; /* Match code font size */
+    line-height: 1.4 !important; /* Match code line height */
+    color: #7d8590 !important;
+    text-align: right !important;
+    user-select: none !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+    font-family: 'Consolas', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace !important;
+    white-space: pre !important;
+    box-sizing: border-box !important;
+}
+
+
+
+.highlight.has-line-numbers pre {
+    padding-left: 3rem !important;
+}
+
+/* Hover effects for line numbers */
+.highlight:hover .line-numbers {
+    background: rgba(13, 17, 23, 1) !important;
+    border-right-color: rgba(199,0,11, 0.5) !important;
+}
+
+/* Mouse spotlight effect support - styles are applied dynamically via JavaScript */
+/* The spotlight element is created and styled entirely in mouse-spotlight.js */
+
+/* Enhance interactive elements for spotlight effect */
+.highlight:hover,
+.admonition:hover,
+.sd-card:hover {
+    /* Elements already have hover effects, spotlight will complement them */
+    z-index: relative; /* Ensure proper layering with spotlight */
+}
+
+/* Ensure spotlight doesn't interfere with copy buttons */
+.copybtn {
+    z-index: 11 !important; /* Above the spotlight z-index of 9999 */
+}
+
+/* Subtle enhancement for elements under spotlight */
+@media (hover: hover) {
+    .highlight,
+    .admonition,
+    .sd-card,
+    h1, h2, h3, h4, h5, h6 {
+        transition: all 0.3s ease, box-shadow 0.3s ease !important;
+    }
+}
+
+/* ===== SIDEBAR WIDTH OPTIMIZATION AND TOGGLE FUNCTIONALITY ===== */
+
+/* Reduce sidebar widths for better content space */
+.furo-sidebar {
+    width: 280px !important; /* Reduced from default ~320px */
+    min-width: 280px !important;
+    max-width: 280px !important;
+}
+
+#furo-main-content .content,
+#furo-main-content article,
+#furo-main-content .container,
+#furo-main-content > *,
+.content,
+article.content,
+.furo-content,
+.page-content {
+    max-width: none !important;
+    width: 100% !important;
+    /* Ensure content respects the 10% margins */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Force main content to maintain 10% margins with highest specificity */
+body #furo-main-content,
+.bd-content #furo-main-content,
+.bd-main #furo-main-content {
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    width: 80% !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    position: relative !important;
+}
+
+/* Sidebar toggle buttons - styling now handled by JavaScript for better control */
+/* Removed empty .sidebar-toggle-left/right rule; styling injected via JS */
+
+/* Responsive adjustments - maintain 10% margins on smaller screens */
+@media (max-width: 1200px) {
+    .furo-sidebar {
+        width: 250px !important;
+        min-width: 250px !important;
+        max-width: 250px !important;
+    }
+
+    #furo-main-content {
+        margin-left: 8% !important;
+        margin-right: 8% !important;
+        width: 84% !important;
+    }
+
+    .furo-sidebar.collapsed {
+        width: 50px !important;
+        min-width: 50px !important;
+        max-width: 50px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Hide native toggle buttons since we have custom ones */
+    .nav-overlay-icon,
+    .toc-overlay-icon {
+        display: none !important;
+    }
+
+    .furo-sidebar {
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    .furo-main-content {
+        margin-left: 10% !important;
+        margin-right: 10% !important;
+        width: 80% !important;
+    }
+}

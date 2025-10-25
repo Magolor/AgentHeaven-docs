@@ -1,0 +1,1580 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../../genindex.html"><link rel="search" title="搜索" href="../../search.html"><link rel="next" title="DAACKLEngine" href="daac.html"><link rel="prev" title="BaseKLEngine" href="base.html">
+        <link rel="prefetch" href="../../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>FacetKLEngine - AgentHeaven文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven 正在积极开发中，功能可能会发生变化。 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">AgentHeaven文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">简介</a><input aria-label="Toggle navigation of 简介" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/philosophy.html">理念与愿景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/architecture.html">架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/learning.html">学习 AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting-started/index.html">快速开始</a><input aria-label="Toggle navigation of 快速开始" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/installation.html">安装指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/setup.html">设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/5min-quickstart.html">5 分钟快速开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/60min-tutorial.html">60 分钟教程</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../configuration/index.html">配置</a><input aria-label="Toggle navigation of 配置" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/core.html">核心配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/llm.html">LLM 配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/database.html">数据库配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/vdb.html">向量数据库配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">主指南（Python）</a><input aria-label="Toggle navigation of 主指南（Python）" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../utils/index.html">实用工具</a><input aria-label="Toggle navigation of 实用工具" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../utils/basic/index.html">基础实用工具</a><input aria-label="Toggle navigation of 基础实用工具" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/config_utils.html">配置管理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/hash_utils.html">哈希工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/parallel_utils.html">多线程并行化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/jinja_utils.html">模板处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/serialize_utils.html">序列化工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/str_utils.html">字符串实用工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/misc_utils.html">其他实用工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/db.html">数据库工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/vdb.html">向量数据库工具</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html">缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ukf/index.html">UKF (通用知识格式)</a><input aria-label="Toggle navigation of UKF (通用知识格式)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/data-types.html">UKF 数据类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/builtin-templates.html">内置模板</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="base.html">BaseKLEngine</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../toolspec/index.html">工具规范</a><input aria-label="Toggle navigation of 工具规范" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../toolspec/base.html">工具规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolspec/builtins.html">内置工具规范</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../agent.html">智能体</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cli-guide/index.html">CLI 指南</a><input aria-label="Toggle navigation of CLI 指南" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/repo-management.html">仓库管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/llm-inference.html">LLM 推理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/llm-session.html">LLM 会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/prompt-management.html">提示词管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/knowledge-management.html">知识管理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui-guide/index.html">GUI 使用指南</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../example-applications/index.html">示例应用</a><input aria-label="Toggle navigation of 示例应用" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../example-applications/nl2sql-system.html">NL2SQL 系统</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">开发规划</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../contribution/index.html">贡献</a><input aria-label="Toggle navigation of 贡献" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/overview.html">贡献概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/for_developers.html">开发者指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/feature_workflow.html">功能添加工作流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/srs.html">简要软件需求（SRS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/ar/index.html">分配需求 (AR)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api_index.html">API 参考</a><input aria-label="Toggle navigation of API 参考" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api/ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../community/index.html">社区与支持</a><input aria-label="Toggle navigation of 社区与支持" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../community/resources.html">社区资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation.html">引用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">许可协议</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/zh/source/python-guide/klengine/facet.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/zh/source/python-guide/klengine/facet.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="facetklengine">
+<h1>FacetKLEngine<a class="headerlink" href="#facetklengine" title="Link to this heading">¶</a></h1>
+<p>FacetKLEngine 是一个基于数据库的 <a class="reference internal" href="base.html"><span class="std std-doc">BaseKLEngine</span></a> 实现，通过 SQL 谓词对知识对象进行结构化过滤和分面检索。它利用关系数据库的能力，通过 <code class="docutils literal notranslate"><span class="pre">Facet</span></code> 运算符这一强大的抽象，提供高效灵活的查询能力，便于构建复杂的过滤条件。</p>
+<section id="id1">
+<h2>1. 介绍<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>1.1. 什么是分面检索？<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p><strong>分面检索</strong>是一种查询技术，允许用户沿多个独立的维度（分面）对数据集进行过滤。每个分面代表一个可过滤的类别或连续属性，这些属性可以被组合、叠加和细化，以缩小检索结果。</p>
+<p><strong>FacetKLEngine</strong> 将这种方法引入知识检索：</p>
+<ul class="simple">
+<li><p><strong>输入</strong>：以 <code class="docutils literal notranslate"><span class="pre">Facet</span></code> 运算符表达的过滤条件（等值、比较、模式、逻辑组合）</p></li>
+<li><p><strong>索引数据</strong>：存储在关系数据库表中的知识对象（通过 <a class="reference internal" href="../klstore/database.html"><span class="std std-doc">DatabaseKLStore</span></a>）</p></li>
+<li><p><strong>输出</strong>：满足所有指定过滤条件的知识对象</p></li>
+<li><p><strong>性能</strong>：利用数据库索引和查询优化实现快速过滤</p></li>
+</ul>
+<p>与语义检索（向量相似度）或模式匹配（DAAC）不同，分面检索擅长基于已知属性和关系的<strong>精确结构化过滤</strong>。</p>
+<br/>
+</section>
+<section id="id3">
+<h3>1.2. 何时使用 FacetKLEngine<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p><strong>理想使用场景：</strong></p>
+<ul class="simple">
+<li><p><strong>结构化数据过滤</strong>：按类型、类别、状态、时间戳、优先级或自定义元数据字段查询知识对象</p></li>
+<li><p><strong>多条件检索</strong>：组合多个过滤条件（AND/OR/NOT 逻辑）以细化结果</p></li>
+<li><p><strong>区间查询</strong>：对数值或日期时间字段进行范围过滤</p></li>
+<li><p><strong>模式匹配</strong>：使用 SQL LIKE/ILIKE 进行文本模式匹配</p></li>
+<li><p><strong>维度过滤</strong>：跨维度表查询（例如，通过外键存储在独立表中的标签、元数据）</p></li>
+<li><p><strong>数据库原生操作</strong>：利用现有数据库基础设施、索引和查询优化</p></li>
+</ul>
+<p><strong>不适用场景：</strong></p>
+<ul class="simple">
+<li><p><strong>语义检索</strong>：使用 <a class="reference internal" href="vector.html"><span class="std std-doc">VectorKLEngine</span></a> 进行基于含义的相似度查询</p></li>
+<li><p><strong>实体识别</strong>：使用 <a class="reference internal" href="daac.html"><span class="std std-doc">DAACKLEngine</span></a> 在文本中查找已知实体字符串</p></li>
+<li><p><strong>全文搜索</strong>：使用专门的全文搜索引擎进行文档内容匹配</p></li>
+<li><p><strong>模糊匹配</strong>：FacetKLEngine 执行精确匹配（在 SQL 模式运算符之后）</p></li>
+</ul>
+<br/>
+</section>
+<section id="id4">
+<h3>1.3. 关键特性<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>丰富的过滤运算符</strong>：全面的运算符集，包括比较（LT、LTE、GT、GTE）、模式匹配（LIKE、ILIKE）、逻辑运算符（AND、OR、NOT）、区间查询（BETWEEN）和列表成员（IN）</p></li>
+<li><p><strong>维度表支持</strong>：使用 NF（规范化形式）运算符跨维度表查询复杂关系</p></li>
+<li><p><strong>两种运行模式</strong>：</p>
+<ul>
+<li><p><strong>原地模式</strong>（<code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>）：直接查询连接的 DatabaseKLStore，零开销</p></li>
+<li><p><strong>非原地模式</strong>（<code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>）：创建带模式子集的优化副本，加速查询</p></li>
+</ul>
+</li>
+<li><p><strong>全局分面</strong>：跨所有检索应用持久化过滤条件</p></li>
+<li><p><strong>SQL 集成</strong>：直接访问生成的 SQL 以便调试和优化</p></li>
+<li><p><strong>类型安全</strong>：自动验证过滤字段是否存在于数据库模式中</p></li>
+<li><p><strong>数据库无关</strong>：通过 SQLAlchemy 支持 PostgreSQL、MySQL、SQLite、DuckDB</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="facet">
+<h2>2. 理解 Facet 运算符<a class="headerlink" href="#facet" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Facet</span></code> 类提供了一个流式 API 来构建过滤表达式，这些表达式会转换为 SQL WHERE 子句。所有运算符都是可组合的，可以任意嵌套。</p>
+<section id="id5">
+<h3>2.1. 比较运算符<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>这些运算符将字段值与常量进行比较：</p>
+<p><strong>等值和不等值：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+
+<span class="c1"># 精确匹配（field == value）</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;documentation&quot;</span><span class="p">)</span>
+<span class="c1"># 生成：{&quot;FIELD:type&quot;: {&quot;==&quot;: &quot;documentation&quot;}}</span>
+
+<span class="c1"># 不等于（field != value）——使用 NOT 包装</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="s2">&quot;deleted&quot;</span><span class="p">))</span>
+<span class="c1"># 生成：{&quot;FIELD:status&quot;: {&quot;NOT&quot;: {&quot;==&quot;: &quot;deleted&quot;}}}</span>
+</pre></div>
+</div>
+<p><strong>数值比较：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 小于</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LT</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1"># 生成：{&quot;FIELD:priority&quot;: {&quot;&lt;&quot;: 5}}</span>
+
+<span class="c1"># 小于或等于</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LTE</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="c1"># 生成：{&quot;FIELD:priority&quot;: {&quot;&lt;=&quot;: 10}}</span>
+
+<span class="c1"># 大于</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GT</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
+<span class="c1"># 生成：{&quot;FIELD:score&quot;: {&quot;&gt;&quot;: 80}}</span>
+
+<span class="c1"># 大于或等于</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
+<span class="c1"># 生成：{&quot;FIELD:score&quot;: {&quot;&gt;=&quot;: 90}}</span>
+</pre></div>
+</div>
+<p><strong>日期时间比较：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># 按日期范围过滤</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">created_at</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="c1"># 生成：{&quot;FIELD:created_at&quot;: {&quot;&gt;=&quot;: datetime.datetime(2024, 1, 1)}}</span>
+
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">updated_at</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LTE</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)))</span>
+<span class="c1"># 生成：{&quot;FIELD:updated_at&quot;: {&quot;&lt;=&quot;: datetime.datetime(2024, 12, 31)}}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id6">
+<h3>2.2. 模式匹配运算符<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p>SQL LIKE 运算符用于文本模式匹配：</p>
+<p><strong>区分大小写的模式匹配（LIKE）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 通配符匹配</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;%Python%&quot;</span><span class="p">))</span>  <span class="c1"># 包含 &quot;Python&quot;</span>
+<span class="c1"># 生成：{&quot;FIELD:name&quot;: {&quot;LIKE&quot;: &quot;%Python%&quot;}}</span>
+
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;Python%&quot;</span><span class="p">))</span>   <span class="c1"># 以 &quot;Python&quot; 开头</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;%Tutorial&quot;</span><span class="p">))</span>  <span class="c1"># 以 &quot;Tutorial&quot; 结尾</span>
+</pre></div>
+</div>
+<p><strong>不区分大小写的模式匹配（ILIKE）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 不区分大小写搜索</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">ILIKE</span><span class="p">(</span><span class="s2">&quot;%python%&quot;</span><span class="p">))</span>  <span class="c1"># 匹配 &quot;Python&quot;、&quot;PYTHON&quot;、&quot;python&quot;</span>
+<span class="c1"># 生成：{&quot;FIELD:description&quot;: {&quot;ILIKE&quot;: &quot;%python%&quot;}}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id7">
+<h3>2.3. 区间运算符<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>对数值或日期时间范围内的值进行过滤：</p>
+<p><strong>BETWEEN 运算符：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 闭区间 [min, max]</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="c1"># 生成：{&quot;FIELD:score&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: 0}, {&quot;&lt;=&quot;: 100}]}}</span>
+
+<span class="c1"># 使用 None 表示开区间</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">price</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>  <span class="c1"># &gt;= 100（无上界）</span>
+<span class="c1"># 生成：{&quot;FIELD:price&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: 100}, {&quot;&lt;=&quot;: inf}]}}</span>
+
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">65</span><span class="p">))</span>     <span class="c1"># &lt;= 65（无下界）</span>
+<span class="c1"># 生成：{&quot;FIELD:age&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: -inf}, {&quot;&lt;=&quot;: 65}]}}</span>
+</pre></div>
+</div>
+<p><strong>元组简写：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 元组自动转换为 BETWEEN</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="c1"># 等价于：Facet.expr(priority=Facet.BETWEEN(1, 10))</span>
+<span class="c1"># 生成：{&quot;FIELD:priority&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: 1}, {&quot;&lt;=&quot;: 10}]}}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id8">
+<h3>2.4. 逻辑运算符<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>使用布尔逻辑组合多个条件：</p>
+<p><strong>AND 运算符（逻辑合取）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 所有条件必须为真</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="n">Facet</span><span class="o">.</span><span class="n">LTE</span><span class="p">(</span><span class="mi">100</span><span class="p">)]))</span>
+<span class="c1"># 生成：{&quot;FIELD:score&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: 80}, {&quot;&lt;=&quot;: 100}]}}</span>
+<span class="c1"># SQL：score &gt;= 80 AND score &lt;= 100</span>
+</pre></div>
+</div>
+<p><strong>OR 运算符（逻辑析取）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 至少一个条件必须为真</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span> <span class="s2">&quot;reviewing&quot;</span><span class="p">]))</span>
+<span class="c1"># 生成：{&quot;FIELD:status&quot;: {&quot;OR&quot;: [{&quot;IN&quot;: [&quot;active&quot;, &quot;pending&quot;, &quot;reviewing&quot;]}]}}</span>
+<span class="c1"># SQL：status IN (&#39;active&#39;, &#39;pending&#39;, &#39;reviewing&#39;)</span>
+
+<span class="c1"># 在 OR 中混合运算符</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;urgent%&quot;</span><span class="p">)]))</span>
+<span class="c1"># 生成：{&quot;FIELD:priority&quot;: {&quot;OR&quot;: [{&quot;&gt;=&quot;: 8}, {&quot;LIKE&quot;: &quot;urgent%&quot;}]}}</span>
+<span class="c1"># SQL：priority &gt;= 8 OR priority LIKE &#39;urgent%&#39;</span>
+</pre></div>
+</div>
+<p><strong>NOT 运算符（逻辑否定）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 否定任意条件</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="s2">&quot;archived&quot;</span><span class="p">))</span>
+<span class="c1"># 生成：{&quot;FIELD:status&quot;: {&quot;NOT&quot;: {&quot;==&quot;: &quot;archived&quot;}}}</span>
+<span class="c1"># SQL：status != &#39;archived&#39;</span>
+
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">eprecated%&quot;</span><span class="p">)))</span>
+<span class="c1"># 生成：{&quot;FIELD:name&quot;: {&quot;NOT&quot;: {&quot;LIKE&quot;: &quot;%deprecated%&quot;}}}</span>
+<span class="c1"># SQL：name NOT LIKE &#39;%deprecated%&#39;</span>
+</pre></div>
+</div>
+<p><strong>IN 运算符（成员测试）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># OR 的简单值别名</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">IN</span><span class="p">([</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="s2">&quot;guide&quot;</span><span class="p">,</span> <span class="s2">&quot;reference&quot;</span><span class="p">]))</span>
+<span class="c1"># 等价于：Facet.expr(category=Facet.OR([...]))</span>
+<span class="c1"># 生成：{&quot;FIELD:category&quot;: {&quot;OR&quot;: [{&quot;IN&quot;: [&quot;tutorial&quot;, &quot;guide&quot;, &quot;reference&quot;]}]}}</span>
+
+<span class="c1"># 列表自动转换为 OR/IN</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;pending&quot;</span><span class="p">])</span>
+<span class="c1"># 生成：{&quot;FIELD:status&quot;: {&quot;OR&quot;: [{&quot;IN&quot;: [&quot;active&quot;, &quot;pending&quot;]}]}}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="nf">
+<h3>2.5. 维度表运算符（NF）<a class="headerlink" href="#nf" title="Link to this heading">¶</a></h3>
+<p>**NF（规范化形式）**运算符用于跨维度表进行查询——这些维度表是通过外键链接的独立表，用于存储复杂的 UKF 字段，如标签、元数据或数组。</p>
+<p><strong>理解维度表：</strong></p>
+<p>当 <code class="docutils literal notranslate"><span class="pre">BaseUKF</span></code> 包含 <code class="docutils literal notranslate"><span class="pre">DatabaseNfType</span></code> 类型的字段（例如 <code class="docutils literal notranslate"><span class="pre">tags</span></code>、<code class="docutils literal notranslate"><span class="pre">metadata</span></code>、<code class="docutils literal notranslate"><span class="pre">content_resources</span></code>）时，DatabaseKLStore 会将它们存储在独立的维度表中：</p>
+<ul class="simple">
+<li><p><strong>主表</strong>：<code class="docutils literal notranslate"><span class="pre">ukf_main</span></code>（id、name、type、version、timestamp 等）</p></li>
+<li><p><strong>维度表</strong>：<code class="docutils literal notranslate"><span class="pre">ukf_tags</span></code>、<code class="docutils literal notranslate"><span class="pre">ukf_metadata</span></code> 等（ukf_id、slot、value）</p></li>
+</ul>
+<p><strong>NF 运算符语法：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 按槽和值查询维度表</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">))</span>
+<span class="c1"># 生成：{&quot;FIELD:tags&quot;: {&quot;NF&quot;: {&quot;slot&quot;: &quot;category&quot;, &quot;value&quot;: &quot;tutorial&quot;}}}</span>
+<span class="c1"># SQL：EXISTS (SELECT DISTINCT ukf_tags.id FROM ukf_tags </span>
+<span class="c1">#             WHERE ukf_main.id = ukf_tags.ukf_id </span>
+<span class="c1">#             AND ukf_tags.slot = &#39;category&#39; AND ukf_tags.value = &#39;tutorial&#39;)</span>
+
+<span class="c1"># 带运算符的查询</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;math&quot;</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="s2">&quot;ANY_IF_EXISTS&quot;</span><span class="p">))</span>
+<span class="c1"># 一个槽可以有多个值；如果该槽至少存在一个值，则只要有任意一个值满足条件即匹配</span>
+<span class="c1"># 支持的运算符：</span>
+<span class="c1"># - EXACT</span>
+<span class="c1"># - NONE_OF</span>
+<span class="c1"># - ANY_OF</span>
+<span class="c1"># - ANY_IF_EXISTS</span>
+<span class="c1"># - ONE_OF</span>
+<span class="c1"># - MANY_OF</span>
+<span class="c1"># - ALL_OF</span>
+<span class="c1"># - ALL_IN</span>
+<span class="c1"># - HAS_NONE（一元，仅检查槽）</span>
+<span class="c1"># - HAS_ANY（一元，仅检查槽）</span>
+<span class="c1"># - HAS_ONE（一元，仅检查槽）</span>
+<span class="c1"># - HAS_MANY（一元，仅检查槽）</span>
+</pre></div>
+</div>
+<p><strong>多维度过滤器：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 同一维度中的多个槽值对（AND 逻辑）</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">),</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">)</span>
+<span class="c1"># 两个条件都必须在 tags 维度表中存在</span>
+</pre></div>
+</div>
+<p><strong>真实示例：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 查找带特定标签的知识对象</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;project&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;AgentHeaven&quot;</span><span class="p">),</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;published&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># 返回满足以下条件的 UKF：</span>
+<span class="c1"># - 标签条目中存在 slot=&quot;project&quot; 和 value=&quot;AgentHeaven&quot;</span>
+<span class="c1"># - 元数据条目中存在 slot=&quot;status&quot; 和 value=&quot;published&quot;</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id9">
+<h3>2.6. 多字段表达式<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>组合多个字段的过滤器（隐式 AND）：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 多个字段构成 AND 结构</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;documentation&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;reviewing&quot;</span><span class="p">]),</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;%Tutorial%&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># 生成：{</span>
+<span class="c1">#   &quot;AND&quot;: [</span>
+<span class="c1">#     {&quot;FIELD:type&quot;: {&quot;==&quot;: &quot;documentation&quot;}},</span>
+<span class="c1">#     {&quot;FIELD:priority&quot;: {&quot;&gt;=&quot;: 5}},</span>
+<span class="c1">#     {&quot;FIELD:status&quot;: {&quot;OR&quot;: [{&quot;IN&quot;: [&quot;active&quot;, &quot;reviewing&quot;]}]}},</span>
+<span class="c1">#     {&quot;FIELD:name&quot;: {&quot;LIKE&quot;: &quot;%Tutorial%&quot;}}</span>
+<span class="c1">#   ]</span>
+<span class="c1"># }</span>
+<span class="c1"># SQL：type = &#39;documentation&#39; </span>
+<span class="c1">#      AND priority &gt;= 5 </span>
+<span class="c1">#      AND status IN (&#39;active&#39;, &#39;reviewing&#39;)</span>
+<span class="c1">#      AND name LIKE &#39;%Tutorial%&#39;</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id10">
+<h3>2.7. 复杂嵌套表达式<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>构建任意复杂的过滤树：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 复杂的的多层过滤</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span>
+    <span class="c1"># 模式匹配</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%a</span><span class="s2">gent%&quot;</span><span class="p">),</span>
+    
+    <span class="c1"># 多个状态选项</span>
+    <span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span> <span class="s2">&quot;reviewing&quot;</span><span class="p">]),</span>
+    
+    <span class="c1"># 带显式 AND 的分数范围</span>
+    <span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="n">Facet</span><span class="o">.</span><span class="n">LTE</span><span class="p">(</span><span class="mi">100</span><span class="p">)]),</span>
+    
+    <span class="c1"># 日期范围</span>
+    <span class="n">created_at</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    
+    <span class="c1"># 维度表过滤器</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;high&quot;</span><span class="p">),</span>
+    
+    <span class="c1"># 否定</span>
+    <span class="n">description</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">eprecated%&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="c1"># 所有条件通过 AND 逻辑组合</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id11">
+<h2>3. 快速入门<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<p>请注意，FacetKLEngine 中的分面仅用于过滤已定义的 UKF 属性（例如，name、type、tags、priority）。存储在非结构化格式（例如 JSON blob）中的自定义字段无法直接查询。</p>
+<p>对于所有与 NF（规范化形式）字段相关的查询（即 <code class="docutils literal notranslate"><span class="pre">set</span></code> 字段，如 <code class="docutils literal notranslate"><span class="pre">tags</span></code>、<code class="docutils literal notranslate"><span class="pre">related</span></code>、<code class="docutils literal notranslate"><span class="pre">auth</span></code> 和 <code class="docutils literal notranslate"><span class="pre">synonyms</span></code>），必须使用 <code class="docutils literal notranslate"><span class="pre">Facet.NF</span></code>。</p>
+<section id="id12">
+<h3>3.1. 原地模式的基本用法<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUKF</span>
+
+<span class="c1"># 创建数据库存储</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;knowledge.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+
+<span class="c1"># 填充知识对象</span>
+<span class="n">kls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">BaseUKF</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Python Tutorial&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+            <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:programming]&quot;</span><span class="p">,</span> <span class="s2">&quot;[language:python]&quot;</span><span class="p">}),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SQL Guide&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;guide&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:database]&quot;</span><span class="p">,</span> <span class="s2">&quot;[language:sql]&quot;</span><span class="p">}),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Machine Learning Intro&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+            <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:ai]&quot;</span><span class="p">,</span> <span class="s2">&quot;[language:python]&quot;</span><span class="p">}),</span>
+<span class="p">]</span>
+<span class="n">store</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">kls</span><span class="p">)</span>
+
+<span class="c1"># 在原地模式下创建 FacetKLEngine（直接查询存储）</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 按精确字段匹配搜索</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;找到 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个教程&quot;</span><span class="p">)</span>
+
+<span class="c1"># 使用比较运算符搜索</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> 
+                       <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;kl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (priority: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;kl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">priority</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># 使用维度表过滤器搜索（NF 运算符）</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+                       <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;language&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;找到 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个 Python 相关条目&quot;</span><span class="p">)</span>
+
+<span class="c1"># 组合多个过滤器（AND 逻辑）</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;programming&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id13">
+<h3>3.2. 初始化参数<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<p><strong>必需参数：</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">storage</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">DatabaseKLStore</span></code>)：要查询的数据库支持的 KLStore。必须是 DatabaseKLStore 实例。</p></li>
+</ul>
+<p><strong>模式参数：</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">inplace</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, 默认：<code class="docutils literal notranslate"><span class="pre">True</span></code>)：运行模式</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>：直接在存储数据库上查询（零开销，无复制）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>：创建带模式子集的独立索引数据库</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>模式参数（仅 <code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>）：</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">include</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, 可选)：要包含在索引中的 BaseUKF 字段名列表。如果为 None，则包含所有字段。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">exclude</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, 可选)：要从索引中排除的 BaseUKF 字段名列表。在 <code class="docutils literal notranslate"><span class="pre">include</span></code> 之后应用。</p></li>
+</ul>
+<p><strong>过滤参数：</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">facets</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>, 可选)：应用于所有搜索的全局分面。使用与搜索过滤器相同的格式。</p></li>
+</ul>
+<p><strong>通用参数：</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">name</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, 可选)：引擎实例名称。默认为 <code class="docutils literal notranslate"><span class="pre">&quot;{storage.name}_facet_idx&quot;</span></code>。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">condition</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>, 可选)：用于条件索引的过滤函数。只有满足条件的 UKF 才会被索引。</p></li>
+</ul>
+<p><strong>数据库参数（仅 <code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>）：</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">database</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, 可选)：索引数据库名称或路径。如果省略，则使用配置默认值。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">provider</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, 可选)：数据库提供商（“sqlite”、“pg”、“mysql”、“duckdb”）。如果省略，则使用配置默认值。</p></li>
+<li><p>附加 kwargs：连接参数（host、port、username、password 等）</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="id14">
+<h2>4. 运行模式<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<p>FacetKLEngine 支持两种不同的运行模式，具有不同的性能特点和使用场景：</p>
+<section id="inplace-true">
+<h3>4.1. 原地模式（<code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>）<a class="headerlink" href="#inplace-true" title="Link to this heading">¶</a></h3>
+<p><strong>工作原理：</strong></p>
+<ul class="simple">
+<li><p>引擎直接查询连接的 DatabaseKLStore，不创建任何附加结构</p></li>
+<li><p>所有操作（搜索、获取）都路由到存储后端</p></li>
+<li><p>零设置时间，零存储开销</p></li>
+<li><p>对存储的修改会立即在搜索结果中可见</p></li>
+</ul>
+<p><strong>特点：</strong></p>
+<ul class="simple">
+<li><p><strong>设置时间</strong>：即时（无需索引）</p></li>
+<li><p><strong>存储开销</strong>：无（使用现有存储）</p></li>
+<li><p><strong>查询性能</strong>：取决于存储数据库的索引</p></li>
+<li><p><strong>同步</strong>：始终最新（无需同步）</p></li>
+<li><p><strong>模式</strong>：存储中的所有字段都可查询</p></li>
+</ul>
+<p><strong>使用时机：</strong></p>
+<ul class="simple">
+<li><p>开发和原型设计（设置最快）</p></li>
+<li><p>中小型数据集（&lt; 100K 对象）</p></li>
+<li><p>动态数据（频繁插入/更新）</p></li>
+<li><p>当存储数据库具有适当的索引时</p></li>
+<li><p>当需要所有 UKF 字段进行过滤时</p></li>
+</ul>
+<p><strong>示例：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;knowledge.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 立即可以查询（无索引阶段）</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>**注意：**在原地模式下，<code class="docutils literal notranslate"><span class="pre">upsert()</span></code>、<code class="docutils literal notranslate"><span class="pre">insert()</span></code>、<code class="docutils literal notranslate"><span class="pre">remove()</span></code>、<code class="docutils literal notranslate"><span class="pre">clear()</span></code> 操作是无操作的，因为引擎不维护独立状态。</p>
+<br/>
+</section>
+<section id="inplace-false">
+<h3>4.2. 非原地模式（<code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>）<a class="headerlink" href="#inplace-false" title="Link to this heading">¶</a></h3>
+<p><strong>工作原理：</strong></p>
+<ul class="simple">
+<li><p>引擎创建具有模式子集的独立索引数据库</p></li>
+<li><p>只有指定的字段（<code class="docutils literal notranslate"><span class="pre">include</span></code> 参数）被复制到索引</p></li>
+<li><p>数据更改后需要与存储进行显式同步</p></li>
+<li><p>在字段子集上进行优化查询</p></li>
+</ul>
+<p><strong>特点：</strong></p>
+<ul class="simple">
+<li><p><strong>设置时间</strong>：需要初始同步（将数据复制到索引）</p></li>
+<li><p><strong>存储开销</strong>：重复数据（索引数据库）</p></li>
+<li><p><strong>查询性能</strong>：在子集模式上更快（字段更少 = 索引更好）</p></li>
+<li><p><strong>同步</strong>：存储更改后需要手动 <code class="docutils literal notranslate"><span class="pre">sync()</span></code></p></li>
+<li><p><strong>模式</strong>：只有包含的字段可查询</p></li>
+</ul>
+<p><strong>使用时机：</strong></p>
+<ul class="simple">
+<li><p>大型数据集（&gt; 100K 对象），其中模式子集可提高性能</p></li>
+<li><p>静态或缓慢变化的数据（不频繁更新）</p></li>
+<li><p>当查询只需要字段的子集时</p></li>
+<li><p>减少索引大小并提高查询速度</p></li>
+<li><p>当存储数据库缺少最佳索引时</p></li>
+</ul>
+<p><strong>示例：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;knowledge.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+
+<span class="c1"># 创建具有字段子集的独立索引</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">],</span>  <span class="c1"># 仅这些字段</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;knowledge_index.db&quot;</span>  <span class="c1"># 索引的独立数据库</span>
+<span class="p">)</span>
+
+<span class="c1"># 初始同步（复制数据）</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
+
+<span class="c1"># 在子集模式上查询</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> 
+                       <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># 存储更改后，重新同步</span>
+<span class="n">store</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">new_kl</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>  <span class="c1"># 更新索引</span>
+</pre></div>
+</div>
+<p><strong>模式子集的好处：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 完整模式：20 多个字段（name、type、version、content、description 等）</span>
+<span class="c1"># 索引模式：5 个字段（id、name、type、priority、tags）</span>
+<span class="c1"># 结果：索引小 4 倍，对索引字段的查询更快</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">],</span>  <span class="c1"># 最小模式</span>
+    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">]</span>  <span class="c1"># 排除大文本字段</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id15">
+<h2>5. 搜索操作<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<section id="id16">
+<h3>5.1. 分面搜索（默认）<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<p>使用结构化过滤器的主要搜索方法：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>           <span class="c1"># 或省略（默认模式）</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>   <span class="c1"># 结果中要包含的字段</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>        <span class="c1"># 字段过滤器</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;programming&quot;</span><span class="p">),</span>
+    <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>                <span class="c1"># 限制结果数量（SQL LIMIT）</span>
+    <span class="n">offset</span><span class="o">=</span><span class="mi">0</span>                <span class="c1"># 跳过结果数量（SQL OFFSET）</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>搜索参数：</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">include</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">Iterable[str]</span></code>, 可选)：结果中要包含的字段</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>：知识对象 ID（int）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;kl&quot;</span></code>：完整的 BaseUKF 对象（如果可从存储中恢复）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;filter&quot;</span></code>：解析后的 Facet 过滤器（用于调试）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;sql&quot;</span></code>：生成的 SQL 语句（用于调试和优化）</p></li>
+<li><p>默认：<code class="docutils literal notranslate"><span class="pre">[&quot;id&quot;,</span> <span class="pre">&quot;kl&quot;]</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">topk</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, 可选)：要返回的最大结果数（SQL LIMIT）。如果为 None，则返回所有匹配的结果。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">offset</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, 可选)：要跳过的结果数（SQL OFFSET）。如果为 None，则从第一个结果开始。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code></strong>：使用 Facet 运算符或简单值的过滤条件</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>  <span class="c1"># 每个字典包含 `include` 中请求的字段</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id17">
+<h3>5.2. 结果结构<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<p><strong>最小结果（仅 ID）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span>
+<span class="c1"># [</span>
+<span class="c1">#   {&quot;id&quot;: 123},</span>
+<span class="c1">#   {&quot;id&quot;: 456},</span>
+<span class="c1">#   {&quot;id&quot;: 789}</span>
+<span class="c1"># ]</span>
+</pre></div>
+</div>
+<p><strong>完整结果（带知识对象）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1"># [</span>
+<span class="c1">#   {&quot;id&quot;: 123, &quot;kl&quot;: &lt;BaseUKF object&gt;},</span>
+<span class="c1">#   {&quot;id&quot;: 456, &quot;kl&quot;: &lt;BaseUKF object&gt;}</span>
+<span class="c1"># ]</span>
+</pre></div>
+</div>
+<p><strong>调试结果（带 SQL）：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;sql&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span>
+<span class="c1"># [</span>
+<span class="c1">#   {&quot;id&quot;: 123, &quot;sql&quot;: &quot;SELECT ukf_main.id FROM ukf_main WHERE ukf_main.type = &#39;tutorial&#39;&quot;},</span>
+<span class="c1">#   ...</span>
+<span class="c1"># ]</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id18">
+<h3>5.3. 全局分面<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<p>跨所有搜索应用持久化过滤器：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建带全局分面的引擎</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">facets</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>                              <span class="c1"># 仅索引教程</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;published&quot;</span><span class="p">)</span>  <span class="c1"># 仅已发布的</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># 所有搜索都会自动包含全局分面</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> 
+                       <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="c1"># SQL：WHERE type = &#39;tutorial&#39; </span>
+<span class="c1">#      AND EXISTS (tags with status=published)</span>
+<span class="c1">#      AND priority &gt;= 7</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id19">
+<h3>5.4. 分页<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">topk</span></code> 和 <code class="docutils literal notranslate"><span class="pre">offset</span></code> 实现分页结果：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 第 1 页：前 10 个结果</span>
+<span class="n">page1</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> 
+                     <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 第 2 页：接下来 10 个结果</span>
+<span class="n">page2</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+                     <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 第 3 页：再接下来 10 个结果</span>
+<span class="n">page3</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+                     <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="sql">
+<h3>5.5. SQL 调试<a class="headerlink" href="#sql" title="Link to this heading">¶</a></h3>
+<p>检查生成的 SQL 以进行优化：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;sql&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;programming&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 打印 SQL 语句</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;sql&quot;</span><span class="p">])</span>
+<span class="c1"># 输出：</span>
+<span class="c1"># SELECT ukf_main.id FROM ukf_main </span>
+<span class="c1"># WHERE ukf_main.type = &#39;tutorial&#39; </span>
+<span class="c1"># AND ukf_main.priority &gt;= 5 </span>
+<span class="c1"># AND ukf_main.priority &lt;= 10</span>
+<span class="c1"># AND EXISTS (SELECT DISTINCT ukf_tags.id FROM ukf_tags </span>
+<span class="c1">#             WHERE ukf_main.id = ukf_tags.ukf_id </span>
+<span class="c1">#             AND ukf_tags.slot = &#39;category&#39; </span>
+<span class="c1">#             AND ukf_tags.value = &#39;programming&#39;)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id20">
+<h2>6. 完整示例<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h2>
+<section id="id21">
+<h3>6.1. 论文过滤<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUKF</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># 设置存储和引擎</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;papers.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 创建研究论文</span>
+<span class="n">papers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Attention Is All You Need&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[field:nlp]&quot;</span><span class="p">,</span> <span class="s2">&quot;[venue:nips]&quot;</span><span class="p">,</span> <span class="s2">&quot;[topic:transformers]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;citations&quot;</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span> <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;BERT: Pre-training of Deep Bidirectional Transformers&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[field:nlp]&quot;</span><span class="p">,</span> <span class="s2">&quot;[venue:naacl]&quot;</span><span class="p">,</span> <span class="s2">&quot;[topic:language_models]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;citations&quot;</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span> <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResNet: Deep Residual Learning&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[field:cv]&quot;</span><span class="p">,</span> <span class="s2">&quot;[venue:cvpr]&quot;</span><span class="p">,</span> <span class="s2">&quot;[topic:architectures]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;citations&quot;</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span> <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+<span class="n">store</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">papers</span><span class="p">)</span>
+
+<span class="c1"># 查询 1：高影响力的近期 NLP 论文</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;nlp&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;高影响力 NLP 论文：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="n">kl</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;kl&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">kl</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">kl</span><span class="o">.</span><span class="n">timestamp</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># 查询 2：引用数在范围内的论文</span>
+<span class="c1"># 注意：元数据过滤器需要使用维度表</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;nlp&quot;</span><span class="p">),</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;venue&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;nips&quot;</span><span class="p">,</span> <span class="s2">&quot;naacl&quot;</span><span class="p">,</span> <span class="s2">&quot;acl&quot;</span><span class="p">]))</span>
+    <span class="p">])</span>
+<span class="p">)</span>
+
+<span class="c1"># 查询 3：非计算机视觉领域的论文</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;cv&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;非 CV 论文：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id22">
+<h3>6.2. 电商产品过滤<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUKF</span>
+
+<span class="c1"># 设置</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;products.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 创建产品</span>
+<span class="n">products</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Laptop Pro 15&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:laptop]&quot;</span><span class="p">,</span> <span class="s2">&quot;[brand:TechCorp]&quot;</span><span class="p">,</span> <span class="s2">&quot;[condition:new]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">1299.99</span><span class="p">,</span> <span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Wireless Mouse&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:accessory]&quot;</span><span class="p">,</span> <span class="s2">&quot;[brand:TechCorp]&quot;</span><span class="p">,</span> <span class="s2">&quot;[condition:new]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">29.99</span><span class="p">,</span> <span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mf">4.2</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Refurbished Laptop 13&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:laptop]&quot;</span><span class="p">,</span> <span class="s2">&quot;[brand:BudgetTech]&quot;</span><span class="p">,</span> <span class="s2">&quot;[condition:refurbished]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">499.99</span><span class="p">,</span> <span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mf">3.8</span><span class="p">}</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+<span class="n">store</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">products</span><span class="p">)</span>
+
+<span class="c1"># 查询 1：有库存的笔记本电脑，按优先级排序</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;laptop&quot;</span><span class="p">),</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;condition&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;new&quot;</span><span class="p">)</span>  <span class="c1"># 仅限新产品</span>
+    <span class="p">])</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;新款笔记本电脑：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 查询 2：特定品牌的产品</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;brand&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;TechCorp&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TechCorp 产品：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 查询 3：产品名称中的模式搜索</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%La</span><span class="s2">ptop%&quot;</span><span class="p">),</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;笔记本电脑产品：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;kl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id23">
+<h3>6.3. 任务管理系统<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUKF</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># 设置</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;tasks.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">facets</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;task&quot;</span><span class="p">}</span>  <span class="c1"># 全局分面：仅任务</span>
+<span class="p">)</span>
+
+<span class="c1"># 创建任务</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Implement authentication&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;task&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[status:in_progress]&quot;</span><span class="p">,</span> <span class="s2">&quot;[assignee:alice]&quot;</span><span class="p">,</span> <span class="s2">&quot;[sprint:Q1]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;estimate&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;actual&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Write documentation&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;task&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[status:pending]&quot;</span><span class="p">,</span> <span class="s2">&quot;[assignee:bob]&quot;</span><span class="p">,</span> <span class="s2">&quot;[sprint:Q1]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;estimate&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;actual&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Fix critical bug&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;task&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[status:completed]&quot;</span><span class="p">,</span> <span class="s2">&quot;[assignee:alice]&quot;</span><span class="p">,</span> <span class="s2">&quot;[sprint:Q1]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;estimate&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;actual&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Design database schema&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;task&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[status:completed]&quot;</span><span class="p">,</span> <span class="s2">&quot;[assignee:charlie]&quot;</span><span class="p">,</span> <span class="s2">&quot;[sprint:Q1]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;estimate&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;actual&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+<span class="n">store</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+
+<span class="c1"># 查询 1：高优先级的活动任务</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;pending&quot;</span><span class="p">,</span> <span class="s2">&quot;in_progress&quot;</span><span class="p">]))</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;高优先级活动任务：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 查询 2：Alice 已完成的任务</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;assignee&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;alice&quot;</span><span class="p">),</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;completed&quot;</span><span class="p">)</span>
+    <span class="p">])</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alice 已完成的任务：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 查询 3：1 月份创建的任务</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span>
+        <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">59</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1 月份任务：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 查询 4：逾期任务（实际 &gt; 预估）——需要复杂逻辑</span>
+<span class="c1"># 首先获取所有任务，然后在 Python 中过滤</span>
+<span class="c1"># （或通过 _search_sql 使用原始 SQL 进行复杂计算）</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">])</span>
+<span class="n">overdue</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;kl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;actual&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;kl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;estimate&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;逾期任务：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">overdue</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id24">
+<h3>6.4. 非原地模式与模式子集<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+
+<span class="c1"># 具有许多字段的大型存储</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;large_store.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+
+<span class="c1"># 创建具有字段子集的优化索引</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">],</span>
+    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>  <span class="c1"># 排除大文本字段</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;optimized_index.db&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># 初始同步（将数据复制到索引）</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;正在同步索引...&quot;</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;已索引 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个对象&quot;</span><span class="p">)</span>
+
+<span class="c1"># 在索引字段上进行快速查询</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>  <span class="c1"># 仅 ID（如果 kl 不可恢复）</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;important&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;找到 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个高优先级项目&quot;</span><span class="p">)</span>
+
+<span class="c1"># 存储更改后，重新同步</span>
+<span class="n">new_kl</span> <span class="o">=</span> <span class="n">BaseUKF</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;New Item&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;document&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">store</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">new_kl</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>  <span class="c1"># 更新索引</span>
+
+<span class="c1"># 关闭引擎</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id25">
+<h2>拓展阅读<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>提示：</strong> 有关基本接口和通用操作，请参阅：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="base.html"><span class="std std-doc">BaseKLEngine</span></a> - 定义 KLEngine 接口和共享功能的抽象基类</p></li>
+<li><p><a class="reference internal" href="index.html"><span class="std std-doc">KLEngine 概览</span></a> - 查询引擎和检索策略简介</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>提示：</strong> 有关其他搜索方法，请参阅：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="vector.html"><span class="std std-doc">VectorKLEngine</span></a> - 使用向量嵌入进行语义相似度搜索</p></li>
+<li><p><a class="reference internal" href="daac.html"><span class="std std-doc">DAACKLEngine</span></a> - 用于实体识别的多模式字符串匹配</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>提示：</strong> 有关数据库集成，请参阅：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../klstore/database.html"><span class="std std-doc">DatabaseKLStore</span></a> - 基于 ORM 的知识对象持久化存储</p></li>
+<li><p><a class="reference internal" href="../utils/db.html"><span class="std std-doc">数据库实用工具</span></a> - 数据库连接、查询执行和实用工具</p></li>
+<li><p><a class="reference internal" href="../../configuration/database.html"><span class="std std-doc">数据库配置</span></a> - 数据库提供商的 YAML 配置</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>提示：</strong> 有关高级查询模式，请参阅：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../utils/db.html#facet-operators"><span class="std std-ref">Facet 运算符参考</span></a> - 所有 Facet 运算符的完整参考</p></li>
+<li><p><a class="reference internal" href="../utils/db.html#query-optimization"><span class="std std-ref">SQL 查询优化</span></a> - 数据库查询的性能调优</p></li>
+</ul>
+</div></blockquote>
+<br/>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="daac.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">DAACKLEngine</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="base.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">BaseKLEngine</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL团队
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">FacetKLEngine</a><ul>
+<li><a class="reference internal" href="#id1">1. 介绍</a><ul>
+<li><a class="reference internal" href="#id2">1.1. 什么是分面检索？</a></li>
+<li><a class="reference internal" href="#id3">1.2. 何时使用 FacetKLEngine</a></li>
+<li><a class="reference internal" href="#id4">1.3. 关键特性</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#facet">2. 理解 Facet 运算符</a><ul>
+<li><a class="reference internal" href="#id5">2.1. 比较运算符</a></li>
+<li><a class="reference internal" href="#id6">2.2. 模式匹配运算符</a></li>
+<li><a class="reference internal" href="#id7">2.3. 区间运算符</a></li>
+<li><a class="reference internal" href="#id8">2.4. 逻辑运算符</a></li>
+<li><a class="reference internal" href="#nf">2.5. 维度表运算符（NF）</a></li>
+<li><a class="reference internal" href="#id9">2.6. 多字段表达式</a></li>
+<li><a class="reference internal" href="#id10">2.7. 复杂嵌套表达式</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">3. 快速入门</a><ul>
+<li><a class="reference internal" href="#id12">3.1. 原地模式的基本用法</a></li>
+<li><a class="reference internal" href="#id13">3.2. 初始化参数</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">4. 运行模式</a><ul>
+<li><a class="reference internal" href="#inplace-true">4.1. 原地模式（<code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>）</a></li>
+<li><a class="reference internal" href="#inplace-false">4.2. 非原地模式（<code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">5. 搜索操作</a><ul>
+<li><a class="reference internal" href="#id16">5.1. 分面搜索（默认）</a></li>
+<li><a class="reference internal" href="#id17">5.2. 结果结构</a></li>
+<li><a class="reference internal" href="#id18">5.3. 全局分面</a></li>
+<li><a class="reference internal" href="#id19">5.4. 分页</a></li>
+<li><a class="reference internal" href="#sql">5.5. SQL 调试</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id20">6. 完整示例</a><ul>
+<li><a class="reference internal" href="#id21">6.1. 论文过滤</a></li>
+<li><a class="reference internal" href="#id22">6.2. 电商产品过滤</a></li>
+<li><a class="reference internal" href="#id23">6.3. 任务管理系统</a></li>
+<li><a class="reference internal" href="#id24">6.4. 非原地模式与模式子集</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id25">拓展阅读</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=e4723610"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

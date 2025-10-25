@@ -1,0 +1,1294 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../genindex.html"><link rel="search" title="搜索" href="../search.html"><link rel="next" title="工具规范" href="toolspec/index.html"><link rel="prev" title="VectorKLEngine" href="klengine/vector.html">
+        <link rel="prefetch" href="../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>KLBase - AgentHeaven文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven 正在积极开发中，功能可能会发生变化。 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">AgentHeaven文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/index.html">简介</a><input aria-label="Toggle navigation of 简介" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/philosophy.html">理念与愿景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/architecture.html">架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/learning.html">学习 AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting-started/index.html">快速开始</a><input aria-label="Toggle navigation of 快速开始" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">安装指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/setup.html">设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/5min-quickstart.html">5 分钟快速开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/60min-tutorial.html">60 分钟教程</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../configuration/index.html">配置</a><input aria-label="Toggle navigation of 配置" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/core.html">核心配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/llm.html">LLM 配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/database.html">数据库配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/vdb.html">向量数据库配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">主指南（Python）</a><input aria-label="Toggle navigation of 主指南（Python）" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="utils/index.html">实用工具</a><input aria-label="Toggle navigation of 实用工具" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="utils/basic/index.html">基础实用工具</a><input aria-label="Toggle navigation of 基础实用工具" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils/basic/config_utils.html">配置管理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils/basic/hash_utils.html">哈希工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils/basic/parallel_utils.html">多线程并行化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils/basic/jinja_utils.html">模板处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils/basic/serialize_utils.html">序列化工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils/basic/str_utils.html">字符串实用工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils/basic/misc_utils.html">其他实用工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utils/db.html">数据库工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/vdb.html">向量数据库工具</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ukf/index.html">UKF (通用知识格式)</a><input aria-label="Toggle navigation of UKF (通用知识格式)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ukf/data-types.html">UKF 数据类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ukf/builtin-templates.html">内置模板</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="klengine/index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="klengine/base.html">BaseKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klengine/facet.html">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klengine/daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klengine/vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="toolspec/index.html">工具规范</a><input aria-label="Toggle navigation of 工具规范" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="toolspec/base.html">工具规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolspec/builtins.html">内置工具规范</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html">智能体</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cli-guide/index.html">CLI 指南</a><input aria-label="Toggle navigation of CLI 指南" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/repo-management.html">仓库管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-inference.html">LLM 推理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-session.html">LLM 会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/prompt-management.html">提示词管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/knowledge-management.html">知识管理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gui-guide/index.html">GUI 使用指南</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../example-applications/index.html">示例应用</a><input aria-label="Toggle navigation of 示例应用" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../example-applications/nl2sql-system.html">NL2SQL 系统</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">开发规划</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contribution/index.html">贡献</a><input aria-label="Toggle navigation of 贡献" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/overview.html">贡献概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/for_developers.html">开发者指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/feature_workflow.html">功能添加工作流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/srs.html">简要软件需求（SRS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/ar/index.html">分配需求 (AR)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_index.html">API 参考</a><input aria-label="Toggle navigation of API 参考" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../community/index.html">社区与支持</a><input aria-label="Toggle navigation of 社区与支持" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community/resources.html">社区资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">引用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/zh/source/python-guide/klbase.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/zh/source/python-guide/klbase.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="klbase">
+<h1>KLBase<a class="headerlink" href="#klbase" title="Link to this heading">¶</a></h1>
+<p><strong>KLBase</strong> 是 AgentHeaven 知识管理系统的中心编排层。它提供了统一的接口,用于跨多个存储后端(知识存储)和搜索引擎(知识引擎)管理知识条目(UKF 对象)。通过组合不同的存储和引擎实现,KLBase 能够根据特定应用需求实现灵活、高效的知识检索和操作。</p>
+<br/>
+<section id="id1">
+<h2>1. 核心概念<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p><strong>KLBase</strong> 协调三个主要组件:</p>
+<ul class="simple">
+<li><p><strong>UKF (Universal Knowledge Framework,统一知识格式)</strong>: 表示知识条目的数据模型(参见 <a class="reference internal" href="ukf/index.html"><span class="std std-doc">UKF 指南</span></a>)</p></li>
+<li><p><strong>KLStore (知识存储)</strong>: 持久化 UKF 对象的存储后端(例如数据库、缓存、文件系统)</p></li>
+<li><p><strong>KLEngine (知识引擎)</strong>: 索引和查询 UKF 对象的搜索和检索引擎(例如分面检索、自动补全、向量搜索)</p></li>
+</ul>
+<p>KLBase 作为 <strong>编排层</strong>,负责:</p>
+<ol class="arabic simple">
+<li><p>将 CRUD 操作路由到适当的存储后端</p></li>
+<li><p>维护多个存储和引擎之间的一致性</p></li>
+<li><p>提供跨不同引擎类型的统一搜索接口</p></li>
+<li><p>通过 <code class="docutils literal notranslate"><span class="pre">&#64;reg_toolspec</span></code> 装饰器暴露工具规范,以便智能体集成</p></li>
+</ol>
+<br/>
+</section>
+<section id="id2">
+<h2>2. 基本架构<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p><strong>KLBase</strong> 维护两个主要集合,它们协同工作以提供全面的知识管理能力:</p>
+<p><strong>存储层</strong> (<code class="docutils literal notranslate"><span class="pre">storages:</span> <span class="pre">Dict[str,</span> <span class="pre">BaseKLStore]</span></code>):</p>
+<ul class="simple">
+<li><p>一个命名存储后端的字典,用于持久化 UKF 对象</p></li>
+<li><p>每个存储提供对知识条目的 CRUD 操作(创建、读取、更新、删除)</p></li>
+<li><p>可用的存储实现:</p>
+<ul>
+<li><p><strong>CacheKLStore</strong>: 内存或基于文件的缓存,用于快速临时存储</p></li>
+<li><p><strong>DatabaseKLStore</strong>: 关系数据库后端(PostgreSQL、MySQL、SQLite),用于持久化存储</p></li>
+<li><p><strong>VectorDBKLStore</strong>: 专门的向量数据库存储,用于基于嵌入的操作</p></li>
+<li><p><strong>CascadeKLStore</strong>: 分层存储链,按顺序查询多个后端</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>引擎层</strong> (<code class="docutils literal notranslate"><span class="pre">engines:</span> <span class="pre">Dict[str,</span> <span class="pre">BaseKLEngine]</span></code>):</p>
+<ul class="simple">
+<li><p>一个命名搜索和检索引擎的字典,用于索引和查询 UKF 对象</p></li>
+<li><p>每个引擎提供针对不同查询模式优化的专门搜索能力</p></li>
+<li><p>可用的引擎实现:</p>
+<ul>
+<li><p><strong>FacetKLEngine</strong>: 支持复杂过滤和聚合的多维分面检索</p></li>
+<li><p><strong>DAACKLEngine</strong>: 动态自动补全引擎,用于基于前缀和模糊匹配</p></li>
+<li><p><strong>VectorKLEngine</strong>: 使用向量嵌入的语义相似性搜索</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>编排模型:</strong>
+KLBase 通过将数据操作路由到适当的后端来协调这些层。当插入或更新 UKF 对象时,KLBase 将更改传播到所有指定的存储和引擎以维护一致性。当进行搜索时,KLBase 将查询委托给适当的引擎,并从关联的存储后端检索完整对象。</p>
+<br/>
+</section>
+<section id="id3">
+<h2>3. 类定义<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>3.1. 构造函数<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">KLBase</span><span class="p">(</span><span class="n">ToolRegistry</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">storages</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">BaseKLStore</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">BaseKLStore</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">engines</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">BaseKLEngine</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">BaseKLEngine</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+</pre></div>
+</div>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>storages</strong> (<code class="docutils literal notranslate"><span class="pre">Optional[Union[List[BaseKLStore],</span> <span class="pre">Dict[str,</span> <span class="pre">BaseKLStore]]]</span></code>):</p>
+<ul>
+<li><p>用于持久化 UKF 对象的存储后端</p></li>
+<li><p>可以作为列表(按 <code class="docutils literal notranslate"><span class="pre">storage.name</span></code> 索引)或字典(自定义键)提供</p></li>
+<li><p>如果为 None,则默认为空字典</p></li>
+</ul>
+</li>
+<li><p><strong>engines</strong> (<code class="docutils literal notranslate"><span class="pre">Optional[Union[List[BaseKLEngine],</span> <span class="pre">Dict[str,</span> <span class="pre">BaseKLEngine]]]</span></code>):</p>
+<ul>
+<li><p>用于查询 UKF 对象的搜索/检索引擎</p></li>
+<li><p>可以作为列表(按 <code class="docutils literal notranslate"><span class="pre">engine.name</span></code> 索引)或字典(自定义键)提供</p></li>
+<li><p>如果为 None,则默认为空字典</p></li>
+</ul>
+</li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">Optional[str]</span></code>):</p>
+<ul>
+<li><p>此 KLBase 实例的标识符</p></li>
+<li><p>如果为 None,则默认为 “default”</p></li>
+</ul>
+</li>
+</ul>
+<br/>
+</section>
+<section id="id5">
+<h3>3.2. 存储管理<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h4>3.2.1. 添加存储<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">BaseKLStore</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>注册新的存储后端。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>storage</strong> (<code class="docutils literal notranslate"><span class="pre">BaseKLStore</span></code>): 要添加的存储实例</p></li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">Optional[str]</span></code>): 注册键(默认为 <code class="docutils literal notranslate"><span class="pre">storage.name</span></code>)</p></li>
+</ul>
+</section>
+<section id="id7">
+<h4>3.2.2. 移除存储<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">del_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>注销并移除存储后端。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>): 要移除的存储的注册键</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="id8">
+<h3>3.3. 引擎管理<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<section id="id9">
+<h4>3.3.1. 添加引擎<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="n">BaseKLEngine</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>注册新的搜索/检索引擎。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>engine</strong> (<code class="docutils literal notranslate"><span class="pre">BaseKLEngine</span></code>): 要添加的引擎实例</p></li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">Optional[str]</span></code>): 注册键(默认为 <code class="docutils literal notranslate"><span class="pre">engine.name</span></code>)</p></li>
+</ul>
+</section>
+<section id="id10">
+<h4>3.3.2. 移除引擎<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">del_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>注销并移除引擎。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>): 要移除的引擎的注册键</p></li>
+</ul>
+<br/>
+</section>
+</section>
+</section>
+<section id="id11">
+<h2>4. 数据操作<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<p>所有数据操作都支持通过 <code class="docutils literal notranslate"><span class="pre">storages</span></code> 和 <code class="docutils literal notranslate"><span class="pre">engines</span></code> 参数进行选择性的存储/引擎目标设定。如果未指定,操作将应用于 <strong>所有</strong> 已注册的存储/引擎。</p>
+<section id="id12">
+<h3>4.1. 插入/更新插入操作<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<section id="id13">
+<h4>4.1.1. 单个更新插入<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">upsert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kl</span><span class="p">:</span> <span class="n">BaseUKF</span><span class="p">,</span> <span class="n">storages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>跨指定的存储和引擎插入或更新单个 UKF 对象。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>kl</strong> (<code class="docutils literal notranslate"><span class="pre">BaseUKF</span></code>): 要更新插入的知识条目</p></li>
+<li><p><strong>storages</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, 可选): 目标存储名称(默认为全部)</p></li>
+<li><p><strong>engines</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, 可选): 目标引擎名称(默认为全部)</p></li>
+</ul>
+</section>
+<section id="id14">
+<h4>4.1.2. 单个插入<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kl</span><span class="p">:</span> <span class="n">BaseUKF</span><span class="p">,</span> <span class="n">storages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>插入新的 UKF 对象(如果已存在,可能会引发错误,取决于后端)。</p>
+<p><strong>参数:</strong> 与 <code class="docutils literal notranslate"><span class="pre">upsert</span></code> 相同</p>
+</section>
+<section id="id15">
+<h4>4.1.3. 批量更新插入<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">batch_upsert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseUKF</span><span class="p">],</span> <span class="n">storages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>批量更新插入多个 UKF 对象(比单个更新插入更高效)。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>kls</strong> (<code class="docutils literal notranslate"><span class="pre">List[BaseUKF]</span></code>): 要更新插入的知识条目列表</p></li>
+<li><p><strong>storages/engines</strong>: 与单个更新插入相同</p></li>
+</ul>
+</section>
+<section id="id16">
+<h4>4.1.4. 批量插入<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">batch_insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseUKF</span><span class="p">],</span> <span class="n">storages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>批量插入多个 UKF 对象。</p>
+<p><strong>参数:</strong> 与 <code class="docutils literal notranslate"><span class="pre">batch_upsert</span></code> 相同</p>
+<br/>
+</section>
+<section id="id17">
+<h4>4.1.5. 选择性同步<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h4>
+<p>控制哪些存储/引擎接收更新:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 仅更新数据库存储</span>
+<span class="n">klbase</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">kl</span><span class="p">,</span> <span class="n">storages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;db_store&quot;</span><span class="p">],</span> <span class="n">engines</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="c1"># 仅更新搜索引擎</span>
+<span class="n">klbase</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">kl</span><span class="p">,</span> <span class="n">storages</span><span class="o">=</span><span class="p">[],</span> <span class="n">engines</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;facet_engine&quot;</span><span class="p">,</span> <span class="s2">&quot;vec_engine&quot;</span><span class="p">])</span>
+
+<span class="c1"># 更新所有(默认)</span>
+<span class="n">klbase</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">kl</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id18">
+<h3>4.2. 移除操作<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<section id="id19">
+<h4>4.2.1. 单个移除<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">BaseUKF</span><span class="p">],</span> <span class="n">storages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>通过键移除单个 UKF 对象。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>key</strong> (<code class="docutils literal notranslate"><span class="pre">Union[int,</span> <span class="pre">str,</span> <span class="pre">BaseUKF]</span></code>): 要移除的 ID、名称或 UKF 实例</p></li>
+<li><p><strong>storages/engines</strong>: 目标后端(默认为全部)</p></li>
+</ul>
+</section>
+<section id="id20">
+<h4>4.2.2. 批量移除<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">batch_remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">BaseUKF</span><span class="p">]],</span> <span class="n">storages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>批量移除多个 UKF 对象。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>keys</strong> (<code class="docutils literal notranslate"><span class="pre">List[Union[int,</span> <span class="pre">str,</span> <span class="pre">BaseUKF]]</span></code>): 要移除的标识符列表</p></li>
+<li><p><strong>storages/engines</strong>: 目标后端(默认为全部)</p></li>
+</ul>
+</section>
+<section id="id21">
+<h4>4.2.3. 清除所有<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">engines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>从指定的存储和引擎中移除所有 UKF 对象。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>storages/engines</strong>: 要清除的目标后端(默认为全部)</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="id22">
+<h3>4.3. 搜索操作<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+</pre></div>
+</div>
+<p>使用指定引擎执行搜索查询。</p>
+<p><strong>参数:</strong></p>
+<ul class="simple">
+<li><p><strong>engine</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>): 要使用的引擎名称</p></li>
+<li><p>***args, <strong>kwargs</strong>: 引擎特定的搜索参数</p></li>
+</ul>
+<p><strong>返回:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Iterable[Dict[str,</span> <span class="pre">Any]]</span></code>: 搜索结果的字典列表</p></li>
+</ul>
+<p><strong>标准结果键</strong>(取决于引擎):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> (<code class="docutils literal notranslate"><span class="pre">int</span></code>): UKF 对象标识符</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;kl&quot;</span></code> (<code class="docutils literal notranslate"><span class="pre">BaseUKF</span></code>): 实际的 UKF 实例(如果引擎可恢复)</p></li>
+<li><p>附加键因引擎类型而异(例如,向量搜索的 <code class="docutils literal notranslate"><span class="pre">&quot;score&quot;</span></code>,自动补全的 <code class="docutils literal notranslate"><span class="pre">&quot;rank&quot;</span></code>)</p></li>
+</ul>
+<p><strong>示例:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 分面检索</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">klbase</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s1">&#39;facet_engine&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;facet&#39;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;TOPIC&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;math&quot;</span><span class="p">))</span>
+
+<span class="c1"># 向量搜索</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">klbase</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s1">&#39;vec_engine&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;fibonacci sequence&quot;</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># 自动补全</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">klbase</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s1">&#39;ac_engine&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;Fibo&quot;</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id23">
+<h3>4.4. 列出搜索方法<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">list_search</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+</pre></div>
+</div>
+<p>枚举已注册引擎中所有可用的搜索方法。</p>
+<p><strong>返回:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">List[Tuple[str,</span> <span class="pre">Optional[str]]]</span></code>: (引擎名称, 搜索模式) 对的列表</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">engine_name</span></code>: 引擎的名称</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search_mode</span></code>: 引擎的搜索模式(可选,如果引擎只有一种模式则为 None)</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>示例:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">search_methods</span> <span class="o">=</span> <span class="n">klbase</span><span class="o">.</span><span class="n">list_search</span><span class="p">()</span>
+<span class="c1"># [(&#39;facet_engine&#39;, &#39;facet&#39;), (&#39;ac_engine1&#39;, None), (&#39;vec_engine&#39;, &#39;vector&#39;)]</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id24">
+<h2>5. 创建自定义 KLBase 应用<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
+<p>创建基于 KLBase 的应用的典型工作流程:</p>
+<section id="id25">
+<h3>5.1. 继承 KLBase<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klbase</span><span class="w"> </span><span class="kn">import</span> <span class="n">KLBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span><span class="p">,</span> <span class="n">CacheKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span><span class="p">,</span> <span class="n">DAACKLEngine</span><span class="p">,</span> <span class="n">VectorKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.tool.mixin</span><span class="w"> </span><span class="kn">import</span> <span class="n">reg_toolspec</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyKLBase</span><span class="p">(</span><span class="n">KLBase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;./.ahvn/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/&quot;</span>
+        
+        <span class="c1"># 配置存储和引擎(见下文)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id26">
+<h3>5.2. 配置存储和引擎<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h3>
+<p>在 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法中,设置你的存储和引擎组合:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 示例: 多个存储后端</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">add_storage</span><span class="p">(</span>
+    <span class="n">CacheKLStore</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;cache_store&quot;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">JsonCache</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">/cache&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">add_storage</span><span class="p">(</span>
+    <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;db_store&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;pg&quot;</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 示例: 分面检索引擎</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">add_engine</span><span class="p">(</span>
+    <span class="n">FacetKLEngine</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;facet_engine&quot;</span><span class="p">,</span>
+        <span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="s2">&quot;db_store&quot;</span><span class="p">],</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># 使用存储的原生查询能力</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 示例: 知识条目的自动补全引擎</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">add_engine</span><span class="p">(</span>
+    <span class="n">DAACKLEngine</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ac_by_name&quot;</span><span class="p">,</span>
+        <span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="s2">&quot;db_store&quot;</span><span class="p">],</span>
+        <span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">/ac_index&quot;</span><span class="p">,</span>
+        <span class="n">encoder</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="p">[</span><span class="n">kl</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">kl</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
+        <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="n">kl</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;knowledge&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 示例: 经验条目的向量搜索引擎</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">add_engine</span><span class="p">(</span>
+    <span class="n">VectorKLEngine</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;vec_engine&quot;</span><span class="p">,</span>
+        <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;pgvector&quot;</span><span class="p">,</span>
+        <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;vec_collection&quot;</span><span class="p">,</span>
+        <span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="s2">&quot;db_store&quot;</span><span class="p">],</span>
+        <span class="n">encoder</span><span class="o">=</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">kl</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">kl</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">query</span><span class="p">:</span> <span class="n">query</span>
+        <span class="p">),</span>
+        <span class="n">embedder</span><span class="o">=</span><span class="s2">&quot;embedder&quot;</span><span class="p">,</span>  <span class="c1"># 引用已配置的嵌入器</span>
+        <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="n">kl</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;experience&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>关键考虑因素:</strong></p>
+<ul class="simple">
+<li><p><strong>存储选择</strong>: 根据持久化需求选择(缓存用于临时,数据库用于长期)</p></li>
+<li><p><strong>引擎-存储配对</strong>: 引擎通常引用存储后端进行数据检索</p></li>
+<li><p><strong>原地 vs. 外部索引</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>: 使用存储的原生查询(例如 SQL WHERE 子句)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>: 维护单独的索引结构</p></li>
+</ul>
+</li>
+<li><p><strong>条件索引</strong>: 使用 <code class="docutils literal notranslate"><span class="pre">condition</span></code> lambda 选择性地索引 UKF 对象(例如按类型)</p></li>
+</ul>
+<br/>
+</section>
+<section id="id27">
+<h3>5.3. 定义工具规范<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h3>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">&#64;reg_toolspec()</span></code> 装饰器将方法暴露为智能体可调用的工具:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyKLBase</span><span class="p">(</span><span class="n">KLBase</span><span class="p">):</span>
+    <span class="c1"># ... __init__ 配置 ...</span>
+    
+    <span class="nd">@reg_toolspec</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">facet_search</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">facets</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> 
+        <span class="n">topk</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> 
+        <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;在 KLBase 上执行分面检索。</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            facets (Dict[str, Any]): 分面条件的字典。</span>
+<span class="sd">                每个分面是一个键值对,其中键是分面名称,</span>
+<span class="sd">                值是期望的值或条件。</span>
+<span class="sd">                对于复杂条件,使用 Facet.NF、Facet.LIKE、Facet.OR 等。</span>
+<span class="sd">                示例:</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;tags&quot;: Facet.NF(slot=&quot;TOPIC&quot;, value=Facet.LIKE(&quot;math%&quot;)),</span>
+<span class="sd">                        &quot;priority&quot;: Facet.OR([42, 7]),</span>
+<span class="sd">                        &quot;type&quot;: &quot;knowledge&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                支持的字段: id、name、type、content、tags、synonyms、priority</span>
+<span class="sd">            topk (int, 可选): 最大结果数。默认为 20。</span>
+<span class="sd">            offset (int, 可选): 要跳过的初始结果数。默认为 0。</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: 包含以下键的字典:</span>
+<span class="sd">                - &quot;cnt&quot; (int): 匹配项的总数</span>
+<span class="sd">                - &quot;kls&quot; (List[BaseUKF]): 前 k 个匹配的知识条目</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engines</span><span class="p">[</span><span class="s1">&#39;facet_engine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;facet&#39;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">facets</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;cnt&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span>
+            <span class="s2">&quot;kls&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engines</span><span class="p">[</span><span class="s1">&#39;facet_engine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">id_</span><span class="p">)</span> 
+                <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span><span class="o">+</span><span class="n">topk</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    
+    <span class="nd">@reg_toolspec</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vector_search</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="n">topk</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;执行语义向量搜索。</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            query (str): 自然语言搜索查询</span>
+<span class="sd">            topk (int, 可选): 要返回的结果数。默认为 5。</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Dict[str, Any]]: 包含以下键的搜索结果:</span>
+<span class="sd">                - &quot;id&quot; (int): UKF 对象 ID</span>
+<span class="sd">                - &quot;kl&quot; (BaseUKF): 知识条目</span>
+<span class="sd">                - &quot;score&quot; (float): 相似度分数</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+            <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;vec_engine&#39;</span><span class="p">,</span>
+            <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+            <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">],</span>
+            <span class="n">topk</span><span class="o">=</span><span class="n">topk</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>工具定义的最佳实践:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>全面的文档字符串</strong>: 包含详细描述、参数类型和示例(由 <code class="docutils literal notranslate"><span class="pre">&#64;reg_toolspec</span></code> 自动解析)</p></li>
+<li><p><strong>合理的默认值</strong>: 为可选参数提供默认值</p></li>
+<li><p><strong>结构化返回</strong>: 返回字典或结构化对象,便于智能体解析</p></li>
+<li><p><strong>错误处理</strong>: 考虑在 try-except 中包装引擎调用以优雅地处理失败</p></li>
+<li><p><strong>参数验证</strong>: 在传递给底层引擎之前验证输入</p></li>
+</ol>
+<br/>
+</section>
+<section id="id28">
+<h3>5.4. 导出工具供智能体使用<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 实例化你的 KLBase</span>
+<span class="n">klbase</span> <span class="o">=</span> <span class="n">MyKLBase</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_app_kb&quot;</span><span class="p">)</span>
+
+<span class="c1"># 将所有 @reg_toolspec 工具导出为 ToolSpec 对象</span>
+<span class="n">tools</span> <span class="o">=</span> <span class="n">klbase</span><span class="o">.</span><span class="n">to_toolspecs</span><span class="p">()</span>
+
+<span class="c1"># 列出可用工具</span>
+<span class="n">tool_names</span> <span class="o">=</span> <span class="n">klbase</span><span class="o">.</span><span class="n">list_toolspecs</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tool_names</span><span class="p">)</span>  <span class="c1"># [&#39;facet_search&#39;, &#39;vector_search&#39;]</span>
+
+<span class="c1"># 直接使用工具</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">tools</span><span class="p">[</span><span class="s1">&#39;facet_search&#39;</span><span class="p">](</span><span class="n">facets</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;knowledge&quot;</span><span class="p">},</span> <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 或与智能体框架集成</span>
+<span class="c1"># (例如,将工具传递给 LLM 函数调用、MCP 服务器等)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id29">
+<h2>6. 完整示例<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h2>
+<p>下面是一个演示 KLBase 使用的完整示例(来自 <code class="docutils literal notranslate"><span class="pre">db_demo.py</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">Knowledge</span><span class="p">,</span> <span class="n">Experience</span><span class="p">,</span> <span class="n">ptags</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">InMemCache</span><span class="p">,</span> <span class="n">JsonCache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span><span class="p">,</span> <span class="n">CacheKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span><span class="p">,</span> <span class="n">DAACKLEngine</span><span class="p">,</span> <span class="n">VectorKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klbase</span><span class="w"> </span><span class="kn">import</span> <span class="n">KLBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.tool.mixin</span><span class="w"> </span><span class="kn">import</span> <span class="n">reg_toolspec</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyKLBase</span><span class="p">(</span><span class="n">KLBase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;./.ahvn/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/&quot;</span>
+        
+        <span class="c1"># 存储 1: JSON 缓存,用于快速本地访问</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_storage</span><span class="p">(</span>
+            <span class="n">CacheKLStore</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;store1&quot;</span><span class="p">,</span>
+                <span class="n">cache</span><span class="o">=</span><span class="n">JsonCache</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">/store1&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># 存储 2: PostgreSQL 数据库,用于持久化存储</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_storage</span><span class="p">(</span>
+            <span class="n">DatabaseKLStore</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;store2&quot;</span><span class="p">,</span>
+                <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;pg&quot;</span><span class="p">,</span>
+                <span class="n">database</span><span class="o">=</span><span class="s2">&quot;store2&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># 引擎 1: 数据库上的分面检索</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_engine</span><span class="p">(</span>
+            <span class="n">FacetKLEngine</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;facet_engine&quot;</span><span class="p">,</span>
+                <span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="s2">&quot;store2&quot;</span><span class="p">],</span>
+                <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># 引擎 2: 按名称和内容自动补全</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_engine</span><span class="p">(</span>
+            <span class="n">DAACKLEngine</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ac_engine1&quot;</span><span class="p">,</span>
+                <span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="s2">&quot;store2&quot;</span><span class="p">],</span>
+                <span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">/ac_index_by_name_content&quot;</span><span class="p">,</span>
+                <span class="n">encoder</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="p">[</span><span class="n">kl</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">kl</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
+                <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="n">kl</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;knowledge&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># 引擎 3: 按同义词自动补全</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_engine</span><span class="p">(</span>
+            <span class="n">DAACKLEngine</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ac_engine2&quot;</span><span class="p">,</span>
+                <span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="s2">&quot;store2&quot;</span><span class="p">],</span>
+                <span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">/ac_index_by_synonyms&quot;</span><span class="p">,</span>
+                <span class="n">encoder</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="p">[</span><span class="n">syn</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="n">kl</span><span class="o">.</span><span class="n">synonyms</span><span class="p">],</span>
+                <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="n">kl</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;knowledge&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># 引擎 4: 经验的向量搜索</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_engine</span><span class="p">(</span>
+            <span class="n">VectorKLEngine</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;vec_engine&quot;</span><span class="p">,</span>
+                <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;pgvector&quot;</span><span class="p">,</span>
+                <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;vec_store2&quot;</span><span class="p">,</span>
+                <span class="n">storage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="s2">&quot;store2&quot;</span><span class="p">],</span>
+                <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                <span class="n">encoder</span><span class="o">=</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">kl</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">kl</span><span class="o">.</span><span class="n">content</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="k">lambda</span> <span class="n">query</span><span class="p">:</span> <span class="n">query</span>
+                <span class="p">),</span>
+                <span class="n">embedder</span><span class="o">=</span><span class="s2">&quot;embedder&quot;</span><span class="p">,</span>
+                <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kl</span><span class="p">:</span> <span class="n">kl</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;experience&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    
+    <span class="nd">@reg_toolspec</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">facet_search</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">facets</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+        <span class="n">topk</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;在 KLBase 上执行分面检索。&quot;&quot;&quot;</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engines</span><span class="p">[</span><span class="s1">&#39;facet_engine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;facet&#39;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">facets</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;cnt&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span>
+            <span class="s2">&quot;kls&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">engines</span><span class="p">[</span><span class="s1">&#39;facet_engine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">id_</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span><span class="o">+</span><span class="n">topk</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+
+<span class="c1"># 使用示例</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">klbase</span> <span class="o">=</span> <span class="n">MyKLBase</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_klbase&quot;</span><span class="p">)</span>
+    <span class="n">klbase</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    
+    <span class="c1"># 1. 创建并插入知识条目</span>
+    <span class="n">kl1</span> <span class="o">=</span> <span class="n">Knowledge</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Fibonacci Sequence&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;knowledge&quot;</span><span class="p">,</span>
+        <span class="n">content</span><span class="o">=</span><span class="s2">&quot;The Fibonacci sequence is a series of numbers...&quot;</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="n">ptags</span><span class="p">(</span><span class="n">TOPIC</span><span class="o">=</span><span class="s2">&quot;math&quot;</span><span class="p">,</span> <span class="n">ENTITY</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">),</span>
+        <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fibonacci numbers&quot;</span><span class="p">,</span> <span class="s2">&quot;Fibonacci series&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">klbase</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">([</span><span class="n">kl1</span><span class="p">])</span>
+    
+    <span class="c1"># 2. 从函数缓存生成经验</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="n">InMemCache</span><span class="p">()</span>
+    
+    <span class="nd">@cache</span><span class="o">.</span><span class="n">memoize</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">fibonacci</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    
+    <span class="n">exps</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Experience</span><span class="o">.</span><span class="n">from_cache_entry</span><span class="p">(</span>
+            <span class="n">entry</span><span class="p">,</span>
+            <span class="n">tags</span><span class="o">=</span><span class="n">ptags</span><span class="p">(</span>
+                <span class="n">TOPIC</span><span class="o">=</span><span class="s2">&quot;math&quot;</span><span class="p">,</span>
+                <span class="n">NUMBER</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]),</span> <span class="nb">str</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">output</span><span class="p">)]</span>
+            <span class="p">),</span>
+            <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;fibonacci(</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">cache</span>
+    <span class="p">]</span>
+    <span class="n">klbase</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">exps</span><span class="p">)</span>
+    
+    <span class="c1"># 3. 使用不同引擎进行搜索</span>
+    <span class="c1"># 分面检索</span>
+    <span class="k">for</span> <span class="n">kl</span> <span class="ow">in</span> <span class="n">klbase</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;facet_engine&#39;</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;facet&#39;</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;TOPIC&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;math%&quot;</span><span class="p">))</span>
+    <span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">kl</span><span class="p">)</span>
+    
+    <span class="c1"># 自动补全搜索</span>
+    <span class="k">for</span> <span class="n">kl</span> <span class="ow">in</span> <span class="n">klbase</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s1">&#39;ac_engine1&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;Fibonacci&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">kl</span><span class="p">)</span>
+    
+    <span class="c1"># 向量搜索</span>
+    <span class="k">for</span> <span class="n">kl</span> <span class="ow">in</span> <span class="n">klbase</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;vec_engine&#39;</span><span class="p">,</span>
+        <span class="n">query</span><span class="o">=</span><span class="s2">&quot;fibonacci 63&quot;</span><span class="p">,</span>
+        <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">],</span>
+        <span class="n">topk</span><span class="o">=</span><span class="mi">3</span>
+    <span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">kl</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id30">
+<h2>拓展阅读<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>提示:</strong> 要更深入地了解 KLBase 组件,请参阅:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="ukf/index.html"><span class="std std-doc">UKF</span></a> - 知识条目的数据模型</p></li>
+<li><p><a class="reference internal" href="klstore/index.html"><span class="std std-doc">KLStore</span></a> - 知识对象的存储层</p></li>
+<li><p><a class="reference internal" href="klengine/index.html"><span class="std std-doc">KLEngine</span></a> - 构建在知识存储之上的搜索引擎实现</p></li>
+<li><p><a class="reference internal" href="toolspec/index.html"><span class="std std-doc">工具规范</span></a> - 智能体集成详情</p></li>
+</ul>
+</div></blockquote>
+<br/>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="toolspec/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">工具规范</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="klengine/vector.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">VectorKLEngine</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL团队
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">KLBase</a><ul>
+<li><a class="reference internal" href="#id1">1. 核心概念</a></li>
+<li><a class="reference internal" href="#id2">2. 基本架构</a></li>
+<li><a class="reference internal" href="#id3">3. 类定义</a><ul>
+<li><a class="reference internal" href="#id4">3.1. 构造函数</a></li>
+<li><a class="reference internal" href="#id5">3.2. 存储管理</a><ul>
+<li><a class="reference internal" href="#id6">3.2.1. 添加存储</a></li>
+<li><a class="reference internal" href="#id7">3.2.2. 移除存储</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">3.3. 引擎管理</a><ul>
+<li><a class="reference internal" href="#id9">3.3.1. 添加引擎</a></li>
+<li><a class="reference internal" href="#id10">3.3.2. 移除引擎</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">4. 数据操作</a><ul>
+<li><a class="reference internal" href="#id12">4.1. 插入/更新插入操作</a><ul>
+<li><a class="reference internal" href="#id13">4.1.1. 单个更新插入</a></li>
+<li><a class="reference internal" href="#id14">4.1.2. 单个插入</a></li>
+<li><a class="reference internal" href="#id15">4.1.3. 批量更新插入</a></li>
+<li><a class="reference internal" href="#id16">4.1.4. 批量插入</a></li>
+<li><a class="reference internal" href="#id17">4.1.5. 选择性同步</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id18">4.2. 移除操作</a><ul>
+<li><a class="reference internal" href="#id19">4.2.1. 单个移除</a></li>
+<li><a class="reference internal" href="#id20">4.2.2. 批量移除</a></li>
+<li><a class="reference internal" href="#id21">4.2.3. 清除所有</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id22">4.3. 搜索操作</a></li>
+<li><a class="reference internal" href="#id23">4.4. 列出搜索方法</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id24">5. 创建自定义 KLBase 应用</a><ul>
+<li><a class="reference internal" href="#id25">5.1. 继承 KLBase</a></li>
+<li><a class="reference internal" href="#id26">5.2. 配置存储和引擎</a></li>
+<li><a class="reference internal" href="#id27">5.3. 定义工具规范</a></li>
+<li><a class="reference internal" href="#id28">5.4. 导出工具供智能体使用</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id29">6. 完整示例</a></li>
+<li><a class="reference internal" href="#id30">拓展阅读</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=e4723610"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

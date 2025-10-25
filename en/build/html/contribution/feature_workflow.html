@@ -1,0 +1,1305 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Simple SRS" href="srs.html"><link rel="prev" title="Guide for Developers" href="for_developers.html">
+        <link rel="prefetch" href="../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Feature Addition Workflow - AgentHeaven Doc</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven is in active development. Features may change. 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">AgentHeaven Doc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/philosophy.html">Philosophy &amp; Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/architecture.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/learning.html">Learning AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting-started/index.html">Getting Started</a><input aria-label="Toggle navigation of Getting Started" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/setup.html">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/5min-quickstart.html">5min Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/60min-tutorial.html">60min Tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../configuration/index.html">Configuration</a><input aria-label="Toggle navigation of Configuration" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/core.html">Core Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/llm.html">LLM Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/database.html">Database Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/vdb.html">Vector Database Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python-guide/index.html">Main Guide (Python)</a><input aria-label="Toggle navigation of Main Guide (Python)" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../python-guide/utils/basic/index.html">Basic Utilities</a><input aria-label="Toggle navigation of Basic Utilities" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/config_utils.html">Configuration Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/hash_utils.html">Hashing Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/parallel_utils.html">Multi-Thread Parallelization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/jinja_utils.html">Template Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/serialize_utils.html">Serialization Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/str_utils.html">String Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/misc_utils.html">Miscellaneous Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/utils/db.html">Database Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/utils/vdb.html">Vector Database Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/cache.html">Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/ukf/index.html">UKF (Unified Knowledge Format)</a><input aria-label="Toggle navigation of UKF (Unified Knowledge Format)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/data-types.html">UKF Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/builtin-templates.html">Built-in Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/klengine/index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/base.html">BaseKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/facet.html">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/toolspec/index.html">ToolSpec</a><input aria-label="Toggle navigation of ToolSpec" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/toolspec/base.html">ToolSpec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/toolspec/builtins.html">Built-in ToolSpecs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/agent.html">Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cli-guide/index.html">CLI Guide</a><input aria-label="Toggle navigation of CLI Guide" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/repo-management.html">Repo Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-inference.html">LLM Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-session.html">LLM Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/prompt-management.html">Prompt Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/knowledge-management.html">Knowledge Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gui-guide/index.html">GUI Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../example-applications/index.html">Example Applications</a><input aria-label="Toggle navigation of Example Applications" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../example-applications/nl2sql-system.html">NL2SQL System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Contribution</a><input aria-label="Toggle navigation of Contribution" checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Contribution Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="for_developers.html">Guide for Developers</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Feature Addition Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="srs.html">Simple SRS</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ar/index.html">Allocated Requirements (AR)</a><input aria-label="Toggle navigation of Allocated Requirements (AR)" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="ar/base_ukf.html">BaseUKF - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/cache.html">Cache - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/llm.html">LLM - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/prompts.html">Prompts - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/database.html">Database - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/klstore.html">KLStore - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/klengine.html">KLEngine - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/klbase.html">KLBase - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/agent.html">Agent - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/sie.html">Structured Information Extraction (SIE) - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ar/cli.html">Command Line Interface (CLI) - Allocated Requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../community/index.html">Community &amp; Support</a><input aria-label="Toggle navigation of Community &amp; Support" class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" role="switch" type="checkbox"/><label for="toctree-checkbox-36"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community/resources.html">Community Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/en/source/contribution/feature_workflow.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/en/source/contribution/feature_workflow.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="feature-addition-workflow">
+<h1>Feature Addition Workflow<a class="headerlink" href="#feature-addition-workflow" title="Link to this heading">¶</a></h1>
+<p>This guide provides a comprehensive workflow for adding new features to AgentHeaven. Whether you’re new to open-source development or an experienced contributor, this workflow will help you create high-quality features that follow the project’s standards and patterns.</p>
+<p>General steps to add a new feature:</p>
+<ol class="arabic simple">
+<li><p>Implement the feature under <code class="docutils literal notranslate"><span class="pre">src/</span></code>, following the coding style of existing modules (Cache, KLStore, KLEngine). Keep functions modular and small.</p></li>
+<li><p>Add standard unit tests under <code class="docutils literal notranslate"><span class="pre">tests/</span></code> that validate your feature and ensure the full test-suite still passes.</p></li>
+<li><p>Create English and Chinese docs under <code class="docutils literal notranslate"><span class="pre">docs/en/</span></code> and <code class="docutils literal notranslate"><span class="pre">docs/zh/</span></code>, following existing doc style (numbered sections, code blocks, <code class="docutils literal notranslate"><span class="pre">&lt;br/&gt;</span></code> separators). Recommended: write in English first, then translate to Chinese using an LLM and proofread manually.</p></li>
+<li><p>Run formatting and linting (Black/Flake8) to ensure code quality and readable style.</p></li>
+<li><p>Verify CI (GitHub Actions) passes on your branch before opening a PR.</p></li>
+<li><p>Open a pull request for review and address feedback until merged.</p></li>
+</ol>
+<p>This guide below expands each step with patterns, examples, and checks to help you succeed.</p>
+<br/>
+<section id="branch-creation-and-naming-convention">
+<h2>1. Branch Creation and Naming Convention<a class="headerlink" href="#branch-creation-and-naming-convention" title="Link to this heading">¶</a></h2>
+<section id="branch-naming-rules">
+<h3>1.1. Branch Naming Rules<a class="headerlink" href="#branch-naming-rules" title="Link to this heading">¶</a></h3>
+<p>Use descriptive branch names that follow this pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">type</span><span class="o">&gt;/&lt;</span><span class="n">short</span><span class="o">-</span><span class="n">description</span><span class="o">&gt;-&lt;</span><span class="n">issue</span><span class="o">-</span><span class="n">number</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><strong>Types:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">feat/</span></code> - New features</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fix/</span></code> - Bug fixes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code> - Documentation changes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refactor/</span></code> - Code refactoring</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test/</span></code> - Test improvements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">perf/</span></code> - Performance optimizations</p></li>
+</ul>
+<p><strong>Examples:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">feat</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">redis</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">backend</span><span class="o">-</span><span class="mi">123</span>
+<span class="n">fix</span><span class="o">/</span><span class="n">memory</span><span class="o">-</span><span class="n">leak</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">klstore</span><span class="o">-</span><span class="mi">456</span>
+<span class="n">docs</span><span class="o">/</span><span class="n">update</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">guide</span><span class="o">-</span><span class="mi">789</span>
+<span class="n">refactor</span><span class="o">/</span><span class="n">simplify</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">abc</span><span class="o">-</span><span class="mi">101</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="creating-your-branch">
+<h3>1.2. Creating Your Branch<a class="headerlink" href="#creating-your-branch" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Always start from the latest main/master branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>master
+git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>master
+
+<span class="c1"># Create your feature branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feat/your-feature-name-123
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="feature-implementation">
+<h2>2. Feature Implementation<a class="headerlink" href="#feature-implementation" title="Link to this heading">¶</a></h2>
+<section id="code-structure-and-patterns">
+<h3>2.1. Code Structure and Patterns<a class="headerlink" href="#code-structure-and-patterns" title="Link to this heading">¶</a></h3>
+<p><strong>Follow the established patterns:</strong></p>
+<ul class="simple">
+<li><p>All core modules inherit from abstract base classes</p></li>
+<li><p>Use consistent naming conventions (snake_case for functions, PascalCase for classes)</p></li>
+<li><p>Implement comprehensive docstrings with proper formatting</p></li>
+<li><p>Follow the modular architecture with clear separation of concerns</p></li>
+</ul>
+<p><strong>Example Cache Implementation Pattern:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;MyCache&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils.basic</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..cache.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseCache</span><span class="p">,</span> <span class="n">CacheEntry</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyCache</span><span class="p">(</span><span class="n">BaseCache</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">    My custom cache implementation.</span>
+<span class="sd">    </span>
+<span class="sd">    This cache provides... (comprehensive description)</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        _cache: Internal storage for cache entries</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exclude</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">        Initialize MyCache.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            exclude: Parameters to exclude from cache key generation</span>
+<span class="sd">            *args: Additional positional arguments</span>
+<span class="sd">            **kwargs: Additional keyword arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">        Retrieve cache entry by key.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            key: Cache entry key</span>
+<span class="sd">            default: Default value if not found</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Cache entry data or default</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Implementation here</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">        Set cache entry by key.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            key: Cache entry key</span>
+<span class="sd">            value: Cache entry data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Implementation here</span>
+        <span class="k">pass</span>
+    
+    <span class="c1"># Implement other required abstract methods...</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="module-structure">
+<h3>2.2. Module Structure<a class="headerlink" href="#module-structure" title="Link to this heading">¶</a></h3>
+<p><strong>Place your code in the appropriate directory:</strong></p>
+<ul class="simple">
+<li><p>Utilities: <code class="docutils literal notranslate"><span class="pre">src/ahvn/utils/</span></code></p></li>
+<li><p>Caching: <code class="docutils literal notranslate"><span class="pre">src/ahvn/cache/</span></code></p></li>
+<li><p>KLStorage: <code class="docutils literal notranslate"><span class="pre">src/ahvn/klstore/</span></code></p></li>
+<li><p>KLEngines: <code class="docutils literal notranslate"><span class="pre">src/ahvn/klengine/</span></code></p></li>
+<li><p>KLBases: <code class="docutils literal notranslate"><span class="pre">src/ahvn/klbase/</span></code></p></li>
+<li><p>LLM: <code class="docutils literal notranslate"><span class="pre">src/ahvn/llm/</span></code></p></li>
+<li><p>Agents: <code class="docutils literal notranslate"><span class="pre">src/ahvn/agent/</span></code></p></li>
+<li><p>Resources: <code class="docutils literal notranslate"><span class="pre">src/ahvn/resources/</span></code></p></li>
+</ul>
+<p><strong>Update <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;MyCache&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.my_cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyCache</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="error-handling-and-logging">
+<h3>2.3. Error Handling and Logging<a class="headerlink" href="#error-handling-and-logging" title="Link to this heading">¶</a></h3>
+<p><strong>Use consistent error handling:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..utils.basic.log_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Your implementation</span>
+        <span class="k">pass</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in my_function: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>  <span class="c1"># Re-raise for upstream handling</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-management">
+<h3>2.4. Configuration Management<a class="headerlink" href="#configuration-management" title="Link to this heading">¶</a></h3>
+<p><strong>If your feature needs configuration:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add to src/ahvn/resources/config_schema.yaml</span>
+<span class="n">my_feature</span><span class="p">:</span>
+    <span class="n">enabled</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">cache_size</span><span class="p">:</span> <span class="mi">1000</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="mi">30</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="testing">
+<h2>3. Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
+<section id="test-structure">
+<h3>3.1. Test Structure<a class="headerlink" href="#test-structure" title="Link to this heading">¶</a></h3>
+<p><strong>Create comprehensive tests following the existing patterns:</strong></p>
+<ul class="simple">
+<li><p>Unit tests: <code class="docutils literal notranslate"><span class="pre">tests/unit/your_module/</span></code></p></li>
+<li><p>Integration tests: <code class="docutils literal notranslate"><span class="pre">tests/integration/</span></code></p></li>
+<li><p>Test fixtures: <code class="docutils literal notranslate"><span class="pre">tests/fixtures/</span></code></p></li>
+</ul>
+<p><strong>Example Test Structure:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Unit tests for MyCache implementation.</span>
+
+<span class="sd">Tests cover basic functionality, edge cases, and integration patterns.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Add tests directory to Python path</span>
+<span class="n">TESTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">TESTS_DIR</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">TESTS_DIR</span><span class="p">))</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CacheTestCase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.cache.my_cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyCache</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestMyCache</span><span class="p">(</span><span class="n">CacheTestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test MyCache functionality.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up test fixtures.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setup_method</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">MyCache</span><span class="p">()</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_basic_functionality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test basic cache operations.&quot;&quot;&quot;</span>
+        <span class="c1"># Your test here</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_edge_cases</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test edge cases and error conditions.&quot;&quot;&quot;</span>
+        <span class="c1"># Your test here</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="test-coverage-requirements">
+<h3>3.2. Test Coverage Requirements<a class="headerlink" href="#test-coverage-requirements" title="Link to this heading">¶</a></h3>
+<p><strong>Aim for comprehensive coverage:</strong></p>
+<ul class="simple">
+<li><p>All public methods must be tested</p></li>
+<li><p>Test both success and failure cases</p></li>
+<li><p>Include integration tests with other components</p></li>
+<li><p>Test async functions if applicable</p></li>
+<li><p>Use pytest fixtures for common test data</p></li>
+</ul>
+<br/>
+</section>
+<section id="running-tests">
+<h3>3.3. Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run all tests</span>
+pytest
+
+<span class="c1"># Run specific test file</span>
+pytest<span class="w"> </span>tests/unit/your_module/test_my_cache.py
+
+<span class="c1"># Run with coverage</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>src/ahvn/your_module
+
+<span class="c1"># Run specific test class</span>
+pytest<span class="w"> </span>tests/unit/your_module/test_my_cache.py::TestMyCache
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="documentation">
+<h2>4. Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h2>
+<section id="english-documentation">
+<h3>4.1. English Documentation<a class="headerlink" href="#english-documentation" title="Link to this heading">¶</a></h3>
+<p><strong>Create comprehensive English documentation:</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># MyCache</span>
+
+AgentHeaven provides a custom cache implementation that... (brief description)
+
+&lt;br/&gt;
+
+<span class="gu">## 1. Basic Usage Example</span>
+This example shows how to use MyCache for...
+
+<span class="sb">```python</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyCache</span>
+
+<span class="n">cache</span> <span class="o">=</span> <span class="n">MyCache</span><span class="p">()</span>
+
+<span class="nd">@cache</span><span class="o">.</span><span class="n">memoize</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="c1"># Usage</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="sb">```</span>
+
+&lt;br/&gt;
+
+<span class="gu">## 2. Configuration Options</span>
+
+<span class="gu">### 2.1. Basic Configuration</span>
+Simple configuration with default settings.
+
+<span class="sb">```python</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyCache</span>
+
+<span class="n">cache</span> <span class="o">=</span> <span class="n">MyCache</span><span class="p">()</span>
+<span class="sb">```</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**Pros**</span>: Easy to use, minimal setup
+<span class="k">-</span><span class="w"> </span><span class="gs">**Cons**</span>: Limited customization
+<span class="k">-</span><span class="w"> </span><span class="gs">**Use case**</span>: Development, simple caching needs
+
+&lt;br/&gt;
+
+<span class="gu">## 3. Advanced Features</span>
+
+<span class="gu">### 3.1. Custom Parameters</span>
+Configure MyCache with custom parameters.
+
+<span class="sb">```python</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">MyCache</span><span class="p">(</span>
+    <span class="n">cache_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">custom_option</span><span class="o">=</span><span class="s2">&quot;value&quot;</span>
+<span class="p">)</span>
+<span class="sb">```</span>
+
+&lt;br/&gt;
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="chinese-documentation">
+<h3>4.2. Chinese Documentation<a class="headerlink" href="#chinese-documentation" title="Link to this heading">¶</a></h3>
+<p><strong>Create Chinese translation:</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># MyCache</span>
+
+AgentHeaven 提供了一个自定义缓存实现，用于... (中文描述)
+
+&lt;br/&gt;
+
+<span class="gu">## 1. 基本使用示例</span>
+本示例展示如何使用 MyCache 进行...
+
+<span class="sb">```python</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyCache</span>
+
+<span class="n">cache</span> <span class="o">=</span> <span class="n">MyCache</span><span class="p">()</span>
+
+<span class="nd">@cache</span><span class="o">.</span><span class="n">memoize</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="c1"># 使用</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="sb">```</span>
+
+&lt;br/&gt;
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="documentation-requirements">
+<h3>4.3. Documentation Requirements<a class="headerlink" href="#documentation-requirements" title="Link to this heading">¶</a></h3>
+<p><strong>Follow these guidelines:</strong></p>
+<ul class="simple">
+<li><p>Number all sections and subsections</p></li>
+<li><p>End each section with <code class="docutils literal notranslate"><span class="pre">&lt;br/&gt;</span></code></p></li>
+<li><p>Include comprehensive code examples</p></li>
+<li><p>Follow the existing documentation style</p></li>
+<li><p>Add to appropriate index files</p></li>
+<li><p>Use proper markdown formatting</p></li>
+</ul>
+<br/>
+</section>
+<section id="update-documentation-index">
+<h3>4.4. Update Documentation Index<a class="headerlink" href="#update-documentation-index" title="Link to this heading">¶</a></h3>
+<p><strong>Add your documentation to the relevant index:</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Update docs/en/source/python-guide/index.md</span>
+```{toctree}
+:maxdepth: 2
+
+cache
+klstore
+klengine
+my_cache  # Add your new module
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="code-quality-and-formatting">
+<h2>5. Code Quality and Formatting<a class="headerlink" href="#code-quality-and-formatting" title="Link to this heading">¶</a></h2>
+<section id="code-formatting">
+<h3>5.1. Code Formatting<a class="headerlink" href="#code-formatting" title="Link to this heading">¶</a></h3>
+<p><strong>Use the project’s formatting scripts:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format code with Black and check with Flake8</span>
+bash<span class="w"> </span>scripts/flake.bash<span class="w"> </span>-b<span class="w"> </span>-f
+
+<span class="c1"># Equivalent manual commands:</span>
+black<span class="w"> </span>--line-length<span class="w"> </span><span class="m">160</span><span class="w"> </span>src/ahvn/your_module/
+flake8<span class="w"> </span>--max-line-length<span class="o">=</span><span class="m">160</span><span class="w"> </span>--ignore<span class="o">=</span>F401,F403,F405,E203,E402,E501,W503,E701<span class="w"> </span>src/ahvn/your_module/
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="code-quality-standards">
+<h3>5.2. Code Quality Standards<a class="headerlink" href="#code-quality-standards" title="Link to this heading">¶</a></h3>
+<p><strong>Follow these quality standards:</strong></p>
+<ul class="simple">
+<li><p>Line length: 120 characters maximum</p></li>
+<li><p>Use type hints for all function signatures</p></li>
+<li><p>Write comprehensive docstrings</p></li>
+<li><p>Follow PEP 8 style guidelines</p></li>
+<li><p>Include proper error handling</p></li>
+<li><p>Add logging for debugging</p></li>
+</ul>
+<br/>
+</section>
+<section id="pre-commit-checks">
+<h3>5.3. Pre-commit Checks<a class="headerlink" href="#pre-commit-checks" title="Link to this heading">¶</a></h3>
+<p><strong>Before committing, run these checks:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code quality checks</span>
+bash<span class="w"> </span>scripts/flake.bash<span class="w"> </span>-b<span class="w"> </span>-f
+
+<span class="c1"># Run all tests</span>
+bash<span class="w"> </span>scripts/test.bash
+
+<span class="c1"># Build documentation</span>
+bash<span class="w"> </span>scripts/docs.bash<span class="w"> </span>en<span class="w"> </span>zh<span class="w"> </span>-s
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="github-actions-and-ci-cd">
+<h2>6. GitHub Actions and CI/CD<a class="headerlink" href="#github-actions-and-ci-cd" title="Link to this heading">¶</a></h2>
+<section id="understanding-the-ci-pipeline">
+<h3>6.1. Understanding the CI Pipeline<a class="headerlink" href="#understanding-the-ci-pipeline" title="Link to this heading">¶</a></h3>
+<p>The project uses GitHub Actions for continuous integration:</p>
+<p><strong>Python Tests (<code class="docutils literal notranslate"><span class="pre">.github/workflows/python-test.yml</span></code>):</strong></p>
+<ul class="simple">
+<li><p>Runs on push to <code class="docutils literal notranslate"><span class="pre">master</span></code>, <code class="docutils literal notranslate"><span class="pre">develop</span></code>, and <code class="docutils literal notranslate"><span class="pre">copilot/*</span></code> branches</p></li>
+<li><p>Tests against Python 3.10, 3.11, 3.12, and 3.13</p></li>
+<li><p>Only runs if commit message contains <code class="docutils literal notranslate"><span class="pre">[major]</span></code></p></li>
+<li><p>Installs dependencies and runs pytest</p></li>
+</ul>
+<p><strong>Code Quality (<code class="docutils literal notranslate"><span class="pre">.github/workflows/code-quality.yml</span></code>):</strong></p>
+<ul class="simple">
+<li><p>Runs Black and Flake8 checks</p></li>
+<li><p>Comments on PRs if formatting is needed</p></li>
+<li><p>Enforces code style standards</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="pull-request-process">
+<h2>7. Pull Request Process<a class="headerlink" href="#pull-request-process" title="Link to this heading">¶</a></h2>
+<section id="before-creating-a-pr">
+<h3>7.1. Before Creating a PR<a class="headerlink" href="#before-creating-a-pr" title="Link to this heading">¶</a></h3>
+<p><strong>Complete this checklist:</strong></p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All tests pass locally</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Code is properly formatted</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Documentation is complete and follows style guidelines</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Feature is fully implemented</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> No breaking changes (or properly documented)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Branch is up to date with master (or proper base branch)</p></li>
+</ul>
+<br/>
+</section>
+<section id="creating-the-pull-request">
+<h3>7.2. Creating the Pull Request<a class="headerlink" href="#creating-the-pull-request" title="Link to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p><strong>Push your branch:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feat/your-feature-name-123
+</pre></div>
+</div>
+</li>
+<li><p><strong>Create PR on GitHub:</strong></p>
+<ul class="simple">
+<li><p>Base branch: <code class="docutils literal notranslate"><span class="pre">master</span></code> or <code class="docutils literal notranslate"><span class="pre">develop</span></code></p></li>
+<li><p>Compare branch: your feature branch</p></li>
+<li><p>Title: Clear description of the feature</p></li>
+<li><p>Description: Detailed explanation with testing instructions</p></li>
+</ul>
+</li>
+<li><p><strong>Link to issues:</strong> Reference any related issues using <code class="docutils literal notranslate"><span class="pre">Closes</span> <span class="pre">#123</span></code></p></li>
+</ol>
+<br/>
+</section>
+<section id="pr-review-process">
+<h3>7.3. PR Review Process<a class="headerlink" href="#pr-review-process" title="Link to this heading">¶</a></h3>
+<p><strong>Be prepared for:</strong></p>
+<ul class="simple">
+<li><p>Code review feedback</p></li>
+<li><p>Documentation suggestions</p></li>
+<li><p>Test coverage improvements</p></li>
+<li><p>Performance considerations</p></li>
+<li><p>Security reviews</p></li>
+</ul>
+<p><strong>Respond to feedback:</strong></p>
+<ul class="simple">
+<li><p>Address all comments</p></li>
+<li><p>Update code and documentation</p></li>
+<li><p>Add additional tests if needed</p></li>
+<li><p>Be polite and collaborative</p></li>
+</ul>
+<br/>
+</section>
+<section id="final-checks">
+<h3>7.4. Final Checks<a class="headerlink" href="#final-checks" title="Link to this heading">¶</a></h3>
+<p><strong>Before merging:</strong></p>
+<ul class="simple">
+<li><p>All CI checks pass</p></li>
+<li><p>At least one approval from maintainers</p></li>
+<li><p>Documentation is updated</p></li>
+<li><p>Tests are comprehensive</p></li>
+<li><p>Code follows project standards</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="post-merger-tasks">
+<h2>8. Post-Merger Tasks<a class="headerlink" href="#post-merger-tasks" title="Link to this heading">¶</a></h2>
+<section id="cleanup">
+<h3>8.1. Cleanup<a class="headerlink" href="#cleanup" title="Link to this heading">¶</a></h3>
+<p><strong>After your PR is merged:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Switch to master and update</span>
+git<span class="w"> </span>checkout<span class="w"> </span>master
+git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>master
+
+<span class="c1"># Delete your feature branch</span>
+git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>feat/your-feature-name-123
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--delete<span class="w"> </span>feat/your-feature-name-123
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="celebrate-and-document">
+<h3>8.2. Celebrate and Document<a class="headerlink" href="#celebrate-and-document" title="Link to this heading">¶</a></h3>
+<p><strong>Share your contribution:</strong></p>
+<ul class="simple">
+<li><p>Update your portfolio or resume</p></li>
+<li><p>Consider writing a blog post / tutorial about your feature</p></li>
+<li><p>Help answer questions about your feature in issues</p></li>
+<li><p>Monitor for bug reports related to your feature</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="troubleshooting-and-help">
+<h2>9. Troubleshooting and Help<a class="headerlink" href="#troubleshooting-and-help" title="Link to this heading">¶</a></h2>
+<section id="common-issues">
+<h3>9.1. Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
+<p><strong>Test Failures:</strong></p>
+<ul class="simple">
+<li><p>Check Python version compatibility</p></li>
+<li><p>Ensure all dependencies are installed</p></li>
+<li><p>Verify your conda environment is active</p></li>
+<li><p>Check for integration issues with existing code</p></li>
+</ul>
+<p><strong>Code Quality Issues:</strong></p>
+<ul class="simple">
+<li><p>Run the formatting scripts locally</p></li>
+<li><p>Check line length and style guidelines</p></li>
+<li><p>Ensure proper type hints</p></li>
+<li><p>Verify docstring format</p></li>
+</ul>
+<p><strong>Documentation Issues:</strong></p>
+<ul class="simple">
+<li><p>Check markdown syntax</p></li>
+<li><p>Verify all sections are numbered</p></li>
+<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">&lt;br/&gt;</span></code> tags are present</p></li>
+<li><p>Test code examples in documentation</p></li>
+</ul>
+<br/>
+</section>
+<section id="getting-help">
+<h3>9.2. Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">¶</a></h3>
+<p><strong>Resources:</strong></p>
+<ul class="simple">
+<li><p>GitHub Issues: Report bugs or ask questions</p></li>
+<li><p>Documentation: Check existing guides</p></li>
+<li><p>Code Examples: Look at similar features</p></li>
+<li><p>Community: Join discussions in the repository</p></li>
+</ul>
+<p><strong>When to ask for help:</strong></p>
+<ul class="simple">
+<li><p>You’re stuck on a technical issue</p></li>
+<li><p>You’re unsure about design decisions</p></li>
+<li><p>You need clarification on requirements</p></li>
+<li><p>You want feedback on your approach</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="best-practices-and-tips">
+<h2>10. Best Practices and Tips<a class="headerlink" href="#best-practices-and-tips" title="Link to this heading">¶</a></h2>
+<section id="development-best-practices">
+<h3>10.1. Development Best Practices<a class="headerlink" href="#development-best-practices" title="Link to this heading">¶</a></h3>
+<p><strong>Code Quality:</strong></p>
+<ul class="simple">
+<li><p>Write clean, modular code</p></li>
+<li><p>Follow existing patterns and conventions</p></li>
+<li><p>Add comprehensive tests</p></li>
+<li><p>Document your code thoroughly</p></li>
+<li><p>Consider performance implications</p></li>
+</ul>
+<p><strong>Collaboration:</strong></p>
+<ul class="simple">
+<li><p>Communicate early and often</p></li>
+<li><p>Be open to feedback and suggestions</p></li>
+<li><p>Help review other contributors’ code</p></li>
+<li><p>Share knowledge and experience</p></li>
+<li><p>Be patient and respectful</p></li>
+</ul>
+<br/>
+</section>
+<section id="performance-considerations">
+<h3>10.2. Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h3>
+<p><strong>Think about:</strong></p>
+<ul class="simple">
+<li><p>Memory usage and efficiency</p></li>
+<li><p>Scalability of your solution</p></li>
+<li><p>Impact on existing functionality</p></li>
+<li><p>Integration with other components</p></li>
+<li><p>Testing under different conditions</p></li>
+</ul>
+<br/>
+</section>
+<section id="security-considerations">
+<h3>10.3. Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading">¶</a></h3>
+<p><strong>Always consider:</strong></p>
+<ul class="simple">
+<li><p>Input validation and sanitization</p></li>
+<li><p>Proper error handling</p></li>
+<li><p>Secure configuration management</p></li>
+<li><p>Dependency security</p></li>
+<li><p>Access control and permissions</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="further-exploration">
+<h2>Further Exploration<a class="headerlink" href="#further-exploration" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Tip:</strong> For more information about contributing to AgentHeaven, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="overview.html"><span class="std std-doc">Contribution Overview</span></a> - High-level contribution guidelines and ways to get started</p></li>
+<li><p><a class="reference internal" href="for_developers.html"><span class="std std-doc">For Developers</span></a> - Developer setup, workflow, and testing instructions</p></li>
+<li><p><a class="reference internal" href="srs.html"><span class="std std-doc">Simple SRS</span></a> - High-level software requirements for the project</p></li>
+<li><p><a class="reference internal" href="ar/index.html"><span class="std std-doc">Allocated Requirements (AR)</span></a> - Detailed component requirements allocation and specifications</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Tip:</strong> For more information about AgentHeaven development, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../python-guide/index.html"><span class="std std-doc">Main Guide (Python)</span></a> - Comprehensive Python development guide</p></li>
+<li><p><a class="reference internal" href="../configuration/index.html"><span class="std std-doc">Configuration Guide</span></a> - Configuration system setup and management</p></li>
+<li><p><a class="reference internal" href="../cli-guide/index.html"><span class="std std-doc">CLI Guide</span></a> - Command-line interface development and usage</p></li>
+<li><p><a class="reference internal" href="../community/index.html"><span class="std std-doc">Community Resources</span></a> - Community guidelines and support resources</p></li>
+</ul>
+</div></blockquote>
+<br/>
+```````
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="srs.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Simple SRS</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="for_developers.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Guide for Developers</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Feature Addition Workflow</a><ul>
+<li><a class="reference internal" href="#branch-creation-and-naming-convention">1. Branch Creation and Naming Convention</a><ul>
+<li><a class="reference internal" href="#branch-naming-rules">1.1. Branch Naming Rules</a></li>
+<li><a class="reference internal" href="#creating-your-branch">1.2. Creating Your Branch</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#feature-implementation">2. Feature Implementation</a><ul>
+<li><a class="reference internal" href="#code-structure-and-patterns">2.1. Code Structure and Patterns</a></li>
+<li><a class="reference internal" href="#module-structure">2.2. Module Structure</a></li>
+<li><a class="reference internal" href="#error-handling-and-logging">2.3. Error Handling and Logging</a></li>
+<li><a class="reference internal" href="#configuration-management">2.4. Configuration Management</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing">3. Testing</a><ul>
+<li><a class="reference internal" href="#test-structure">3.1. Test Structure</a></li>
+<li><a class="reference internal" href="#test-coverage-requirements">3.2. Test Coverage Requirements</a></li>
+<li><a class="reference internal" href="#running-tests">3.3. Running Tests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documentation">4. Documentation</a><ul>
+<li><a class="reference internal" href="#english-documentation">4.1. English Documentation</a></li>
+<li><a class="reference internal" href="#chinese-documentation">4.2. Chinese Documentation</a></li>
+<li><a class="reference internal" href="#documentation-requirements">4.3. Documentation Requirements</a></li>
+<li><a class="reference internal" href="#update-documentation-index">4.4. Update Documentation Index</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#code-quality-and-formatting">5. Code Quality and Formatting</a><ul>
+<li><a class="reference internal" href="#code-formatting">5.1. Code Formatting</a></li>
+<li><a class="reference internal" href="#code-quality-standards">5.2. Code Quality Standards</a></li>
+<li><a class="reference internal" href="#pre-commit-checks">5.3. Pre-commit Checks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#github-actions-and-ci-cd">6. GitHub Actions and CI/CD</a><ul>
+<li><a class="reference internal" href="#understanding-the-ci-pipeline">6.1. Understanding the CI Pipeline</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pull-request-process">7. Pull Request Process</a><ul>
+<li><a class="reference internal" href="#before-creating-a-pr">7.1. Before Creating a PR</a></li>
+<li><a class="reference internal" href="#creating-the-pull-request">7.2. Creating the Pull Request</a></li>
+<li><a class="reference internal" href="#pr-review-process">7.3. PR Review Process</a></li>
+<li><a class="reference internal" href="#final-checks">7.4. Final Checks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#post-merger-tasks">8. Post-Merger Tasks</a><ul>
+<li><a class="reference internal" href="#cleanup">8.1. Cleanup</a></li>
+<li><a class="reference internal" href="#celebrate-and-document">8.2. Celebrate and Document</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting-and-help">9. Troubleshooting and Help</a><ul>
+<li><a class="reference internal" href="#common-issues">9.1. Common Issues</a></li>
+<li><a class="reference internal" href="#getting-help">9.2. Getting Help</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#best-practices-and-tips">10. Best Practices and Tips</a><ul>
+<li><a class="reference internal" href="#development-best-practices">10.1. Development Best Practices</a></li>
+<li><a class="reference internal" href="#performance-considerations">10.2. Performance Considerations</a></li>
+<li><a class="reference internal" href="#security-considerations">10.3. Security Considerations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-exploration">Further Exploration</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=9dc39874"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

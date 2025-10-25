@@ -1,0 +1,676 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../genindex.html"><link rel="search" title="搜索" href="../search.html"><link rel="next" title="学习 AgentHeaven" href="learning.html"><link rel="prev" title="理念与愿景" href="philosophy.html">
+        <link rel="prefetch" href="../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>架构 - AgentHeaven文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven 正在积极开发中，功能可能会发生变化。 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">AgentHeaven文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">简介</a><input aria-label="Toggle navigation of 简介" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="philosophy.html">理念与愿景</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="learning.html">学习 AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting-started/index.html">快速开始</a><input aria-label="Toggle navigation of 快速开始" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">安装指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/setup.html">设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/5min-quickstart.html">5 分钟快速开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/60min-tutorial.html">60 分钟教程</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../configuration/index.html">配置</a><input aria-label="Toggle navigation of 配置" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/core.html">核心配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/llm.html">LLM 配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/database.html">数据库配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/vdb.html">向量数据库配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python-guide/index.html">主指南（Python）</a><input aria-label="Toggle navigation of 主指南（Python）" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/utils/index.html">实用工具</a><input aria-label="Toggle navigation of 实用工具" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../python-guide/utils/basic/index.html">基础实用工具</a><input aria-label="Toggle navigation of 基础实用工具" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/config_utils.html">配置管理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/hash_utils.html">哈希工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/parallel_utils.html">多线程并行化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/jinja_utils.html">模板处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/serialize_utils.html">序列化工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/str_utils.html">字符串实用工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/misc_utils.html">其他实用工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/utils/db.html">数据库工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/utils/vdb.html">向量数据库工具</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/cache.html">缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/ukf/index.html">UKF (通用知识格式)</a><input aria-label="Toggle navigation of UKF (通用知识格式)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/data-types.html">UKF 数据类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/builtin-templates.html">内置模板</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/klengine/index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/base.html">BaseKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/facet.html">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/toolspec/index.html">工具规范</a><input aria-label="Toggle navigation of 工具规范" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/toolspec/base.html">工具规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/toolspec/builtins.html">内置工具规范</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/agent.html">智能体</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cli-guide/index.html">CLI 指南</a><input aria-label="Toggle navigation of CLI 指南" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/repo-management.html">仓库管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-inference.html">LLM 推理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-session.html">LLM 会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/prompt-management.html">提示词管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/knowledge-management.html">知识管理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gui-guide/index.html">GUI 使用指南</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../example-applications/index.html">示例应用</a><input aria-label="Toggle navigation of 示例应用" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../example-applications/nl2sql-system.html">NL2SQL 系统</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">开发规划</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contribution/index.html">贡献</a><input aria-label="Toggle navigation of 贡献" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/overview.html">贡献概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/for_developers.html">开发者指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/feature_workflow.html">功能添加工作流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/srs.html">简要软件需求（SRS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/ar/index.html">分配需求 (AR)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_index.html">API 参考</a><input aria-label="Toggle navigation of API 参考" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../api/ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../api/ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../community/index.html">社区与支持</a><input aria-label="Toggle navigation of 社区与支持" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community/resources.html">社区资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">引用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/zh/source/introduction/architecture.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/zh/source/introduction/architecture.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>架构<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>本节将详细介绍 AgentHeaven 的架构，包括其核心组件及交互关系。它还介绍了统一知识格式（UKF）与用于终身学习的模仿器（Imitator）组件。</p>
+<section id="id2">
+<h2>1. 系统架构<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>AgentHeaven 是一个面向构建 <strong>垂直领域应用</strong> 的框架，其核心是把知识视为核心资产。其架构围绕 <strong><a class="reference internal" href="../python-guide/ukf/index.html"><span class="std std-doc">统一知识格式（UKF）</span></a></strong> 的概念构建，确保所有形式的知识——从文档与数据库模式到用户查询和函数结果——都以一致的方式管理。这种方法打造了一条无缝的流水线，使智能体能够轻松地提取、存储并利用知识来执行任务。</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../_static/arch_sys_zh.png"><img alt="AgentHeaven 架构图" src="../_static/arch_sys_zh.png" style="width: 95%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">AgentHeaven 系统架构</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>具体而言，AgentHeaven 由若干组件协同工作，以构建一个灵活而智能的系统：</p>
+<ul class="simple">
+<li><p><strong>Cache（缓存）</strong>：用于监控、累积并临时存储函数调用及其结果。可用于记录历史用户查询、标注、LLM 输入/输出、智能体轨迹，或从在线系统收集数据以支持终身学习。</p></li>
+<li><p><strong>LLM（大语言模型）</strong>：AgentHeaven 使用 <a class="reference external" href="https://www.litellm.ai/">LiteLLM</a> 为多种 LLM 提供统一接口。LLM 是 AgentHeaven 实现中不可或缺的一部分，支持可配置的预设，而不仅仅是一个外部服务。</p></li>
+<li><p><strong>Prompts（提示词）</strong>：提示词以 <a class="reference external" href="https://jinja.palletsprojects.com/en/stable/">Jinja</a> + <a class="reference external" href="https://babel.pocoo.org/en/latest/">Babel</a> 模板管理，并可转换为 UKF。这为提示工程与版本管理提供统一接口，将提示词视作一种知识。</p></li>
+<li><p><strong>Database（数据库）</strong>：AgentHeaven 专注数据相关应用，并在优化数据库交互方面投入大量精力。集成了 <a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy</a> 以连接多种数据库，高效存取 UKF 数据。</p></li>
+<li><p><strong>Vector Database（向量数据库）</strong>：对于需要语义检索的应用，AgentHeaven 通过 <a class="reference external" href="https://www.llamaindex.ai/">LlamaIndex</a> 集成向量数据库，以高效存储与检索知识的高维向量表示。</p></li>
+<li><p><strong>BaseUKF</strong>：UKF 协议旨在分离知识的提取、存储、管理、检索与利用。作为语义层，BaseUKF 将智能体工作流所需的各类组件统一为数据。</p></li>
+<li><p><strong>KLStore（知识存储）</strong>：用于 UKF 的长期管理与持久化的存储层。支持多种方案，包括内存、文件系统、数据库、远程存储、级联与路由等。</p></li>
+<li><p><strong>KLEngine（知识引擎）</strong>：UKF 的利用层。例如，基于检索的利用可借助 UKF 中存储的知识，通过字符串匹配、分面检索、向量检索或图遍历等方法回答查询或执行任务；又如，利用这些知识进行模型微调与知识蒸馏。</p></li>
+<li><p><strong>KLBase（知识库）</strong>：AgentHeaven 的核心，整合一个或多个 KLStore 与 KLEngine 实例。它为其上层的任意智能体工作流提供统一的利用接口，屏蔽底层实现细节。</p></li>
+<li><p><strong>ToolSpec（工具规范）</strong>：工具（函数、API 等）的结构化表示。围绕 <a class="reference external" href="https://gofastmcp.com/getting-started/welcome/">FastMCP 2.0</a>，ToolSpec 支持从函数、代码、MCP 或 FastMCP 工具相互转换，并可导出为函数、签名、代码、MCP 或 FastMCP 工具、函数调用 JSON Schema、字符串与 UKF。</p></li>
+<li><p><strong>Imitator（模仿器）</strong>：基于模仿学习的智能体构建器。利用 KLBase 中的知识，通过弱监督创建并持续打磨特定领域的智能体。</p></li>
+</ul>
+<br/>
+</section>
+<section id="ukf">
+<h2>2. 统一知识格式（UKF）架构<a class="headerlink" href="#ukf" title="Link to this heading">¶</a></h2>
+<p>统一知识格式（UKF）是 AgentHeaven 的核心概念，提供了一种标准化的方式来表示和管理跨不同领域和应用的知识。UKF 架构设计为可扩展和适应性强，允许用户定义领域特定的知识表示，同时保持知识操作的一致接口。</p>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../_static/arch_ukf_zh.png"><img alt="统一知识格式（UKF）架构图" src="../_static/arch_ukf_zh.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">统一知识格式（UKF）架构</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>在开发垂直领域应用时，应在领域专家的指导下首先定义对应领域的 <strong>UKF 变体（UKF Variants）</strong>。例如在数据库场景中，枚举、列、表与数据库模式都是重要的知识类型，因而都应被定义为 UKF 变体。</p>
+<p>为便于使用，AgentHeaven 提供了一些基础的一级变体（如 KnowledgeUKFT、ExperienceUKFT、DocumentUKFT 等），并内置了若干二级变体（例如面向数据库的变体）继承自这些一级变体；同时也允许用户通过继承内置变体或其他自定义变体来定义自己的二级或三级变体。</p>
+<p>随后，所有领域知识都可以被转换为这些变体的 UKF 实例，并按照 <strong>BaseUKF</strong> 协议支持全部相关操作。</p>
+<p>BaseUKF 的底层处理对终端用户与应用开发者应当是“不可感知”的——他们只需关注对 UKF 实例的高层操作。</p>
+<blockquote>
+<div><p>对贡献者而言，由于 BaseUKF 采用基于类型的适配器系统，你可以轻松实现适配器以修改 BaseUKF 的定义，或将 UKF 连接到你自己的后端。</p>
+<p>具体来说，BaseUKF 模式中的每个字段都关联一个 <strong>UKF 类型（UKF Type）</strong>。若要将 BaseUKF 连接到自定义后端，需要为这些 UKF 类型实现适配器——例如把 <code class="docutils literal notranslate"><span class="pre">UKFShortTextType</span></code> 映射为 SQL 数据库中的 <code class="docutils literal notranslate"><span class="pre">VARCHAR(255)</span></code>，或把 <code class="docutils literal notranslate"><span class="pre">UKFVectorType</span></code> 连接到向量数据库中的 <code class="docutils literal notranslate"><span class="pre">_vec</span></code>。</p>
+<p>对于内置适配器，AgentHeaven 旨在提供统一实现，而不是为每个后端分别实现适配器。因此我们引入了另一层 Connector，通过第三方集成器连接各类后端。例如，SQLAlchemy Connector 连接多种 SQL 数据库，而 LlamaIndex Connector 连接多种向量数据库。</p>
+</div></blockquote>
+<p>至于将原始的领域知识转换为 UKF 实例——这一过程高度依赖具体领域——AgentHeaven 倡导 <strong>Agents for Agents</strong> 的理念：我们为智能体构建知识库，同时也利用智能体来辅助构建它。具体而言，在下一节我们将介绍 <strong>Imitator（模仿器）</strong> 组件，我们认为它是实现智能体系统终身学习的一种通用机制。在我们的演示中，我们展示了如何借助 Imitator 与 AgentHeaven 的工具，在实际场景中快速搭建一个 UKF 抽取智能体。</p>
+<br/>
+</section>
+<section id="id3">
+<h2>3. 模仿器架构<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>从概念上，我们将通过智能体工作流解决的所有任务表述为一个 <strong>函数（Function）</strong>。当前，AgentHeaven 仅考虑既是记录级（record-wise，意指每条输入记录恰对应一条输出记录）又是确定性的函数。需要注意的是，这里的“函数”并不局限于代码中实现的实际函数，也可指代人工标注、LLM 调用或完整的智能体工作流。</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../_static/arch_im_a_zh.png"><img alt="模仿器架构：函数" src="../_static/arch_im_a_zh.png" style="width: 20%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">模仿器架构：函数</span><a class="headerlink" href="#id6" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>为实现终身学习，首先需要跟踪函数调用及其结果。这由 <strong>Cache（缓存）</strong> 组件（更具体地说是 <strong>CallbackCache</strong>）完成，它可以作为装饰器包装任意函数，从而创建一个 <strong>受监控函数（Monitored Function）</strong>。受监控函数在继续接收相同输入并产生相同输出的同时，还会向缓存发出 <strong>CacheEntry</strong> 实例，记录函数名、输入参数、输出结果、时间戳与其他元数据。随后，这些 CacheEntry 可被转换为 UKF 实例（例如 <strong>ExperienceUKFT</strong>），并被存入 <strong>KLBase（知识库）</strong> 进行长期管理。</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../_static/arch_im_b_zh.png"><img alt="模仿器架构：受监控函数" src="../_static/arch_im_b_zh.png" style="width: 35%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">模仿器架构：受监控函数</span><a class="headerlink" href="#id7" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>此时，我们拥有一个包含函数经验（以及可能的其他知识）的 KLBase。下一步便是从 KLBase 中构建一个 <strong>仿函数（Mimic Function）</strong>。仿函数以黑盒形式模拟原始函数：在同样的输入基础上，结合 KLBase，产生与原始函数相似（甚至更优）的输出。</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="../_static/arch_im_c_zh.png"><img alt="模仿器架构：仿函数" src="../_static/arch_im_c_zh.png" style="width: 40%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">模仿器架构：仿函数</span><a class="headerlink" href="#id8" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>仿函数可以通过多种方式实现，例如基于提示工程的上下文学习（ICL）、微调、将 ExperienceUKFT 作为单元测试的代码生成，或基于历史输入/输出的精确/模糊匹配。随后，仿函数可以作为原始函数的即插即用替代品。</p>
+<p>最后，我们可以将函数、监控器（Cache）与仿函数（或仿函数工厂）组装为一个 <strong>Imitator（模仿器）</strong>。模仿器与某个 KLBase 绑定，可按需监控任意函数，在后台安静地收集经验并把它们存入 KLBase。</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="../_static/arch_im_d_zh.png"><img alt="模仿器架构：完整工作流" src="../_static/arch_im_d_zh.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">模仿器架构：完整工作流</span><a class="headerlink" href="#id9" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>在任意时刻，模仿器都可以基于 KLBase 构建一个仿函数。随后可以应用一个 <strong>聚合器（Aggregator）</strong>，将原始函数与不同版本仿函数的输出进行组合，得到最终结果。</p>
+<p>最终，这些聚合后的仿函数可以完全替代原始函数：要么通过引入来自 KLBase 的额外知识或从历史数据中学习而产生更优输出；要么以更低成本产生输出（例如以基于 LLM 的仿函数替代人工标注，甚至以基于代码生成的固定代码片段进一步加速）。</p>
+<blockquote>
+<div><p>目前，AgentHeaven 仅内置了一种模仿器，其聚合器采用级联机制：按顺序依次尝试一系列仿函数，并返回第一个非空输出作为最终结果。仿函数基于 ICL 实现，会使用从 KLBase 检索到的历史经验来构建提示中的上下文示例。</p>
+<p>其他聚合器与仿函数的实现将会在未来提供，敬请期待。</p>
+<p>对开发者而言，你可以继承基础的 Imitator 类，自定义实现 Monitor、Mimic 与 Aggregator 组件以构建你自己的模仿器。</p>
+</div></blockquote>
+<p>需要注意的是，在上述架构图的组件之间存在一些浅色阴影小方块，涉及在缓冲区中处理受监控数据，以及利用 KLBase 构建仿函数的过程。这些流程需要领域特定的逻辑，可能需要人工开发者介入。然而，这里同样可以应用 Agents for Agents 的思路：这些小方块可以被抽象为“函数”，并可以递归地通过模仿器来实现。</p>
+<p>直观来看，凡是可以受益于自动化的任务，总会同时存在共性与差异性。共性（80% 的简单情形）可以由模仿器处理；而差异性（20% 的困难情形）则需要人工介入。若人工介入成本较高，它同样会是一个可以受益于自动化的任务，并再次体现出共性与差异性。通过递归地应用这一原则，我们可以逐步自动化越来越多的任务，在保留人类参与的同时尽量减少人力成本。就像自注意力是 Transformer 的基石一样，我们相信模仿器是智能体系统实现终身学习的基石。</p>
+<br/>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="learning.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">学习 AgentHeaven</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="philosophy.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">理念与愿景</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL团队
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">架构</a><ul>
+<li><a class="reference internal" href="#id2">1. 系统架构</a></li>
+<li><a class="reference internal" href="#ukf">2. 统一知识格式（UKF）架构</a></li>
+<li><a class="reference internal" href="#id3">3. 模仿器架构</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=e4723610"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

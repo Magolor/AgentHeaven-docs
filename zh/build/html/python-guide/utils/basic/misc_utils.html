@@ -1,0 +1,1585 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../../../genindex.html"><link rel="search" title="搜索" href="../../../search.html"><link rel="next" title="数据库工具" href="../db.html"><link rel="prev" title="字符串实用工具" href="str_utils.html">
+        <link rel="prefetch" href="../../../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../../../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>其他实用工具 - AgentHeaven文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven 正在积极开发中，功能可能会发生变化。 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">AgentHeaven文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../introduction/index.html">简介</a><input aria-label="Toggle navigation of 简介" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction/philosophy.html">理念与愿景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction/architecture.html">架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction/learning.html">学习 AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../getting-started/index.html">快速开始</a><input aria-label="Toggle navigation of 快速开始" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html">安装指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/setup.html">设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/5min-quickstart.html">5 分钟快速开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/60min-tutorial.html">60 分钟教程</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../configuration/index.html">配置</a><input aria-label="Toggle navigation of 配置" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../configuration/core.html">核心配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../configuration/llm.html">LLM 配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../configuration/database.html">数据库配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../configuration/vdb.html">向量数据库配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">主指南（Python）</a><input aria-label="Toggle navigation of 主指南（Python）" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">实用工具</a><input aria-label="Toggle navigation of 实用工具" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 current has-children"><a class="reference internal" href="index.html">基础实用工具</a><input aria-label="Toggle navigation of 基础实用工具" checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="config_utils.html">配置管理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hash_utils.html">哈希工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="parallel_utils.html">多线程并行化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jinja_utils.html">模板处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize_utils.html">序列化工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="str_utils.html">字符串实用工具</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">其他实用工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../db.html">数据库工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vdb.html">向量数据库工具</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cache.html">缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ukf/index.html">UKF (通用知识格式)</a><input aria-label="Toggle navigation of UKF (通用知识格式)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ukf/data-types.html">UKF 数据类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ukf/builtin-templates.html">内置模板</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../klengine/index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../klengine/base.html">BaseKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klengine/facet.html">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klengine/daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klengine/vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../toolspec/index.html">工具规范</a><input aria-label="Toggle navigation of 工具规范" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../toolspec/base.html">工具规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../toolspec/builtins.html">内置工具规范</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent.html">智能体</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../cli-guide/index.html">CLI 指南</a><input aria-label="Toggle navigation of CLI 指南" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/repo-management.html">仓库管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/llm-inference.html">LLM 推理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/llm-session.html">LLM 会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/prompt-management.html">提示词管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/knowledge-management.html">知识管理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui-guide/index.html">GUI 使用指南</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../example-applications/index.html">示例应用</a><input aria-label="Toggle navigation of 示例应用" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../example-applications/nl2sql-system.html">NL2SQL 系统</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../roadmap.html">开发规划</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../contribution/index.html">贡献</a><input aria-label="Toggle navigation of 贡献" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/overview.html">贡献概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/for_developers.html">开发者指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/feature_workflow.html">功能添加工作流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/srs.html">简要软件需求（SRS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/ar/index.html">分配需求 (AR)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_index.html">API 参考</a><input aria-label="Toggle navigation of API 参考" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../api/ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../community/index.html">社区与支持</a><input aria-label="Toggle navigation of 社区与支持" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../community/resources.html">社区资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../community/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citation.html">引用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">许可协议</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/zh/source/python-guide/utils/basic/misc_utils.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/zh/source/python-guide/utils/basic/misc_utils.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>其他实用工具<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">misc_utils.py</span></code> 模块提供了一系列不属于其他类别但在 AgentHeaven 代码库中常用的实用工具函数。这些工具包括数据处理、字符串操作和列表操作。</p>
+<br/>
+<section id="id2">
+<h2>1. 命令行工具<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="cmd">
+<h3>1.1. <code class="docutils literal notranslate"><span class="pre">cmd()</span></code> - 命令执行<a class="headerlink" href="#cmd" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cmd()</span></code> 函数为运行系统命令提供统一接口：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.cmd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">cmd</span>
+
+<span class="c1"># 运行简单命令</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cmd</span><span class="p">(</span><span class="s2">&quot;ls -la&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stdout&quot;</span><span class="p">,</span> <span class="s2">&quot;returncode&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;输出: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;stdout&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;返回码: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;returncode&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 使用 sudo 运行</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cmd</span><span class="p">(</span><span class="s2">&quot;apt update&quot;</span><span class="p">,</span> <span class="n">sudo</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;stdout&quot;</span><span class="p">,</span> <span class="s2">&quot;stderr&quot;</span><span class="p">])</span>
+
+<span class="c1"># 不等待运行</span>
+<span class="n">process</span> <span class="o">=</span> <span class="n">cmd</span><span class="p">(</span><span class="s2">&quot;sleep 10&quot;</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># 进程在后台运行...</span>
+
+<span class="c1"># 运行并获取特定输出</span>
+<span class="n">stdout</span> <span class="o">=</span> <span class="n">cmd</span><span class="p">(</span><span class="s2">&quot;echo hello&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="s2">&quot;stdout&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;标准输出: </span><span class="si">{</span><span class="n">stdout</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>1.2. 平台检测<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>该模块提供检测当前平台的功能：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.cmd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_macos</span><span class="p">,</span> <span class="n">is_windows</span><span class="p">,</span> <span class="n">is_linux</span>
+
+<span class="k">if</span> <span class="n">is_macos</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;运行在 macOS 上&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">is_windows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;运行在 Windows 上&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">is_linux</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;运行在 Linux 上&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="browse">
+<h3>1.3. <code class="docutils literal notranslate"><span class="pre">browse()</span></code> - 文件/文件夹浏览器<a class="headerlink" href="#browse" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">browse()</span></code> 函数在系统默认应用程序中打开文件或文件夹：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.cmd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">browse</span>
+
+<span class="c1"># 在默认文本编辑器中打开文件</span>
+<span class="n">browse</span><span class="p">(</span><span class="s2">&quot;/path/to/file.txt&quot;</span><span class="p">)</span>
+
+<span class="c1"># 在文件管理器中打开文件夹</span>
+<span class="n">browse</span><span class="p">(</span><span class="s2">&quot;/path/to/folder&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id4">
+<h2>2. 网络实用工具<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<br/>
+<section id="networkproxy">
+<h3>2.1. <code class="docutils literal notranslate"><span class="pre">NetworkProxy</span></code> - 代理上下文管理器<a class="headerlink" href="#networkproxy" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">NetworkProxy</span></code> 类提供一个健壮的上下文管理器，用于临时设置代理相关的环境变量：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.request_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetworkProxy</span>
+
+<span class="c1"># 临时设置代理</span>
+<span class="k">with</span> <span class="n">NetworkProxy</span><span class="p">(</span>
+    <span class="n">http_proxy</span><span class="o">=</span><span class="s2">&quot;http://proxy.example.com:8080&quot;</span><span class="p">,</span>
+    <span class="n">https_proxy</span><span class="o">=</span><span class="s2">&quot;https://proxy.example.com:8080&quot;</span><span class="p">,</span>
+    <span class="n">no_proxy</span><span class="o">=</span><span class="s2">&quot;localhost,127.0.0.1&quot;</span>
+<span class="p">):</span>
+    <span class="c1"># 使用代理进行网络请求</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+    
+<span class="c1"># 代理设置会自动恢复</span>
+
+<span class="c1"># 临时禁用代理（使用空字符串）</span>
+<span class="k">with</span> <span class="n">NetworkProxy</span><span class="p">(</span><span class="n">http_proxy</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">https_proxy</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="c1"># 网络请求绕过代理</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+
+<span class="c1"># 保留现有设置（使用 None）</span>
+<span class="k">with</span> <span class="n">NetworkProxy</span><span class="p">(</span><span class="n">http_proxy</span><span class="o">=</span><span class="s2">&quot;http://new-proxy.com:8080&quot;</span><span class="p">):</span>
+    <span class="c1"># 仅更改 HTTP 代理，HTTPS 代理保持不变</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>主要特性：</strong></p>
+<ul class="simple">
+<li><p>同时处理大写和小写的代理环境变量（<code class="docutils literal notranslate"><span class="pre">HTTP_PROXY</span></code>、<code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> 等）</p></li>
+<li><p>在退出上下文时正确恢复原始值（包括删除原本不存在的变量）</p></li>
+<li><p>空字符串处理：移除代理变量而不是设置为空</p></li>
+<li><p>支持 <code class="docutils literal notranslate"><span class="pre">NO_PROXY</span></code> 来绕过特定主机的代理</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> 值保留现有的环境设置</p></li>
+</ul>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> (Optional[str])：HTTP 代理 URL。如果为空字符串，将禁用 HTTP 代理。如果为 None，将保留现有设置。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> (Optional[str])：HTTPS 代理 URL。如果为空字符串，将禁用 HTTPS 代理。如果为 None，将保留现有设置。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">no_proxy</span></code> (Optional[str])：逗号分隔的主机列表，用于绕过代理。如果为空字符串，将禁用 no_proxy。如果为 None，将保留现有设置。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>：用于未来扩展的额外关键字参数。</p></li>
+</ul>
+<br/>
+</section>
+<section id="google-download-google-drive">
+<h3>2.2. <code class="docutils literal notranslate"><span class="pre">google_download()</span></code> - Google Drive 下载器<a class="headerlink" href="#google-download-google-drive" title="Link to this heading">¶</a></h3>
+<p>使用文件 ID 从 Google Drive 下载文件。文件必须是公开可访问的：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.request_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">google_download</span>
+
+<span class="c1"># 基本下载</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">google_download</span><span class="p">(</span>
+    <span class="n">file_id</span><span class="o">=</span><span class="s2">&quot;1a2b3c4d5e6f7g8h9i&quot;</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/path/to/save/file.zip&quot;</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">file_path</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloaded to: </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Download failed&quot;</span><span class="p">)</span>
+
+<span class="c1"># 使用代理设置下载</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">google_download</span><span class="p">(</span>
+    <span class="n">file_id</span><span class="o">=</span><span class="s2">&quot;1a2b3c4d5e6f7g8h9i&quot;</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/path/to/save/file.zip&quot;</span><span class="p">,</span>
+    <span class="n">http_proxy</span><span class="o">=</span><span class="s2">&quot;http://proxy.example.com:8080&quot;</span><span class="p">,</span>
+    <span class="n">https_proxy</span><span class="o">=</span><span class="s2">&quot;https://proxy.example.com:8080&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># 传递额外参数给 gdown.download</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">google_download</span><span class="p">(</span>
+    <span class="n">file_id</span><span class="o">=</span><span class="s2">&quot;1a2b3c4d5e6f7g8h9i&quot;</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/path/to/save/file.zip&quot;</span><span class="p">,</span>
+    <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fuzzy</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file_id</span></code> (str)：Google Drive 文件 ID（分享 URL 中 <code class="docutils literal notranslate"><span class="pre">id=</span></code> 后面的部分）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code> (str)：保存下载文件的本地路径。如果父目录不存在，将自动创建。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> (Optional[str])：HTTP 代理 URL。如果为空字符串，禁用 HTTP 代理。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> (Optional[str])：HTTPS 代理 URL。如果为空字符串，禁用 HTTPS 代理。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*args</span></code>：传递给 <code class="docutils literal notranslate"><span class="pre">gdown.download</span></code> 的额外位置参数。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>：传递给 <code class="docutils literal notranslate"><span class="pre">gdown.download</span></code> 的额外关键字参数。</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p>str：下载文件的路径，如果下载失败则返回 None。</p></li>
+</ul>
+<p><strong>依赖要求：</strong></p>
+<ul class="simple">
+<li><p>需要安装 <code class="docutils literal notranslate"><span class="pre">gdown</span></code> 包：<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gdown</span></code></p></li>
+</ul>
+<p><strong>注意：</strong> 该函数会自动创建父目录（如果不存在）。如果未安装 <code class="docutils literal notranslate"><span class="pre">gdown</span></code>，将记录错误并返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
+<br/>
+</section>
+</section>
+<section id="id5">
+<h2>3. 颜色实用工具<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>颜色工具提供为终端输出添加颜色的函数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.color_utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">color_red</span><span class="p">,</span> <span class="n">color_green</span><span class="p">,</span> <span class="n">color_yellow</span><span class="p">,</span> <span class="n">color_blue</span><span class="p">,</span>
+    <span class="n">color_magenta</span><span class="p">,</span> <span class="n">color_cyan</span><span class="p">,</span> <span class="n">color_white</span><span class="p">,</span> <span class="n">color_black</span><span class="p">,</span>
+    <span class="n">color_error</span><span class="p">,</span> <span class="n">color_warning</span><span class="p">,</span> <span class="n">color_success</span><span class="p">,</span> <span class="n">color_info</span>
+<span class="p">)</span>
+
+<span class="c1"># 为文本着色</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">color_red</span><span class="p">(</span><span class="s2">&quot;错误消息&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">color_green</span><span class="p">(</span><span class="s2">&quot;成功消息&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">color_yellow</span><span class="p">(</span><span class="s2">&quot;警告消息&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">color_blue</span><span class="p">(</span><span class="s2">&quot;信息消息&quot;</span><span class="p">))</span>
+
+<span class="c1"># 以颜色打印</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.color_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_error</span><span class="p">,</span> <span class="n">print_success</span><span class="p">,</span> <span class="n">print_warning</span>
+<span class="n">print_error</span><span class="p">(</span><span class="s2">&quot;这是一个错误&quot;</span><span class="p">)</span>
+<span class="n">print_success</span><span class="p">(</span><span class="s2">&quot;这是一次成功&quot;</span><span class="p">)</span>
+<span class="n">print_warning</span><span class="p">(</span><span class="s2">&quot;这是一个警告&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id6">
+<h2>4. 调试实用工具<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h3>4.1. 错误处理<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>调试工具提供更好的错误处理与调试能力：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.debug_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">raise_mismatch</span><span class="p">,</span> <span class="n">error_str</span>
+
+<span class="c1"># 通过更友好的错误消息进行输入校验</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">raise_mismatch</span><span class="p">([</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">],</span> <span class="s2">&quot;appel&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;fruit&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># 输出: 不支持的 fruit &#39;appel&#39;。您是指 &#39;apple&#39; 吗？</span>
+
+<span class="c1"># 获取错误的字符串表示</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">error_msg</span> <span class="o">=</span> <span class="n">error_str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;错误: </span><span class="si">{</span><span class="n">error_msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id8">
+<h3>4.2. 自定义异常<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>该模块提供自定义异常类：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.debug_utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LLMError</span><span class="p">,</span> <span class="n">ToolError</span><span class="p">,</span> <span class="n">DatabaseError</span><span class="p">,</span> <span class="n">AutoFuncError</span><span class="p">,</span> <span class="n">DependencyError</span>
+<span class="p">)</span>
+
+<span class="c1"># 使用自定义异常</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">LLMError</span><span class="p">(</span><span class="s2">&quot;LLM 请求失败&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">LLMError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LLM 错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id9">
+<h2>5. 文件实用工具<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<section id="id10">
+<h3>5.1. 文件操作<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>文件工具提供文件操作的高级函数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">touch_file</span><span class="p">,</span> <span class="n">touch_dir</span><span class="p">,</span> <span class="n">exists_file</span><span class="p">,</span> <span class="n">exists_dir</span><span class="p">,</span>
+    <span class="n">copy_file</span><span class="p">,</span> <span class="n">copy_dir</span><span class="p">,</span> <span class="n">delete_file</span><span class="p">,</span> <span class="n">delete_dir</span>
+<span class="p">)</span>
+
+<span class="c1"># 创建文件和目录</span>
+<span class="n">touch_file</span><span class="p">(</span><span class="s2">&quot;/path/to/file.txt&quot;</span><span class="p">)</span>
+<span class="n">touch_dir</span><span class="p">(</span><span class="s2">&quot;/path/to/directory&quot;</span><span class="p">)</span>
+
+<span class="c1"># 检查是否存在</span>
+<span class="k">if</span> <span class="n">exists_file</span><span class="p">(</span><span class="s2">&quot;/path/to/file.txt&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;文件存在&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">exists_dir</span><span class="p">(</span><span class="s2">&quot;/path/to/directory&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;目录存在&quot;</span><span class="p">)</span>
+
+<span class="c1"># 复制操作</span>
+<span class="n">copy_file</span><span class="p">(</span><span class="s2">&quot;/path/to/source.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/dest.txt&quot;</span><span class="p">)</span>
+<span class="n">copy_dir</span><span class="p">(</span><span class="s2">&quot;/path/to/source_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/dest_dir&quot;</span><span class="p">)</span>
+
+<span class="c1"># 删除操作</span>
+<span class="n">delete_file</span><span class="p">(</span><span class="s2">&quot;/path/to/file.txt&quot;</span><span class="p">)</span>
+<span class="n">delete_dir</span><span class="p">(</span><span class="s2">&quot;/path/to/directory&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id11">
+<h3>5.2. 文件列举<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p>该模块提供用于列出文件与目录的函数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">list_files</span><span class="p">,</span> <span class="n">list_dirs</span><span class="p">,</span> <span class="n">list_paths</span>
+
+<span class="c1"># 列出目录中的文件</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">list_files</span><span class="p">(</span><span class="s2">&quot;/path/to/directory&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;文件: </span><span class="si">{</span><span class="n">files</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 列出目录</span>
+<span class="n">dirs</span> <span class="o">=</span> <span class="n">list_dirs</span><span class="p">(</span><span class="s2">&quot;/path/to/directory&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;目录: </span><span class="si">{</span><span class="n">dirs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 列出所有路径</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="n">list_paths</span><span class="p">(</span><span class="s2">&quot;/path/to/directory&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;所有路径: </span><span class="si">{</span><span class="n">paths</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="folder-diagram">
+<h3>5.3. <code class="docutils literal notranslate"><span class="pre">folder_diagram()</span></code> - 目录树可视化<a class="headerlink" href="#folder-diagram" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">folder_diagram()</span></code> 函数生成层次化的树形结构，展示文件和文件夹组织：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">folder_diagram</span>
+
+<span class="c1"># 基本用法 - 可视化目录</span>
+<span class="n">diagram</span> <span class="o">=</span> <span class="n">folder_diagram</span><span class="p">(</span><span class="s2">&quot;/path/to/project&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diagram</span><span class="p">)</span>
+<span class="c1"># 输出:</span>
+<span class="c1"># project/</span>
+<span class="c1"># ├── docs/</span>
+<span class="c1"># │   └── api.md</span>
+<span class="c1"># ├── src/</span>
+<span class="c1"># │   └── utils.py</span>
+<span class="c1"># ├── main.py</span>
+<span class="c1"># └── README.md</span>
+
+<span class="c1"># 使用注释 - 为文件添加描述</span>
+<span class="n">annotations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;README.md&quot;</span><span class="p">:</span> <span class="s2">&quot;项目文档&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;src/utils.py&quot;</span><span class="p">:</span> <span class="s2">&quot;实用函数&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;main.py&quot;</span><span class="p">:</span> <span class="s2">&quot;入口点&quot;</span>
+<span class="p">}</span>
+<span class="n">diagram</span> <span class="o">=</span> <span class="n">folder_diagram</span><span class="p">(</span><span class="s2">&quot;/path/to/project&quot;</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">annotations</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diagram</span><span class="p">)</span>
+<span class="c1"># 输出:</span>
+<span class="c1"># project/</span>
+<span class="c1"># ├── docs/</span>
+<span class="c1"># │   └── api.md</span>
+<span class="c1"># ├── src/</span>
+<span class="c1"># │   └── utils.py  # 实用函数</span>
+<span class="c1"># ├── main.py  # 入口点</span>
+<span class="c1"># └── README.md  # 项目文档</span>
+
+<span class="c1"># 自定义根节点名称</span>
+<span class="n">diagram</span> <span class="o">=</span> <span class="n">folder_diagram</span><span class="p">(</span><span class="s2">&quot;/path/to/project&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyProject&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diagram</span><span class="p">)</span>
+<span class="c1"># 输出:</span>
+<span class="c1"># MyProject/</span>
+<span class="c1"># ├── ...</span>
+
+<span class="c1"># 单个文件可视化</span>
+<span class="n">diagram</span> <span class="o">=</span> <span class="n">folder_diagram</span><span class="p">(</span><span class="s2">&quot;/path/to/file.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diagram</span><span class="p">)</span>
+<span class="c1"># 输出: file.txt</span>
+
+<span class="c1"># 单个文件使用自定义名称</span>
+<span class="n">diagram</span> <span class="o">=</span> <span class="n">folder_diagram</span><span class="p">(</span><span class="s2">&quot;/path/to/file.txt&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diagram</span><span class="p">)</span>
+<span class="c1"># 输出: config</span>
+
+<span class="c1"># 限制每个目录的条目数（适用于大型目录）</span>
+<span class="n">diagram</span> <span class="o">=</span> <span class="n">folder_diagram</span><span class="p">(</span><span class="s2">&quot;/path/to/large_project&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="c1"># 每个目录最多显示 8 个条目（顶部 4 个，底部 4 个）</span>
+<span class="c1"># 中间的条目会被折叠，显示 &quot;... (omitting N files)&quot; 消息</span>
+</pre></div>
+</div>
+<p><strong>参数：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code> (str)：要构建树形结构的目录路径。也可以是单个文件路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">annotations</span></code> (Optional[Dict[str, str]])：文件级注释，以注释形式显示。键可以是相对于根目录的相对路径，也可以只是文件名。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (Optional[str])：根节点的自定义标签。默认为 <code class="docutils literal notranslate"><span class="pre">path</span></code> 的基本名称。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> (int)：在折叠中间部分之前，每个目录要渲染的最大条目数。默认为 16。建议设置为偶数以实现平衡显示。</p></li>
+</ul>
+<p><strong>返回值：</strong></p>
+<ul class="simple">
+<li><p>str：格式化的树形结构图，包含可选的注释。</p></li>
+</ul>
+<p><strong>特性：</strong></p>
+<ul class="simple">
+<li><p>在每一层中，目录先于文件列出</p></li>
+<li><p>空目录仅显示带有尾部斜杠的目录名称</p></li>
+<li><p>注释以 <code class="docutils literal notranslate"><span class="pre">#</span></code> 前缀的内联注释形式显示</p></li>
+<li><p>可以使用 <code class="docutils literal notranslate"><span class="pre">limit</span></code> 参数折叠大型目录</p></li>
+<li><p>为 LLM 理解资源结构优化的格式</p></li>
+</ul>
+<p><strong>注意：</strong> 此函数特别适用于：</p>
+<ul class="simple">
+<li><p>记录项目结构</p></li>
+<li><p>向 LLM 提供文件组织的上下文</p></li>
+<li><p>生成目录层次结构的可视化表示</p></li>
+<li><p>创建文件系统的可读快照</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="id12">
+<h2>6. 路径实用工具<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<p>路径工具提供路径处理相关函数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.path_utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">pj</span><span class="p">,</span> <span class="n">get_file_ext</span><span class="p">,</span> <span class="n">get_file_name</span><span class="p">,</span> <span class="n">get_file_basename</span><span class="p">,</span> <span class="n">get_file_dir</span>
+<span class="p">)</span>
+
+<span class="c1"># 连接路径</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">pj</span><span class="p">(</span><span class="s2">&quot;home&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;documents&quot;</span><span class="p">,</span> <span class="s2">&quot;file.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;连接后的路径: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 获取文件信息</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="s2">&quot;/path/to/file.txt&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;扩展名: </span><span class="si">{</span><span class="n">get_file_ext</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;名称: </span><span class="si">{</span><span class="n">get_file_name</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;基本名: </span><span class="si">{</span><span class="n">get_file_basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;目录: </span><span class="si">{</span><span class="n">get_file_dir</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 操作文件名</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;无扩展名的名称: </span><span class="si">{</span><span class="n">get_file_name</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="w"> </span><span class="n">ext</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;替换扩展名后的名称: </span><span class="si">{</span><span class="n">get_file_name</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="w"> </span><span class="n">ext</span><span class="o">=</span><span class="s1">&#39;md&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id13">
+<h2>7. 日志实用工具<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<p>日志工具提供彩色日志记录器配置：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.log_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
+
+<span class="c1"># 获取彩色日志记录器</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;信息消息&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;警告消息&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;错误消息&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">&quot;成功消息&quot;</span><span class="p">)</span>  <span class="c1"># 自定义级别</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id14">
+<h2>8. 随机实用工具<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<p>随机工具提供稳定的随机数生成，不会干扰全局随机状态。</p>
+<section id="stable-rnd">
+<h3>8.1. <code class="docutils literal notranslate"><span class="pre">stable_rnd()</span></code> - 稳定随机浮点数<a class="headerlink" href="#stable-rnd" title="Link to this heading">¶</a></h3>
+<p>生成 [0.0, 1.0) 范围内的随机浮点数，不影响全局随机状态：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.rnd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_rnd</span>
+
+<span class="c1"># 使用稳定种子生成随机浮点数</span>
+<span class="n">random_value</span> <span class="o">=</span> <span class="n">stable_rnd</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;随机值: </span><span class="si">{</span><span class="n">random_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 不使用种子（不稳定）</span>
+<span class="n">random_value</span> <span class="o">=</span> <span class="n">stable_rnd</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="stable-rndint">
+<h3>8.2. <code class="docutils literal notranslate"><span class="pre">stable_rndint()</span></code> - 稳定随机整数<a class="headerlink" href="#stable-rndint" title="Link to this heading">¶</a></h3>
+<p>在包含两端的范围内生成随机整数，且不影响全局随机状态：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.rnd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_rndint</span>
+
+<span class="c1"># 生成 1 到 100 之间的随机整数</span>
+<span class="n">random_int</span> <span class="o">=</span> <span class="n">stable_rndint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;随机整数: </span><span class="si">{</span><span class="n">random_int</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="stable-shuffle">
+<h3>8.3. <code class="docutils literal notranslate"><span class="pre">stable_shuffle()</span></code> - 稳定打乱<a class="headerlink" href="#stable-shuffle" title="Link to this heading">¶</a></h3>
+<p>对序列进行打乱，且不影响全局随机状态：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.rnd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_shuffle</span>
+
+<span class="c1"># 打乱列表</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">shuffled</span> <span class="o">=</span> <span class="n">stable_shuffle</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;打乱结果: </span><span class="si">{</span><span class="n">shuffled</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 原地打乱（针对可变序列）</span>
+<span class="n">stable_shuffle</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;原地打乱后: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="stable-split">
+<h3>8.4. <code class="docutils literal notranslate"><span class="pre">stable_split()</span></code> - 稳定序列拆分<a class="headerlink" href="#stable-split" title="Link to this heading">¶</a></h3>
+<p>基于稳定的哈希选择将序列拆分为两部分：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.rnd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_split</span>
+
+<span class="c1"># 将序列拆分为 10% 和 90%</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">smaller</span><span class="p">,</span> <span class="n">larger</span> <span class="o">=</span> <span class="n">stable_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;较小组: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">smaller</span><span class="p">)</span><span class="si">}</span><span class="s2"> 项&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;较大组: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">larger</span><span class="p">)</span><span class="si">}</span><span class="s2"> 项&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="stable-sample">
+<h3>8.5. <code class="docutils literal notranslate"><span class="pre">stable_sample()</span></code> - 稳定采样<a class="headerlink" href="#stable-sample" title="Link to this heading">¶</a></h3>
+<p>以哈希值最小的 n 个元素进行无放回稳定采样：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.rnd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_sample</span>
+
+<span class="c1"># 从序列中采样 5 个元素</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">stable_sample</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;采样项: </span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="stable-rnd-vector">
+<h3>8.6. <code class="docutils literal notranslate"><span class="pre">stable_rnd_vector()</span></code> - 稳定随机向量<a class="headerlink" href="#stable-rnd-vector" title="Link to this heading">¶</a></h3>
+<p>在哈希得到的某一维上赋予较大权重以生成稳定随机向量：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.rnd_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_rnd_vector</span>
+
+<span class="c1"># 生成稳定随机向量（默认 384 维）</span>
+<span class="n">vector</span> <span class="o">=</span> <span class="n">stable_rnd_vector</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;向量维度: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;向量 L2 范数: </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 应约为 ~1.0</span>
+
+<span class="c1"># 指定自定义维度</span>
+<span class="n">vector</span> <span class="o">=</span> <span class="n">stable_rnd_vector</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;自定义维度向量: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 调整主维比例</span>
+<span class="n">vector</span> <span class="o">=</span> <span class="n">stable_rnd_vector</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">384</span><span class="p">,</span> <span class="n">major_ratio</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;更高主维比例的向量&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>该函数适用于在测试中创建模拟的嵌入向量：既确定性又有差异性，且近似真实嵌入的行为。向量通过先 softmax 再 L2 归一化到单位长度。</p>
+<br/>
+</section>
+</section>
+<section id="id15">
+<h2>9. 类型实用工具<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<section id="autotype">
+<h3>9.1. <code class="docutils literal notranslate"><span class="pre">autotype()</span></code> - 自动类型转换<a class="headerlink" href="#autotype" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">autotype()</span></code> 函数会自动将字符串转换为合适的类型：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.type_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">autotype</span>
+
+<span class="c1"># 整数转换</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">))</span>        <span class="c1"># -&gt; 42</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;42.0&quot;</span><span class="p">))</span>      <span class="c1"># -&gt; 42.0</span>
+
+<span class="c1"># 浮点数转换</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;3.14&quot;</span><span class="p">))</span>      <span class="c1"># -&gt; 3.14</span>
+
+<span class="c1"># 布尔值转换</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">))</span>      <span class="c1"># -&gt; True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;false&quot;</span><span class="p">))</span>     <span class="c1"># -&gt; False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">))</span>      <span class="c1"># -&gt; None</span>
+
+<span class="c1"># JSON 转换</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s1">&#39;{&quot;key&quot;: &quot;value&quot;}&#39;</span><span class="p">))</span>  <span class="c1"># -&gt; {&#39;key&#39;: &#39;value&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;[1, 2, 3]&quot;</span><span class="p">))</span>        <span class="c1"># -&gt; [1, 2, 3]</span>
+
+<span class="c1"># 表达式求值</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;1 + 2&quot;</span><span class="p">))</span>      <span class="c1"># -&gt; 3</span>
+
+<span class="c1"># 字符串保留</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;&#39;42&#39;&quot;</span><span class="p">))</span>       <span class="c1"># -&gt; 42</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autotype</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">))</span>      <span class="c1"># -&gt; Hello</span>
+</pre></div>
+</div>
+<p><strong>警告：</strong> 此函数使用 <code class="docutils literal notranslate"><span class="pre">eval()</span></code> 进行表达式求值，如果输入不受控制会带来风险。请谨慎使用。</p>
+<br/>
+</section>
+<section id="jsonschema-type-python-json-schema">
+<h3>9.2. <code class="docutils literal notranslate"><span class="pre">jsonschema_type()</span></code> - Python 类型到 JSON Schema 转换<a class="headerlink" href="#jsonschema-type-python-json-schema" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">jsonschema_type()</span></code> 函数将 Python 类型注解的字符串转换为 JSON Schema 格式：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.type_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">jsonschema_type</span>
+
+<span class="c1"># 简单类型</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">))</span>           <span class="c1"># {&#39;type&#39;: &#39;integer&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">))</span>           <span class="c1"># {&#39;type&#39;: &#39;string&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span>         <span class="c1"># {&#39;type&#39;: &#39;number&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;bool&quot;</span><span class="p">))</span>          <span class="c1"># {&#39;type&#39;: &#39;boolean&#39;}</span>
+
+<span class="c1"># 复杂类型</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;List[str]&quot;</span><span class="p">))</span>     <span class="c1"># {&#39;items&#39;: {&#39;type&#39;: &#39;string&#39;}, &#39;type&#39;: &#39;array&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;Dict[str, int]&quot;</span><span class="p">))</span>  <span class="c1"># {&#39;type&#39;: &#39;object&#39;, &#39;x-original-generic&#39;: &#39;Dict[str, int]&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;Optional[str]&quot;</span><span class="p">))</span> <span class="c1"># {&#39;type&#39;: &#39;string&#39;}</span>
+
+<span class="c1"># 联合类型</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;Union[str, int]&quot;</span><span class="p">))</span>
+<span class="c1"># {&#39;type&#39;: &#39;string&#39;, &#39;x-original-union&#39;: [&#39;str&#39;, &#39;int&#39;]}</span>
+
+<span class="c1"># 字面量类型</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;Literal[&#39;fast&#39;, &#39;slow&#39;]&quot;</span><span class="p">))</span>
+<span class="c1"># {&#39;enum&#39;: [&#39;fast&#39;, &#39;slow&#39;], &#39;type&#39;: &#39;string&#39;}</span>
+
+<span class="c1"># 特殊格式</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;datetime&quot;</span><span class="p">))</span>
+<span class="c1"># {&#39;format&#39;: &#39;date-time&#39;, &#39;type&#39;: &#39;string&#39;}</span>
+
+<span class="c1"># 未知类型默认视为字符串</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonschema_type</span><span class="p">(</span><span class="s2">&quot;CustomType&quot;</span><span class="p">))</span>
+<span class="c1"># {&#39;type&#39;: &#39;string&#39;, &#39;x-original-type&#39;: &#39;CustomType&#39;}</span>
+</pre></div>
+</div>
+<p>该函数有助于根据 Python 类型注解自动生成 JSON Schema，尤其适用于 API 文档与校验。</p>
+<br/>
+</section>
+<section id="parse-function-signature">
+<h3>9.3. <code class="docutils literal notranslate"><span class="pre">parse_function_signature()</span></code> - 提取函数签名<a class="headerlink" href="#parse-function-signature" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">parse_function_signature()</span></code> 函数从 Python 函数签名中提取全面的类型信息与元数据：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.type_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_function_signature</span>
+
+<span class="c1"># 定义一个示例函数</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_func</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example function with typed parameters.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="c1"># 解析签名</span>
+<span class="n">sig_info</span> <span class="o">=</span> <span class="n">parse_function_signature</span><span class="p">(</span><span class="n">example_func</span><span class="p">)</span>
+
+<span class="c1"># 访问参数信息</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="s1">&#39;a&#39;</span><span class="p">][</span><span class="s1">&#39;type_schema&#39;</span><span class="p">])</span>  <span class="c1"># {&#39;type&#39;: &#39;integer&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="s1">&#39;a&#39;</span><span class="p">][</span><span class="s1">&#39;required&#39;</span><span class="p">])</span>     <span class="c1"># True</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="s1">&#39;b&#39;</span><span class="p">][</span><span class="s1">&#39;type_schema&#39;</span><span class="p">])</span>  <span class="c1"># {&#39;type&#39;: &#39;string&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="s1">&#39;b&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">])</span>      <span class="c1"># &#39;default&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="s1">&#39;b&#39;</span><span class="p">][</span><span class="s1">&#39;required&#39;</span><span class="p">])</span>     <span class="c1"># False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">])</span>      <span class="c1"># None</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">][</span><span class="s1">&#39;required&#39;</span><span class="p">])</span>     <span class="c1"># False</span>
+
+<span class="c1"># 检查返回类型</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;return_type&#39;</span><span class="p">])</span>  <span class="c1"># {&#39;type&#39;: &#39;boolean&#39;}</span>
+
+<span class="c1"># 检查可变参数</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;has_var_args&#39;</span><span class="p">])</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;has_var_kwargs&#39;</span><span class="p">])</span>  <span class="c1"># False</span>
+
+<span class="c1"># 含 *args 与 **kwargs 的示例</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">varargs_func</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">sig_info</span> <span class="o">=</span> <span class="n">parse_function_signature</span><span class="p">(</span><span class="n">varargs_func</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;has_var_args&#39;</span><span class="p">])</span>    <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sig_info</span><span class="p">[</span><span class="s1">&#39;has_var_kwargs&#39;</span><span class="p">])</span>  <span class="c1"># True</span>
+</pre></div>
+</div>
+<p>该函数尤其适用于：</p>
+<ul class="simple">
+<li><p>自动生成 API 文档</p></li>
+<li><p>构建动态函数调用接口</p></li>
+<li><p>为函数参数创建校验模式</p></li>
+<li><p>为框架与工具进行函数元数据自省</p></li>
+</ul>
+<p><strong>注意：</strong> 该函数仅分析函数签名本身。若需包含描述的完整 docstring 解析，请使用“函数实用工具”章节中的 <code class="docutils literal notranslate"><span class="pre">parse_docstring()</span></code>。</p>
+<br/>
+</section>
+</section>
+<section id="id16">
+<h2>10. 函数实用工具<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
+<section id="code2func">
+<h3>10.1. <code class="docutils literal notranslate"><span class="pre">code2func()</span></code> - 从代码提取函数<a class="headerlink" href="#code2func" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">code2func()</span></code> 函数从代码片段中提取可调用的函数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.func_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">code2func</span>
+
+<span class="c1"># 从代码字符串中提取函数</span>
+<span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">def add(a: int, b: int) -&gt; int:</span>
+<span class="s2">    return a + b</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">add_func</span> <span class="o">=</span> <span class="n">code2func</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">add_func</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># 5</span>
+
+<span class="c1"># 当存在多个函数时，指定函数名</span>
+<span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">def add(a: int, b: int) -&gt; int:</span>
+<span class="s2">    return a + b</span>
+
+<span class="s2">def multiply(a: int, b: int) -&gt; int:</span>
+<span class="s2">    return a * b</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">add_func</span> <span class="o">=</span> <span class="n">code2func</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">func_name</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
+<span class="n">multiply_func</span> <span class="o">=</span> <span class="n">code2func</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">func_name</span><span class="o">=</span><span class="s2">&quot;multiply&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="parse-docstring">
+<h3>10.2. <code class="docutils literal notranslate"><span class="pre">parse_docstring()</span></code> - 解析文档字符串<a class="headerlink" href="#parse-docstring" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">parse_docstring()</span></code> 函数将函数的文档字符串解析为结构化元数据：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.func_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_docstring</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">example_func</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example function with documentation.</span>
+<span class="sd">    </span>
+<span class="sd">    This function demonstrates docstring parsing.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        a (int): First parameter.</span>
+<span class="sd">        b (str, optional): Second parameter. Defaults to &quot;default&quot;.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if successful.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If a is negative.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; example_func(5)</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="c1"># 解析文档字符串</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">parse_docstring</span><span class="p">(</span><span class="n">example_func</span><span class="p">)</span>
+
+<span class="c1"># 访问解析结果</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">])</span>
+<span class="c1"># Example function with documentation.</span>
+<span class="c1">#</span>
+<span class="c1"># This function demonstrates docstring parsing.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">])</span>
+<span class="c1"># {&#39;properties&#39;: {&#39;a&#39;: {&#39;description&#39;: &#39;First parameter.&#39;, &#39;type&#39;: &#39;integer&#39;},</span>
+<span class="c1">#                 &#39;b&#39;: {&#39;default&#39;: &#39;default&#39;,</span>
+<span class="c1">#                       &#39;description&#39;: &#39;Second parameter. Defaults to &quot;default&quot;.&#39;,</span>
+<span class="c1">#                       &#39;type&#39;: &#39;string&#39;}},</span>
+<span class="c1">#  &#39;required&#39;: [&#39;a&#39;],</span>
+<span class="c1">#  &#39;type&#39;: &#39;object&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;returns&#39;</span><span class="p">])</span>
+<span class="c1"># {&#39;properties&#39;: {&#39;result&#39;: {&#39;description&#39;: &#39;True if successful.&#39;,</span>
+<span class="c1">#                            &#39;type&#39;: &#39;boolean&#39;}},</span>
+<span class="c1">#  &#39;type&#39;: &#39;object&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;raises&#39;</span><span class="p">])</span>
+<span class="c1"># [{&#39;description&#39;: &#39;If a is negative.&#39;, &#39;type&#39;: &#39;ValueError&#39;}]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;examples&#39;</span><span class="p">])</span>
+<span class="c1"># [{&#39;description&#39;: &#39;&gt;&gt;&gt; example_func(5)\nTrue&#39;, &#39;snippet&#39;: None}]</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="synthesize-docstring">
+<h3>10.3. <code class="docutils literal notranslate"><span class="pre">synthesize_docstring()</span></code> - 生成文档字符串<a class="headerlink" href="#synthesize-docstring" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">synthesize_docstring()</span></code> 函数根据工具规范（ToolSpec）的属性生成文档字符串：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.func_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">synthesize_docstring</span>
+
+<span class="c1"># 定义输入与输出模式</span>
+<span class="n">input_schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;User name&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;User age&quot;</span><span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">output_schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Greeting message&quot;</span><span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># 生成文档字符串</span>
+<span class="n">docstring</span> <span class="o">=</span> <span class="n">synthesize_docstring</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Greet a user by name and optionally age.&quot;</span><span class="p">,</span>
+    <span class="n">input_schema</span><span class="o">=</span><span class="n">input_schema</span><span class="p">,</span>
+    <span class="n">output_schema</span><span class="o">=</span><span class="n">output_schema</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;google&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">docstring</span><span class="p">)</span>
+<span class="c1"># Greet a user by name and optionally age.</span>
+<span class="c1">#</span>
+<span class="c1"># Args:</span>
+<span class="c1">#     name (str): User name</span>
+<span class="c1">#     age (int): User age Optional.</span>
+<span class="c1">#</span>
+<span class="c1"># Returns:</span>
+<span class="c1">#     str: Greeting message</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="synthesize-def">
+<h3>10.4. <code class="docutils literal notranslate"><span class="pre">synthesize_def()</span></code> - 生成函数定义<a class="headerlink" href="#synthesize-def" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">synthesize_def()</span></code> 函数基于模式元数据生成完整的 Python 函数定义：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.func_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">synthesize_def</span>
+
+<span class="c1"># 生成函数定义</span>
+<span class="n">func_def</span> <span class="o">=</span> <span class="n">synthesize_def</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;greet_user&quot;</span><span class="p">,</span>
+    <span class="n">input_schema</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="n">output_schema</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">docstring</span><span class="o">=</span><span class="s2">&quot;Greet a user.&quot;</span><span class="p">,</span>
+    <span class="n">code</span><span class="o">=</span><span class="s2">&quot;return f&#39;Hello, </span><span class="si">{name}</span><span class="s2">!&#39;&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">func_def</span><span class="p">)</span>
+<span class="c1"># def greet_user(name: str, age: int = 18) -&gt; str:</span>
+<span class="c1">#     &quot;&quot;&quot;\</span>
+<span class="c1">#     Greet a user.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     return f&#39;Hello, {name}!&#39;</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="synthesize-signature">
+<h3>10.5. <code class="docutils literal notranslate"><span class="pre">synthesize_signature()</span></code> - 生成函数调用签名<a class="headerlink" href="#synthesize-signature" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">synthesize_signature()</span></code> 函数根据给定的参数与默认值生成 Python 函数调用签名：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.func_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">synthesize_signature</span>
+
+<span class="c1"># 生成函数调用签名</span>
+<span class="n">signature</span> <span class="o">=</span> <span class="n">synthesize_signature</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;greet_user&quot;</span><span class="p">,</span>
+    <span class="n">input_schema</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>  <span class="c1"># greet_user(name=&#39;Alice&#39;, age=18)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id17">
+<h2>11. 解析实用工具<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h2>
+<section id="parse-keys">
+<h3>11.1. <code class="docutils literal notranslate"><span class="pre">parse_keys()</span></code> - 解析键值对<a class="headerlink" href="#parse-keys" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">parse_keys()</span></code> 函数解析以键值对格式返回的 LLM 响应中的键：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.parser_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_keys</span>
+
+<span class="c1"># 解析包含键值对的响应</span>
+<span class="n">response</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">name: John Doe</span>
+<span class="s2">age: 30</span>
+<span class="s2">city: New York</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># 解析为字典</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">parse_keys</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;dict&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># {&#39;name&#39;: &#39;John Doe&#39;, &#39;age&#39;: &#39;30\ncity: New York&#39;, &#39;height&#39;: None}</span>
+
+<span class="c1"># 解析为列表</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">parse_keys</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;list&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># [{&#39;key&#39;: &#39;name&#39;, &#39;value&#39;: &#39;John Doe&#39;}, {&#39;key&#39;: &#39;age&#39;, &#39;value&#39;: &#39;30\ncity: New York&#39;}]</span>
+
+<span class="c1"># 解析所有键（keys=None）</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">parse_keys</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;dict&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># {&#39;name&#39;: &#39;John Doe&#39;, &#39;age&#39;: &#39;30&#39;, &#39;city&#39;: &#39;New York&#39;}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="parse-md-markdown">
+<h3>11.2. <code class="docutils literal notranslate"><span class="pre">parse_md()</span></code> - 解析类 Markdown 块<a class="headerlink" href="#parse-md-markdown" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">parse_md()</span></code> 函数将类似 Markdown 的字符串解析为结构化块，包括类 XML 标签与围栏代码块：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.parser_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_md</span>
+
+<span class="c1"># 解析混合内容</span>
+<span class="n">response</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;think&gt;Let me analyze this...&lt;/think&gt;</span>
+<span class="s2">Some textual output here.</span>
+<span class="s2">```sql</span>
+<span class="s2">SELECT * FROM users WHERE age &gt; 18;</span>
+<span class="s2">```</span>
+<span class="s2">&lt;rating&gt;</span>
+<span class="s2">```json</span>
+<span class="s2">{&quot;score&quot;: 5, &quot;confidence&quot;: 0.95}</span>
+<span class="s2">```</span>
+<span class="s2">&lt;/rating&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># 解析为字典（扁平）</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">parse_md</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;dict&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># {&#39;rating&#39;: &#39;```json\n{&quot;score&quot;: 5, &quot;confidence&quot;: 0.95}\n```&#39;,</span>
+<span class="c1">#  &#39;sql&#39;: &#39;SELECT * FROM users WHERE age &gt; 18;&#39;,</span>
+<span class="c1">#  &#39;text&#39;: &#39;Some textual output here.&#39;,</span>
+<span class="c1">#  &#39;think&#39;: &#39;Let me analyze this...&#39;}</span>
+
+<span class="c1"># 递归解析</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">parse_md</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">recurse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;dict&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># {&#39;rating.json&#39;: &#39;{&quot;score&quot;: 5, &quot;confidence&quot;: 0.95}&#39;,</span>
+<span class="c1">#  &#39;sql&#39;: &#39;SELECT * FROM users WHERE age &gt; 18;&#39;,</span>
+<span class="c1">#  &#39;text&#39;: &#39;Some textual output here.&#39;,</span>
+<span class="c1">#  &#39;think.text&#39;: &#39;Let me analyze this...&#39;}</span>
+
+<span class="c1"># 解析为列表</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">parse_md</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;list&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># [{&#39;key&#39;: &#39;think&#39;, &#39;value&#39;: &#39;Let me analyze this...&#39;},</span>
+<span class="c1">#  {&#39;key&#39;: &#39;text&#39;, &#39;value&#39;: &#39;Some textual output here.&#39;},</span>
+<span class="c1">#  {&#39;key&#39;: &#39;sql&#39;, &#39;value&#39;: &#39;SELECT * FROM users WHERE age &gt; 18;&#39;},</span>
+<span class="c1">#  {&#39;key&#39;: &#39;rating&#39;, &#39;value&#39;: &#39;```json\n{&quot;score&quot;: 5, &quot;confidence&quot;: 0.95}\n```&#39;}]</span>
+</pre></div>
+</div>
+<p><strong>特性：</strong></p>
+<ul class="simple">
+<li><p>提取类 XML 标签：<code class="docutils literal notranslate"><span class="pre">&lt;tag&gt;...&lt;/tag&gt;</span></code></p></li>
+<li><p>提取围栏代码块：<code class="docutils literal notranslate"><span class="pre">```language\n...\n```</span></code>（language 可选）</p></li>
+<li><p>未提供语言时默认使用 “markdown”</p></li>
+<li><p>支持对嵌套结构进行递归解析</p></li>
+<li><p>以列表或字典形式返回结构化数据</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="id18">
+<h2>12. 其他杂项实用工具<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
+<section id="unique">
+<h3>12.1. <code class="docutils literal notranslate"><span class="pre">unique()</span></code> - 获取唯一元素<a class="headerlink" href="#unique" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">unique()</span></code> 函数在保留顺序的前提下，从可迭代对象中返回唯一元素列表：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.misc_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">unique</span>
+
+<span class="c1"># 基本用法</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># [1, 2, 3, 4, 5]</span>
+
+<span class="c1"># 使用自定义键函数</span>
+<span class="n">users</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">28</span><span class="p">}</span>
+<span class="p">]</span>
+<span class="n">unique_users</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="n">users</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_users</span><span class="p">))</span>  <span class="c1"># 2 (Alice 和 Bob，不区分大小写)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="lflat">
+<h3>12.2. <code class="docutils literal notranslate"><span class="pre">lflat()</span></code> - 列表扁平化<a class="headerlink" href="#lflat" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">lflat()</span></code> 函数用于将嵌套可迭代对象扁平化（深度 2 层）：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.misc_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">lflat</span>
+
+<span class="c1"># 基本扁平化</span>
+<span class="n">nested</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="n">flattened</span> <span class="o">=</span> <span class="n">lflat</span><span class="p">(</span><span class="n">nested</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flattened</span><span class="p">)</span>  <span class="c1"># [1, 2, 3, 4, 5, 6]</span>
+
+<span class="c1"># 混合类型</span>
+<span class="n">mixed</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]]</span>
+<span class="n">flattened</span> <span class="o">=</span> <span class="n">lflat</span><span class="p">(</span><span class="n">mixed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flattened</span><span class="p">)</span>  <span class="c1"># [1, &quot;a&quot;, 2, &quot;b&quot;, 3, &quot;c&quot;]</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id19">
+<h2>拓展阅读<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>提示：</strong> 有关 AgentHeaven 中实用工具的更多信息，请参见：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../index.html"><span class="std std-doc">实用工具</span></a> - 所有便捷的 Python 实用工具</p></li>
+</ul>
+</div></blockquote>
+<br/>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../db.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">数据库工具</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="str_utils.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">字符串实用工具</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL团队
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">其他实用工具</a><ul>
+<li><a class="reference internal" href="#id2">1. 命令行工具</a><ul>
+<li><a class="reference internal" href="#cmd">1.1. <code class="docutils literal notranslate"><span class="pre">cmd()</span></code> - 命令执行</a></li>
+<li><a class="reference internal" href="#id3">1.2. 平台检测</a></li>
+<li><a class="reference internal" href="#browse">1.3. <code class="docutils literal notranslate"><span class="pre">browse()</span></code> - 文件/文件夹浏览器</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">2. 网络实用工具</a><ul>
+<li><a class="reference internal" href="#networkproxy">2.1. <code class="docutils literal notranslate"><span class="pre">NetworkProxy</span></code> - 代理上下文管理器</a></li>
+<li><a class="reference internal" href="#google-download-google-drive">2.2. <code class="docutils literal notranslate"><span class="pre">google_download()</span></code> - Google Drive 下载器</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">3. 颜色实用工具</a></li>
+<li><a class="reference internal" href="#id6">4. 调试实用工具</a><ul>
+<li><a class="reference internal" href="#id7">4.1. 错误处理</a></li>
+<li><a class="reference internal" href="#id8">4.2. 自定义异常</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">5. 文件实用工具</a><ul>
+<li><a class="reference internal" href="#id10">5.1. 文件操作</a></li>
+<li><a class="reference internal" href="#id11">5.2. 文件列举</a></li>
+<li><a class="reference internal" href="#folder-diagram">5.3. <code class="docutils literal notranslate"><span class="pre">folder_diagram()</span></code> - 目录树可视化</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id12">6. 路径实用工具</a></li>
+<li><a class="reference internal" href="#id13">7. 日志实用工具</a></li>
+<li><a class="reference internal" href="#id14">8. 随机实用工具</a><ul>
+<li><a class="reference internal" href="#stable-rnd">8.1. <code class="docutils literal notranslate"><span class="pre">stable_rnd()</span></code> - 稳定随机浮点数</a></li>
+<li><a class="reference internal" href="#stable-rndint">8.2. <code class="docutils literal notranslate"><span class="pre">stable_rndint()</span></code> - 稳定随机整数</a></li>
+<li><a class="reference internal" href="#stable-shuffle">8.3. <code class="docutils literal notranslate"><span class="pre">stable_shuffle()</span></code> - 稳定打乱</a></li>
+<li><a class="reference internal" href="#stable-split">8.4. <code class="docutils literal notranslate"><span class="pre">stable_split()</span></code> - 稳定序列拆分</a></li>
+<li><a class="reference internal" href="#stable-sample">8.5. <code class="docutils literal notranslate"><span class="pre">stable_sample()</span></code> - 稳定采样</a></li>
+<li><a class="reference internal" href="#stable-rnd-vector">8.6. <code class="docutils literal notranslate"><span class="pre">stable_rnd_vector()</span></code> - 稳定随机向量</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">9. 类型实用工具</a><ul>
+<li><a class="reference internal" href="#autotype">9.1. <code class="docutils literal notranslate"><span class="pre">autotype()</span></code> - 自动类型转换</a></li>
+<li><a class="reference internal" href="#jsonschema-type-python-json-schema">9.2. <code class="docutils literal notranslate"><span class="pre">jsonschema_type()</span></code> - Python 类型到 JSON Schema 转换</a></li>
+<li><a class="reference internal" href="#parse-function-signature">9.3. <code class="docutils literal notranslate"><span class="pre">parse_function_signature()</span></code> - 提取函数签名</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id16">10. 函数实用工具</a><ul>
+<li><a class="reference internal" href="#code2func">10.1. <code class="docutils literal notranslate"><span class="pre">code2func()</span></code> - 从代码提取函数</a></li>
+<li><a class="reference internal" href="#parse-docstring">10.2. <code class="docutils literal notranslate"><span class="pre">parse_docstring()</span></code> - 解析文档字符串</a></li>
+<li><a class="reference internal" href="#synthesize-docstring">10.3. <code class="docutils literal notranslate"><span class="pre">synthesize_docstring()</span></code> - 生成文档字符串</a></li>
+<li><a class="reference internal" href="#synthesize-def">10.4. <code class="docutils literal notranslate"><span class="pre">synthesize_def()</span></code> - 生成函数定义</a></li>
+<li><a class="reference internal" href="#synthesize-signature">10.5. <code class="docutils literal notranslate"><span class="pre">synthesize_signature()</span></code> - 生成函数调用签名</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id17">11. 解析实用工具</a><ul>
+<li><a class="reference internal" href="#parse-keys">11.1. <code class="docutils literal notranslate"><span class="pre">parse_keys()</span></code> - 解析键值对</a></li>
+<li><a class="reference internal" href="#parse-md-markdown">11.2. <code class="docutils literal notranslate"><span class="pre">parse_md()</span></code> - 解析类 Markdown 块</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id18">12. 其他杂项实用工具</a><ul>
+<li><a class="reference internal" href="#unique">12.1. <code class="docutils literal notranslate"><span class="pre">unique()</span></code> - 获取唯一元素</a></li>
+<li><a class="reference internal" href="#lflat">12.2. <code class="docutils literal notranslate"><span class="pre">lflat()</span></code> - 列表扁平化</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id19">拓展阅读</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=e4723610"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../../../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../../../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../../../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

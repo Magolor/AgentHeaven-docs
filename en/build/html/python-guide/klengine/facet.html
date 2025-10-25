@@ -1,0 +1,1592 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="DAACKLEngine" href="daac.html"><link rel="prev" title="BaseKLEngine" href="base.html">
+        <link rel="prefetch" href="../../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>FacetKLEngine - AgentHeaven Doc</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven is in active development. Features may change. 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">AgentHeaven Doc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/index.html">Introduction</a><input aria-label="Toggle navigation of Introduction" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/philosophy.html">Philosophy &amp; Vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/architecture.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/learning.html">Learning AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a><input aria-label="Toggle navigation of Getting Started" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/installation.html">Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/setup.html">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/5min-quickstart.html">5min Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started/60min-tutorial.html">60min Tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../configuration/index.html">Configuration</a><input aria-label="Toggle navigation of Configuration" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/core.html">Core Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/llm.html">LLM Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/database.html">Database Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/vdb.html">Vector Database Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Main Guide (Python)</a><input aria-label="Toggle navigation of Main Guide (Python)" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../utils/basic/index.html">Basic Utilities</a><input aria-label="Toggle navigation of Basic Utilities" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/config_utils.html">Configuration Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/hash_utils.html">Hashing Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/parallel_utils.html">Multi-Thread Parallelization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/jinja_utils.html">Template Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/serialize_utils.html">Serialization Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/str_utils.html">String Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/basic/misc_utils.html">Miscellaneous Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/db.html">Database Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/vdb.html">Vector Database Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ukf/index.html">UKF (Unified Knowledge Format)</a><input aria-label="Toggle navigation of UKF (Unified Knowledge Format)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/data-types.html">UKF Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ukf/builtin-templates.html">Built-in Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="base.html">BaseKLEngine</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../toolspec/index.html">ToolSpec</a><input aria-label="Toggle navigation of ToolSpec" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../toolspec/base.html">ToolSpec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolspec/builtins.html">Built-in ToolSpecs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../agent.html">Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cli-guide/index.html">CLI Guide</a><input aria-label="Toggle navigation of CLI Guide" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/repo-management.html">Repo Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/llm-inference.html">LLM Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/llm-session.html">LLM Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/prompt-management.html">Prompt Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli-guide/knowledge-management.html">Knowledge Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui-guide/index.html">GUI Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../example-applications/index.html">Example Applications</a><input aria-label="Toggle navigation of Example Applications" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../example-applications/nl2sql-system.html">NL2SQL System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../contribution/index.html">Contribution</a><input aria-label="Toggle navigation of Contribution" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/overview.html">Contribution Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/for_developers.html">Guide for Developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/feature_workflow.html">Feature Addition Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution/srs.html">Simple SRS</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../contribution/ar/index.html">Allocated Requirements (AR)</a><input aria-label="Toggle navigation of Allocated Requirements (AR)" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/base_ukf.html">BaseUKF - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/cache.html">Cache - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/llm.html">LLM - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/prompts.html">Prompts - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/database.html">Database - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/klstore.html">KLStore - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/klengine.html">KLEngine - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/klbase.html">KLBase - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/agent.html">Agent - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/sie.html">Structured Information Extraction (SIE) - Allocated Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contribution/ar/cli.html">Command Line Interface (CLI) - Allocated Requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api_index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api/ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../api/ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../api/ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../api/ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../api/ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../community/index.html">Community &amp; Support</a><input aria-label="Toggle navigation of Community &amp; Support" class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" role="switch" type="checkbox"/><label for="toctree-checkbox-36"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../community/resources.html">Community Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation.html">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/en/source/python-guide/klengine/facet.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/en/source/python-guide/klengine/facet.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="facetklengine">
+<h1>FacetKLEngine<a class="headerlink" href="#facetklengine" title="Link to this heading">¶</a></h1>
+<p>FacetKLEngine is a database-backed <a class="reference internal" href="base.html"><span class="std std-doc">BaseKLEngine</span></a> implementation that enables structured filtering and faceted search over knowledge objects using SQL predicates. It leverages relational database capabilities to provide efficient, flexible querying through <code class="docutils literal notranslate"><span class="pre">Facet</span></code> operators—a powerful abstraction for building complex filter conditions.</p>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<section id="what-is-faceted-search">
+<h3>1.1. What is Faceted Search?<a class="headerlink" href="#what-is-faceted-search" title="Link to this heading">¶</a></h3>
+<p><strong>Faceted search</strong> is a query technique that allows users to filter datasets along multiple independent dimensions (facets). Each facet represents a categorical or continuous attribute that can be filtered, combined, and refined to narrow down search results.</p>
+<p><strong>FacetKLEngine</strong> brings this approach to knowledge retrieval by:</p>
+<ul class="simple">
+<li><p><strong>Input</strong>: Filter conditions expressed as <code class="docutils literal notranslate"><span class="pre">Facet</span></code> operators (equality, comparisons, patterns, logical combinations)</p></li>
+<li><p><strong>Indexed Data</strong>: Knowledge objects stored in relational database tables (via <a class="reference internal" href="../klstore/database.html"><span class="std std-doc">DatabaseKLStore</span></a>)</p></li>
+<li><p><strong>Output</strong>: Knowledge objects matching all specified filter criteria</p></li>
+<li><p><strong>Performance</strong>: Leverages database indexes and query optimization for fast filtering</p></li>
+</ul>
+<p>Unlike semantic search (vector similarity) or pattern matching (DAAC), faceted search excels at <strong>precise, structured filtering</strong> based on known attributes and relationships.</p>
+<br/>
+</section>
+<section id="when-to-use-facetklengine">
+<h3>1.2. When to Use FacetKLEngine<a class="headerlink" href="#when-to-use-facetklengine" title="Link to this heading">¶</a></h3>
+<p><strong>Ideal Use Cases:</strong></p>
+<ul class="simple">
+<li><p><strong>Structured Data Filtering</strong>: Query knowledge objects by type, category, status, timestamps, priority, or custom metadata fields</p></li>
+<li><p><strong>Multi-Criteria Search</strong>: Combine multiple filter conditions (AND/OR/NOT logic) to refine results</p></li>
+<li><p><strong>Range Queries</strong>: Filter numeric or datetime fields within specific ranges</p></li>
+<li><p><strong>Pattern Matching</strong>: Use SQL LIKE/ILIKE for text pattern matching</p></li>
+<li><p><strong>Dimensional Filtering</strong>: Query across dimension tables (e.g., tags, metadata stored in separate tables with foreign keys)</p></li>
+<li><p><strong>Database-Native Operations</strong>: Leverage existing database infrastructure, indexes, and query optimization</p></li>
+</ul>
+<p><strong>Not Suitable For:</strong></p>
+<ul class="simple">
+<li><p><strong>Semantic Search</strong>: Use <a class="reference internal" href="vector.html"><span class="std std-doc">VectorKLEngine</span></a> for meaning-based similarity queries</p></li>
+<li><p><strong>Entity Recognition</strong>: Use <a class="reference internal" href="daac.html"><span class="std std-doc">DAACKLEngine</span></a> for finding known entity strings in text</p></li>
+<li><p><strong>Full-Text Search</strong>: Use dedicated full-text search engines for document content matching</p></li>
+<li><p><strong>Fuzzy Matching</strong>: FacetKLEngine performs exact matching (after SQL pattern operators)</p></li>
+</ul>
+<br/>
+</section>
+<section id="key-features">
+<h3>1.3. Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Rich Filter Operators</strong>: Comprehensive set of operators including comparison (LT, LTE, GT, GTE), pattern matching (LIKE, ILIKE), logical operators (AND, OR, NOT), range queries (BETWEEN), and list membership (IN)</p></li>
+<li><p><strong>Dimension Table Support</strong>: Query across dimension tables using the NF (Normalized Form) operator for complex relationships</p></li>
+<li><p><strong>Two Operating Modes</strong>:</p>
+<ul>
+<li><p><strong>In-Place Mode</strong> (<code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>): Directly query the attached DatabaseKLStore with zero overhead</p></li>
+<li><p><strong>Non-In-Place Mode</strong> (<code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>): Create an optimized copy with schema subsetting for faster queries</p></li>
+</ul>
+</li>
+<li><p><strong>Global Facets</strong>: Apply persistent filter conditions across all searches</p></li>
+<li><p><strong>SQL Integration</strong>: Direct access to generated SQL for debugging and optimization</p></li>
+<li><p><strong>Type Safety</strong>: Automatic validation of filter fields against database schema</p></li>
+<li><p><strong>Database Agnostic</strong>: Works with PostgreSQL, MySQL, SQLite, DuckDB through SQLAlchemy</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="understanding-facet-operators">
+<h2>2. Understanding Facet Operators<a class="headerlink" href="#understanding-facet-operators" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Facet</span></code> class provides a fluent API for building filter expressions that translate to SQL WHERE clauses. All operators are composable and can be nested arbitrarily.</p>
+<section id="comparison-operators">
+<h3>2.1. Comparison Operators<a class="headerlink" href="#comparison-operators" title="Link to this heading">¶</a></h3>
+<p>These operators compare field values against constants:</p>
+<p><strong>Equality and Inequality:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+
+<span class="c1"># Exact match (field == value)</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;documentation&quot;</span><span class="p">)</span>
+<span class="c1"># Generated: {&quot;FIELD:type&quot;: {&quot;==&quot;: &quot;documentation&quot;}}</span>
+
+<span class="c1"># Not equal (field != value) - use NOT wrapper</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="s2">&quot;deleted&quot;</span><span class="p">))</span>
+<span class="c1"># Generated: {&quot;FIELD:status&quot;: {&quot;NOT&quot;: {&quot;==&quot;: &quot;deleted&quot;}}}</span>
+</pre></div>
+</div>
+<p><strong>Numeric Comparisons:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Less than</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LT</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1"># Generated: {&quot;FIELD:priority&quot;: {&quot;&lt;&quot;: 5}}</span>
+
+<span class="c1"># Less than or equal</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LTE</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="c1"># Generated: {&quot;FIELD:priority&quot;: {&quot;&lt;=&quot;: 10}}</span>
+
+<span class="c1"># Greater than</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GT</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
+<span class="c1"># Generated: {&quot;FIELD:score&quot;: {&quot;&gt;&quot;: 80}}</span>
+
+<span class="c1"># Greater than or equal</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
+<span class="c1"># Generated: {&quot;FIELD:score&quot;: {&quot;&gt;=&quot;: 90}}</span>
+</pre></div>
+</div>
+<p><strong>DateTime Comparisons:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># Filter by date range</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">created_at</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="c1"># Generated: {&quot;FIELD:created_at&quot;: {&quot;&gt;=&quot;: datetime.datetime(2024, 1, 1)}}</span>
+
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">updated_at</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LTE</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)))</span>
+<span class="c1"># Generated: {&quot;FIELD:updated_at&quot;: {&quot;&lt;=&quot;: datetime.datetime(2024, 12, 31)}}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="pattern-matching-operators">
+<h3>2.2. Pattern Matching Operators<a class="headerlink" href="#pattern-matching-operators" title="Link to this heading">¶</a></h3>
+<p>SQL LIKE operators for text pattern matching:</p>
+<p><strong>Case-Sensitive Pattern Matching (LIKE):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Wildcard matching</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;%Python%&quot;</span><span class="p">))</span>  <span class="c1"># Contains &quot;Python&quot;</span>
+<span class="c1"># Generated: {&quot;FIELD:name&quot;: {&quot;LIKE&quot;: &quot;%Python%&quot;}}</span>
+
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;Python%&quot;</span><span class="p">))</span>   <span class="c1"># Starts with &quot;Python&quot;</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;%Tutorial&quot;</span><span class="p">))</span>  <span class="c1"># Ends with &quot;Tutorial&quot;</span>
+</pre></div>
+</div>
+<p><strong>Case-Insensitive Pattern Matching (ILIKE):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Case-insensitive search</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">ILIKE</span><span class="p">(</span><span class="s2">&quot;%python%&quot;</span><span class="p">))</span>  <span class="c1"># Matches &quot;Python&quot;, &quot;PYTHON&quot;, &quot;python&quot;</span>
+<span class="c1"># Generated: {&quot;FIELD:description&quot;: {&quot;ILIKE&quot;: &quot;%python%&quot;}}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="range-operators">
+<h3>2.3. Range Operators<a class="headerlink" href="#range-operators" title="Link to this heading">¶</a></h3>
+<p>Filter values within numeric or datetime ranges:</p>
+<p><strong>BETWEEN Operator:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inclusive range [min, max]</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="c1"># Generated: {&quot;FIELD:score&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: 0}, {&quot;&lt;=&quot;: 100}]}}</span>
+
+<span class="c1"># Open-ended ranges with None</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">price</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>  <span class="c1"># &gt;= 100 (no upper limit)</span>
+<span class="c1"># Generated: {&quot;FIELD:price&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: 100}, {&quot;&lt;=&quot;: inf}]}}</span>
+
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">65</span><span class="p">))</span>     <span class="c1"># &lt;= 65 (no lower limit)</span>
+<span class="c1"># Generated: {&quot;FIELD:age&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: -inf}, {&quot;&lt;=&quot;: 65}]}}</span>
+</pre></div>
+</div>
+<p><strong>Tuple Shorthand:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tuples automatically convert to BETWEEN</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="c1"># Equivalent to: Facet.expr(priority=Facet.BETWEEN(1, 10))</span>
+<span class="c1"># Generated: {&quot;FIELD:priority&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: 1}, {&quot;&lt;=&quot;: 10}]}}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="logical-operators">
+<h3>2.4. Logical Operators<a class="headerlink" href="#logical-operators" title="Link to this heading">¶</a></h3>
+<p>Combine multiple conditions with boolean logic:</p>
+<p><strong>AND Operator (Logical Conjunction):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># All conditions must be true</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="n">Facet</span><span class="o">.</span><span class="n">LTE</span><span class="p">(</span><span class="mi">100</span><span class="p">)]))</span>
+<span class="c1"># Generated: {&quot;FIELD:score&quot;: {&quot;AND&quot;: [{&quot;&gt;=&quot;: 80}, {&quot;&lt;=&quot;: 100}]}}</span>
+<span class="c1"># SQL: score &gt;= 80 AND score &lt;= 100</span>
+</pre></div>
+</div>
+<p><strong>OR Operator (Logical Disjunction):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># At least one condition must be true</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span> <span class="s2">&quot;reviewing&quot;</span><span class="p">]))</span>
+<span class="c1"># Generated: {&quot;FIELD:status&quot;: {&quot;OR&quot;: [{&quot;IN&quot;: [&quot;active&quot;, &quot;pending&quot;, &quot;reviewing&quot;]}]}}</span>
+<span class="c1"># SQL: status IN (&#39;active&#39;, &#39;pending&#39;, &#39;reviewing&#39;)</span>
+
+<span class="c1"># Mix operators in OR</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;urgent%&quot;</span><span class="p">)]))</span>
+<span class="c1"># Generated: {&quot;FIELD:priority&quot;: {&quot;OR&quot;: [{&quot;&gt;=&quot;: 8}, {&quot;LIKE&quot;: &quot;urgent%&quot;}]}}</span>
+<span class="c1"># SQL: priority &gt;= 8 OR priority LIKE &#39;urgent%&#39;</span>
+</pre></div>
+</div>
+<p><strong>NOT Operator (Logical Negation):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Negate any condition</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="s2">&quot;archived&quot;</span><span class="p">))</span>
+<span class="c1"># Generated: {&quot;FIELD:status&quot;: {&quot;NOT&quot;: {&quot;==&quot;: &quot;archived&quot;}}}</span>
+<span class="c1"># SQL: status != &#39;archived&#39;</span>
+
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">eprecated%&quot;</span><span class="p">)))</span>
+<span class="c1"># Generated: {&quot;FIELD:name&quot;: {&quot;NOT&quot;: {&quot;LIKE&quot;: &quot;%deprecated%&quot;}}}</span>
+<span class="c1"># SQL: name NOT LIKE &#39;%deprecated%&#39;</span>
+</pre></div>
+</div>
+<p><strong>IN Operator (Membership Test):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alias for OR with simple values</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">IN</span><span class="p">([</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="s2">&quot;guide&quot;</span><span class="p">,</span> <span class="s2">&quot;reference&quot;</span><span class="p">]))</span>
+<span class="c1"># Equivalent to: Facet.expr(category=Facet.OR([...]))</span>
+<span class="c1"># Generated: {&quot;FIELD:category&quot;: {&quot;OR&quot;: [{&quot;IN&quot;: [&quot;tutorial&quot;, &quot;guide&quot;, &quot;reference&quot;]}]}}</span>
+
+<span class="c1"># Lists automatically convert to OR/IN</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;pending&quot;</span><span class="p">])</span>
+<span class="c1"># Generated: {&quot;FIELD:status&quot;: {&quot;OR&quot;: [{&quot;IN&quot;: [&quot;active&quot;, &quot;pending&quot;]}]}}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="dimension-table-operator-nf">
+<h3>2.5. Dimension Table Operator (NF)<a class="headerlink" href="#dimension-table-operator-nf" title="Link to this heading">¶</a></h3>
+<p>The <strong>NF (Normalized Form)</strong> operator queries across dimension tables—separate tables linked by foreign keys that store complex UKF fields like tags, metadata, or arrays.</p>
+<p><strong>Understanding Dimension Tables:</strong></p>
+<p>When a <code class="docutils literal notranslate"><span class="pre">BaseUKF</span></code> has fields of type <code class="docutils literal notranslate"><span class="pre">DatabaseNfType</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">tags</span></code>, <code class="docutils literal notranslate"><span class="pre">metadata</span></code>, <code class="docutils literal notranslate"><span class="pre">content_resources</span></code>), DatabaseKLStore stores them in separate dimension tables:</p>
+<ul class="simple">
+<li><p><strong>Main Table</strong>: <code class="docutils literal notranslate"><span class="pre">ukf_main</span></code> (id, name, type, version, timestamp, etc.)</p></li>
+<li><p><strong>Dimension Tables</strong>: <code class="docutils literal notranslate"><span class="pre">ukf_tags</span></code>, <code class="docutils literal notranslate"><span class="pre">ukf_metadata</span></code>, etc. (ukf_id, slot, value)</p></li>
+</ul>
+<p><strong>NF Operator Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Query dimension table by slot and value</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">))</span>
+<span class="c1"># Generated: {&quot;FIELD:tags&quot;: {&quot;NF&quot;: {&quot;slot&quot;: &quot;category&quot;, &quot;value&quot;: &quot;tutorial&quot;}}}</span>
+<span class="c1"># SQL: EXISTS (SELECT DISTINCT ukf_tags.id FROM ukf_tags </span>
+<span class="c1">#             WHERE ukf_main.id = ukf_tags.ukf_id </span>
+<span class="c1">#             AND ukf_tags.slot = &#39;category&#39; AND ukf_tags.value = &#39;tutorial&#39;)</span>
+
+<span class="c1"># Query with operator</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;math&quot;</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="s2">&quot;ANY_IF_EXISTS&quot;</span><span class="p">))</span>
+<span class="c1"># A slot can have multiple values; matches if any value satisfies the condition if only at least one value exists for the slot</span>
+<span class="c1"># Supported operators:</span>
+<span class="c1"># - EXACT</span>
+<span class="c1"># - NONE_OF</span>
+<span class="c1"># - ANY_OF</span>
+<span class="c1"># - ANY_IF_EXISTS</span>
+<span class="c1"># - ONE_OF</span>
+<span class="c1"># - MANY_OF</span>
+<span class="c1"># - ALL_OF</span>
+<span class="c1"># - ALL_IN</span>
+<span class="c1"># - HAS_NONE (Unary, check the slot only)</span>
+<span class="c1"># - HAS_ANY (Unary, check the slot only)</span>
+<span class="c1"># - HAS_ONE (Unary, check the slot only)</span>
+<span class="c1"># - HAS_MANY (Unary, check the slot only)</span>
+</pre></div>
+</div>
+<p><strong>Multiple Dimension Filters:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple slot-value pairs in same dimension (AND logic)</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">),</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">)</span>
+<span class="c1"># Both conditions must exist in the tags dimension table</span>
+</pre></div>
+</div>
+<p><strong>Real-World Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find knowledge objects with specific tags</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;project&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;AgentHeaven&quot;</span><span class="p">),</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;published&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># Returns UKFs that have:</span>
+<span class="c1"># - A tag entry with slot=&quot;project&quot; and value=&quot;AgentHeaven&quot;</span>
+<span class="c1"># - A metadata entry with slot=&quot;status&quot; and value=&quot;published&quot;</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="multiple-field-expressions">
+<h3>2.6. Multiple Field Expressions<a class="headerlink" href="#multiple-field-expressions" title="Link to this heading">¶</a></h3>
+<p>Combine filters on multiple fields (implicit AND):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple fields create AND structure</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;documentation&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;reviewing&quot;</span><span class="p">]),</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;%Tutorial%&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># Generated: {</span>
+<span class="c1">#   &quot;AND&quot;: [</span>
+<span class="c1">#     {&quot;FIELD:type&quot;: {&quot;==&quot;: &quot;documentation&quot;}},</span>
+<span class="c1">#     {&quot;FIELD:priority&quot;: {&quot;&gt;=&quot;: 5}},</span>
+<span class="c1">#     {&quot;FIELD:status&quot;: {&quot;OR&quot;: [{&quot;IN&quot;: [&quot;active&quot;, &quot;reviewing&quot;]}]}},</span>
+<span class="c1">#     {&quot;FIELD:name&quot;: {&quot;LIKE&quot;: &quot;%Tutorial%&quot;}}</span>
+<span class="c1">#   ]</span>
+<span class="c1"># }</span>
+<span class="c1"># SQL: type = &#39;documentation&#39; </span>
+<span class="c1">#      AND priority &gt;= 5 </span>
+<span class="c1">#      AND status IN (&#39;active&#39;, &#39;reviewing&#39;)</span>
+<span class="c1">#      AND name LIKE &#39;%Tutorial%&#39;</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="complex-nested-expressions">
+<h3>2.7. Complex Nested Expressions<a class="headerlink" href="#complex-nested-expressions" title="Link to this heading">¶</a></h3>
+<p>Build arbitrarily complex filter trees:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sophisticated multi-level filtering</span>
+<span class="n">Facet</span><span class="o">.</span><span class="n">expr</span><span class="p">(</span>
+    <span class="c1"># Pattern matching</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%a</span><span class="s2">gent%&quot;</span><span class="p">),</span>
+    
+    <span class="c1"># Multiple status options</span>
+    <span class="n">status</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span> <span class="s2">&quot;reviewing&quot;</span><span class="p">]),</span>
+    
+    <span class="c1"># Score range with explicit AND</span>
+    <span class="n">score</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="n">Facet</span><span class="o">.</span><span class="n">LTE</span><span class="p">(</span><span class="mi">100</span><span class="p">)]),</span>
+    
+    <span class="c1"># Date range</span>
+    <span class="n">created_at</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    
+    <span class="c1"># Dimension table filter</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;high&quot;</span><span class="p">),</span>
+    
+    <span class="c1"># Negation</span>
+    <span class="n">description</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">eprecated%&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="c1"># All conditions combined with AND logic</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="quick-start">
+<h2>3. Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<p>Notice that Facets in FacetKLEngine are only filtering the defined UKF attributes (e.g., name, type, tags, priority). Custom fields stored in unstructured formats (e.g., JSON blobs) are not directly queryable.</p>
+<p>For all queries related to NF (Normalized Form) fields (i.e., <code class="docutils literal notranslate"><span class="pre">set</span></code> fields like <code class="docutils literal notranslate"><span class="pre">tags</span></code>, <code class="docutils literal notranslate"><span class="pre">related</span></code>, <code class="docutils literal notranslate"><span class="pre">auth</span></code> and <code class="docutils literal notranslate"><span class="pre">synonyms</span></code>), <code class="docutils literal notranslate"><span class="pre">Facet.NF</span></code> is required.</p>
+<section id="basic-usage-with-in-place-mode">
+<h3>3.1. Basic Usage with In-Place Mode<a class="headerlink" href="#basic-usage-with-in-place-mode" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUKF</span>
+
+<span class="c1"># Create database storage</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;knowledge.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+
+<span class="c1"># Populate with knowledge objects</span>
+<span class="n">kls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">BaseUKF</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Python Tutorial&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+            <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:programming]&quot;</span><span class="p">,</span> <span class="s2">&quot;[language:python]&quot;</span><span class="p">}),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SQL Guide&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;guide&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:database]&quot;</span><span class="p">,</span> <span class="s2">&quot;[language:sql]&quot;</span><span class="p">}),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Machine Learning Intro&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+            <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:ai]&quot;</span><span class="p">,</span> <span class="s2">&quot;[language:python]&quot;</span><span class="p">}),</span>
+<span class="p">]</span>
+<span class="n">store</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">kls</span><span class="p">)</span>
+
+<span class="c1"># Create FacetKLEngine in in-place mode (directly queries store)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Search by exact field match</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> tutorials&quot;</span><span class="p">)</span>
+
+<span class="c1"># Search with comparison operators</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> 
+                       <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;kl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (priority: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;kl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">priority</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Search with dimension table filter (NF operator)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+                       <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;language&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> Python-related items&quot;</span><span class="p">)</span>
+
+<span class="c1"># Combine multiple filters (AND logic)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;programming&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="initialization-parameters">
+<h3>3.2. Initialization Parameters<a class="headerlink" href="#initialization-parameters" title="Link to this heading">¶</a></h3>
+<p><strong>Required Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">storage</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">DatabaseKLStore</span></code>): The database-backed KLStore to query. Must be a DatabaseKLStore instance.</p></li>
+</ul>
+<p><strong>Mode Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">inplace</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">True</span></code>): Operating mode</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: Query directly on storage database (zero overhead, no copying)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: Create separate index database with schema subsetting</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Schema Parameters (for <code class="docutils literal notranslate"><span class="pre">inplace=False</span></code> only):</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">include</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, optional): List of BaseUKF field names to include in index. If None, includes all fields.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">exclude</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, optional): List of BaseUKF field names to exclude from index. Applied after <code class="docutils literal notranslate"><span class="pre">include</span></code>.</p></li>
+</ul>
+<p><strong>Filter Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">facets</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>, optional): Global facets applied to all searches. Uses same format as search filters.</p></li>
+</ul>
+<p><strong>Common Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">name</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional): Engine instance name. Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;{storage.name}_facet_idx&quot;</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">condition</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>, optional): Filter function for conditional indexing. Only UKFs satisfying the condition are indexed.</p></li>
+</ul>
+<p><strong>Database Parameters (for <code class="docutils literal notranslate"><span class="pre">inplace=False</span></code> only):</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">database</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional): Index database name or path. Uses config default if omitted.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">provider</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional): Database provider (“sqlite”, “pg”, “mysql”, “duckdb”). Uses config default if omitted.</p></li>
+<li><p>Additional kwargs: Connection parameters (host, port, username, password, etc.)</p></li>
+</ul>
+<br/>
+</section>
+</section>
+<section id="operating-modes">
+<h2>4. Operating Modes<a class="headerlink" href="#operating-modes" title="Link to this heading">¶</a></h2>
+<p>FacetKLEngine supports two distinct operating modes with different performance characteristics and use cases:</p>
+<section id="in-place-mode-inplace-true">
+<h3>4.1. In-Place Mode (<code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>)<a class="headerlink" href="#in-place-mode-inplace-true" title="Link to this heading">¶</a></h3>
+<p><strong>How It Works:</strong></p>
+<ul class="simple">
+<li><p>Engine directly queries the attached DatabaseKLStore without creating any additional structures</p></li>
+<li><p>All operations (search, get) are routed to the storage backend</p></li>
+<li><p>Zero setup time, zero storage overhead</p></li>
+<li><p>Modifications to storage are immediately visible in search results</p></li>
+</ul>
+<p><strong>Characteristics:</strong></p>
+<ul class="simple">
+<li><p><strong>Setup Time</strong>: Instant (no indexing required)</p></li>
+<li><p><strong>Storage Overhead</strong>: None (uses existing store)</p></li>
+<li><p><strong>Query Performance</strong>: Depends on storage database indexes</p></li>
+<li><p><strong>Synchronization</strong>: Always up-to-date (no sync needed)</p></li>
+<li><p><strong>Schema</strong>: All fields from storage are queryable</p></li>
+</ul>
+<p><strong>When to Use:</strong></p>
+<ul class="simple">
+<li><p>Development and prototyping (fastest setup)</p></li>
+<li><p>Small to medium datasets (&lt; 100K objects)</p></li>
+<li><p>Dynamic data (frequent inserts/updates)</p></li>
+<li><p>When storage database has appropriate indexes</p></li>
+<li><p>When all UKF fields are needed for filtering</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;knowledge.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Immediately ready to query (no indexing phase)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> In in-place mode, <code class="docutils literal notranslate"><span class="pre">upsert()</span></code>, <code class="docutils literal notranslate"><span class="pre">insert()</span></code>, <code class="docutils literal notranslate"><span class="pre">remove()</span></code>, <code class="docutils literal notranslate"><span class="pre">clear()</span></code> operations are no-ops (do nothing) since the engine doesn’t maintain separate state.</p>
+<br/>
+</section>
+<section id="non-in-place-mode-inplace-false">
+<h3>4.2. Non-In-Place Mode (<code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>)<a class="headerlink" href="#non-in-place-mode-inplace-false" title="Link to this heading">¶</a></h3>
+<p><strong>How It Works:</strong></p>
+<ul class="simple">
+<li><p>Engine creates a separate index database with schema subsetting</p></li>
+<li><p>Only specified fields (<code class="docutils literal notranslate"><span class="pre">include</span></code> parameter) are copied to index</p></li>
+<li><p>Requires explicit synchronization with storage when data changes</p></li>
+<li><p>Optimized queries on subset of fields</p></li>
+</ul>
+<p><strong>Characteristics:</strong></p>
+<ul class="simple">
+<li><p><strong>Setup Time</strong>: Requires initial sync (copies data to index)</p></li>
+<li><p><strong>Storage Overhead</strong>: Duplicate data (index database)</p></li>
+<li><p><strong>Query Performance</strong>: Faster on subset schemas (fewer fields = better indexes)</p></li>
+<li><p><strong>Synchronization</strong>: Manual <code class="docutils literal notranslate"><span class="pre">sync()</span></code> required after storage changes</p></li>
+<li><p><strong>Schema</strong>: Only included fields are queryable</p></li>
+</ul>
+<p><strong>When to Use:</strong></p>
+<ul class="simple">
+<li><p>Large datasets (&gt; 100K objects) where schema subsetting improves performance</p></li>
+<li><p>Static or slowly changing data (infrequent updates)</p></li>
+<li><p>When only a subset of fields is needed for queries</p></li>
+<li><p>To reduce index size and improve query speed</p></li>
+<li><p>When storage database lacks optimal indexes</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;knowledge.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create separate index with subset of fields</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">],</span>  <span class="c1"># Only these fields</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;knowledge_index.db&quot;</span>  <span class="c1"># Separate database for index</span>
+<span class="p">)</span>
+
+<span class="c1"># Initial synchronization (copies data)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
+
+<span class="c1"># Query on subset schema</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> 
+                       <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># After storage changes, resync</span>
+<span class="n">store</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">new_kl</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>  <span class="c1"># Update index</span>
+</pre></div>
+</div>
+<p><strong>Schema Subsetting Benefits:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Full schema: 20+ fields (name, type, version, content, description, etc.)</span>
+<span class="c1"># Index schema: 5 fields (id, name, type, priority, tags)</span>
+<span class="c1"># Result: 4x smaller index, faster queries on indexed fields</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">],</span>  <span class="c1"># Minimal schema</span>
+    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">]</span>  <span class="c1"># Exclude large text fields</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="search-operations">
+<h2>5. Search Operations<a class="headerlink" href="#search-operations" title="Link to this heading">¶</a></h2>
+<section id="faceted-search-default">
+<h3>5.1. Faceted Search (Default)<a class="headerlink" href="#faceted-search-default" title="Link to this heading">¶</a></h3>
+<p>The primary search method using structured filters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>           <span class="c1"># Or omit (default mode)</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>   <span class="c1"># Fields to include in results</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>        <span class="c1"># Field filters</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;programming&quot;</span><span class="p">),</span>
+    <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>                <span class="c1"># Limit results (SQL LIMIT)</span>
+    <span class="n">offset</span><span class="o">=</span><span class="mi">0</span>                <span class="c1"># Skip results (SQL OFFSET)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Search Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">include</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">Iterable[str]</span></code>, optional): Fields to include in results</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>: Knowledge object ID (int)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;kl&quot;</span></code>: Full BaseUKF object (retrieved from storage if recoverable)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;filter&quot;</span></code>: The parsed Facet filter (for debugging)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;sql&quot;</span></code>: Generated SQL statement (for debugging and optimization)</p></li>
+<li><p>Default: <code class="docutils literal notranslate"><span class="pre">[&quot;id&quot;,</span> <span class="pre">&quot;kl&quot;]</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">topk</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional): Maximum number of results to return (SQL LIMIT). If None, returns all matching results.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">offset</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional): Number of results to skip (SQL OFFSET). If None, starts from first result.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code></strong>: Filter conditions using Facet operators or simple values</p></li>
+</ul>
+<p><strong>Return Value:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>  <span class="c1"># Each dict contains requested fields from `include`</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="result-structures">
+<h3>5.2. Result Structures<a class="headerlink" href="#result-structures" title="Link to this heading">¶</a></h3>
+<p><strong>Minimal Results (IDs only):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span>
+<span class="c1"># [</span>
+<span class="c1">#   {&quot;id&quot;: 123},</span>
+<span class="c1">#   {&quot;id&quot;: 456},</span>
+<span class="c1">#   {&quot;id&quot;: 789}</span>
+<span class="c1"># ]</span>
+</pre></div>
+</div>
+<p><strong>Full Results (with knowledge objects):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1"># [</span>
+<span class="c1">#   {&quot;id&quot;: 123, &quot;kl&quot;: &lt;BaseUKF object&gt;},</span>
+<span class="c1">#   {&quot;id&quot;: 456, &quot;kl&quot;: &lt;BaseUKF object&gt;}</span>
+<span class="c1"># ]</span>
+</pre></div>
+</div>
+<p><strong>Debug Results (with SQL):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;sql&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">)</span>
+<span class="c1"># [</span>
+<span class="c1">#   {&quot;id&quot;: 123, &quot;sql&quot;: &quot;SELECT ukf_main.id FROM ukf_main WHERE ukf_main.type = &#39;tutorial&#39;&quot;},</span>
+<span class="c1">#   ...</span>
+<span class="c1"># ]</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="global-facets">
+<h3>5.3. Global Facets<a class="headerlink" href="#global-facets" title="Link to this heading">¶</a></h3>
+<p>Apply persistent filters across all searches:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create engine with global facets</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">facets</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>                              <span class="c1"># Only index tutorials</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;published&quot;</span><span class="p">)</span>  <span class="c1"># Only published</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># All searches automatically include global facets</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> 
+                       <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="c1"># SQL: WHERE type = &#39;tutorial&#39; </span>
+<span class="c1">#      AND EXISTS (tags with status=published)</span>
+<span class="c1">#      AND priority &gt;= 7</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="pagination">
+<h3>5.4. Pagination<a class="headerlink" href="#pagination" title="Link to this heading">¶</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">topk</span></code> and <code class="docutils literal notranslate"><span class="pre">offset</span></code> for paginated results:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Page 1: First 10 results</span>
+<span class="n">page1</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span> 
+                     <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Page 2: Next 10 results</span>
+<span class="n">page2</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+                     <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Page 3: Next 10 results</span>
+<span class="n">page3</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+                     <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">topk</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="sql-debugging">
+<h3>5.5. SQL Debugging<a class="headerlink" href="#sql-debugging" title="Link to this heading">¶</a></h3>
+<p>Inspect generated SQL for optimization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;sql&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;programming&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Print SQL statement</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;sql&quot;</span><span class="p">])</span>
+<span class="c1"># Output: </span>
+<span class="c1"># SELECT ukf_main.id FROM ukf_main </span>
+<span class="c1"># WHERE ukf_main.type = &#39;tutorial&#39; </span>
+<span class="c1"># AND ukf_main.priority &gt;= 5 </span>
+<span class="c1"># AND ukf_main.priority &lt;= 10</span>
+<span class="c1"># AND EXISTS (SELECT DISTINCT ukf_tags.id FROM ukf_tags </span>
+<span class="c1">#             WHERE ukf_main.id = ukf_tags.ukf_id </span>
+<span class="c1">#             AND ukf_tags.slot = &#39;category&#39; </span>
+<span class="c1">#             AND ukf_tags.value = &#39;programming&#39;)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="complete-examples">
+<h2>6. Complete Examples<a class="headerlink" href="#complete-examples" title="Link to this heading">¶</a></h2>
+<section id="research-paper-filtering">
+<h3>6.1. Research Paper Filtering<a class="headerlink" href="#research-paper-filtering" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUKF</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># Setup storage and engine</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;papers.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Create research papers</span>
+<span class="n">papers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Attention Is All You Need&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[field:nlp]&quot;</span><span class="p">,</span> <span class="s2">&quot;[venue:nips]&quot;</span><span class="p">,</span> <span class="s2">&quot;[topic:transformers]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;citations&quot;</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span> <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;BERT: Pre-training of Deep Bidirectional Transformers&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[field:nlp]&quot;</span><span class="p">,</span> <span class="s2">&quot;[venue:naacl]&quot;</span><span class="p">,</span> <span class="s2">&quot;[topic:language_models]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;citations&quot;</span><span class="p">:</span> <span class="mi">30000</span><span class="p">,</span> <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResNet: Deep Residual Learning&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[field:cv]&quot;</span><span class="p">,</span> <span class="s2">&quot;[venue:cvpr]&quot;</span><span class="p">,</span> <span class="s2">&quot;[topic:architectures]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;citations&quot;</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span> <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+<span class="n">store</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">papers</span><span class="p">)</span>
+
+<span class="c1"># Query 1: High-impact recent NLP papers</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;nlp&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;High-impact NLP papers: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="n">kl</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;kl&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">kl</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">kl</span><span class="o">.</span><span class="n">timestamp</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Query 2: Papers with citation count in range</span>
+<span class="c1"># Note: metadata filters require using dimension tables</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;nlp&quot;</span><span class="p">),</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;venue&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;nips&quot;</span><span class="p">,</span> <span class="s2">&quot;naacl&quot;</span><span class="p">,</span> <span class="s2">&quot;acl&quot;</span><span class="p">]))</span>
+    <span class="p">])</span>
+<span class="p">)</span>
+
+<span class="c1"># Query 3: Papers NOT about computer vision</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;research_paper&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NOT</span><span class="p">(</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;cv&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Non-CV papers: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="e-commerce-product-filtering">
+<h3>6.2. E-commerce Product Filtering<a class="headerlink" href="#e-commerce-product-filtering" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUKF</span>
+
+<span class="c1"># Setup</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;products.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Create products</span>
+<span class="n">products</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Laptop Pro 15&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:laptop]&quot;</span><span class="p">,</span> <span class="s2">&quot;[brand:TechCorp]&quot;</span><span class="p">,</span> <span class="s2">&quot;[condition:new]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">1299.99</span><span class="p">,</span> <span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Wireless Mouse&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:accessory]&quot;</span><span class="p">,</span> <span class="s2">&quot;[brand:TechCorp]&quot;</span><span class="p">,</span> <span class="s2">&quot;[condition:new]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">29.99</span><span class="p">,</span> <span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mf">4.2</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Refurbished Laptop 13&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[category:laptop]&quot;</span><span class="p">,</span> <span class="s2">&quot;[brand:BudgetTech]&quot;</span><span class="p">,</span> <span class="s2">&quot;[condition:refurbished]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">499.99</span><span class="p">,</span> <span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="mf">3.8</span><span class="p">}</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+<span class="n">store</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">products</span><span class="p">)</span>
+
+<span class="c1"># Query 1: Laptops in stock, sorted by priority</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;laptop&quot;</span><span class="p">),</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;condition&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;new&quot;</span><span class="p">)</span>  <span class="c1"># Only new products</span>
+    <span class="p">])</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New laptops: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Query 2: Products by specific brand</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;brand&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;TechCorp&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TechCorp products: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Query 3: Pattern search in product names</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">LIKE</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%La</span><span class="s2">ptop%&quot;</span><span class="p">),</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;electronics&quot;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Laptop products: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;kl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="task-management-system">
+<h3>6.3. Task Management System<a class="headerlink" href="#task-management-system" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.ukf</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUKF</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># Setup</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;tasks.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">facets</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;task&quot;</span><span class="p">}</span>  <span class="c1"># Global facet: only tasks</span>
+<span class="p">)</span>
+
+<span class="c1"># Create tasks</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Implement authentication&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;task&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[status:in_progress]&quot;</span><span class="p">,</span> <span class="s2">&quot;[assignee:alice]&quot;</span><span class="p">,</span> <span class="s2">&quot;[sprint:Q1]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;estimate&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;actual&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Write documentation&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;task&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[status:pending]&quot;</span><span class="p">,</span> <span class="s2">&quot;[assignee:bob]&quot;</span><span class="p">,</span> <span class="s2">&quot;[sprint:Q1]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;estimate&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;actual&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Fix critical bug&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;task&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[status:completed]&quot;</span><span class="p">,</span> <span class="s2">&quot;[assignee:alice]&quot;</span><span class="p">,</span> <span class="s2">&quot;[sprint:Q1]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;estimate&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;actual&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+    <span class="p">),</span>
+    <span class="n">BaseUKF</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Design database schema&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;task&quot;</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;[status:completed]&quot;</span><span class="p">,</span> <span class="s2">&quot;[assignee:charlie]&quot;</span><span class="p">,</span> <span class="s2">&quot;[sprint:Q1]&quot;</span><span class="p">},</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;estimate&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;actual&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+<span class="n">store</span><span class="o">.</span><span class="n">batch_upsert</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+
+<span class="c1"># Query 1: High-priority active tasks</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">OR</span><span class="p">([</span><span class="s2">&quot;pending&quot;</span><span class="p">,</span> <span class="s2">&quot;in_progress&quot;</span><span class="p">]))</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;High-priority active tasks: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Query 2: Alice&#39;s completed tasks</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">AND</span><span class="p">([</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;assignee&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;alice&quot;</span><span class="p">),</span>
+        <span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;completed&quot;</span><span class="p">)</span>
+    <span class="p">])</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alice&#39;s completed tasks: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Query 3: Tasks created in January</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">],</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">BETWEEN</span><span class="p">(</span>
+        <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">59</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;January tasks: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Query 4: Overdue tasks (actual &gt; estimate) - requires complex logic</span>
+<span class="c1"># First get all tasks, then filter in Python</span>
+<span class="c1"># (or use raw SQL through _search_sql for complex calculations)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;kl&quot;</span><span class="p">])</span>
+<span class="n">overdue</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;kl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;actual&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;kl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;estimate&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Overdue tasks: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">overdue</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="non-in-place-mode-with-schema-subsetting">
+<h3>6.4. Non-In-Place Mode with Schema Subsetting<a class="headerlink" href="#non-in-place-mode-with-schema-subsetting" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klstore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatabaseKLStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.klengine</span><span class="w"> </span><span class="kn">import</span> <span class="n">FacetKLEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.db.facet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Facet</span>
+
+<span class="c1"># Large storage with many fields</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">DatabaseKLStore</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;large_store.db&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create optimized index with subset of fields</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">FacetKLEngine</span><span class="p">(</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">],</span>
+    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>  <span class="c1"># Exclude large text fields</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;optimized_index.db&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Initial sync (copy data to index)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Syncing index...&quot;</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Indexed </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="si">}</span><span class="s2"> objects&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fast queries on indexed fields</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;facet&quot;</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>  <span class="c1"># Only IDs (kl not available if not recoverable)</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">GTE</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span>
+    <span class="n">tags</span><span class="o">=</span><span class="n">Facet</span><span class="o">.</span><span class="n">NF</span><span class="p">(</span><span class="n">slot</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;important&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> high-priority items&quot;</span><span class="p">)</span>
+
+<span class="c1"># After storage changes, resync</span>
+<span class="n">new_kl</span> <span class="o">=</span> <span class="n">BaseUKF</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;New Item&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;document&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">store</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">new_kl</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>  <span class="c1"># Update index</span>
+
+<span class="c1"># Close engine</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="further-exploration">
+<h2>Further Exploration<a class="headerlink" href="#further-exploration" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Tip:</strong> For the base interface and common operations, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="base.html"><span class="std std-doc">BaseKLEngine</span></a> - Abstract base class defining the KLEngine interface and shared functionality</p></li>
+<li><p><a class="reference internal" href="index.html"><span class="std std-doc">KLEngine Overview</span></a> - Introduction to query engines and retrieval strategies</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Tip:</strong> For other search methodologies, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="vector.html"><span class="std std-doc">VectorKLEngine</span></a> - Semantic similarity search using vector embeddings</p></li>
+<li><p><a class="reference internal" href="daac.html"><span class="std std-doc">DAACKLEngine</span></a> - Multi-pattern string matching for entity recognition</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Tip:</strong> For database integration, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../klstore/database.html"><span class="std std-doc">DatabaseKLStore</span></a> - ORM-based persistent storage for knowledge objects</p></li>
+<li><p><a class="reference internal" href="../utils/db.html"><span class="std std-doc">Database Utilities</span></a> - Database connection, query execution, and utilities</p></li>
+<li><p><a class="reference internal" href="../../configuration/database.html"><span class="std std-doc">Database Configuration</span></a> - YAML configuration for database providers</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Tip:</strong> For advanced query patterns, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../utils/db.html#facet-operators"><span class="std std-ref">Facet Operators Reference</span></a> - Complete reference for all Facet operators</p></li>
+<li><p><a class="reference internal" href="../utils/db.html#query-optimization"><span class="std std-ref">SQL Query Optimization</span></a> - Performance tuning for database queries</p></li>
+</ul>
+</div></blockquote>
+<br/>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="daac.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">DAACKLEngine</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="base.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">BaseKLEngine</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">FacetKLEngine</a><ul>
+<li><a class="reference internal" href="#introduction">1. Introduction</a><ul>
+<li><a class="reference internal" href="#what-is-faceted-search">1.1. What is Faceted Search?</a></li>
+<li><a class="reference internal" href="#when-to-use-facetklengine">1.2. When to Use FacetKLEngine</a></li>
+<li><a class="reference internal" href="#key-features">1.3. Key Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#understanding-facet-operators">2. Understanding Facet Operators</a><ul>
+<li><a class="reference internal" href="#comparison-operators">2.1. Comparison Operators</a></li>
+<li><a class="reference internal" href="#pattern-matching-operators">2.2. Pattern Matching Operators</a></li>
+<li><a class="reference internal" href="#range-operators">2.3. Range Operators</a></li>
+<li><a class="reference internal" href="#logical-operators">2.4. Logical Operators</a></li>
+<li><a class="reference internal" href="#dimension-table-operator-nf">2.5. Dimension Table Operator (NF)</a></li>
+<li><a class="reference internal" href="#multiple-field-expressions">2.6. Multiple Field Expressions</a></li>
+<li><a class="reference internal" href="#complex-nested-expressions">2.7. Complex Nested Expressions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-start">3. Quick Start</a><ul>
+<li><a class="reference internal" href="#basic-usage-with-in-place-mode">3.1. Basic Usage with In-Place Mode</a></li>
+<li><a class="reference internal" href="#initialization-parameters">3.2. Initialization Parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#operating-modes">4. Operating Modes</a><ul>
+<li><a class="reference internal" href="#in-place-mode-inplace-true">4.1. In-Place Mode (<code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>)</a></li>
+<li><a class="reference internal" href="#non-in-place-mode-inplace-false">4.2. Non-In-Place Mode (<code class="docutils literal notranslate"><span class="pre">inplace=False</span></code>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#search-operations">5. Search Operations</a><ul>
+<li><a class="reference internal" href="#faceted-search-default">5.1. Faceted Search (Default)</a></li>
+<li><a class="reference internal" href="#result-structures">5.2. Result Structures</a></li>
+<li><a class="reference internal" href="#global-facets">5.3. Global Facets</a></li>
+<li><a class="reference internal" href="#pagination">5.4. Pagination</a></li>
+<li><a class="reference internal" href="#sql-debugging">5.5. SQL Debugging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#complete-examples">6. Complete Examples</a><ul>
+<li><a class="reference internal" href="#research-paper-filtering">6.1. Research Paper Filtering</a></li>
+<li><a class="reference internal" href="#e-commerce-product-filtering">6.2. E-commerce Product Filtering</a></li>
+<li><a class="reference internal" href="#task-management-system">6.3. Task Management System</a></li>
+<li><a class="reference internal" href="#non-in-place-mode-with-schema-subsetting">6.4. Non-In-Place Mode with Schema Subsetting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-exploration">Further Exploration</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=9dc39874"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

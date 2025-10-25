@@ -1,0 +1,1103 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../../../genindex.html"><link rel="search" title="搜索" href="../../../search.html"><link rel="next" title="序列化工具" href="serialize_utils.html"><link rel="prev" title="多线程并行化" href="parallel_utils.html">
+        <link rel="prefetch" href="../../../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../../../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>模板处理 - AgentHeaven文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven 正在积极开发中，功能可能会发生变化。 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">AgentHeaven文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../introduction/index.html">简介</a><input aria-label="Toggle navigation of 简介" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction/philosophy.html">理念与愿景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction/architecture.html">架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction/learning.html">学习 AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../getting-started/index.html">快速开始</a><input aria-label="Toggle navigation of 快速开始" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/installation.html">安装指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/setup.html">设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/5min-quickstart.html">5 分钟快速开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting-started/60min-tutorial.html">60 分钟教程</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../configuration/index.html">配置</a><input aria-label="Toggle navigation of 配置" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../configuration/core.html">核心配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../configuration/llm.html">LLM 配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../configuration/database.html">数据库配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../configuration/vdb.html">向量数据库配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">主指南（Python）</a><input aria-label="Toggle navigation of 主指南（Python）" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">实用工具</a><input aria-label="Toggle navigation of 实用工具" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 current has-children"><a class="reference internal" href="index.html">基础实用工具</a><input aria-label="Toggle navigation of 基础实用工具" checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="config_utils.html">配置管理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hash_utils.html">哈希工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="parallel_utils.html">多线程并行化</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">模板处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize_utils.html">序列化工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="str_utils.html">字符串实用工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="misc_utils.html">其他实用工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../db.html">数据库工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vdb.html">向量数据库工具</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cache.html">缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ukf/index.html">UKF (通用知识格式)</a><input aria-label="Toggle navigation of UKF (通用知识格式)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ukf/data-types.html">UKF 数据类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ukf/builtin-templates.html">内置模板</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../klengine/index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../klengine/base.html">BaseKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klengine/facet.html">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klengine/daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../klengine/vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../toolspec/index.html">工具规范</a><input aria-label="Toggle navigation of 工具规范" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../toolspec/base.html">工具规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../toolspec/builtins.html">内置工具规范</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent.html">智能体</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../cli-guide/index.html">CLI 指南</a><input aria-label="Toggle navigation of CLI 指南" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/repo-management.html">仓库管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/llm-inference.html">LLM 推理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/llm-session.html">LLM 会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/prompt-management.html">提示词管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cli-guide/knowledge-management.html">知识管理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui-guide/index.html">GUI 使用指南</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../example-applications/index.html">示例应用</a><input aria-label="Toggle navigation of 示例应用" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../example-applications/nl2sql-system.html">NL2SQL 系统</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../roadmap.html">开发规划</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../contribution/index.html">贡献</a><input aria-label="Toggle navigation of 贡献" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/overview.html">贡献概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/for_developers.html">开发者指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/feature_workflow.html">功能添加工作流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/srs.html">简要软件需求（SRS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contribution/ar/index.html">分配需求 (AR)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_index.html">API 参考</a><input aria-label="Toggle navigation of API 参考" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../api/ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../api/ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.serialize_utils.html">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../../api/ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../api/ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../api/ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../community/index.html">社区与支持</a><input aria-label="Toggle navigation of 社区与支持" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../community/resources.html">社区资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../community/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citation.html">引用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">许可协议</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/zh/source/python-guide/utils/basic/jinja_utils.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/zh/source/python-guide/utils/basic/jinja_utils.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>模板处理<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">jinja_utils.py</span></code> 模块为在 AgentHeaven 中使用 Jinja 模板和通过 Babel 进行国际化 (i18n) 提供了全面的实用工具。本指南将逐步介绍如何使用模板系统、Babel 集成和环境管理。</p>
+<section id="id2">
+<h2>1. 入门指南<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>1.1. 模板结构<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>AgentHeaven 中的每个模板目录都遵循一致的结构，支持模板、自定义过滤器和国际化：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>template_directory/
+├── *.jinja                 # Jinja 模板文件
+├── filters/                # 自定义 Jinja 过滤器
+│   └── *.py                # Python 过滤器模块
+└── locale/                 # Babel 国际化
+    ├── babel.cfg           # Babel 配置
+    ├── messages.pot        # 可移植对象模板
+    └── zh/LC_MESSAGES/     # 特定语言翻译
+        ├── messages.po     # 翻译文件
+        └── messages.mo     # 编译后的翻译
+</pre></div>
+</div>
+<p>每个模板目录的三个主要组件：</p>
+<ul class="simple">
+<li><p><strong>模板 (<code class="docutils literal notranslate"><span class="pre">.jinja</span></code> 文件)</strong>：包含带有 Jinja 语法和可翻译字符串的模板内容</p></li>
+<li><p><strong>过滤器 (<code class="docutils literal notranslate"><span class="pre">filters/</span></code> 目录)</strong>：扩展 Jinja 过滤功能的自定义 Python 函数</p></li>
+<li><p><strong>本地化 (<code class="docutils literal notranslate"><span class="pre">locale/</span></code> 目录)</strong>：用于多语言支持的 Babel 国际化文件</p></li>
+</ul>
+<br/>
+</section>
+<section id="id4">
+<h3>1.2. 基本用法<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">jinja_utils</span></code> 为模板管理提供了三个主要函数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_jinja_env</span><span class="p">,</span> <span class="n">babel_init</span><span class="p">,</span> <span class="n">babel_compile</span>
+
+<span class="c1"># 使用默认设置加载 Jinja 环境</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">()</span>
+
+<span class="c1"># 从经验目录渲染模板</span>
+<span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;experience/default_instance.jinja&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">},</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;response&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="jinja">
+<h2>2. Jinja 环境<a class="headerlink" href="#jinja" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h3>2.1. 什么是 Jinja？<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://jinja.palletsprojects.com/en/stable/">Jinja</a> 是一个快速、表达性强、可扩展的 Python 模板引擎。模板中的特殊占位符允许您编写类似于 Python 语法的代码。然后将数据传递给模板以呈现最终文档。它广泛用于生成 HTML、配置文件，以及随着大语言模型的兴起，也用于生成提示模板。</p>
+<p>例如，您可以创建如下模板：</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">你好，</span><span class="cp">{{</span> <span class="nv">name</span> <span class="cp">}}</span><span class="x">！欢迎来到我们的平台。</span>
+</pre></div>
+</div>
+<p>然后用 Python 渲染它：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jinja2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s2">&quot;你好，{{ name }}！欢迎来到我们的平台。&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alex&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>  <span class="c1"># 输出: 你好，Alex！欢迎来到我们的平台。</span>
+</pre></div>
+</div>
+<p>这种逻辑与表示的分离使得创建动态内容变得容易。</p>
+<br/>
+</section>
+<section id="id6">
+<h3>2.2. 加载环境<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">load_jinja_env</span></code> 函数创建配置的 Jinja 环境，具有自动本地化和过滤器加载功能：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_jinja_env</span>
+
+<span class="c1"># 从默认扫描路径加载（在 prompts.scan 中配置）</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">()</span>
+
+<span class="c1"># 从单个目录加载</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">(</span><span class="s2">&quot;path/to/templates&quot;</span><span class="p">)</span>
+
+<span class="c1"># 使用选择加载器从多个目录加载</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">([</span><span class="s2">&quot;templates/en&quot;</span><span class="p">,</span> <span class="s2">&quot;templates/es&quot;</span><span class="p">])</span>
+
+<span class="c1"># 使用前缀加载器进行命名空间分离</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">({</span>
+    <span class="s2">&quot;experience&quot;</span><span class="p">:</span> <span class="s2">&quot;src/ahvn/resources/prompts/experience&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;autocode&quot;</span><span class="p">:</span> <span class="s2">&quot;src/ahvn/resources/prompts/autocode&quot;</span>
+<span class="p">})</span>
+
+<span class="c1"># 使用特定语言加载</span>
+<span class="n">env_zh</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s2">&quot;zh&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id7">
+<h3>2.3. 内置模板<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>AgentHeaven 在 <code class="docutils literal notranslate"><span class="pre">src/ahvn/resources/prompts/</span></code> 目录中组织内置模板，包含多个模板文件夹，每个文件夹遵循单个模板文件夹结构：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>src/ahvn/resources/prompts/
+├── experience/          # 经验模板
+│   ├── default_instance.jinja
+│   ├── correct_instance.jinja
+│   ├── filters/         # 自定义 Jinja 过滤器
+│   │   └── value_repr.py
+│   └── locale/          # Babel 本地化文件
+│       ├── babel.cfg
+│       ├── messages.pot
+│       └── zh/LC_MESSAGES/
+│           ├── messages.po
+│           └── messages.mo
+├── autocode/           # 自动代码模板
+│   └── default.jinja
+├── autofunc/           # 自动函数模板
+│   └── default.jinja
+├── toolspec/           # 工具规范模板
+│   └── default.jinja
+└── po_translate/       # 翻译模板
+    └── default.jinja
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h3>2.4. 模板路径扫描<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>除了内置模板外，用户还可以在 <code class="docutils literal notranslate"><span class="pre">prompts.scan</span></code> 配置中添加自己的模板。</p>
+<p>当在 <code class="docutils literal notranslate"><span class="pre">load_jinja_env</span></code> 中未指定路径时，系统会扫描在 <code class="docutils literal notranslate"><span class="pre">prompts.scan</span></code> 中配置的目录：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_jinja_env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.config_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">HEAVEN_CM</span>
+
+<span class="c1"># 检查当前扫描配置</span>
+<span class="n">scan_paths</span> <span class="o">=</span> <span class="n">HEAVEN_CM</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prompts.scan&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;$ prompts/&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;扫描路径: </span><span class="si">{</span><span class="n">scan_paths</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 使用自动扫描加载</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">()</span>
+
+<span class="c1"># 通过目录前缀访问模板</span>
+<span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;experience/default_instance&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>扫描器会自动：</p>
+<ul class="simple">
+<li><p>使用 AgentHeaven 的路径解析扩展路径</p></li>
+<li><p>为找到的每个子目录创建前缀加载器</p></li>
+<li><p>从每个目录加载过滤器和翻译</p></li>
+</ul>
+<br/>
+</section>
+<section id="id9">
+<h3>2.5. 自定义过滤器<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>自定义 Jinja 过滤器会自动从每个模板目录的 <code class="docutils literal notranslate"><span class="pre">filters/</span></code> 目录加载：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建自定义过滤器: my_filters/value_format.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">value_format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;用指定精度格式化数值。&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">f</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<span class="c1"># 过滤器在模板中自动可用</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">(</span><span class="s2">&quot;path/to/templates&quot;</span><span class="p">)</span>
+<span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;my_template.jinja&quot;</span><span class="p">)</span>
+
+<span class="c1"># 模板用法: {{ price | value_format(3) }}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">price</span><span class="o">=</span><span class="mf">123.456789</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="babel">
+<h2>3. Babel 本地化<a class="headerlink" href="#babel" title="Link to this heading">¶</a></h2>
+<section id="id10">
+<h3>3.1. 什么是 Babel？<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://babel.pocoo.org/en/latest/">Babel</a> 是一个 Python 库，用于协助应用程序的国际化 (i18n) 和本地化 (l10n)。它通过提供工具来提取可翻译文本、创建翻译目录并将其编译以在运行时使用，从而帮助您管理项目的翻译。</p>
+<p>例如，您可以在 Python 代码中标记一个字符串以进行翻译：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">babel.support</span><span class="w"> </span><span class="kn">import</span> <span class="n">Translations</span>
+
+<span class="c1"># 假设翻译已加载</span>
+<span class="n">translations</span> <span class="o">=</span> <span class="n">Translations</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;locale&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;en_US&#39;</span><span class="p">,</span> <span class="s1">&#39;de_DE&#39;</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">translations</span><span class="o">.</span><span class="n">gettext</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>当应用程序在德语环境中运行时，如果翻译可用，它可能会打印 <code class="docutils literal notranslate"><span class="pre">&quot;Hallo,</span> <span class="pre">Welt!&quot;</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">world!&quot;</span></code>。在 AgentHeaven 中，Babel 与 Jinja 集成以无缝处理模板翻译。</p>
+<br/>
+</section>
+<section id="jinja-babel">
+<h3>3.2. Jinja 和 Babel 如何协同工作<a class="headerlink" href="#jinja-babel" title="Link to this heading">¶</a></h3>
+<p>AgentHeaven 结合了 Jinja2 和 Babel，为提示词创建了一个强大的国际化 (i18n) 工作流。这使您可以编写单个提示词模板并以多种语言呈现它。以下是它们如何交互的：</p>
+<ol class="arabic simple">
+<li><p><strong>标记可翻译文本</strong>：在您的 <code class="docutils literal notranslate"><span class="pre">.jinja</span></code> 模板中，将任何需要翻译的文本包裹在 <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">trans</span> <span class="pre">%}...{%</span> <span class="pre">endtrans</span> <span class="pre">%}</span></code> 标签中。</p></li>
+<li><p><strong>提取</strong>：<code class="docutils literal notranslate"><span class="pre">babel</span></code> 命令行工具（或 <code class="docutils literal notranslate"><span class="pre">babel_init</span></code> 函数）会扫描您的模板，找到这些 <code class="docutils literal notranslate"><span class="pre">trans</span></code> 块，并将文本提取到一个 <code class="docutils literal notranslate"><span class="pre">.pot</span></code>（可移植对象模板）文件中。该文件是所有可翻译字符串的主列表。</p></li>
+<li><p><strong>翻译</strong>：从 <code class="docutils literal notranslate"><span class="pre">.pot</span></code> 文件中，为每个目标语言（例如，中文为 <code class="docutils literal notranslate"><span class="pre">zh</span></code>）创建特定语言的 <code class="docutils literal notranslate"><span class="pre">.po</span></code>（可移植对象）文件。然后，翻译人员在这些文件中为每个字符串填写相应的翻译。此步骤可以手动完成，也可以使用 <code class="docutils literal notranslate"><span class="pre">ahvn</span> <span class="pre">babel</span> <span class="pre">translate</span></code> 命令自动完成。</p></li>
+<li><p><strong>编译</strong>：完成的 <code class="docutils literal notranslate"><span class="pre">.po</span></code> 文件使用 <code class="docutils literal notranslate"><span class="pre">babel_compile</span></code> 函数编译成二进制的 <code class="docutils literal notranslate"><span class="pre">.mo</span></code>（机器对象）文件。这些文件经过优化，可在运行时快速查找。</p></li>
+<li><p><strong>渲染</strong>：当您使用特定语言（例如 <code class="docutils literal notranslate"><span class="pre">lang=&quot;zh&quot;</span></code>）加载 Jinja 环境时，它会自动查找并使用相应的 <code class="docutils literal notranslate"><span class="pre">.mo</span></code> 文件。当它在渲染过程中遇到 <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">trans</span> <span class="pre">%}</span></code> 块时，它会用翻译版本替换原始文本。</p></li>
+</ol>
+<p>这整个过程实现了提示词逻辑与翻译的清晰分离，使得管理和扩展多语言智能体应用变得容易。</p>
+<br/>
+</section>
+<section id="id11">
+<h3>3.3. 初始化<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">babel_init</span></code> 函数设置国际化基础设施：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">babel_init</span>
+
+<span class="c1"># 为模板目录初始化 Babel</span>
+<span class="n">babel_init</span><span class="p">(</span><span class="s2">&quot;src/ahvn/resources/prompts/experience&quot;</span><span class="p">)</span>
+
+<span class="c1"># 使用特定语言初始化</span>
+<span class="n">babel_init</span><span class="p">(</span>
+    <span class="s2">&quot;src/ahvn/resources/prompts/experience&quot;</span><span class="p">,</span>
+    <span class="n">langs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;zh&quot;</span><span class="p">,</span> <span class="s2">&quot;es&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">],</span>
+    <span class="n">main</span><span class="o">=</span><span class="s2">&quot;en&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># 使用覆盖初始化（清除现有翻译）</span>
+<span class="n">babel_init</span><span class="p">(</span>
+    <span class="s2">&quot;src/ahvn/resources/prompts/experience&quot;</span><span class="p">,</span>
+    <span class="n">langs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;zh&quot;</span><span class="p">],</span>
+    <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>这会创建：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">locale/babel.cfg</span></code>: Babel 配置文件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">locale/messages.pot</span></code>: 带有可提取字符串的可移植对象模板</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">locale/zh/LC_MESSAGES/messages.po</span></code>: 中文翻译文件</p></li>
+</ul>
+<p>然后推荐的方法是手动编辑 <code class="docutils literal notranslate"><span class="pre">.po</span></code> 文件以添加每种语言的翻译。</p>
+<blockquote>
+<div><p><strong>开发中：</strong> 添加通过机器翻译服务进行自动翻译的支持。</p>
+</div></blockquote>
+<br/>
+</section>
+<section id="id12">
+<h3>3.4. 编译翻译<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">babel_compile</span></code> 函数将 <code class="docutils literal notranslate"><span class="pre">.po</span></code> 文件编译成二进制 <code class="docutils literal notranslate"><span class="pre">.mo</span></code> 文件：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">babel_compile</span>
+
+<span class="c1"># 编译所有可用语言</span>
+<span class="n">babel_compile</span><span class="p">(</span><span class="s2">&quot;src/ahvn/resources/prompts/experience&quot;</span><span class="p">)</span>
+
+<span class="c1"># 编译特定语言</span>
+<span class="n">babel_compile</span><span class="p">(</span>
+    <span class="s2">&quot;src/ahvn/resources/prompts/experience&quot;</span><span class="p">,</span>
+    <span class="n">langs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;zh&quot;</span><span class="p">,</span> <span class="s2">&quot;es&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># 使用自动检测可用语言进行编译</span>
+<span class="n">babel_compile</span><span class="p">(</span><span class="s2">&quot;src/ahvn/resources/prompts/experience&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>编译后的 <code class="docutils literal notranslate"><span class="pre">.mo</span></code> 文件可以被 Babel 在加载环境时识别。</p>
+<p>加载环境时，指定要使用的语言：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_jinja_env</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s2">&quot;zh&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id13">
+<h3>3.5. 可翻译模板<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<p>模板使用 Jinja 的 i18n 扩展来处理可翻译内容：</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="c">{# experience/default_instance.jinja -#}</span>
+<span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span><span class="x">Inputs:</span><span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">key</span><span class="o">,</span> <span class="nv">value</span> <span class="k">in</span> <span class="nv">inputs.items</span><span class="o">()</span> -<span class="cp">%}</span>
+<span class="x">- </span><span class="cp">{{</span> <span class="nv">key</span> <span class="cp">}}</span><span class="x">: </span><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">value_repr</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> -<span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span><span class="x">Output:</span><span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span>
+<span class="x">- </span><span class="cp">{{</span> <span class="nv">output</span> <span class="o">|</span> <span class="nf">value_repr</span><span class="o">(-</span><span class="m">1</span><span class="o">)</span> <span class="cp">}}</span>
+
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">expected</span> <span class="k">is</span> <span class="nf">defined</span> -<span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span><span class="x">Expected:</span><span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span>
+<span class="x">- </span><span class="cp">{{</span> <span class="nv">expected</span> <span class="o">|</span> <span class="nf">value_repr</span><span class="o">(-</span><span class="m">1</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span>
+</pre></div>
+</div>
+<p>翻译工作流：</p>
+<ol class="arabic simple">
+<li><p>创建带有 <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">trans</span> <span class="pre">%}...{%</span> <span class="pre">endtrans</span> <span class="pre">%}</span></code> 块的模板</p></li>
+<li><p>运行 <code class="docutils literal notranslate"><span class="pre">babel_init()</span></code> 将字符串提取到 <code class="docutils literal notranslate"><span class="pre">.pot</span></code> 文件</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">.po</span></code> 文件中翻译字符串</p></li>
+<li><p>运行 <code class="docutils literal notranslate"><span class="pre">babel_compile()</span></code> 编译为 <code class="docutils literal notranslate"><span class="pre">.mo</span></code> 文件</p></li>
+<li><p>使用特定语言加载环境</p></li>
+</ol>
+<br/>
+</section>
+</section>
+<section id="id14">
+<h2>4. 高级功能<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<section id="id15">
+<h3>4.1. 多语言模板渲染<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<p>以不同语言渲染模板：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_jinja_env</span>
+
+<span class="c1"># 为不同语言加载环境</span>
+<span class="n">env_en</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="n">env_zh</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s2">&quot;zh&quot;</span><span class="p">)</span>
+
+<span class="c1"># 以不同语言渲染相同模板</span>
+<span class="n">template_en</span> <span class="o">=</span> <span class="n">env_en</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;experience/default_instance&quot;</span><span class="p">)</span>
+<span class="n">template_zh</span> <span class="o">=</span> <span class="n">env_zh</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;experience/default_instance&quot;</span><span class="p">)</span>
+
+<span class="n">result_en</span> <span class="o">=</span> <span class="n">template_en</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;data&quot;</span><span class="p">},</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;result&quot;</span><span class="p">)</span>
+<span class="n">result_zh</span> <span class="o">=</span> <span class="n">template_zh</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;数据&quot;</span><span class="p">},</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;结果&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id16">
+<h3>4.2. 配置集成<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<p>该模块与 AgentHeaven 的配置系统集成：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.config_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">HEAVEN_CM</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_jinja_env</span>
+
+<span class="c1"># 配置国际化设置</span>
+<span class="n">HEAVEN_CM</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;prompts.main&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>        <span class="c1"># 源语言</span>
+<span class="n">HEAVEN_CM</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;prompts.lang&quot;</span><span class="p">,</span> <span class="s2">&quot;zh&quot;</span><span class="p">)</span>        <span class="c1"># 目标语言</span>
+<span class="n">HEAVEN_CM</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;prompts.langs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;zh&quot;</span><span class="p">,</span> <span class="s2">&quot;es&quot;</span><span class="p">])</span> <span class="c1"># 可用语言</span>
+<span class="n">HEAVEN_CM</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;prompts.scan&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;&amp; prompts/&quot;</span><span class="p">])</span> <span class="c1"># 模板扫描路径</span>
+
+<span class="c1"># 使用配置默认值加载</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">()</span>  <span class="c1"># 自动使用中文语言</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="ukf">
+<h3>4.3. 与 UKF 集成<a class="headerlink" href="#ukf" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p><strong>开发中：</strong> 添加对 UKF（统一知识格式）集成的支持。</p>
+</div></blockquote>
+<br/>
+</section>
+</section>
+<section id="id17">
+<h2>5. 最佳实践<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h2>
+<section id="id18">
+<h3>5.1. 示例：经验格式化<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">experience/default_instance.jinja</span></code> 模板演示了高级功能。</p>
+<section id="id19">
+<h4>5.1.1. Jinja 模板<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h4>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="c">{#-</span>
+<span class="c">必需:</span>
+<span class="c">    inputs (Dict[str, Any]): 输入变量及其值的字典。</span>
+<span class="c">    output (Any): 输出值。</span>
+<span class="c">可选:</span>
+<span class="c">    expected (Any): 预期输出值。如果未提供则省略。</span>
+<span class="c">    cutoff (int): 显示输入值的最大长度，默认为 256（字符）。</span>
+<span class="c">    hints (List[str]): 提示或附加信息列表。如果未提供则省略。</span>
+<span class="c">过滤器:</span>
+<span class="c">    value_repr(cutoff:int=256): 格式化值表示的过滤器，必要时进行截断。</span>
+<span class="c">-#}</span>
+<span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span><span class="x">Inputs:</span><span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">key</span><span class="o">,</span> <span class="nv">value</span> <span class="k">in</span> <span class="nv">inputs.items</span><span class="o">()</span> -<span class="cp">%}</span>
+<span class="x">- </span><span class="cp">{{</span> <span class="nv">key</span> <span class="cp">}}</span><span class="x">: </span><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">value_repr</span><span class="o">(</span><span class="nv">cutoff</span><span class="o">|</span><span class="nf">default</span><span class="o">(</span><span class="m">256</span><span class="o">))</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> -<span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span><span class="x">Output:</span><span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span>
+<span class="x">- </span><span class="cp">{{</span> <span class="nv">output</span> <span class="o">|</span> <span class="nf">value_repr</span><span class="o">(-</span><span class="m">1</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">expected</span> <span class="k">is</span> <span class="nf">defined</span> -<span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span><span class="x">Expected:</span><span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span>
+<span class="x">- </span><span class="cp">{{</span> <span class="nv">expected</span> <span class="o">|</span> <span class="nf">value_repr</span><span class="o">(-</span><span class="m">1</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">hints</span> <span class="k">is</span> <span class="nf">defined</span> <span class="k">and</span> <span class="nv">hints</span><span class="o">|</span><span class="nf">length</span> <span class="o">&gt;</span> <span class="m">0</span> -<span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span><span class="x">Hints:</span><span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">hint</span> <span class="k">in</span> <span class="nv">hints</span> -<span class="cp">%}</span>
+<span class="x">- </span><span class="cp">{{</span> <span class="nv">hint</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> -<span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> -<span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="id20">
+<h4>5.1.2. 自定义过滤器<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">filters/value_repr.py</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">value_repr</span></code> 过滤器：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CUTOFF_LENGTH_DEFAULT</span> <span class="o">=</span> <span class="mi">256</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">value_repr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">CUTOFF_LENGTH_DEFAULT</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">    返回值的字符串表示，截断到指定长度。</span>
+
+<span class="sd">    参数:</span>
+<span class="sd">        value: 要表示的值。</span>
+<span class="sd">        cutoff: 字符串表示的最大长度。</span>
+<span class="sd">            如果 cutoff 为负，则不应用截断。</span>
+
+<span class="sd">    返回:</span>
+<span class="sd">        值的字符串表示，必要时进行截断。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">cutoff</span> <span class="ow">or</span> <span class="n">cutoff</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">s</span><span class="p">[:</span> <span class="n">cutoff</span> <span class="o">-</span> <span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id21">
+<h4>5.1.3. 用法<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h4>
+<p>AgentHeaven 中的模板已经翻译成英文和中文，因此我们可以直接加载它们而无需国际化初始化。</p>
+<blockquote>
+<div><p><strong>开发中：</strong> 添加更多语言的内置模板翻译。</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ahvn.utils.basic.jinja_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_jinja_env</span>
+
+<span class="c1"># 步骤 2: 加载环境</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="c1"># 步骤 3: 使用示例数据渲染</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="s2">&quot;Geography question&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;The capital of France is Paris.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expected&quot;</span><span class="p">:</span> <span class="s2">&quot;Paris&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cutoff&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;hints&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Consider European geography&quot;</span><span class="p">,</span> <span class="s2">&quot;Capital cities&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;experience/default_instance&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Inputs</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">query</span><span class="p">:</span> <span class="s1">&#39;What is the capital of France?&#39;</span>
+<span class="o">-</span> <span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Geography question&#39;</span>
+<span class="n">Output</span><span class="p">:</span>
+<span class="o">-</span> <span class="s1">&#39;The capital of France is Paris.&#39;</span>
+<span class="n">Expected</span><span class="p">:</span>
+<span class="o">-</span> <span class="s1">&#39;Paris&#39;</span>
+<span class="n">Hints</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">Consider</span> <span class="n">European</span> <span class="n">geography</span>
+<span class="o">-</span> <span class="n">Capital</span> <span class="n">cities</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id22">
+<h3>5.2. 模板组织<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
+<p>有效组织模板：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 良好：按功能逻辑分离</span>
+<span class="n">template_paths</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;experience&quot;</span><span class="p">:</span> <span class="s2">&quot;prompts/experience&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tools&quot;</span><span class="p">:</span> <span class="s2">&quot;prompts/toolspec&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="s2">&quot;prompts/autocode&quot;</span>
+<span class="p">}</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">load_jinja_env</span><span class="p">(</span><span class="n">template_paths</span><span class="p">)</span>
+
+<span class="c1"># 良好：一致的命名约定</span>
+<span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;experience/user_interaction&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<br/>
+</section>
+<section id="id23">
+<h3>5.3. 国际化策略<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<p>规划多语言：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 配置支持的语言</span>
+<span class="n">HEAVEN_CM</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;prompts.langs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;zh&quot;</span><span class="p">,</span> <span class="s2">&quot;es&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">])</span>
+
+<span class="c1"># 在模板中使用可翻译字符串</span>
+<span class="c1"># 良好: {% trans %}Hello World{% endtrans %}</span>
+<span class="c1"># 不良: Hello World</span>
+
+<span class="c1"># 为翻译者提供上下文</span>
+<span class="c1"># {# 上下文: 用户问候消息 #}</span>
+<span class="c1"># {% trans %}Welcome to AgentHeaven!{% endtrans %}</span>
+</pre></div>
+</div>
+<br/>
+</section>
+</section>
+<section id="id24">
+<h2>拓展阅读<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>提示：</strong> 有关 AgentHeaven 中提示词使用的更多信息，请参见：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../cli-guide/prompt-management.html"><span class="std std-doc">提示管理</span></a> - CLI 中的提示词创建和本地化</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>提示：</strong> 有关 AgentHeaven 中实用工具的更多信息，请参见：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../index.html"><span class="std std-doc">实用工具</span></a> - 为方便起见提供的所有 Python 实用工具</p></li>
+</ul>
+</div></blockquote>
+<br/>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="serialize_utils.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">序列化工具</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="parallel_utils.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">多线程并行化</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL团队
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">模板处理</a><ul>
+<li><a class="reference internal" href="#id2">1. 入门指南</a><ul>
+<li><a class="reference internal" href="#id3">1.1. 模板结构</a></li>
+<li><a class="reference internal" href="#id4">1.2. 基本用法</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#jinja">2. Jinja 环境</a><ul>
+<li><a class="reference internal" href="#id5">2.1. 什么是 Jinja？</a></li>
+<li><a class="reference internal" href="#id6">2.2. 加载环境</a></li>
+<li><a class="reference internal" href="#id7">2.3. 内置模板</a></li>
+<li><a class="reference internal" href="#id8">2.4. 模板路径扫描</a></li>
+<li><a class="reference internal" href="#id9">2.5. 自定义过滤器</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#babel">3. Babel 本地化</a><ul>
+<li><a class="reference internal" href="#id10">3.1. 什么是 Babel？</a></li>
+<li><a class="reference internal" href="#jinja-babel">3.2. Jinja 和 Babel 如何协同工作</a></li>
+<li><a class="reference internal" href="#id11">3.3. 初始化</a></li>
+<li><a class="reference internal" href="#id12">3.4. 编译翻译</a></li>
+<li><a class="reference internal" href="#id13">3.5. 可翻译模板</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">4. 高级功能</a><ul>
+<li><a class="reference internal" href="#id15">4.1. 多语言模板渲染</a></li>
+<li><a class="reference internal" href="#id16">4.2. 配置集成</a></li>
+<li><a class="reference internal" href="#ukf">4.3. 与 UKF 集成</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id17">5. 最佳实践</a><ul>
+<li><a class="reference internal" href="#id18">5.1. 示例：经验格式化</a><ul>
+<li><a class="reference internal" href="#id19">5.1.1. Jinja 模板</a></li>
+<li><a class="reference internal" href="#id20">5.1.2. 自定义过滤器</a></li>
+<li><a class="reference internal" href="#id21">5.1.3. 用法</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id22">5.2. 模板组织</a></li>
+<li><a class="reference internal" href="#id23">5.3. 国际化策略</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id24">拓展阅读</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=e4723610"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../../../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../../../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../../../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>

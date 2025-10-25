@@ -1,0 +1,1387 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../genindex.html"><link rel="search" title="搜索" href="../search.html"><link rel="next" title="ahvn.utils.basic.str_utils module" href="ahvn.utils.basic.str_utils.html"><link rel="prev" title="ahvn.utils.basic.rnd_utils module" href="ahvn.utils.basic.rnd_utils.html">
+        <link rel="prefetch" href="../_static/logo-light.png" as="image">
+        <link rel="prefetch" href="../_static/logo-dark.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>ahvn.utils.basic.serialize_utils module - AgentHeaven文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=43646d4c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     🚧 AgentHeaven 正在积极开发中，功能可能会发生变化。 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">AgentHeaven文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/logo-light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/logo-dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/index.html">简介</a><input aria-label="Toggle navigation of 简介" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/philosophy.html">理念与愿景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/architecture.html">架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/learning.html">学习 AgentHeaven</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting-started/index.html">快速开始</a><input aria-label="Toggle navigation of 快速开始" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/installation.html">安装指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/setup.html">设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/5min-quickstart.html">5 分钟快速开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/60min-tutorial.html">60 分钟教程</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../configuration/index.html">配置</a><input aria-label="Toggle navigation of 配置" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/core.html">核心配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/llm.html">LLM 配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/database.html">数据库配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/vdb.html">向量数据库配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python-guide/index.html">主指南（Python）</a><input aria-label="Toggle navigation of 主指南（Python）" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/utils/index.html">实用工具</a><input aria-label="Toggle navigation of 实用工具" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../python-guide/utils/basic/index.html">基础实用工具</a><input aria-label="Toggle navigation of 基础实用工具" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/config_utils.html">配置管理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/hash_utils.html">哈希工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/parallel_utils.html">多线程并行化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/jinja_utils.html">模板处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/serialize_utils.html">序列化工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/str_utils.html">字符串实用工具</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../python-guide/utils/basic/misc_utils.html">其他实用工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/utils/db.html">数据库工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/utils/vdb.html">向量数据库工具</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/cache.html">缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/llm.html">LLM</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/ukf/index.html">UKF (通用知识格式)</a><input aria-label="Toggle navigation of UKF (通用知识格式)" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/ukf-v1.0.html">UKF v1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/data-types.html">UKF 数据类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/ukf/builtin-templates.html">内置模板</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/klstore/index.html">KLStore</a><input aria-label="Toggle navigation of KLStore" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/base.html">BaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/cache.html">CacheKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/database.html">DatabaseKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/vector.html">VectorKLStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klstore/cascade.html">CascadeKLStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/klengine/index.html">KLEngine</a><input aria-label="Toggle navigation of KLEngine" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/base.html">BaseKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/facet.html">FacetKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/daac.html">DAACKLEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/klengine/vector.html">VectorKLEngine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/klbase.html">KLBase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python-guide/toolspec/index.html">工具规范</a><input aria-label="Toggle navigation of 工具规范" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/toolspec/base.html">工具规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-guide/toolspec/builtins.html">内置工具规范</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python-guide/agent.html">智能体</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cli-guide/index.html">CLI 指南</a><input aria-label="Toggle navigation of CLI 指南" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/repo-management.html">仓库管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-inference.html">LLM 推理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/llm-session.html">LLM 会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/prompt-management.html">提示词管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli-guide/knowledge-management.html">知识管理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gui-guide/index.html">GUI 使用指南</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../example-applications/index.html">示例应用</a><input aria-label="Toggle navigation of 示例应用" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../example-applications/nl2sql-system.html">NL2SQL 系统</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">开发规划</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contribution/index.html">贡献</a><input aria-label="Toggle navigation of 贡献" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/overview.html">贡献概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/for_developers.html">开发者指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/feature_workflow.html">功能添加工作流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/srs.html">简要软件需求（SRS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution/ar/index.html">分配需求 (AR)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_index.html">API 参考</a><input aria-label="Toggle navigation of API 参考" checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="ahvn.html">ahvn package</a><input aria-label="Toggle navigation of ahvn package" checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.adapter.html">ahvn.adapter package</a><input aria-label="Toggle navigation of ahvn.adapter package" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.adapter.base.html">ahvn.adapter.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.adapter.db.html">ahvn.adapter.db module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.adapter.vdb.html">ahvn.adapter.vdb module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.cache.html">ahvn.cache package</a><input aria-label="Toggle navigation of ahvn.cache package" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.base.html">ahvn.cache.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.callback_cache.html">ahvn.cache.callback_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.db_cache.html">ahvn.cache.db_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.disk_cache.html">ahvn.cache.disk_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.in_mem_cache.html">ahvn.cache.in_mem_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.json_cache.html">ahvn.cache.json_cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cache.no_cache.html">ahvn.cache.no_cache module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.cli.html">ahvn.cli package</a><input aria-label="Toggle navigation of ahvn.cli package" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.ahvn.html">ahvn.cli.ahvn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.babel_cli.html">ahvn.cli.babel_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.chat_cli.html">ahvn.cli.chat_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.config_cli.html">ahvn.cli.config_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.repo_cli.html">ahvn.cli.repo_cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.cli.utils.html">ahvn.cli.utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.imitator.html">ahvn.imitator package</a><input aria-label="Toggle navigation of ahvn.imitator package" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.imitator.base.html">ahvn.imitator.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.klbase.html">ahvn.klbase package</a><input aria-label="Toggle navigation of ahvn.klbase package" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klbase.base.html">ahvn.klbase.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.klengine.html">ahvn.klengine package</a><input aria-label="Toggle navigation of ahvn.klengine package" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klengine.base.html">ahvn.klengine.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klengine.daac_engine.html">ahvn.klengine.daac_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klengine.facet_engine.html">ahvn.klengine.facet_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klengine.vector_engine.html">ahvn.klengine.vector_engine module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.klstore.html">ahvn.klstore package</a><input aria-label="Toggle navigation of ahvn.klstore package" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.base.html">ahvn.klstore.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.cache_store.html">ahvn.klstore.cache_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.cascade_store.html">ahvn.klstore.cascade_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.db_store.html">ahvn.klstore.db_store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.klstore.vdb_store.html">ahvn.klstore.vdb_store module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.llm.html">ahvn.llm package</a><input aria-label="Toggle navigation of ahvn.llm package" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.llm.base.html">ahvn.llm.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.llm.llm_utils.html">ahvn.llm.llm_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ahvn.market.html">ahvn.market package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.tool.html">ahvn.tool package</a><input aria-label="Toggle navigation of ahvn.tool package" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.tool.base.html">ahvn.tool.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.tool.mixin.html">ahvn.tool.mixin module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ahvn.ukf.html">ahvn.ukf package</a><input aria-label="Toggle navigation of ahvn.ukf package" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.ukf.templates.html">ahvn.ukf.templates package</a><input aria-label="Toggle navigation of ahvn.ukf.templates package" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="ahvn.ukf.templates.basic.html">ahvn.ukf.templates.basic package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.basic package" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.document.html">ahvn.ukf.templates.basic.document module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.experience.html">ahvn.ukf.templates.basic.experience module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.knowledge.html">ahvn.ukf.templates.basic.knowledge module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.prompt.html">ahvn.ukf.templates.basic.prompt module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.resource.html">ahvn.ukf.templates.basic.resource module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.template.html">ahvn.ukf.templates.basic.template module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.basic.tool.html">ahvn.ukf.templates.basic.tool module</a></li>
+</ul>
+</li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="ahvn.ukf.templates.db.html">ahvn.ukf.templates.db package</a><input aria-label="Toggle navigation of ahvn.ukf.templates.db package" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.col_ukft.html">ahvn.ukf.templates.db.col_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.db_ukft.html">ahvn.ukf.templates.db.db_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.enum_ukft.html">ahvn.ukf.templates.db.enum_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.pred_ukft.html">ahvn.ukf.templates.db.pred_ukft module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.ukf.templates.db.tab_ukft.html">ahvn.ukf.templates.db.tab_ukft module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.ukf.base.html">ahvn.ukf.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.ukf.types.html">ahvn.ukf.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.ukf.ukf_utils.html">ahvn.ukf.ukf_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="ahvn.utils.html">ahvn.utils package</a><input aria-label="Toggle navigation of ahvn.utils package" checked="" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l4 current has-children"><a class="reference internal" href="ahvn.utils.basic.html">ahvn.utils.basic package</a><input aria-label="Toggle navigation of ahvn.utils.basic package" checked="" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.cmd_utils.html">ahvn.utils.basic.cmd_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.color_utils.html">ahvn.utils.basic.color_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.config_utils.html">ahvn.utils.basic.config_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.debug_utils.html">ahvn.utils.basic.debug_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.file_utils.html">ahvn.utils.basic.file_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.func_utils.html">ahvn.utils.basic.func_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.hash_utils.html">ahvn.utils.basic.hash_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.jinja_utils.html">ahvn.utils.basic.jinja_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.log_utils.html">ahvn.utils.basic.log_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.misc_utils.html">ahvn.utils.basic.misc_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.parallel_utils.html">ahvn.utils.basic.parallel_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.parser_utils.html">ahvn.utils.basic.parser_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.path_utils.html">ahvn.utils.basic.path_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.request_utils.html">ahvn.utils.basic.request_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.rnd_utils.html">ahvn.utils.basic.rnd_utils module</a></li>
+<li class="toctree-l5 current current-page"><a class="current reference internal" href="#">ahvn.utils.basic.serialize_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.str_utils.html">ahvn.utils.basic.str_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.basic.type_utils.html">ahvn.utils.basic.type_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.utils.db.html">ahvn.utils.db package</a><input aria-label="Toggle navigation of ahvn.utils.db package" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="ahvn.utils.db.db_desc.html">ahvn.utils.db.db_desc package</a><input aria-label="Toggle navigation of ahvn.utils.db.db_desc package" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" role="switch" type="checkbox"/><label for="toctree-checkbox-32"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.db_desc_gen.html">ahvn.utils.db.db_desc.db_desc_gen module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.db_info_extract.html">ahvn.utils.db.db_desc.db_info_extract module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.db_ukf_store.html">ahvn.utils.db.db_desc.db_ukf_store module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.facet_demo.html">ahvn.utils.db.db_desc.facet_demo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.gen_synonyms.html">ahvn.utils.db.db_desc.gen_synonyms module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ahvn.utils.db.db_desc.synonyms_utils.html">ahvn.utils.db.db_desc.synonyms_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.db.base.html">ahvn.utils.db.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.db.db_utils.html">ahvn.utils.db.db_utils module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.db.facet.html">ahvn.utils.db.facet module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.db.types.html">ahvn.utils.db.types module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.utils.extensions.html">ahvn.utils.extensions package</a><input aria-label="Toggle navigation of ahvn.utils.extensions package" class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" role="switch" type="checkbox"/><label for="toctree-checkbox-33"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.extensions.autocode.html">ahvn.utils.extensions.autocode module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.extensions.autofunc.html">ahvn.utils.extensions.autofunc module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.extensions.autoi18n.html">ahvn.utils.extensions.autoi18n module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.extensions.autotask.html">ahvn.utils.extensions.autotask module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="ahvn.utils.vdb.html">ahvn.utils.vdb package</a><input aria-label="Toggle navigation of ahvn.utils.vdb package" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" role="switch" type="checkbox"/><label for="toctree-checkbox-34"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.vdb.base.html">ahvn.utils.vdb.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.vdb.filter.html">ahvn.utils.vdb.filter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.vdb.types.html">ahvn.utils.vdb.types module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ahvn.utils.vdb.vdb_utils.html">ahvn.utils.vdb.vdb_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.utils.default_deps.html">ahvn.utils.default_deps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ahvn.utils.deps.html">ahvn.utils.deps module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ahvn.version.html">ahvn.version module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../community/index.html">社区与支持</a><input aria-label="Toggle navigation of 社区与支持" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" role="switch" type="checkbox"/><label for="toctree-checkbox-35"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community/resources.html">社区资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">引用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">许可协议</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/blob/master/docs/zh/source/api/ahvn.utils.basic.serialize_utils.rst?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Magolor/AgentHeaven/edit/master/docs/zh/source/api/ahvn.utils.basic.serialize_utils.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-ahvn.utils.basic.serialize_utils">
+<span id="ahvn-utils-basic-serialize-utils-module"></span><h1>ahvn.utils.basic.serialize_utils module<a class="headerlink" href="#module-ahvn.utils.basic.serialize_utils" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.load_txt">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">load_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#load_txt"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.load_txt" title="Link to this definition">¶</a></dt>
+<dd><p>Load text from a file. If the file does not exist, returns an empty string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the file.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for reading the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns an empty string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The contents of the file or an empty string if the file does not exist.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）">str</a></p>
+</dd>
+<dt class="field-even">抛出<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/exceptions.html#FileNotFoundError" title="（在 Python v3.14）"><strong>FileNotFoundError</strong></a> -- If the file does not exist and <cite>strict</cite> is True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.iter_txt">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">iter_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#iter_txt"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.iter_txt" title="Link to this definition">¶</a></dt>
+<dd><p>Iterate over a text file, yielding each line (stripping the newline character at the end).</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the file.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for reading the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns an empty generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">生成器<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em> -- Each line in the text file.</p>
+</dd>
+<dt class="field-odd">抛出<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/exceptions.html#FileNotFoundError" title="（在 Python v3.14）"><strong>FileNotFoundError</strong></a> -- If the file does not exist and <cite>strict</cite> is True.</p>
+</dd>
+<dt class="field-even">返回类型<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/zh-cn/3/library/typing.html#typing.Generator" title="（在 Python v3.14）"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/zh-cn/3/library/constants.html#None" title="（在 Python v3.14）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/zh-cn/3/library/constants.html#None" title="（在 Python v3.14）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.save_txt">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">save_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#save_txt"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.save_txt" title="Link to this definition">¶</a></dt>
+<dd><p>Save text to a file. If the file does not exist, it will be created.</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>An extra newline will be added at the end of the string to be consistent with the behavior of <cite>append_txt</cite>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The text to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the file.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for writing the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.append_txt">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">append_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#append_txt"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.append_txt" title="Link to this definition">¶</a></dt>
+<dd><p>Append text to a file. If the file does not exist, it will be created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The text to append.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the file.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for writing the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.loads_yaml">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">loads_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#loads_yaml"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.loads_yaml" title="Link to this definition">¶</a></dt>
+<dd><p>Load a YAML string into a Python object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The YAML string to load.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>yaml.safe_load</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Python object represented by the YAML string.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dumps_yaml">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dumps_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dumps_yaml"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dumps_yaml" title="Link to this definition">¶</a></dt>
+<dd><p>Serialize a Python object to a YAML string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The Python object to serialize.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the YAML output. Defaults to False.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#int" title="（在 Python v3.14）"><em>int</em></a>) -- The number of spaces to use for indentation. Defaults to 4.</p></li>
+<li><p><strong>allow_unicode</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to allow Unicode characters in the output. Defaults to True.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>yaml.safe_dump</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The YAML string representation of the object.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.load_yaml">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">load_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#load_yaml"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.load_yaml" title="Link to this definition">¶</a></dt>
+<dd><p>Load a YAML file into a Python object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the YAML file.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for reading the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns an empty dictionary.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>yaml.safe_load</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Python object represented by the YAML file.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">抛出<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/exceptions.html#FileNotFoundError" title="（在 Python v3.14）"><strong>FileNotFoundError</strong></a> -- If the file does not exist and <cite>strict</cite> is True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dump_yaml">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dump_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dump_yaml"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dump_yaml" title="Link to this definition">¶</a></dt>
+<dd><p>Save a Python object to a YAML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The Python object to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the YAML file.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the YAML output. Defaults to False.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#int" title="（在 Python v3.14）"><em>int</em></a>) -- The number of spaces to use for indentation. Defaults to 4.</p></li>
+<li><p><strong>allow_unicode</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to allow Unicode characters in the output. Defaults to True.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>yaml.safe_dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.save_yaml">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">save_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#save_yaml"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.save_yaml" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <cite>dump_yaml</cite>. Saves a Python object to a YAML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The Python object to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the YAML file.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the YAML output. Defaults to False.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#int" title="（在 Python v3.14）"><em>int</em></a>) -- The number of spaces to use for indentation. Defaults to 4.</p></li>
+<li><p><strong>allow_unicode</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to allow Unicode characters in the output. Defaults to True.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>yaml.safe_dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.load_pkl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">load_pkl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#load_pkl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.load_pkl" title="Link to this definition">¶</a></dt>
+<dd><p>Load a Python object from a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the pickle file.</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns None.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>pickle.load</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Python object represented by the pickle file.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dump_pkl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dump_pkl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dump_pkl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dump_pkl" title="Link to this definition">¶</a></dt>
+<dd><p>Save a Python object to a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The Python object to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the pickle file.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>pickle.dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.save_pkl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">save_pkl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#save_pkl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.save_pkl" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <cite>dump_pkl</cite>. Saves a Python object to a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The Python object to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the pickle file.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>pickle.dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.load_hex">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">load_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#load_hex"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.load_hex" title="Link to this definition">¶</a></dt>
+<dd><p>Load the binary contents of a file as a hexadecimal string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the file.</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns an empty string.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>bytes.hex</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The hexadecimal string representation of the file's contents.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dump_hex">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dump_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dump_hex"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dump_hex" title="Link to this definition">¶</a></dt>
+<dd><p>Save a string or bytes object as a hexadecimal string to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The string or bytes object to save as hexadecimal.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the file.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>binascii.hexlify</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.save_hex">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">save_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#save_hex"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.save_hex" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <cite>dump_hex</cite>. Saves a string or bytes object as a hexadecimal string to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The string or bytes object to save as hexadecimal.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the file.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>binascii.hexlify</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.load_b64">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">load_b64</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#load_b64"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.load_b64" title="Link to this definition">¶</a></dt>
+<dd><p>Load the binary contents of a file as a Base64-encoded string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the file.</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns an empty string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Base64 string representation of the file's contents.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dump_b64">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dump_b64</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dump_b64"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dump_b64" title="Link to this definition">¶</a></dt>
+<dd><p>Save a Base64 string to a file by decoding it into binary content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The Base64 string to decode and save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.save_b64">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">save_b64</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#save_b64"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.save_b64" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <cite>dump_b64</cite>. Saves a Base64 string to a file by decoding it into binary content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The Base64 string to decode and save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.serialize_path">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">serialize_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#serialize_path"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.serialize_path" title="Link to this definition">¶</a></dt>
+<dd><p>Serialize the contents of a directory hierarchy into a dictionary mapping relative paths to Base64-encoded file contents.</p>
+<p>Directories are recorded with a value of <code class="docutils literal notranslate"><span class="pre">None</span></code> so the structure can be rehydrated later.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- Directory (or file) path to serialize.</p>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapping of relative paths to Base64 payloads (or <code class="docutils literal notranslate"><span class="pre">None</span></code> for directories).</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）">str</a>, Optional[<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）">str</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.deserialize_path">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">deserialize_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serialized</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#deserialize_path"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.deserialize_path" title="Link to this definition">¶</a></dt>
+<dd><p>Materialize files and directories described by <code class="docutils literal notranslate"><span class="pre">serialized</span></code> under <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>serialized</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a><em>, </em><em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a><em>]</em><em>]</em>) -- Mapping emitted by <a class="reference internal" href="#ahvn.utils.basic.serialize_utils.serialize_path" title="ahvn.utils.basic.serialize_utils.serialize_path"><code class="xref py py-func docutils literal notranslate"><span class="pre">serialize_path()</span></code></a>.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- Destination directory where content should be written.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.serialize_func">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">serialize_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#serialize_func"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.serialize_func" title="Link to this definition">¶</a></dt>
+<dd><p>Serialize a function to a descriptor dictionary using <cite>dill</cite> for source code and <cite>cloudpickle</cite> for binary content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>Callable</em>) -- The function to serialize.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>cloudpickle.dumps</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A dictionary representation of the serialized function. It contains the following attributes:</dt><dd><p>Built-in Attributes:
+- name: The function's name.
+- qualname: The qualified name of the function.
+- doc: The function's docstring.
+- module: The qualified name of the module where the function is defined.
+- defaults: Default values for the function's positional arguments.
+- kwdefaults: Default values for the function's keyword-only arguments.
+- annotations: Type annotations for the function's arguments and return value.
+- code: The source code of the function (as a string, via <cite>dill</cite>).
+- dict: The function's <cite>__dict__</cite> (excluding <cite>__source__</cite>), with all values stringified.
+Extra Attributes:
+- stream: Whether the function is a generator function (bool).
+- hex_dumps: The function serialized as a hex string using <cite>cloudpickle</cite>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.deserialize_func">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">deserialize_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hex_dumps'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#deserialize_func"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.deserialize_func" title="Link to this definition">¶</a></dt>
+<dd><p>Deserialize a function from a descriptor dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>Dict</em>) -- The function descriptor dictionary.</p></li>
+<li><p><strong>prefer</strong> (<em>Literal</em><em>[</em><em>'code'</em><em>,</em><em>'hex_dumps'</em><em>]</em>) -- Which method to try first.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The deserialized function.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+<dt class="field-even">抛出<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="ahvn.utils.basic.debug_utils.html#ahvn.utils.basic.debug_utils.FunctionDeserializationError" title="ahvn.utils.basic.debug_utils.FunctionDeserializationError"><strong>FunctionDeserializationError</strong></a> -- If deserialization fails.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.AhvnJsonEncoder">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">AhvnJsonEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipkeys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_circular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#AhvnJsonEncoder"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.AhvnJsonEncoder" title="Link to this definition">¶</a></dt>
+<dd><p>基类：<a class="reference external" href="https://docs.python.org/zh-cn/3/library/json.html#json.JSONEncoder" title="（在 Python v3.14）"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONEncoder</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.AhvnJsonEncoder.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#AhvnJsonEncoder.encode"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.AhvnJsonEncoder.encode" title="Link to this definition">¶</a></dt>
+<dd><p>Return a JSON string representation of a Python data structure.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">json.encoder</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONEncoder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JSONEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">]})</span>
+<span class="go">&#39;{&quot;foo&quot;: [&quot;bar&quot;, &quot;baz&quot;]}&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.AhvnJsonEncoder.transform">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#AhvnJsonEncoder.transform"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.AhvnJsonEncoder.transform" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.AhvnJsonDecoder">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">AhvnJsonDecoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#AhvnJsonDecoder"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.AhvnJsonDecoder" title="Link to this definition">¶</a></dt>
+<dd><p>基类：<a class="reference external" href="https://docs.python.org/zh-cn/3/library/json.html#json.JSONDecoder" title="（在 Python v3.14）"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONDecoder</span></code></a></p>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.AhvnJsonDecoder.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#AhvnJsonDecoder.__init__"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.AhvnJsonDecoder.__init__" title="Link to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">object_hook</span></code>, if specified, will be called with the result
+of every JSON object decoded and its return value will be used in
+place of the given <code class="docutils literal notranslate"><span class="pre">dict</span></code>.  This can be used to provide custom
+deserializations (e.g. to support JSON-RPC class hinting).</p>
+<p><code class="docutils literal notranslate"><span class="pre">object_pairs_hook</span></code>, if specified will be called with the result of
+every JSON object decoded with an ordered list of pairs.  The return
+value of <code class="docutils literal notranslate"><span class="pre">object_pairs_hook</span></code> will be used instead of the <code class="docutils literal notranslate"><span class="pre">dict</span></code>.
+This feature can be used to implement custom decoders.
+If <code class="docutils literal notranslate"><span class="pre">object_hook</span></code> is also defined, the <code class="docutils literal notranslate"><span class="pre">object_pairs_hook</span></code> takes
+priority.</p>
+<p><code class="docutils literal notranslate"><span class="pre">parse_float</span></code>, if specified, will be called with the string
+of every JSON float to be decoded. By default this is equivalent to
+float(num_str). This can be used to use another datatype or parser
+for JSON floats (e.g. decimal.Decimal).</p>
+<p><code class="docutils literal notranslate"><span class="pre">parse_int</span></code>, if specified, will be called with the string
+of every JSON int to be decoded. By default this is equivalent to
+int(num_str). This can be used to use another datatype or parser
+for JSON integers (e.g. float).</p>
+<p><code class="docutils literal notranslate"><span class="pre">parse_constant</span></code>, if specified, will be called with one of the
+following strings: -Infinity, Infinity, NaN.
+This can be used to raise an exception if invalid JSON numbers
+are encountered.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">strict</span></code> is false (true is the default), then control
+characters will be allowed inside strings.  Control characters in
+this context are those with character codes in the 0-31 range,
+including <code class="docutils literal notranslate"><span class="pre">'\t'</span></code> (tab), <code class="docutils literal notranslate"><span class="pre">'\n'</span></code>, <code class="docutils literal notranslate"><span class="pre">'\r'</span></code> and <code class="docutils literal notranslate"><span class="pre">'\0'</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.AhvnJsonDecoder.transform">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#AhvnJsonDecoder.transform"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.AhvnJsonDecoder.transform" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.loads_json">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">loads_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#loads_json"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.loads_json" title="Link to this definition">¶</a></dt>
+<dd><p>Load a JSON string into a Python object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The JSON string to load.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.loads</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Python object represented by the JSON string.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dumps_json">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dumps_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dumps_json"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dumps_json" title="Link to this definition">¶</a></dt>
+<dd><p>Serialize a Python object to a JSON string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The Python object to serialize.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the JSON output. Defaults to False.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#int" title="（在 Python v3.14）"><em>int</em></a>) -- The number of spaces to use for indentation. Defaults to 4.</p></li>
+<li><p><strong>ensure_ascii</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to escape non-ASCII characters. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.dumps</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The JSON string representation of the object.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.load_json">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#load_json"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.load_json" title="Link to this definition">¶</a></dt>
+<dd><p>Load a JSON file into a Python object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the JSON file.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for reading the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns an empty dictionary.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.load</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Python object represented by the JSON file.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">抛出<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/exceptions.html#FileNotFoundError" title="（在 Python v3.14）"><strong>FileNotFoundError</strong></a> -- If the file does not exist and <cite>strict</cite> is True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dump_json">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dump_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dump_json"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dump_json" title="Link to this definition">¶</a></dt>
+<dd><p>Save a Python object to a JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The Python object to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the JSON file.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the JSON output. Defaults to False.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#int" title="（在 Python v3.14）"><em>int</em></a>) -- The number of spaces to use for indentation. Defaults to 4.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for writing the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>ensure_ascii</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to escape non-ASCII characters. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.save_json">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">save_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#save_json"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.save_json" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <cite>dump_json</cite>. Saves a Python object to a JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) -- The Python object to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the JSON file.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the JSON output. Defaults to False.</p></li>
+<li><p><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#int" title="（在 Python v3.14）"><em>int</em></a>) -- The number of spaces to use for indentation. Defaults to 4.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for writing the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>ensure_ascii</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to escape non-ASCII characters. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.loads_jsonl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">loads_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#loads_jsonl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.loads_jsonl" title="Link to this definition">¶</a></dt>
+<dd><p>Load a JSON Lines string into a list of Python objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The JSON Lines string to load.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.loads</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of Python objects represented by the JSON Lines string.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dumps_jsonl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dumps_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dumps_jsonl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dumps_jsonl" title="Link to this definition">¶</a></dt>
+<dd><p>Serialize a list of Python objects to a JSON Lines string.</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>An extra newline will be added at the end of the string to be consistent with the behavior of <cite>append_jsonl</cite>.
+<cite>indent</cite> is NOT a valid argument for this function, as JSON Lines does not support indentation. Passing <cite>indent</cite> will be ignored.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>List</em><em>[</em><em>Any</em><em>]</em>) -- The list of Python objects to serialize.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the JSON output. Defaults to False.</p></li>
+<li><p><strong>ensure_ascii</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to escape non-ASCII characters. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.dumps</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>The JSON Lines string representation of the list.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.load_jsonl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">load_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#load_jsonl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.load_jsonl" title="Link to this definition">¶</a></dt>
+<dd><p>Load a JSON Lines file into a list of Python objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the JSON Lines file.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for reading the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns an empty list.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.load</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of Python objects represented by the JSON Lines file.</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Any]</p>
+</dd>
+<dt class="field-even">抛出<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/exceptions.html#FileNotFoundError" title="（在 Python v3.14）"><strong>FileNotFoundError</strong></a> -- If the file does not exist and <cite>strict</cite> is True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.iter_jsonl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">iter_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#iter_jsonl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.iter_jsonl" title="Link to this definition">¶</a></dt>
+<dd><p>Iterate over a JSON Lines file, yielding each Python object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the JSON Lines file.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for reading the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- If True, raises an error if the file does not exist. Otherwise, returns an empty list.</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.load</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">生成器<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Any</em> -- Each Python object represented by a line in the JSON Lines file.</p>
+</dd>
+<dt class="field-odd">抛出<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/zh-cn/3/library/exceptions.html#FileNotFoundError" title="（在 Python v3.14）"><strong>FileNotFoundError</strong></a> -- If the file does not exist and <cite>strict</cite> is True.</p>
+</dd>
+<dt class="field-even">返回类型<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/zh-cn/3/library/typing.html#typing.Generator" title="（在 Python v3.14）"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference external" href="https://docs.python.org/zh-cn/3/library/typing.html#typing.Any" title="（在 Python v3.14）"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://docs.python.org/zh-cn/3/library/constants.html#None" title="（在 Python v3.14）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/zh-cn/3/library/constants.html#None" title="（在 Python v3.14）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.dump_jsonl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">dump_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#dump_jsonl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.dump_jsonl" title="Link to this definition">¶</a></dt>
+<dd><p>Save a list of Python objects to a JSON Lines file.</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>An extra newline will be added at the end of the file to be consistent with the behavior of <cite>append_jsonl</cite>.
+<cite>indent</cite> is NOT a valid argument for this function, as JSON Lines does not support indentation. Passing <cite>indent</cite> will be ignored.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>List</em><em>[</em><em>Any</em><em>]</em>) -- The list of Python objects to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the JSON Lines file.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the JSON output. Defaults to False.</p></li>
+<li><p><strong>ensure_ascii</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to escape non-ASCII characters. Defaults to False.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for writing the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.save_jsonl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">save_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#save_jsonl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.save_jsonl" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for <cite>dump_jsonl</cite>. Saves a list of Python objects to a JSON Lines file.</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>An extra newline will be added at the end of the file to be consistent with the behavior of <cite>append_jsonl</cite>.
+<cite>indent</cite> is NOT a valid argument for this function, as JSON Lines does not support indentation. Passing <cite>indent</cite> will be ignored.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>List</em><em>[</em><em>Any</em><em>]</em>) -- The list of Python objects to save.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the JSON Lines file.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the JSON output. Defaults to False.</p></li>
+<li><p><strong>ensure_ascii</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to escape non-ASCII characters. Defaults to False.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for writing the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ahvn.utils.basic.serialize_utils.append_jsonl">
+<span class="sig-prename descclassname"><span class="pre">ahvn.utils.basic.serialize_utils.</span></span><span class="sig-name descname"><span class="pre">append_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ahvn/utils/basic/serialize_utils.html#append_jsonl"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#ahvn.utils.basic.serialize_utils.append_jsonl" title="Link to this definition">¶</a></dt>
+<dd><p>Append a list of Python objects to a JSON Lines file. If the file does not exist, it will be created. If the object is a dictionary, a single line will be added with the dictionary serialized as JSON. If the object is a list, each item in the list will be serialized as a separate line in the JSON Lines file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Union</em><em>[</em><em>Dict</em><em>,</em><em>List</em><em>[</em><em>Any</em><em>]</em><em>]</em>) -- The list of Python objects to append.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The path to the JSON Lines file.</p></li>
+<li><p><strong>sort_keys</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to sort the keys in the JSON output. Defaults to False.</p></li>
+<li><p><strong>ensure_ascii</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/functions.html#bool" title="（在 Python v3.14）"><em>bool</em></a>) -- Whether to escape non-ASCII characters. Defaults to False.</p></li>
+<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" title="（在 Python v3.14）"><em>str</em></a>) -- The encoding to use for writing the file. Defaults to None, which will use the encoding in the config file (&quot;core.encoding&quot;).</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments to pass to <cite>json.dump</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="ahvn.utils.basic.str_utils.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">ahvn.utils.basic.str_utils module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="ahvn.utils.basic.rnd_utils.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">ahvn.utils.basic.rnd_utils module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, RubikSQL团队
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">ahvn.utils.basic.serialize_utils module</a><ul>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.load_txt"><code class="docutils literal notranslate"><span class="pre">load_txt()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.iter_txt"><code class="docutils literal notranslate"><span class="pre">iter_txt()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.save_txt"><code class="docutils literal notranslate"><span class="pre">save_txt()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.append_txt"><code class="docutils literal notranslate"><span class="pre">append_txt()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.loads_yaml"><code class="docutils literal notranslate"><span class="pre">loads_yaml()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dumps_yaml"><code class="docutils literal notranslate"><span class="pre">dumps_yaml()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.load_yaml"><code class="docutils literal notranslate"><span class="pre">load_yaml()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dump_yaml"><code class="docutils literal notranslate"><span class="pre">dump_yaml()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.save_yaml"><code class="docutils literal notranslate"><span class="pre">save_yaml()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.load_pkl"><code class="docutils literal notranslate"><span class="pre">load_pkl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dump_pkl"><code class="docutils literal notranslate"><span class="pre">dump_pkl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.save_pkl"><code class="docutils literal notranslate"><span class="pre">save_pkl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.load_hex"><code class="docutils literal notranslate"><span class="pre">load_hex()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dump_hex"><code class="docutils literal notranslate"><span class="pre">dump_hex()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.save_hex"><code class="docutils literal notranslate"><span class="pre">save_hex()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.load_b64"><code class="docutils literal notranslate"><span class="pre">load_b64()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dump_b64"><code class="docutils literal notranslate"><span class="pre">dump_b64()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.save_b64"><code class="docutils literal notranslate"><span class="pre">save_b64()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.serialize_path"><code class="docutils literal notranslate"><span class="pre">serialize_path()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.deserialize_path"><code class="docutils literal notranslate"><span class="pre">deserialize_path()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.serialize_func"><code class="docutils literal notranslate"><span class="pre">serialize_func()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.deserialize_func"><code class="docutils literal notranslate"><span class="pre">deserialize_func()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.AhvnJsonEncoder"><code class="docutils literal notranslate"><span class="pre">AhvnJsonEncoder</span></code></a><ul>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.AhvnJsonEncoder.encode"><code class="docutils literal notranslate"><span class="pre">AhvnJsonEncoder.encode()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.AhvnJsonEncoder.transform"><code class="docutils literal notranslate"><span class="pre">AhvnJsonEncoder.transform()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.AhvnJsonDecoder"><code class="docutils literal notranslate"><span class="pre">AhvnJsonDecoder</span></code></a><ul>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.AhvnJsonDecoder.__init__"><code class="docutils literal notranslate"><span class="pre">AhvnJsonDecoder.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.AhvnJsonDecoder.transform"><code class="docutils literal notranslate"><span class="pre">AhvnJsonDecoder.transform()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.loads_json"><code class="docutils literal notranslate"><span class="pre">loads_json()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dumps_json"><code class="docutils literal notranslate"><span class="pre">dumps_json()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.load_json"><code class="docutils literal notranslate"><span class="pre">load_json()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dump_json"><code class="docutils literal notranslate"><span class="pre">dump_json()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.save_json"><code class="docutils literal notranslate"><span class="pre">save_json()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.loads_jsonl"><code class="docutils literal notranslate"><span class="pre">loads_jsonl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dumps_jsonl"><code class="docutils literal notranslate"><span class="pre">dumps_jsonl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.load_jsonl"><code class="docutils literal notranslate"><span class="pre">load_jsonl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.iter_jsonl"><code class="docutils literal notranslate"><span class="pre">iter_jsonl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.dump_jsonl"><code class="docutils literal notranslate"><span class="pre">dump_jsonl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.save_jsonl"><code class="docutils literal notranslate"><span class="pre">save_jsonl()</span></code></a></li>
+<li><a class="reference internal" href="#ahvn.utils.basic.serialize_utils.append_jsonl"><code class="docutils literal notranslate"><span class="pre">append_jsonl()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=e4723610"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/line-numbers.js?v=8c0ba6c9"></script>
+    <script src="../_static/mouse-spotlight.js?v=8186b80c"></script>
+    <script src="../_static/dynamic-background.js?v=8e04f8c5"></script>
+    <script src="../_static/sidebar-toggle.js?v=d0176dfc"></script>
+    </body>
+</html>
