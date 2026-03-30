@@ -1,0 +1,270 @@
+---
+title: "Using the LLM"
+description: "Make single-turn calls, stream responses, embed text, and call tools — all through the unified LLM class."
+---
+
+The `LLM` class is the primary interface for every model interaction in AgentHeaven. It wraps [litellm](https://github.com/BerriAI/litellm) under the hood and adds retry logic, transparent caching, proxy support, and a consistent response-shaping API.
+
+## Instantiation
+
+```python
+from ahvn.llm import LLM
+
+llm = LLM(
+    preset="chat",       # named preset from your config (chat, tiny, embedder, coder)
+    model=None,          # override model identifier
+    provider=None,       # override provider (openai, deepseek, ollama, …)
+    cache=True,          # True → DiskCache at default path, False/None → NoCache
+)
+```
+
+<CardGroup cols={2}>
+  <Card title="preset" icon="sliders">
+    A named shortcut from your `llm.presets` config. Built-in presets are `chat`, `tiny`, `embedder`, and `coder`. You can define your own.
+  </Card>
+  <Card title="cache" icon="database">
+    Pass `True` (disk), a path string, a `BaseCache` instance, or `False`/`None` to disable. The LLM caches every successful response keyed by its full input.
+  </Card>
+  <Card title="model / provider" icon="microchip">
+    Both override the preset. Use `model` to specify a model identifier and `provider` to pick the API backend.
+  </Card>
+  <Card title="**kwargs" icon="code">
+    Any extra litellm parameter (`temperature`, `top_p`, `seed`, …) becomes a per-instance default that individual calls can override.
+  </Card>
+</CardGroup>
+
+## LLM Presets
+
+Presets are named configurations defined in your AgentHeaven config file. AgentHeaven ships with four conventional preset slots:
+
+| Preset | Intended use |
+|---|---|
+| `chat` | General-purpose chat and reasoning |
+| `tiny` | Fast, cheap completions |
+| `embedder` | Text embedding models |
+| `coder` | Code generation |
+
+You set them via the CLI:
+
+```bash
+ahvn config set --global llm.presets.chat.provider openrouter
+ahvn config set --global llm.presets.chat.model google/gemini-2.5-flash
+```
+
+## Message Format
+
+All methods accept messages in any of these forms:
+
+```python
+# A plain string — treated as a single user message
+messages = "What is the capital of France?"
+
+# A list of role/content dicts (OpenAI format)
+messages = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user",   "content": "What is the capital of France?"},
+]
+
+# Mixed list — strings are promoted to user messages automatically
+messages = [
+    {"role": "system", "content": "Be concise."},
+    "What is the capital of France?",
+]
+```
+
+Use `format_messages()` to normalize any of the above to a clean list of dicts:
+
+```python
+from ahvn.llm import format_messages
+
+normalized = format_messages(messages)  # → List[Dict]
+```
+
+## Single-Turn: `oracle`
+
+`oracle` collects the full response and returns it in one call.
+
+```python
+# Default: returns the text string
+reply: str = llm.oracle("What is 2 + 2?")
+print(reply)  # "4"
+
+# Ask for multiple fields
+result = llm.oracle(
+    "Explain recursion.",
+    include=["think", "text"],
+    reduce=False,  # always return a dict
+)
+print(result["think"])  # chain-of-thought (if model supports it)
+print(result["text"])   # final answer
+```
+
+## Streaming: `stream`
+
+`stream` yields incremental deltas as they arrive from the model.
+
+```python
+# Stream text tokens
+for chunk in llm.stream("Write a haiku about caching."):
+    print(chunk, end="", flush=True)
+print()
+
+# Stream the full message object (for session management)
+for chunk in llm.stream(messages, include=["content"], reduce=True):
+    print(chunk, end="", flush=True)
+```
+
+<Note>
+`stream` always uses `stream=True` internally — even `oracle` is implemented on top of `stream`. This keeps retry and cache behaviour consistent.
+</Note>
+
+### Gathering a stream
+
+When you need to drive the UI incrementally *and* collect the final message for history, use `gather_stream`:
+
+```python
+from ahvn.llm import gather_stream
+
+chunks = []
+for chunk in llm.stream(messages, include=["message"], reduce=False):
+    print(chunk.get("content", ""), end="", flush=True)
+    chunks.append(chunk)
+
+print()  # newline
+final = gather_stream(chunks, include=["message"])  # → single consolidated dict
+# final["message"] is ready to append to your conversation history
+```
+
+For multi-turn sessions the session CLI (and `gather_assistant_message`) handles this automatically:
+
+```python
+from ahvn.llm import gather_assistant_message
+
+responses = []
+for msg in llm.stream(messages, include=["message"]):
+    responses.append(msg)
+
+assistant_message = gather_assistant_message(responses)
+# {"role": "assistant", "content": "...", "tool_calls": [...]}
+messages.append(assistant_message)
+```
+
+## Embedding: `embed`
+
+```python
+# Single string → list of floats
+vector: list[float] = llm.embed("Semantic search query")
+
+# Batch of strings → list of lists of floats
+vectors: list[list[float]] = llm.embed(["doc 1", "doc 2", "doc 3"])
+
+# Dimensionality
+print(llm.dim)  # e.g. 1536
+```
+
+You should instantiate an LLM with the `embedder` preset when embedding:
+
+```python
+embedder = LLM(preset="embedder")
+vector = embedder.embed("Hello world")
+```
+
+## Tool Use
+
+### Passing tools to `oracle` / `stream`
+
+Pass a list of `ToolSpec` objects (or raw JSON-schema dicts) to any call:
+
+```python
+from ahvn.tool import ToolSpec
+
+def get_weather(city: str) -> str:
+    """Return the current weather for a city."""
+    return f"Sunny in {city}, 24 °C"
+
+weather_tool = ToolSpec.from_function(get_weather)
+
+result = llm.oracle(
+    "What's the weather in Paris?",
+    tools=[weather_tool],
+    include=["text", "tool_calls", "tool_messages"],
+    reduce=False,
+)
+print(result["tool_calls"])    # list of tool call dicts
+print(result["tool_messages"]) # tool execution results
+```
+
+### Dedicated `tooluse` method
+
+`tooluse` forces the LLM to call a tool (`tool_choice="required"`) and returns the executed tool messages:
+
+```python
+tool_messages = llm.tooluse(
+    "What is fibonacci(10)?",
+    tools=[fib_tool],
+)
+# → [{"role": "tool", "tool_call_id": "...", "name": "fibonacci", "content": "55"}]
+```
+
+### Executing tool calls manually with `exec_tool_calls`
+
+```python
+from ahvn.llm import exec_tool_calls
+
+toolspec_dict = {fib_tool.binded.name: fib_tool}
+tool_messages, tool_results = exec_tool_calls(result["tool_calls"], toolspec_dict)
+```
+
+## The `include` Parameter
+
+Every method accepts an `include` list that controls exactly what gets returned.
+
+| Field | Type | Description |
+|---|---|---|
+| `"text"` | `str` | Plain assistant text |
+| `"think"` | `str` | Chain-of-thought / reasoning trace |
+| `"content"` | `str` | Text with thinking tags interleaved |
+| `"message"` | `dict` | Full `{"role": "assistant", ...}` message |
+| `"tool_calls"` | `list` | Raw tool call objects |
+| `"tool_messages"` | `list` | Executed tool result messages |
+| `"tool_results"` | `list` | Tool result strings only |
+| `"delta_messages"` | `list` | New messages since last step |
+| `"messages"` | `list` | Full conversation including new messages |
+| `"structured"` | `dict` | JSON-parsed structured output |
+
+When `include` contains a single field and `reduce=True` (the default), the return value is unwrapped to that field directly. Set `reduce=False` to always receive a dict.
+
+## Structured Output
+
+Pass a `response_format` to request JSON-structured output:
+
+```python
+from pydantic import BaseModel
+
+class Review(BaseModel):
+    sentiment: str
+    score: int
+    summary: str
+
+result = llm.oracle(
+    "Review: Great product, five stars!",
+    response_format=Review,
+    include=["structured"],
+)
+print(result)  # {"sentiment": "positive", "score": 5, "summary": "..."}
+```
+
+## Async Variants
+
+Every method has an async counterpart: `aoracle`, `astream`, `aembed`, `atooluse`.
+
+```python
+async def main():
+    reply = await llm.aoracle("Hello!")
+    async for chunk in llm.astream("Tell me a joke."):
+        print(chunk, end="", flush=True)
+```
+
+<Note>
+Async streaming with `tools` is not yet supported. Use synchronous `stream` when tool calling is required.
+</Note>

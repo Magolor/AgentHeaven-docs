@@ -1,0 +1,71 @@
+---
+title: "Introduction"
+description: "AgentHeaven is a comprehensive management system for AI agent projects, providing environment isolation, dependency management, and streamlined workflows."
+---
+
+<Warning>
+  AgentHeaven is in active experimental development (Development Status: Alpha). Features may change without notice. It is **not** ready for stable production deployment.
+</Warning>
+
+*Ask not what your agents can do for you, ask what you can do for your agents.*
+
+AgentHeaven (`ahvn`) is a comprehensive management system designed specifically for AI agent projects. It provides environment isolation, dependency management, and streamlined workflows — similar to conda, but tailored for intelligent agents.
+
+Whether you are building a simple chatbot or a complex multi-step reasoning pipeline, AgentHeaven gives you the tools to configure LLM providers, manage knowledge bases, define reusable tool specifications, and run agents from a unified CLI or Python API.
+
+## Key features
+
+<CardGroup cols={2}>
+  <Card title="LLM management" icon="brain">
+    Connect to OpenAI, OpenRouter, DeepSeek, Ollama, and more. Configure multiple providers and presets (chat, embedder, coder, tiny) from a single config file.
+  </Card>
+  <Card title="Tool specifications" icon="wrench">
+    Define agent tools with `ToolSpec.from_function()`. Automatic JSON schema generation, argument repair, and seamless integration with LLM tool-calling APIs.
+  </Card>
+  <Card title="Knowledge layer" icon="database">
+    A layered knowledge system: `klstore` for storage backends, `klengine` for retrieval (DAAC, vector, scan), and `klbase` for unified access across stores and engines.
+  </Card>
+  <Card title="Caching" icon="bolt">
+    In-memory and persistent caches with `InMemCache`. Memoize expensive function calls with `@cache.memoize()` — including LLM-generated results.
+  </Card>
+  <Card title="Agent specs" icon="robot">
+    Compose agents with `ConvToolAgentSpec` and `SubmitToolAgentSpec`. Stream step-by-step execution with tool calls, tool results, and text chunks.
+  </Card>
+  <Card title="UKF templates" icon="file-code">
+    Universal Knowledge Fragment (UKF) templates for prompts, tools, knowledge, and experiences. Version-controlled, composable, and bindable.
+  </Card>
+  <Card title="CLI" icon="terminal">
+    A `conda`- and `git`-inspired CLI (`ahvn`) for setup, configuration, interactive chat, session management, and project scaffolding.
+  </Card>
+  <Card title="Agentic decorators" icon="sparkles">
+    `@autocode`, `@autofunc`, and `@autotask` decorators that use LLMs to automatically implement functions from docstrings, type hints, and examples.
+  </Card>
+</CardGroup>
+
+## Architecture overview
+
+AgentHeaven is organized into focused submodules that you can import independently or use together:
+
+| Module | Description |
+|---|---|
+| `ahvn.llm` | LLM client with streaming, tool use, structured outputs, and multi-provider support via LiteLLM |
+| `ahvn.cache` | Caching primitives including `InMemCache` with `@memoize()` support |
+| `ahvn.tool` | `ToolSpec` for defining, serializing, and executing agent tools |
+| `ahvn.ukf` | Universal Knowledge Fragments — templates for prompts, tools, knowledge, and more |
+| `ahvn.klstore` | Storage backends for knowledge entries (database, Mongo, in-memory) |
+| `ahvn.klengine` | Retrieval engines: DAAC full-text, vector similarity, brute-force scan |
+| `ahvn.klbase` | Unified interface over one or more KLStores and KLEngines |
+| `ahvn.agent` | Agent specs including `ConvToolAgentSpec` and `SubmitToolAgentSpec` |
+| `ahvn.cli` | The `ahvn` command-line interface |
+| `ahvn.utils` / `ahvn.utils.exts` | Utilities, serialization helpers, and agentic decorators (`autocode`, `autofunc`, `autotask`) |
+
+## Get started
+
+<CardGroup cols={2}>
+  <Card title="Installation" icon="download" href="/installation">
+    Install AgentHeaven with pip, uv, poetry, or conda.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Set up your environment and run your first agent in minutes.
+  </Card>
+</CardGroup>

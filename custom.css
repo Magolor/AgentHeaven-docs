@@ -1,0 +1,11 @@
+/* Increase overall container max-width to allow more space */
+.max-w-5xl {
+    max-width: 80rem !important; /* expand main grid area up to 1280px */
+}
+
+/* Make text content wider and center it */
+.mdx-content, .prose {
+    max-width: 60rem !important; /* wider readable text up to 960px */
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

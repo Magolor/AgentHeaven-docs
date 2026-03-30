@@ -1,0 +1,513 @@
+---
+title: "Tools"
+description: "Define, register, and execute tools for use with LLMs."
+---
+
+```python
+from ahvn.tool import ToolSpec, ToolRegistry, reg_toolspec
+```
+
+`ToolSpec` wraps a Python function as an LLM-callable tool, exposing the JSON schema the model needs and the callable the runtime uses for execution. `ToolRegistry` provides a mixin for classes that expose multiple tools as a group.
+
+---
+
+## ToolSpec
+
+A specification wrapper that bridges Python functions and LLM tool-use APIs.
+
+```python
+from ahvn.tool import ToolSpec
+
+# Decorator form (most common)
+@ToolSpec(name="add", description="Add two integers")
+def add(a: int, b: int) -> int:
+    return a + b
+
+# The function still works normally
+print(add(a=3, b=5))   # 8
+
+# Pass to an LLM
+result = llm.oracle("What is 3 + 5?", tools=[add])
+```
+
+### ToolSpec() — decorator form
+
+When `ToolSpec` is called with keyword arguments it returns a decorator. The decorator calls `ToolSpec.from_function` internally.
+
+```python
+@ToolSpec(name="search", description="Search the web")
+def web_search(query: str) -> str:
+    ...
+```
+
+All keyword arguments are forwarded to `ToolSpec.from_function`.
+
+---
+
+### ToolSpec.from_function()
+
+Create a `ToolSpec` from a Python function or callable class instance.
+
+```python
+def multiply(a: float, b: float) -> float:
+    """Multiply two numbers.
+
+    Args:
+        a: First operand.
+        b: Second operand.
+
+    Returns:
+        float: The product.
+    """
+    return a * b
+
+tool = ToolSpec.from_function(multiply)
+print(tool.name)  # "multiply"
+print(tool.binded.description)  # "Multiply two numbers."
+```
+
+<ParamField path="func" type="Callable" required>
+  The Python function to wrap. If a callable class instance (with a `__call__` method) is provided, `__call__` is used.
+</ParamField>
+
+<ParamField path="parse_docstring" type="bool" default="True">
+  When `True`, the function's Google-style docstring is parsed to populate the tool description and parameter descriptions automatically.
+</ParamField>
+
+<ParamField path="examples" type="Iterable[ExperienceType]">
+  Optional example usages for few-shot prompting or evaluation.
+</ParamField>
+
+<ParamField path="kwargs" type="Any">
+  Additional keyword arguments forwarded to `fastmcp.tools.Tool.from_function`, such as `name`, `description`, `output_schema`.
+</ParamField>
+
+**Returns** `ToolSpec`.
+
+---
+
+### ToolSpec.from_code()
+
+Create a `ToolSpec` from a code string containing a function definition.
+
+```python
+code = '''
+def greet(name: str) -> str:
+    """Return a greeting message."""
+    return f"Hello, {name}!"
+'''
+
+tool = ToolSpec.from_code(code)
+print(tool(name="Alice"))  # "Hello, Alice!"
+```
+
+<ParamField path="code" type="str" required>
+  Source code containing the function to extract.
+</ParamField>
+
+<ParamField path="func_name" type="str">
+  Name of the function to extract. If `None` and only one callable is defined in the code, that function is used automatically.
+</ParamField>
+
+<ParamField path="env" type="dict">
+  Namespace in which the code is executed (for resolving imports or closures).
+</ParamField>
+
+<ParamField path="examples" type="Iterable">
+  Optional example usages.
+</ParamField>
+
+<ParamField path="kwargs" type="Any">
+  Additional kwargs forwarded to `from_function`.
+</ParamField>
+
+**Returns** `ToolSpec`.
+
+---
+
+### ToolSpec.from_mcp()
+
+Create a `ToolSpec` from an MCP `Tool` or `FastMCPTool` object.
+
+```python
+from mcp.types import Tool as MCPTool
+
+tool = ToolSpec.from_mcp(mcp_tool_object)
+```
+
+<ParamField path="tool" type="MCPTool | FastMCPTool" required>
+  The MCP tool object to wrap.
+</ParamField>
+
+<ParamField path="examples" type="Iterable">
+  Optional example usages.
+</ParamField>
+
+**Returns** `ToolSpec`.
+
+---
+
+### ToolSpec.from_client()
+
+Async class method. Retrieve a tool from a live FastMCP server and wrap it as a `ToolSpec`.
+
+```python
+from fastmcp import FastMCP, Client
+
+server = FastMCP("math")
+
+@server.tool()
+def add(a: int, b: int = 5) -> int:
+    return a + b
+
+client = Client(server)
+async with client:
+    spec = await ToolSpec.from_client(client, "add")
+    print(spec.call(a=3, b=7))  # 10
+    print(spec.available())     # True
+```
+
+<ParamField path="client" type="Client" required>
+  A FastMCP `Client` instance inside an active `async with` context manager.
+</ParamField>
+
+<ParamField path="tool_name" type="str" required>
+  Name of the tool to retrieve from the server.
+</ParamField>
+
+<ParamField path="examples" type="Iterable">
+  Optional example usages.
+</ParamField>
+
+**Returns** `ToolSpec` (awaitable).
+
+**Raises** `ValueError` if the tool name is not found. `RuntimeError` if the client is not connected.
+
+---
+
+### Properties
+
+<ResponseField name="name" type="str">
+  The tool's name as registered. Read from the underlying `FastMCPTool`.
+</ResponseField>
+
+<ResponseField name="binded" type="FastMCPTool">
+  The bound view of the tool after applying any parameter bindings. Use this to access `binded.name`, `binded.description`, `binded.parameters`, etc. When no parameters are bound, `binded` is the same as `tool`.
+</ResponseField>
+
+<ResponseField name="input_schema" type="dict">
+  JSON Schema for the tool's input parameters, derived from `binded.parameters`. Includes a synthesized `required` list.
+</ResponseField>
+
+<ResponseField name="params" type="dict">
+  Shorthand for `input_schema["properties"]` — a dict mapping parameter names to their JSON Schema entries.
+</ResponseField>
+
+<ResponseField name="output_schema" type="dict">
+  JSON Schema for the tool's return value.
+</ResponseField>
+
+<ResponseField name="code" type="str">
+  Synthesized Python function definition string (signature + Google-style docstring + `pass` body). Useful for prompt injection.
+
+  ```python
+  print(add_tool.code)
+  # def add(a: int, b: int) -> int:
+  #     """Add two integers.
+  #     ...
+  #     """
+  #     pass
+  ```
+</ResponseField>
+
+<ResponseField name="docstring" type="str">
+  Synthesized Google-style docstring derived from the tool specification.
+</ResponseField>
+
+---
+
+### Calling a ToolSpec
+
+All call methods accept keyword arguments matching the tool's parameters.
+
+| Method | Mode | Returns |
+| --- | --- | --- |
+| `tool(**kwargs)` | Sync | Main output value (unwrapped from single-key schema). |
+| `tool.call(**kwargs)` | Sync | Same as `__call__`. |
+| `await tool.acall(**kwargs)` | Async | Main output value. |
+| `tool.exec(**kwargs)` | Sync | Full `ToolResult` (structured content). |
+| `await tool.aexec(**kwargs)` | Async | Full `ToolResult`. |
+
+```python
+# All equivalent for local tools
+result = add_tool(a=3, b=5)          # 8
+result = add_tool.call(a=3, b=5)     # 8
+
+# Async
+result = await add_tool.acall(a=3, b=5)   # 8
+```
+
+---
+
+### to_jsonschema()
+
+Generate the OpenAI-format JSON schema dict used internally when passing tools to the LLM API.
+
+```python
+schema = add_tool.to_jsonschema()
+# {
+#     "type": "function",
+#     "function": {
+#         "name": "add",
+#         "description": "Add two integers",
+#         "parameters": {"type": "object", "properties": {...}, "required": [...]}
+#     }
+# }
+```
+
+---
+
+### to_function()
+
+Return a callable with the same signature as the synthesized `code` property. Useful when you need a typed callable for introspection or to pass to code that does not accept `ToolSpec`.
+
+```python
+func = add_tool.to_function()
+import inspect
+print(inspect.signature(func))  # (a: int, b: int) -> int
+print(func(a=3, b=5))           # 8 — delegates to ToolSpec.__call__
+```
+
+---
+
+### signature()
+
+Return a function-call string with the tool's name and default/provided arguments.
+
+```python
+print(add_tool.signature())           # add(a=0, b=0)
+print(add_tool.signature(a=3, b=5))  # add(a=3, b=5)
+```
+
+---
+
+### bind() / unbind()
+
+Bind a parameter to a value held in the tool's `state` dict. The bound parameter is hidden from the LLM's schema (the LLM does not need to supply it).
+
+```python
+db_connection = get_db()
+db_tool = query_tool.bind(param="db", state_key=None, default=db_connection)
+
+# The LLM only sees `query`, not `db`
+result = llm.oracle("List all users", tools=[db_tool])
+```
+
+<ParamField path="param" type="str" required>
+  The parameter name to hide and bind.
+</ParamField>
+
+<ParamField path="state_key" type="str">
+  Dot-separated path into `self.state` to resolve the value at call time. If `None`, uses `param` as the key.
+</ParamField>
+
+<ParamField path="default" type="Any">
+  Default value stored in `state` if the key is not already set.
+</ParamField>
+
+**Returns** `ToolSpec` (self, for chaining).
+
+`unbind(param)` removes a binding and returns `self`.
+
+---
+
+### available()
+
+For remote tools created via `from_client`, returns `True` if the MCP client session is still active. Always returns `True` for local tools.
+
+```python
+if spec.available():
+    result = spec.call(query="SELECT 1")
+```
+
+---
+
+### clone()
+
+Create a shallow copy of the `ToolSpec`, preserving call interfaces, examples, binds, and state.
+
+```python
+base_tool = ToolSpec.from_function(my_func)
+variant = base_tool.clone()
+variant.bind("db", default=other_db)
+```
+
+---
+
+## ToolRegistry
+
+A mixin class that lets you declare class methods as tools using `@reg_toolspec` and then retrieve them as bound `ToolSpec` instances.
+
+```python
+from ahvn.tool import ToolRegistry, reg_toolspec
+
+class KnowledgeBase(ToolRegistry):
+
+    def __init__(self, data: list):
+        self.data = data
+
+    @reg_toolspec(parse_docstring=True)
+    def search(self, query: str) -> str:
+        """Search the knowledge base.
+
+        Args:
+            query: The search query.
+
+        Returns:
+            str: Matching results.
+        """
+        return next((x for x in self.data if query in x), "Not found")
+
+    @reg_toolspec(description="Count items in the knowledge base")
+    def count(self) -> int:
+        return len(self.data)
+
+
+kb = KnowledgeBase(["Paris is the capital of France", "Rome is in Italy"])
+tools = kb.to_toolspecs()
+print(kb.list_toolspecs())  # ["search", "count"]
+
+result = llm.oracle("How many items are in the KB?", tools=list(tools.values()))
+```
+
+---
+
+### reg_toolspec()
+
+Decorator to mark a method for automatic `ToolSpec` creation. Can be used with or without arguments.
+
+```python
+# Bare form
+@reg_toolspec
+def my_method(self, x: int) -> str: ...
+
+# Factory form
+@reg_toolspec(parse_docstring=True, description="Custom description")
+def my_method(self, x: int) -> str: ...
+```
+
+<ParamField path="func" type="Callable">
+  The method to decorate. Omit when using the factory form.
+</ParamField>
+
+<ParamField path="examples" type="Iterable">
+  Example usages for the tool.
+</ParamField>
+
+<ParamField path="parse_docstring" type="bool" default="True">
+  Parse the method's docstring to populate description and parameter descriptions.
+</ParamField>
+
+<ParamField path="kwargs" type="Any">
+  Additional keyword arguments forwarded to `ToolSpec.from_function`.
+</ParamField>
+
+**Returns** the original function with `_is_toolspec = True` metadata attached.
+
+---
+
+### ToolRegistry methods
+
+**`to_toolspecs()`** → `dict[str, ToolSpec]`
+
+Instantiate and return all registered tools as a dict mapping method name to `ToolSpec`. Each tool has `self` bound so it can be called as an instance method.
+
+**`toolspec(name)`** → `ToolSpec`
+
+Return a single named tool as a `ToolSpec` with `self` bound.
+
+**`list_toolspecs()`** → `list[str]`
+
+Return the names of all methods registered with `@reg_toolspec`.
+
+---
+
+## Built-in tools
+
+### toolspec_factory_builtins_execute_sql()
+
+Factory that creates a ready-to-use SQL execution tool with a specific database bound and formatted table output.
+
+```python
+from ahvn.tool.builtins import toolspec_factory_builtins_execute_sql
+from ahvn.utils.db import Database
+
+db = Database(provider="sqlite", database="northwind.db")
+sql_tool = toolspec_factory_builtins_execute_sql(db, max_rows=20, style="SINGLE_BORDER")
+
+# Use the tool directly
+print(sql_tool.call(query="SELECT * FROM customers LIMIT 5"))
+
+# Or pass to an LLM
+result = llm.oracle(
+    "List the top 5 customers by order count.",
+    tools=[sql_tool],
+    include=["text", "tool_messages"],
+)
+```
+
+<ParamField path="db" type="Database" required>
+  The `Database` instance to bind. The LLM only receives the `query` parameter.
+</ParamField>
+
+<ParamField path="max_rows" type="int">
+  Maximum rows to display. Defaults to `db.display.max_rows` from config (fallback: `64`).
+</ParamField>
+
+<ParamField path="max_width" type="int">
+  Maximum column width in characters. Defaults to `db.display.max_width` from config (fallback: `64`).
+</ParamField>
+
+<ParamField path="style" type="str">
+  Table style. One of `"DEFAULT"`, `"MARKDOWN"`, `"PLAIN_COLUMNS"`, `"MSWORD_FRIENDLY"`, `"ORGMODE"`, `"SINGLE_BORDER"`, `"DOUBLE_BORDER"`, `"RANDOM"`. Defaults to `db.display.style` from config (fallback: `"DEFAULT"`).
+</ParamField>
+
+<ParamField path="name" type="str" default='exec_sql'>
+  Name to register the tool under. Change this if you need multiple SQL tools for different databases.
+</ParamField>
+
+**Returns** `ToolSpec` with `db` bound and a single exposed parameter `query: str`.
+
+---
+
+## End-to-end example
+
+```python
+from ahvn.llm import LLM, exec_tool_calls
+from ahvn.tool import ToolSpec
+
+llm = LLM(model="gpt-4o", name="tool-demo")
+
+@ToolSpec(name="get_weather", description="Get the current weather for a city")
+def get_weather(city: str) -> str:
+    # Replace with a real API call
+    return f"The weather in {city} is sunny and 22°C."
+
+# Single-turn tool use
+tool_messages = llm.tooluse(
+    "What is the weather in Tokyo?",
+    tools=[get_weather],
+)
+print(tool_messages)
+# [{"role": "tool", "tool_call_id": "...", "name": "get_weather", "content": "The weather in Tokyo is sunny and 22°C."}]
+
+# Multi-turn: keep the conversation going after tool execution
+msgs = [{"role": "user", "content": "What is the weather in Tokyo?"}]
+response = llm.oracle(msgs, tools=[get_weather], include=["message", "tool_calls", "tool_messages"])
+msgs.append(response["message"])         # assistant message with tool_calls
+msgs.extend(response["tool_messages"])   # tool result messages
+
+# Now ask a follow-up
+final = llm.oracle(msgs + [{"role": "user", "content": "Is that good weather for sightseeing?"}])
+print(final)
+```

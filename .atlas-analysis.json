@@ -1,0 +1,113 @@
+{
+  "projectType": "sdk-library",
+  "projectName": "AgentHeaven",
+  "projectDescription": "AgentHeaven is a Python SDK and CLI for managing AI agent projects, providing environment isolation, LLM integration, knowledge base management, caching, and agentic programming utilities.",
+  "theme": "palm",
+  "primaryColor": "#6366F1",
+  "lightColor": "#EEF2FF",
+  "darkColor": "#3730A3",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "installation",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Configuration",
+            "pages": [
+              "configuration/overview",
+              "configuration/llm-providers"
+            ]
+          },
+          {
+            "group": "CLI Guide",
+            "pages": [
+              "cli/overview",
+              "cli/repo",
+              "cli/config",
+              "cli/chat"
+            ]
+          },
+          {
+            "group": "Python Guide",
+            "pages": [
+              "guides/llm",
+              "guides/agents",
+              "guides/knowledge-base",
+              "guides/caching",
+              "guides/agentic-programming"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Core",
+            "pages": [
+              "api/llm",
+              "api/cache",
+              "api/tools"
+            ]
+          },
+          {
+            "group": "Knowledge Layer",
+            "pages": [
+              "api/ukf",
+              "api/klstore",
+              "api/klengine",
+              "api/klbase"
+            ]
+          },
+          {
+            "group": "Agents",
+            "pages": [
+              "api/agents",
+              "api/agentic-extensions"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "LLM abstraction layer (LiteLLM-backed) supporting OpenAI, OpenRouter, DeepSeek, Ollama and more",
+    "CLI tool (`ahvn`) for setup, configuration, chat, embedding, and repo management",
+    "Knowledge Base system (KLStore + KLEngine + KLBase) with vector, facet, MongoDB, and DAAC engines",
+    "Universal Knowledge Fragment (UKF) schema for structured knowledge, prompts, tools, and experiences",
+    "Multiple cache backends: in-memory, disk, JSON, database, MongoDB",
+    "Agentic programming decorators: @autocode, @autofunc, @autotask for LLM-driven code generation",
+    "Tool specification system (ToolSpec) for defining and registering agent tools",
+    "BaseAgentSpec framework for building multi-step, tool-using AI agents",
+    "Streaming-first LLM interface with structured output and tool-calling support",
+    "Hierarchical config management: system, global, and local config levels"
+  ],
+  "publicApiSurface": [
+    "LLM(preset, model, provider, cache)",
+    "LLM.oracle(messages) -> str",
+    "LLM.stream(messages) -> Generator",
+    "LLM.embed(text) -> List[float]",
+    "BaseCache / InMemCache / DiskCache / JsonCache / DatabaseCache / MongoCache",
+    "BaseCache.memoize() decorator",
+    "ToolSpec.from_function(func) -> ToolSpec",
+    "BaseUKF / KnowledgeUKFT / ExperienceUKFT / PromptUKFT / ToolUKFT / DocumentUKFT",
+    "KLBase(storages, engines)",
+    "KLBase.add / get / search / sync",
+    "BaseKLStore / DatabaseKLStore / MongoKLStore / VectorKLStore / CacheKLStore",
+    "BaseKLEngine / DAACKLEngine / FacetKLEngine / VectorKLEngine / MongoKLEngine / ScanKLEngine",
+    "BaseAgentSpec.encode / step / is_done / decode / stream / run",
+    "autocode(func_spec, examples, instructions) decorator",
+    "autofunc(descriptions, examples) decorator",
+    "autotask(descriptions, examples) decorator",
+    "HEAVEN_CM (ConfigManager)",
+    "ahvn setup / ahvn config / ahvn repo / ahvn chat / ahvn session / ahvn embed"
+  ]
+}

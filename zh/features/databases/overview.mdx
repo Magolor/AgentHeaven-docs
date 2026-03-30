@@ -1,0 +1,20 @@
+---
+title: "数据库"
+description: "通过 SQLAlchemy 集成 SQL 数据库，支持查询编译和自动修复。"
+---
+
+{/* TODO: 从英文版翻译 features/databases/overview.mdx */}
+
+AgentHeaven 通过 [SQLAlchemy](https://www.sqlalchemy.org/) 集成 SQL 数据库，提供统一的连接管理、查询编译、表结构检查和 LLM 辅助 SQL 修复接口。
+
+<CardGroup cols={3}>
+  <Card title="SQLite" icon="database" href="/zh/features/databases/sqlite">
+    默认后端，用于配置、缓存和本地开发。
+  </Card>
+  <Card title="PostgreSQL" icon="elephant" href="/zh/features/databases/postgresql">
+    生产级关系型存储。
+  </Card>
+  <Card title="MongoDB" icon="leaf" href="/zh/features/databases/mongodb">
+    基于 pymongo/motor 的文档存储。
+  </Card>
+</CardGroup>

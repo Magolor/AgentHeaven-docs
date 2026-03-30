@@ -1,0 +1,121 @@
+---
+title: "Repo commands"
+description: "Initialize and manage registered AgentHeaven repositories."
+---
+
+A **repo** is a project directory that has been initialized with a `.ahvn/` configuration directory — analogous to a `.git/` folder. Repos can optionally be registered in the global AgentHeaven config under a name so they can be referenced from anywhere.
+
+<Note>
+Running `ahvn repo init` without a name creates a local `.ahvn/` config but does not register the repo globally. Provide a name to register it and make it discoverable via `ahvn repo list`.
+</Note>
+
+## `ahvn repo init`
+
+Initialize a repo config in the current directory, similar to `git init`. Optionally register the repo globally with a name.
+
+```bash
+ahvn repo init [NAME] [OPTIONS]
+```
+
+| Argument / Flag | Description |
+|---|---|
+| `NAME` | Optional name to register the repo in the global config. |
+| `-r`, `--reset` | Reset the local config to default values. |
+
+**Examples**
+
+```bash
+# Initialize without registering globally
+ahvn repo init
+
+# Initialize and register with a name
+ahvn repo init my-project
+
+# Re-initialize and reset to defaults
+ahvn repo init --reset
+```
+
+<Tip>
+After a named init, the repo appears in `ahvn repo list` from any working directory.
+</Tip>
+
+## `ahvn repo list`
+
+List all repos registered in the global config, showing their path and whether the `.ahvn/` directory still exists on disk.
+
+```bash
+ahvn repo list
+```
+
+Output includes a `✓` (exists) or `✗` (missing) status indicator next to each repo name and path.
+
+**Example**
+
+```bash
+ahvn repo list
+# Registered repos:
+#   ✓ my-project   /home/user/projects/my-project
+#   ✗ old-project  /home/user/projects/old-project
+```
+
+## `ahvn repo info`
+
+Show details about a specific registered repo, including its path, whether it exists on disk, and timestamps.
+
+```bash
+ahvn repo info NAME
+```
+
+| Argument | Description |
+|---|---|
+| `NAME` | The registered name of the repo. Required. |
+
+**Example**
+
+```bash
+ahvn repo info my-project
+# Repo: my-project
+#   Path: /home/user/projects/my-project
+#   Exists: Yes
+#   Created: 2024-01-15 10:30:00
+#   Modified: 2024-03-20 14:22:45
+```
+
+## `ahvn repo remove`
+
+Remove a repo from the global registry. This does **not** delete any files on disk; it only removes the entry from the global config.
+
+```bash
+ahvn repo remove NAME
+```
+
+| Argument | Description |
+|---|---|
+| `NAME` | The registered name of the repo to remove. Required. |
+
+**Example**
+
+```bash
+ahvn repo remove old-project
+# Removed repo 'old-project' from global config.
+```
+
+## `ahvn repo rename`
+
+Rename a repo's entry in the global registry. The directory on disk is not moved.
+
+```bash
+ahvn repo rename OLD_NAME NEW_NAME
+```
+
+| Argument | Description |
+|---|---|
+| `OLD_NAME` | The current registered name of the repo. Required. |
+| `NEW_NAME` | The new name to assign. Required. Fails if the name is already in use. |
+
+**Example**
+
+```bash
+ahvn repo rename my-project agent-v2
+# Renamed repo 'my-project' to 'agent-v2'.
+```

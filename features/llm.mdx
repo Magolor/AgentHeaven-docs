@@ -1,0 +1,28 @@
+---
+title: "LLMs"
+description: "Unified LLM inference across providers with configurable presets."
+---
+
+{/* TODO: Expand from quickstart/first-llm-chat.mdx §1-§4 */}
+{/* Content source: quickstart/first-llm-chat.mdx (completed) */}
+
+{/*
+Planned sections:
+1. Presets and providers — what they are, how they compose
+   - Preset = logical role (sys, chat, reason, embedder, coder, translator, tiny, local, ...)
+   - Provider = backend connection (openrouter, openai, anthropic, ollama, ...)
+   - Model aliases (dsv3 → deepseek/deepseek-v3.2, sonnet → claude-sonnet-4-6, ...)
+2. Python API
+   - LLM(preset=...) construction
+   - llm.oracle(query) — full response as string
+   - llm.stream(query) — streaming deltas
+   - llm.embed(text) — embedding vectors
+   - Message/Messages types
+   - Per-call overrides (model, provider, temperature, seed, max_tokens, ...)
+3. CLI: ahvn chat, ahvn embed
+4. Sessions: ahvn session (multi-turn, slash commands)
+5. Tool use with LLMs (exec_tool_calls, repair_tool_call)
+6. LLMSpec and LLMConfigEngine internals
+*/}
+
+AgentHeaven routes all LLM calls through [LiteLLM](https://www.litellm.ai/), supporting any provider it covers. Model choices and provider choices never appear in your code — only logical preset names.

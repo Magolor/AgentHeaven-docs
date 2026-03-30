@@ -1,0 +1,199 @@
+---
+title: "Configuration"
+description: "Scoped, versioned, database-backed configuration with automatic fallback."
+---
+
+<Note>
+    *Hyperparameters = Data.*
+</Note>
+
+## 1. Why do we want a ConfigManager?
+
+The AgentHeaven ConfigManager is designed to prevent repetitive and fragile config passing in deeply wrapped code.
+
+When config lives only in function parameters, wrappers quickly become noisy and hard to maintain:
+
+```python
+# ===== Pseudocode =====
+some_llm_call("You are a helpful assistant...", model="gpt-4", temperature=0.7, seed=42, max_tokens=4096, ...)
+another_llm_call("You are a helpful assistant...", model="gpt-4", temperature=0.7, seed=42, max_tokens=4096, ...)
+
+def ask_llm_fib(n, model="gpt-4", temperature=0.7, seed=42, max_tokens=4096, ...):
+    return some_llm_call(
+        f"Calculate the {n}th Fibonacci number.",
+        model=model,
+        temperature=temperature,
+        seed=seed,
+        max_tokens=max_tokens,
+        ...
+    )
+
+def ask_llm_fib_sum(a, b, model="gpt-4", temperature=0.5, seed=42, max_tokens=4096, ...):
+    return (
+        ask_llm_fib(a, model=model, temperature=temperature, seed=seed, max_tokens=max_tokens, ...) +
+        ask_llm_fib(b, model=model, temperature=temperature, seed=seed, max_tokens=max_tokens, ...)
+    )
+```
+
+Imagine that, in the example above, the LLM call feature is used as an atomic building block across the codebase. Then every function that calls it, directly or indirectly, needs to have all those parameters in its signature and pass them down the call stack. Each function such as `ask_llm_fib_sum` may have slight variations in the parameters, such as a different temperature, which means we cannot easily abstract config passing into a shared wrapper. Worse, if we want to upgrade the model from `gpt-4` to `gpt-5`, we need to change or at least verify every single call site.
+
+Therefore, in modern serverless Python API designs, a context manager or context variable is often used to pass config implicitly through the call stack. This allows us to set defaults once at a high level and override only what differs in narrower scopes:
+```python
+# ===== Pseudocode =====
+with some_context(model="gpt-4", temperature=0.7, seed=42, max_tokens=4096):
+    some_llm_call("You are a helpful assistant...")
+    another_llm_call("You are a helpful assistant...")
+    ask_llm_fib(n=10)
+    with some_context(temperature=0.5):  # override only what differs in this narrower scope
+        ask_llm_fib_sum(a=10, b=20)
+```
+
+Now, if we want to extract the defaults outside the code entirely, we can leave only a profile reference (i.e., the scope) in the context, and manage the actual values in a config system with version history and CLI:
+
+```python
+# ===== Pseudocode =====
+profiles = {
+    "default_T=0.7": {
+        "model": "gpt-4",
+        "temperature": 0.7,
+        "seed": 42,
+        "max_tokens": 4096,
+    },
+    "T=0.5": {
+        "temperature": 0.5,
+    },
+}
+
+with some_context(profile="default_T=0.7"):
+    some_llm_call("You are a helpful assistant...")
+    another_llm_call("You are a helpful assistant...")
+    ask_llm_fib(n=10)
+    with some_context(profile="T=0.5"):
+        ask_llm_fib_sum(a=10, b=20)
+```
+
+This is the core design principle behind AgentHeaven's ConfigManager: **a global, scoped, versioned config system with automatic fallback**. We set defaults once globally, then override only what is different in a narrower scope. We do not need to manage multiple layered JSON configs or YAML files manually. Config is resolved by scope and persisted with version history.
+
+<br/>
+
+## 2. Mental Model: Scoped Cascade
+
+Think of config resolution as a cascade. `ahvn` has a default config, then an application may have its own config that overrides only what differs, and then a user may have another config that overrides only what differs from the app defaults. When we read a config value, it checks the most specific scope first, then falls back to broader scopes until it finds a value or reaches the global default. Example scope names:
+
+- `ahvn.rubik.app.user_42`
+- `ahvn.rubik`
+- `ahvn`
+
+Then when user_42 reads a config value, say language preference, as long as its called via scope `user_42`, then all config below `rubik` and `ahvn` is automatically overridden by the more specific `user_42` config. If `user_42` does not have a value for that key, it falls back to `rubik` (for all users), and then to `ahvn` (the infrastructure default).
+
+The AgentHeaven ConfigManager offers a generic implementation of this pattern, and the built-in singleton `CM_AHVN` applies that pattern to AgentHeaven's own configuration. Anywhere in the codebase, if we need to read or override the ahvn config, we can use `CM_AHVN` as a dot-path key-value store. For example:
+
+```python
+from ahvn.utils.basic.config_utils import CM_AHVN
+
+# Set shared default in base scope
+CM_AHVN.set("core.debug", False)
+
+with CM_AHVN.scoped("rubik"):
+    # Override only what differs in this scope
+    CM_AHVN.set("core.debug", True)
+    print(CM_AHVN.get("core.debug"))     # ahvn.rubik config: core.debug = True
+
+print(CM_AHVN.get("core.debug"))         # ahvn config: core.debug = False
+```
+
+<Note>
+This page focuses on intuition. For full scope strategy patterns (app, env, user isolation), use the configuration guides.
+</Note>
+
+<br/>
+
+## 3. The Generic ConfigManager
+
+`ConfigManager()` is the generic engine behind `CM_AHVN`. It is not limited to `ahvn`: packages that integrate with AgentHeaven can create their own manager and reuse the same scoped/versioned model.
+
+```python
+from ahvn.utils.basic.config_utils import CM_AHVN, ConfigManager
+
+# AgentHeaven singleton
+print(CM_AHVN.get("core.debug"))
+
+# Generic manager for another package
+CM_RUBIK = ConfigManager(
+    package="rubiksql",
+    distribution="rubiksql",
+    scope="rubik",
+    setup=True,
+)
+```
+
+<Note>
+It is recommended to inherit ConfigManager and create your own class when building a custom package, so you can add package-specific setups and compatibility controls.
+</Note>
+
+<br/>
+
+### 3.1. Storage and Persistence
+
+The ahvn config system is database-backed. With a SQLAlchemy-compatible interface, we can specify any database backend.
+
+Specifically, a machine-level entry config at `~/.ahvn/entry.yaml` specifies the backend and path for the actual config database. By default, it uses SQLite for simplicity and local development. The database is placed under `~/.ahvn/config.db` and managed automatically by the ConfigManager. If you want to switch to another backend such as Postgres, you can change `entry.yaml` to point to the new backend, and the ConfigManager will automatically use it without any code changes, as long as the existing config data is migrated if needed.
+
+All config values and version history are then stored in the database, and the ConfigManager provides an interface for reading, writing, and managing config data with version control. We should rarely need to interact with the database directly, but we can inspect the SQLite file with any SQLite viewer if needed.
+
+When inheriting ConfigManager for your own package, you should specify a different database or database path (e.g., `~/.rubik/config.db`), so that your package's config is stored separately from ahvn's config.
+
+<br/>
+
+### 3.2. Versioning and Compatibility (Experimental)
+
+<Warning>
+AgentHeaven is in active experimental development. Advanced compatibility/version-control workflows may change substantially.
+</Warning>
+
+Each config mutation writes a new versioned record for that scope.
+
+Version history is built in:
+- each write creates a new version
+- inspect history and compare versions
+- copy settings from older versions as a rollback pattern
+
+Compatibility-aware filtering across package versions is supported through the compatibility table and is still evolving.
+
+If there are frequent config changes in your system, this persist-all strategy can lead to a large number of versions. In that case, you can use the `ahvn config compact` command to merge versions into a single latest version, deleting all the history versions.
+
+<br/>
+
+## 4. ConfigCLI
+
+Use `ahvn config` (or `ahvn cfg`) CLI commands to manage scope config safely:
+
+- `ahvn cfg show <key>`                     # Display a config subtree, leave empty to show all
+- `ahvn cfg set <key> <value>`              # Set a config value
+- `ahvn cfg unset <key>`                    # Unset a config value
+- `ahvn cfg history`                        # Show version history for a scope
+- `ahvn cfg diff ...`                       # Show differences between versions or scopes
+- `ahvn cfg copy ...`                       # Copy values from one version/scope to another
+- `ahvn cfg reset -s <scope>`               # Reset a scope to defaults (with confirmation)
+- `ahvn cfg compact -s <scope>`             # Compact version history by merging old versions (with confirmation)
+- `ahvn cfg edit`                           # Open config in an editor for manual changes (advanced users only)
+
+Most commands support `--scope/-s` to specify the target scope (default is `ahvn`), or `--version/-v` to specify the target version (default is latest).
+
+<Tip>
+    Recommendations:
+    1. Keep shared defaults in `ahvn`.
+    2. Create one child scope per app or environment.
+    3. Override only the keys that differ.
+    4. Check `history` and `diff` before large changes.
+</Tip>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Next reads:**
+    - [Quick Setup](/quickstart/quick-setup) — setup and operational baseline
+    - [CLI reference](/reference/cli/overview) — complete command surface for `ahvn config`
+</Tip>

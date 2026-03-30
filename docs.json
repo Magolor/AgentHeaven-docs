@@ -1,0 +1,396 @@
+{
+    "$schema": "https://mintlify.com/docs.json",
+    "name": "AgentHeaven",
+    "description": "Ask not what your agents can do for you, ask what you can do for your agents.",
+    "theme": "palm",
+    "colors": {
+        "primary": "#C70008",
+        "light": "#D33941",
+        "dark": "#7F0001"
+    },
+    "favicon": "/images/favicon.ico",
+    "logo": {
+        "light": "/images/logo-light.png",
+        "dark": "/images/logo-dark.png",
+        "href": "https://rubiksql.github.io/AgentHeaven-docs/"
+    },
+    "appearance": {
+        "default": "dark",
+        "strict": true
+    },
+    "fonts": {
+        "heading": {
+            "family": "HarmonyOS Sans",
+            "source": "/fonts/HarmonyOS_Sans_Black.woff2",
+            "format": "woff2",
+            "weight": 900
+        },
+        "body": {
+            "family": "HarmonyOS Sans",
+            "source": "/fonts/HarmonyOS_Sans_Regular.woff2",
+            "format": "woff2",
+            "weight": 500
+        }
+    },
+    "background": {
+        "decoration": "gradient"
+    },
+    "styling": {
+        "codeblocks": {
+            "theme": {
+                "light": "github-light",
+                "dark": "github-dark"
+            }
+        }
+    },
+    "search": {
+        "prompt": "Search AgentHeaven docs..."
+    },
+    "seo": {
+        "indexing": "navigable"
+    },
+    "navbar": {
+        "primary": {
+            "type": "github",
+            "href": "https://github.com/RubikSQL/AgentHeaven"
+        },
+        "links": []
+    },
+    "footer": {
+        "socials": {
+            "github": "https://github.com/RubikSQL/AgentHeaven"
+        }
+    },
+    "navigation": {
+        "languages": [
+            {
+                "language": "en",
+                "tabs": [
+                    {
+                        "tab": "Documentation",
+                        "groups": [
+                            {
+                                "group": "Introduction",
+                                "pages": [
+                                    "introduction/overview",
+                                    "introduction/philosophy",
+                                    "introduction/architecture"
+                                ]
+                            },
+                            {
+                                "group": "Quickstart",
+                                "pages": [
+                                    "quickstart/installation",
+                                    "quickstart/quick-setup",
+                                    "quickstart/first-llm-chat"
+                                ]
+                            },
+                            {
+                                "group": "Features",
+                                "pages": [
+                                    "features/configuration",
+                                    "features/llm",
+                                    "features/prompts",
+                                    "features/caching",
+                                    "features/capsules",
+                                    "features/tools",
+                                    "features/toolkits",
+                                    {
+                                        "group": "Knowledge",
+                                        "pages": [
+                                            "features/knowledge/overview",
+                                            "features/knowledge/ukf",
+                                            "features/knowledge/storage",
+                                            "features/knowledge/retrieval",
+                                            "features/knowledge/klbase"
+                                        ]
+                                    },
+                                    {
+                                        "group": "Databases",
+                                        "pages": [
+                                            "features/databases/overview",
+                                            "features/databases/sqlite",
+                                            "features/databases/postgresql",
+                                            "features/databases/mongodb"
+                                        ]
+                                    },
+                                    {
+                                        "group": "Vector Databases",
+                                        "pages": [
+                                            "features/vector-databases/overview",
+                                            "features/vector-databases/lancedb",
+                                            "features/vector-databases/chromadb",
+                                            "features/vector-databases/milvus"
+                                        ]
+                                    },
+                                    {
+                                        "group": "Utilities",
+                                        "pages": [
+                                            "features/utilities/overview",
+                                            "features/utilities/serialization",
+                                            "features/utilities/file-and-path",
+                                            "features/utilities/functions",
+                                            "features/utilities/strings",
+                                            "features/utilities/common"
+                                        ]
+                                    },
+                                    {
+                                        "group": "Advanced",
+                                        "pages": [
+                                            "features/agents",
+                                            "features/extensions"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "Ecosystem",
+                                "pages": [
+                                    "ecosystem/llm-providers",
+                                    "ecosystem/mcp-clients",
+                                    "ecosystem/skills"
+                                ]
+                            },
+                            {
+                                "group": "Blog",
+                                "icon": "newspaper",
+                                "pages": [
+                                    "blog/imdb-sentiment-analysis",
+                                    "blog/index"
+                                ]
+                            },
+                            {
+                                "group": "Community",
+                                "pages": [
+                                    "community/roadmap",
+                                    "community/contributing",
+                                    "community/connect",
+                                    "community/license",
+                                    "community/citation"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "Reference",
+                        "groups": [
+                            {
+                                "group": "API",
+                                "pages": [
+                                    "reference/api/overview"
+                                ]
+                            },
+                            {
+                                "group": "CLI",
+                                "pages": [
+                                    "reference/cli/overview"
+                                ]
+                            },
+                            {
+                                "group": "MCP Toolkit",
+                                "pages": [
+                                    "reference/mcp-toolkit/overview"
+                                ]
+                            },
+                            {
+                                "group": "Other",
+                                "pages": [
+                                    "reference/glossary"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "Blog",
+                        "groups": [
+                            {
+                                "group": "Blog",
+                                "pages": [
+                                    "blog/index",
+                                    "blog/imdb-sentiment-analysis"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "Demos",
+                        "groups": [
+                            {
+                                "group": "Demos",
+                                "pages": [
+                                    "demos/index"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "language": "cn",
+                "tabs": [
+                    {
+                        "tab": "文档",
+                        "groups": [
+                            {
+                                "group": "介绍",
+                                "pages": [
+                                    "zh/introduction/overview",
+                                    "zh/introduction/philosophy",
+                                    "zh/introduction/architecture"
+                                ]
+                            },
+                            {
+                                "group": "快速开始",
+                                "pages": [
+                                    "zh/quickstart/installation",
+                                    "zh/quickstart/quick-setup",
+                                    "zh/quickstart/first-llm-chat"
+                                ]
+                            },
+                            {
+                                "group": "功能",
+                                "pages": [
+                                    "zh/features/configuration",
+                                    "zh/features/llm",
+                                    "zh/features/prompts",
+                                    "zh/features/caching",
+                                    "zh/features/capsules",
+                                    "zh/features/tools",
+                                    "zh/features/toolkits",
+                                    {
+                                        "group": "知识系统",
+                                        "pages": [
+                                            "zh/features/knowledge/overview",
+                                            "zh/features/knowledge/ukf",
+                                            "zh/features/knowledge/storage",
+                                            "zh/features/knowledge/retrieval",
+                                            "zh/features/knowledge/klbase"
+                                        ]
+                                    },
+                                    {
+                                        "group": "数据库",
+                                        "pages": [
+                                            "zh/features/databases/overview",
+                                            "zh/features/databases/sqlite",
+                                            "zh/features/databases/postgresql",
+                                            "zh/features/databases/mongodb"
+                                        ]
+                                    },
+                                    {
+                                        "group": "向量数据库",
+                                        "pages": [
+                                            "zh/features/vector-databases/overview",
+                                            "zh/features/vector-databases/lancedb",
+                                            "zh/features/vector-databases/chromadb",
+                                            "zh/features/vector-databases/milvus"
+                                        ]
+                                    },
+                                    {
+                                        "group": "工具集",
+                                        "pages": [
+                                            "zh/features/utilities/overview",
+                                            "zh/features/utilities/serialization",
+                                            "zh/features/utilities/file-and-path",
+                                            "zh/features/utilities/functions",
+                                            "zh/features/utilities/strings",
+                                            "zh/features/utilities/common"
+                                        ]
+                                    },
+                                    {
+                                        "group": "进阶",
+                                        "pages": [
+                                            "zh/features/agents",
+                                            "zh/features/extensions"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "生态",
+                                "pages": [
+                                    "zh/ecosystem/llm-providers",
+                                    "zh/ecosystem/mcp-clients",
+                                    "zh/ecosystem/skills"
+                                ]
+                            },
+                            {
+                                "group": "博客",
+                                "icon": "newspaper",
+                                "pages": [
+                                    "zh/blog/imdb-sentiment-analysis",
+                                    "zh/blog/index"
+                                ]
+                            },
+                            {
+                                "group": "社区",
+                                "pages": [
+                                    "zh/community/roadmap",
+                                    "zh/community/contributing",
+                                    "zh/community/connect",
+                                    "zh/community/license",
+                                    "zh/community/citation"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "参考",
+                        "groups": [
+                            {
+                                "group": "API",
+                                "pages": [
+                                    "zh/reference/api/overview"
+                                ]
+                            },
+                            {
+                                "group": "CLI",
+                                "pages": [
+                                    "zh/reference/cli/overview"
+                                ]
+                            },
+                            {
+                                "group": "MCP 工具包",
+                                "pages": [
+                                    "zh/reference/mcp-toolkit/overview"
+                                ]
+                            },
+                            {
+                                "group": "其他",
+                                "pages": [
+                                    "zh/reference/glossary"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "博客",
+                        "groups": [
+                            {
+                                "group": "博客",
+                                "pages": [
+                                    "zh/blog/index",
+                                    "zh/blog/imdb-sentiment-analysis"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tab": "演示",
+                        "groups": [
+                            {
+                                "group": "演示",
+                                "pages": [
+                                    "zh/demos/index"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "banner": {
+        "dismissible": true,
+        "content": "🚧 AgentHeaven is in active experimental development. Features may change. NOT ready for stable deployment."
+    }
+}

@@ -1,0 +1,218 @@
+---
+title: "Config commands"
+description: "View and modify AgentHeaven configuration at the system, global, and local levels."
+---
+
+AgentHeaven uses a three-level configuration hierarchy:
+
+| Level | Scope | Flag |
+|---|---|---|
+| **system** | Built-in defaults, read-only | `-s` / `--system` |
+| **global** | Per-user settings (`~/.ahvn/`) | `-g` / `--global` |
+| **local** | Per-repo settings (`.ahvn/` in current dir) | _(default)_ |
+
+Local values take precedence over global, which take precedence over system.
+
+## `ahvn config show`
+
+Print config values as YAML. Without a key, prints the entire config for the selected level. With a key, prints the value at that key path.
+
+```bash
+ahvn config show [KEY] [OPTIONS]
+```
+
+| Argument / Flag | Description |
+|---|---|
+| `KEY` | Optional dot-separated key path (e.g., `core.cache_path`). |
+| `-g`, `--global` | Show global config instead of local. |
+| `-s`, `--system` | Show system (default) config. |
+| `-c DIR`, `--cwd DIR` | Use `DIR` as the working directory when resolving local config. |
+
+**Examples**
+
+```bash
+# Show full local config
+ahvn config show
+
+# Show a specific key from global config
+ahvn config show core.cache_path --global
+
+# Show system defaults
+ahvn config show --system
+
+# Show local config for a specific project directory
+ahvn config show --cwd /path/to/project
+```
+
+## `ahvn config set`
+
+Set a config value. Defaults to local level unless `--global` is specified.
+
+```bash
+ahvn config set KEY VALUE [OPTIONS]
+```
+
+| Argument / Flag | Description |
+|---|---|
+| `KEY` | Dot-separated key path. Required. |
+| `VALUE` | Value to set. Automatically typed (string, int, bool). Required. |
+| `-g`, `--global` | Write to global config instead of local. |
+| `-j`, `--json` | Parse `VALUE` as JSON (useful for lists and objects). |
+| `-c DIR`, `--cwd DIR` | Use `DIR` as the working directory when resolving local config. |
+
+**Examples**
+
+```bash
+# Set a value in local config
+ahvn config set llm.model gpt-4o
+
+# Set a value globally
+ahvn config set llm.api_key sk-... --global
+
+# Set a JSON value (e.g., a list)
+ahvn config set llm.stop_sequences '["\n", "END"]' --json
+
+# Set config for a specific project directory
+ahvn config set llm.preset fast --cwd /path/to/project
+```
+
+<Note>
+Values are automatically coerced to the appropriate type (integer, boolean, or string). Use `--json` to set lists, dicts, or other structured values.
+</Note>
+
+## `ahvn config unset`
+
+Remove a key from the config at the specified level.
+
+```bash
+ahvn config unset KEY [OPTIONS]
+```
+
+| Argument / Flag | Description |
+|---|---|
+| `KEY` | Dot-separated key path to remove. Required. |
+| `-g`, `--global` | Remove from global config instead of local. |
+| `-c DIR`, `--cwd DIR` | Use `DIR` as the working directory when resolving local config. |
+
+**Examples**
+
+```bash
+# Remove a key from local config
+ahvn config unset llm.model
+
+# Remove a key from global config
+ahvn config unset llm.api_key --global
+```
+
+## `ahvn config copy`
+
+Copy a config value (or all config values) from global or system config into the local config. Useful for bootstrapping a repo config from your user defaults.
+
+```bash
+ahvn config copy [KEY] [OPTIONS]
+```
+
+| Argument / Flag | Description |
+|---|---|
+| `KEY` | Optional key to copy. If omitted, copies all config values (requires confirmation). |
+| `-g`, `--global` | Copy from system (default) config instead of global config. |
+| `-y`, `--yes` | Skip the confirmation prompt when copying all config values. |
+| `-c DIR`, `--cwd DIR` | Use `DIR` as the working directory when resolving local config. |
+
+<Warning>
+Omitting `KEY` replaces the **entire** local config with the source config. You will be prompted to confirm unless you pass `--yes`.
+</Warning>
+
+**Examples**
+
+```bash
+# Copy a single key from global config to local
+ahvn config copy llm.model
+
+# Copy a key from system defaults to local
+ahvn config copy llm.model --global
+
+# Copy all global config to local (with prompt)
+ahvn config copy
+
+# Copy all global config to local (skip prompt)
+ahvn config copy --yes
+```
+
+## `ahvn config edit`
+
+Open the config file for the selected level in your `$EDITOR` (defaults to `vim`).
+
+```bash
+ahvn config edit [OPTIONS]
+```
+
+| Flag | Description |
+|---|---|
+| `-g`, `--global` | Edit global config instead of local. |
+| `-s`, `--system` | Edit system config. |
+| `-c DIR`, `--cwd DIR` | Use `DIR` as the working directory when resolving local config. |
+
+**Examples**
+
+```bash
+# Edit local repo config
+ahvn config edit
+
+# Edit global user config
+ahvn config edit --global
+
+# Edit with a custom editor
+EDITOR=nano ahvn config edit --global
+```
+
+## `ahvn config open`
+
+Open the config file for the selected level using the system's default file opener (e.g., Finder on macOS, xdg-open on Linux).
+
+```bash
+ahvn config open [OPTIONS]
+```
+
+| Flag | Description |
+|---|---|
+| `-g`, `--global` | Open global config instead of local. |
+| `-s`, `--system` | Open system config. |
+| `-c DIR`, `--cwd DIR` | Use `DIR` as the working directory when resolving local config. |
+
+**Examples**
+
+```bash
+# Open local config in file explorer
+ahvn config open
+
+# Open global config
+ahvn config open --global
+```
+
+## Common workflows
+
+**Set your LLM API key globally**
+
+```bash
+ahvn config set llm.api_key sk-your-key-here --global
+```
+
+**Check what model your project is using**
+
+```bash
+ahvn config show llm.model
+```
+
+**Bootstrap a repo config from your global defaults**
+
+```bash
+ahvn repo init my-project
+ahvn config copy --yes
+```
+
+**Override the model for a specific project**
+
+```bash
+ahvn config set llm.model claude-3-5-sonnet-20241022
+```

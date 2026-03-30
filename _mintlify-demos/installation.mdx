@@ -1,0 +1,145 @@
+---
+title: "Installation"
+description: "Install AgentHeaven using your preferred Python package manager."
+---
+
+## Prerequisites
+
+- **Python** `>=3.10,<3.14`
+- **Git** (recommended) — required for version control features and installing from source
+
+<Note>
+  We recommend installing [Git](https://git-scm.com/) before setting up AgentHeaven so that repository and version control features work out of the box.
+</Note>
+
+## Quick install
+
+Install the core package with no optional dependencies:
+
+<CodeGroup>
+
+```bash pip
+pip install agent-heaven
+```
+
+```bash uv
+uv pip install agent-heaven
+```
+
+```bash poetry
+poetry add agent-heaven
+```
+
+```bash conda
+conda install -c conda-forge agent-heaven
+```
+
+</CodeGroup>
+
+## Full install
+
+Install with all optional extras for the complete feature set:
+
+<CodeGroup>
+
+```bash pip
+pip install "agent-heaven[exp,dev]"
+```
+
+```bash uv
+uv pip install "agent-heaven[exp,dev]"
+```
+
+```bash poetry
+poetry add agent-heaven --extras "exp gui dev"
+```
+
+```bash conda
+conda install -c conda-forge agent-heaven[exp,dev]
+```
+
+</CodeGroup>
+
+## Optional extras
+
+AgentHeaven ships three optional dependency groups:
+
+| Extra | Contents | Recommended? |
+|---|---|---|
+| `exp` | Experimental features: database integrations, vector engines, and more | Yes |
+| `gui` | GUI tools for agent management and monitoring | Optional |
+| `dev` | Development tools: docs generation, code formatting, testing | For contributors |
+
+You can combine extras freely, for example `"agent-heaven[exp,gui]"`.
+
+## Install from source
+
+Use this approach to run the latest development code or contribute to AgentHeaven.
+
+<Steps>
+  <Step title="Clone the repository">
+    ```bash
+    git clone https://github.com/RubikSQL/AgentHeaven.git
+    cd AgentHeaven
+    ```
+  </Step>
+  <Step title="Install (minimal)">
+    Install core only:
+
+    <CodeGroup>
+
+    ```bash pip
+    pip install -e "."
+    ```
+
+    ```bash uv
+    uv pip install -e "."
+    ```
+
+    ```bash poetry
+    poetry install
+    ```
+
+    ```bash conda
+    conda env create -f environment.yml
+    conda activate ahvn
+    ```
+
+    </CodeGroup>
+  </Step>
+  <Step title="Install (full, with all extras)">
+    Install with all optional dependencies:
+
+    <CodeGroup>
+
+    ```bash pip
+    pip install -e ".[dev,exp,gui]"
+    ```
+
+    ```bash uv
+    uv pip install -e ".[dev,exp,gui]"
+    ```
+
+    ```bash poetry
+    poetry install --extras "dev exp gui"
+    ```
+
+    ```bash conda
+    conda env create -f environment-full.yml -n ahvn
+    conda activate ahvn
+    ```
+
+    </CodeGroup>
+  </Step>
+  <Step title="Verify the installation">
+    Confirm that the `ahvn` CLI is available:
+
+    ```bash
+    ahvn --version
+    ```
+  </Step>
+</Steps>
+
+## Next steps
+
+Once installed, follow the [Quickstart](/quickstart) to initialize your environment and run your first agent.

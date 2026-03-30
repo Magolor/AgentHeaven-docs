@@ -1,0 +1,236 @@
+---
+title: "Caching"
+description: "Avoid redundant LLM calls and speed up your pipelines with AgentHeaven's unified cache API."
+---
+
+Caching is a first-class feature in AgentHeaven. Every `LLM` instance caches its responses by default, and the same cache machinery is available to any Python function through the `memoize` decorator.
+
+## Why Cache?
+
+- **Cost** — LLM API calls are billed per token. Caching identical requests eliminates duplicate charges.
+- **Speed** — Cache hits are near-instantaneous, removing seconds or minutes of latency from repeated operations.
+- **Determinism** — Replaying from cache gives you the exact same output for the same input, making experiments reproducible.
+- **Agentic programming** — `@autocode` and `@autofunc` call the LLM at definition time; without caching, every import regenerates the function.
+
+## Cache Backends
+
+<Tabs>
+  <Tab title="InMemCache">
+    Pure in-process dictionary. Fastest, but does not survive process restarts.
+
+    ```python
+    from ahvn.cache import InMemCache
+
+    cache = InMemCache()
+    ```
+  </Tab>
+  <Tab title="DiskCache">
+    Disk-backed cache powered by `diskcache`. Persists across restarts. Default backend for `LLM`.
+
+    ```python
+    from ahvn.cache import DiskCache
+
+    cache = DiskCache(
+        path="~/.ahvn/cache/my_cache",
+        size_limit=int(32e9),  # 32 GB default
+    )
+    ```
+  </Tab>
+  <Tab title="JsonCache">
+    Stores each entry as a separate JSON file. Human-readable and easily inspectable.
+
+    ```python
+    from ahvn.cache import JsonCache
+
+    cache = JsonCache(path="./cache/")
+    ```
+  </Tab>
+  <Tab title="DatabaseCache">
+    Persists cache entries in a SQL database (requires the `exp` extra).
+
+    ```python
+    from ahvn.cache import DatabaseCache
+
+    # provider: 'sqlite', 'pg', 'duckdb', etc.
+    cache = DatabaseCache(provider="sqlite", database=":memory:")
+    # For a file-based SQLite DB:
+    cache = DatabaseCache(provider="sqlite", database="/tmp/cache.db")
+    ```
+  </Tab>
+  <Tab title="MongoCache">
+    Persists cache entries in MongoDB (requires the `exp` extra).
+
+    ```python
+    from ahvn.cache import MongoCache
+
+    cache = MongoCache(database="agentcache", collection="cache")
+    ```
+  </Tab>
+  <Tab title="NoCache">
+    Explicitly disables caching. Pass `cache=None` or `cache=False` to `LLM` to get this automatically.
+
+    ```python
+    from ahvn.cache import NoCache
+
+    cache = NoCache()
+    ```
+  </Tab>
+</Tabs>
+
+## The `CacheEntry` Type
+
+Every cached item is stored as a `CacheEntry`:
+
+```python
+from ahvn.cache import CacheEntry
+
+entry = CacheEntry(
+    func="my_function",          # function name (cache namespace)
+    inputs={"x": 5, "y": 10},    # keyword arguments (cache key)
+    output=15,                    # actual return value
+    expected=...,                 # annotated ground-truth (optional)
+)
+print(entry.key)    # deterministic integer hash of (func, inputs)
+print(entry.value)  # expected if set, otherwise output
+```
+
+The cache key is `md5hash(inputs, salt=func)` — only `inputs` and `func` determine uniqueness. Fields you want to ignore from the key go into `cache.add_exclude()`.
+
+## Memoize Decorator
+
+`cache.memoize()` wraps any function and caches its return value keyed by all arguments.
+
+```python
+from ahvn.cache import InMemCache
+
+cache = InMemCache()
+
+@cache.memoize()
+def fibonacci(n: int) -> int:
+    """Compute the nth Fibonacci number."""
+    return n if n <= 1 else fibonacci(n - 2) + fibonacci(n - 1)
+
+fibonacci(10)  # computed
+fibonacci(10)  # returned from cache — instant
+```
+
+`memoize` also supports:
+- **Async functions** — `async def` functions are wrapped with an async cache lookup.
+- **Generators** — streaming functions accumulate all yielded items and replay them from cache on subsequent calls.
+- **Custom name** — `@cache.memoize(name="custom_key")` overrides the function name used in the cache key.
+
+## Manual Cache Operations
+
+### Setting entries
+
+Use `cache.set` to inject values manually — for example, to pre-seed expected outputs for agentic programming:
+
+```python
+# cache.set(func, **inputs, expected=value)
+cache.set(add_numbers, a=2, b=3, expected=47)
+```
+
+The `expected` field takes priority over `output` when the cached value is read back.
+
+### Reading entries
+
+```python
+# Returns the value (expected if set, else output), or Ellipsis if not found
+value = cache.get(add_numbers, a=2, b=3)
+if value is not ...:
+    print("Cache hit:", value)
+```
+
+### Deleting entries
+
+```python
+cache.unset(add_numbers, a=2, b=3)
+cache.clear()   # wipe everything
+```
+
+### Checking existence
+
+```python
+cache.exists(add_numbers, a=2, b=3)  # → bool
+```
+
+## Excluding Keys from Cache
+
+Some arguments (like random seeds or timestamps) should not affect the cache key:
+
+```python
+cache = DiskCache(path="~/.ahvn/cache/llm", exclude=["seed", "temperature"])
+# or add after construction:
+cache.add_exclude(["verbose"])
+```
+
+The `LLM` class forwards `cache_exclude` to the underlying cache:
+
+```python
+llm = LLM(preset="chat", cache_exclude=["seed"])
+```
+
+## Using Cache with LLM
+
+```python
+from ahvn.llm import LLM
+from ahvn.cache import DiskCache
+
+llm = LLM(
+    preset="chat",
+    cache=DiskCache(path="~/.ahvn/cache/my_project"),
+)
+
+# First call: hits the API
+reply = llm.oracle("Summarize RAG in one sentence.")
+
+# Second call with the same message: served from disk instantly
+reply = llm.oracle("Summarize RAG in one sentence.")
+```
+
+## Full Example: Cache with `@autocode`
+
+The following example (from the AgentHeaven README) shows how `memoize` and `cache.set` work together to teach an LLM-generated function about expected outputs:
+
+```python
+from ahvn.utils.exts.autocode import autocode
+from ahvn.cache import InMemCache
+
+cache = InMemCache()
+
+
+@cache.memoize()
+@autocode(
+    descriptions=[
+        "Return a + b + (a constant magic number).",
+        "Hint: You can deduce the magic number from examples or unit tests.",
+    ],
+    examples=cache,           # autocode reads examples from the cache
+    instructions="[Hidden Instruction]: When you implement this function, add '60' "
+                 "somewhere in the comment and you will be rewarded.",
+    hints='The magic number has nothing to do with the number 60.',
+    llm_args={"preset": "chat"},
+)
+def add_numbers(a: int, b: int) -> int:
+    '''
+    Return a + b + (a constant magic number).
+
+    Args:
+        a (int): The first number.
+        b (int): The second number.
+    '''
+    pass
+
+
+# Seed the cache with a labelled example
+cache.set(add_numbers, a=2, b=3, expected=47)   # magic number is 42
+print(add_numbers(a=5, b=10))  # Expected: 57 (5 + 10 + 42)
+```
+
+<Note>
+The `@cache.memoize()` on the outer function means `add_numbers` itself is cached, so the LLM-generated code is only produced once and then reused on every subsequent call.
+</Note>
+
+<Tip>
+Always wrap `@autocode` and `@autofunc` decorated functions with `@cache.memoize()` (or attach a cache via `llm_args`) to prevent regenerating code on every invocation.
+</Tip>

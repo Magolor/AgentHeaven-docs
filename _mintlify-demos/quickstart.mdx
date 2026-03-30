@@ -1,0 +1,193 @@
+---
+title: "Quickstart"
+description: "Get a working AgentHeaven agent running in under five minutes."
+---
+
+<Warning>
+  AgentHeaven is in active experimental development. Not ready for stable deployment.
+</Warning>
+
+## Prerequisites
+
+- Python 3.10–3.13
+- [Git](https://git-scm.com/) (recommended for version control features)
+- An LLM provider API key (OpenAI, OpenRouter, DeepSeek) **or** [Ollama](https://ollama.com/) for local models
+
+## Setup
+
+<Steps>
+  <Step title="Install AgentHeaven">
+    Install the package with the `exp` extras for full feature support:
+
+    <CodeGroup>
+    ```bash pip
+    pip install "agent-heaven[exp]"
+    ```
+    ```bash uv
+    uv pip install "agent-heaven[exp]"
+    ```
+    ```bash poetry
+    poetry add agent-heaven --extras "exp"
+    ```
+    </CodeGroup>
+  </Step>
+
+  <Step title="Initialize global setup">
+    Run the setup command to initialize AgentHeaven's global configuration:
+
+    ```bash
+    ahvn setup --reset
+    ```
+
+    This creates the global config file at `~/.ahvn/config.yaml`.
+  </Step>
+
+  <Step title="Configure your LLM provider">
+    Set up at least one LLM provider. Choose the one you have access to:
+
+    <Tabs>
+      <Tab title="OpenAI">
+        ```bash
+        ahvn config set --global llm.providers.openai.api_key YOUR_OPENAI_API_KEY
+        ahvn config set --global llm.presets.chat.provider openai
+        ahvn config set --global llm.presets.chat.model gpt-4o
+        ahvn config set --global llm.presets.embedder.provider openai
+        ahvn config set --global llm.presets.embedder.model text-embedding-3-small
+        ```
+      </Tab>
+      <Tab title="OpenRouter">
+        ```bash
+        ahvn config set --global llm.providers.openrouter.api_key YOUR_OPENROUTER_API_KEY
+        ahvn config set --global llm.presets.chat.provider openrouter
+        ahvn config set --global llm.presets.chat.model google/gemini-2.5-flash
+        ```
+      </Tab>
+      <Tab title="DeepSeek">
+        ```bash
+        ahvn config set --global llm.providers.deepseek.api_key YOUR_DEEPSEEK_API_KEY
+        ahvn config set --global llm.presets.chat.provider deepseek
+        ahvn config set --global llm.presets.chat.model deepseek-chat
+        ```
+      </Tab>
+      <Tab title="Ollama (local)">
+        First [install Ollama](https://ollama.com/), then:
+
+        ```bash
+        ollama pull qwen3:4b
+        ollama pull embeddinggemma
+        ahvn config set --global llm.presets.chat.provider ollama
+        ahvn config set --global llm.presets.chat.model qwen3:4b
+        ahvn config set --global llm.presets.embedder.provider ollama
+        ahvn config set --global llm.presets.embedder.model embeddinggemma
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Verify the setup">
+    Send a quick chat message to verify your LLM is working:
+
+    ```bash
+    ahvn chat "Hello! What is 2 + 2?"
+    ```
+
+    You should see a streamed response from your configured LLM.
+
+    <Tip>
+      Use `ahvn session` for an interactive multi-turn chat with history, save/load, and regen commands.
+    </Tip>
+  </Step>
+
+  <Step title="Run your first Python agent">
+    Create a file `first_agent.py`:
+
+    ```python first_agent.py
+    from ahvn.llm import LLM
+    from ahvn.cache import InMemCache
+    from ahvn.tool import ToolSpec
+
+    cache = InMemCache()
+
+    # Define cached tools
+    @cache.memoize()
+    def fibonacci(n: int) -> int:
+        """
+        Compute the nth Fibonacci number.
+
+        Args:
+            n (int): The position in the Fibonacci sequence.
+
+        Returns:
+            int: The nth Fibonacci number.
+        """
+        return n if n <= 1 else fibonacci(n - 2) + fibonacci(n - 1)
+
+
+    def multiply(a: int, b: int) -> int:
+        """
+        Multiply two integers.
+
+        Args:
+            a (int): The first integer.
+            b (int): The second integer.
+
+        Returns:
+            int: The product of the two integers.
+        """
+        return a * b
+
+
+    # Create ToolSpec objects from functions
+    fib_tool = ToolSpec.from_function(fibonacci)
+    mul_tool = ToolSpec.from_function(multiply)
+
+    # Use the LLM with tools
+    llm = LLM(preset="chat")
+
+    messages = [{"role": "user", "content": "What is Fib(10) * Fib(15)?"}]
+
+    # Stream the response, letting the model call tools as needed
+    for chunk in llm.stream(messages, tools=[fib_tool, mul_tool],
+                             include=["text", "tool_calls", "tool_messages"]):
+        if chunk.get("text"):
+            print(chunk["text"], end="", flush=True)
+        if chunk.get("tool_calls"):
+            for tc in chunk["tool_calls"]:
+                name = tc.get("function", {}).get("name", "unknown")
+                print(f"\n  → {name}(...)")
+        if chunk.get("tool_messages"):
+            for tm in chunk["tool_messages"]:
+                print(f"  ← {tm.get('name', 'unknown')}: {tm.get('content', '')}")
+    print()
+    ```
+
+    Run it:
+
+    ```bash
+    python first_agent.py
+    ```
+
+    You should see the LLM calling tools and arriving at the final answer.
+
+    <Tip>
+      For multi-step agents with more complex tool-calling loops, see the [Agents guide](/guides/agents).
+    </Tip>
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Configuration" icon="gear" href="/configuration/overview">
+    Learn about all configuration options including LLM presets, cache paths, and agent settings.
+  </Card>
+  <Card title="CLI guide" icon="terminal" href="/cli/overview">
+    Explore the full `ahvn` CLI for chat, session management, config, and repos.
+  </Card>
+  <Card title="Python guide: LLM" icon="brain" href="/guides/llm">
+    Deep-dive into the LLM class: streaming, tool use, embeddings, and structured output.
+  </Card>
+  <Card title="Agentic programming" icon="wand-magic-sparkles" href="/guides/agentic-programming">
+    Use `@autocode`, `@autofunc`, and `@autotask` to build LLM-powered functions.
+  </Card>
+</CardGroup>

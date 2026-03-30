@@ -1,0 +1,267 @@
+---
+title: "Knowledge base"
+description: "Store, retrieve, and search structured knowledge fragments with KLBase, KLStore, and KLEngine."
+---
+
+The AgentHeaven knowledge base system is organized around three concepts:
+
+<CardGroup cols={3}>
+  <Card title="KLStore" icon="hard-drive">
+    Persistent storage — CRUD operations for individual knowledge fragments.
+  </Card>
+  <Card title="KLEngine" icon="magnifying-glass">
+    Search index — vector search, faceted search, full-scan, etc.
+  </Card>
+  <Card title="KLBase" icon="layer-group">
+    Unified manager — owns one or more stores and engines, coordinates writes and searches.
+  </Card>
+</CardGroup>
+
+Every item stored in the system is a **UKF** (Universal Knowledge Fragment) — a Pydantic model that carries rich metadata alongside its content.
+
+## The UKF Data Model
+
+`BaseUKF` is the foundation for all knowledge items. Key fields:
+
+```python
+from ahvn.ukf.base import BaseUKF
+
+kl = BaseUKF(
+    name="Python list slicing",
+    content="list[start:stop:step] returns a sublist.",
+    description="Explains Python list slicing syntax.",
+    type="knowledge",         # routes to the correct UKFT subclass
+    tags={"[LANGUAGE:en]"},   # structured tags for faceted search
+    synonyms={"slicing", "sublist", "list range"},
+    priority=10,              # higher → ranked first in results
+)
+print(kl.id)   # deterministic integer hash from identity fields
+```
+
+The `id` is a deterministic hash derived from `name`, `type`, `version`, `variant`, `source`, `creator`, `owner`, `workspace`, `collection`, and `tags`. Two UKFs with the same identity fields are the same item.
+
+## Built-in UKF Templates (UKFT)
+
+AgentHeaven ships six typed subclasses. Each registers itself under a `type` string so that `BaseUKF.model_validate` can deserialize to the correct class.
+
+| Class | `type` | Purpose |
+|---|---|---|
+| `KnowledgeUKFT` | `"knowledge"` | General-purpose knowledge |
+| `ExperienceUKFT` | `"experience"` | Input/output pairs, test cases |
+| `PromptUKFT` | `"prompt"` | Jinja2 template folders |
+| `ToolUKFT` | `"tool"` | Serialized MCP tool definitions |
+| `DocumentUKFT` | `"document"` | Text chunks (e.g. RAG documents) |
+| `ResourceUKFT` | `"resource"` | File/path resources |
+
+```python
+from ahvn.ukf.templates.basic.knowledge import KnowledgeUKFT
+from ahvn.ukf.templates.basic.experience import ExperienceUKFT
+
+kl = KnowledgeUKFT(
+    name="Rate limiting",
+    content="Use exponential backoff when a 429 is received.",
+)
+
+experience = ExperienceUKFT(
+    name="add(a=1, b=2)",
+    content_resources={"func": "add", "inputs": {"a": 1, "b": 2}, "output": 3},
+)
+```
+
+## Storage Backends (KLStore)
+
+<Tabs>
+  <Tab title="CacheKLStore">
+    Stores UKFs in a `BaseCache` backend (in-memory, disk, etc.).
+
+    ```python
+    from ahvn.klstore import CacheKLStore
+    from ahvn.cache import DiskCache
+
+    store = CacheKLStore(
+        cache=DiskCache(path="~/.ahvn/cache/klstore"),
+        name="my_store",
+    )
+    ```
+  </Tab>
+  <Tab title="DatabaseKLStore">
+    Persists UKFs in a SQL database via SQLAlchemy. Requires the `exp` extra.
+
+    ```python
+    from ahvn.klstore import DatabaseKLStore
+
+    store = DatabaseKLStore(
+        url="sqlite:///knowledge.db",
+        name="db_store",
+    )
+    ```
+  </Tab>
+  <Tab title="MongoKLStore">
+    Persists UKFs in MongoDB. Requires the `exp` extra.
+
+    ```python
+    from ahvn.klstore import MongoKLStore
+
+    store = MongoKLStore(
+        uri="mongodb://localhost:27017",
+        db="agentdb",
+        collection="knowledge",
+    )
+    ```
+  </Tab>
+  <Tab title="VectorKLStore">
+    A store backed by a vector database. Requires the `exp` extra.
+
+    ```python
+    from ahvn.klstore import VectorKLStore
+
+    store = VectorKLStore(name="vectors")
+    ```
+  </Tab>
+</Tabs>
+
+## Search Engines (KLEngine)
+
+<Tabs>
+  <Tab title="ScanKLEngine">
+    Linear scan over an attached store. No index needed — good for small collections.
+
+    ```python
+    from ahvn.klengine import ScanKLEngine
+
+    engine = ScanKLEngine(storage=store, name="scan")
+    ```
+  </Tab>
+  <Tab title="FacetKLEngine">
+    Tag/slot-based faceted search. Filters by structured tags.
+
+    ```python
+    from ahvn.klengine import FacetKLEngine
+
+    engine = FacetKLEngine(storage=store, name="facet")
+    ```
+  </Tab>
+  <Tab title="VectorKLEngine">
+    Dense vector similarity search (e.g. cosine). Requires the `exp` extra.
+
+    ```python
+    from ahvn.klengine import VectorKLEngine
+
+    engine = VectorKLEngine(
+        llm=embedder_llm,
+        storage=store,
+        name="vector",
+    )
+    ```
+  </Tab>
+  <Tab title="DAACKLEngine">
+    Dual-anchor approximate-cosine engine for large-scale retrieval. Requires the `exp` extra.
+
+    ```python
+    from ahvn.klengine import DAACKLEngine
+
+    engine = DAACKLEngine(storage=store, name="daac")
+    ```
+  </Tab>
+  <Tab title="MongoKLEngine">
+    Full-text and filter search using MongoDB's native query capabilities.
+
+    ```python
+    from ahvn.klengine import MongoKLEngine
+
+    engine = MongoKLEngine(storage=store, name="mongo")
+    ```
+  </Tab>
+</Tabs>
+
+## KLBase: Unified Manager
+
+`KLBase` wires stores and engines together. All writes fan out to every registered store and engine. Searches route to the engine you specify.
+
+```python
+from ahvn.klbase import KLBase
+from ahvn.klstore import CacheKLStore
+from ahvn.klengine import ScanKLEngine
+from ahvn.cache import DiskCache
+
+store = CacheKLStore(cache=DiskCache(path="~/.ahvn/cache/kb"), name="main")
+engine = ScanKLEngine(storage=store, name="scan")
+
+kb = KLBase(
+    storages=[store],
+    engines=[engine],
+    name="my_kb",
+)
+kb.set_default_engine("scan")
+```
+
+### Adding knowledge
+
+```python
+from ahvn.ukf.templates.basic.knowledge import KnowledgeUKFT
+
+kl = KnowledgeUKFT(
+    name="Backoff strategy",
+    content="Use exponential backoff on 429 errors.",
+    tags={"[DOMAIN:api]"},
+)
+
+# upsert: insert or overwrite
+kb.upsert(kl)
+
+# insert: only if not already present
+kb.insert(kl)
+
+# Batch
+kb.batch_upsert([kl1, kl2, kl3])
+```
+
+### Retrieving knowledge
+
+```python
+# By ID from a store
+kl = store.get(kl.id)
+
+# Search via engine
+results = kb.search(topk=5, query="rate limiting")
+for r in results:
+    print(r["kl"].name, r["kl"].content)
+```
+
+### Removing knowledge
+
+```python
+kb.remove(kl)
+kb.remove(kl.id)       # by integer id
+kb.batch_remove([kl1, kl2])
+kb.clear()             # wipe everything
+```
+
+### Syncing engines
+
+When an engine is out of sync with its store (e.g. after bulk imports), call `sync`:
+
+```python
+kb.sync()              # syncs all engines
+kb.desync_engine("scan")   # mark engine as desynced (skip on write)
+kb.sync_desynced()     # re-sync all desynced engines
+```
+
+## KLBase as a Tool Registry
+
+`KLBase` extends `ToolRegistry`, which means you can expose its search methods as agent tools:
+
+```python
+tools = kb.list_tools()   # → list of ToolSpec
+agent = SubmitToolAgentSpec(
+    prompt=p,
+    tools=tools,
+    llm_args={"preset": "chat"},
+)
+```
+
+The agent can then call the knowledge base's search tools directly during execution.
+
+## HEAVEN_KB
+
+AgentHeaven ships a built-in global knowledge base instance `HEAVEN_KB` that is pre-configured using your AgentHeaven environment settings. Import it directly when you want a zero-configuration starting point.

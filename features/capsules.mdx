@@ -1,0 +1,149 @@
+---
+title: "Capsules"
+description: "Persist any Python function as a portable, restorable capsule."
+---
+
+<Note>
+    *Everything in the world is a function.*
+</Note>
+
+Most knowledge systems care about the **what** — content, data, facts. AgentHeaven also cares about the **how** — the processes, transformations, and logic that produce results. Functions are the building blocks of modern software, and they should be monitorable, searchable, learnable, and persistable just like knowledge and data.
+
+In [Prompts](/features/prompts), we saw how treating prompts as persistable functions enables prompt registration, dynamic retrieval, and translation. For a fixed data science task, humans and existing pipelines can also be seen as chained operators — functions.
+
+This page covers **Capsule** — the persistence layer. See [Tools](/features/tools) for the structured interface layer and [Toolkits](/features/toolkits) for grouping and serving.
+
+<br/>
+
+## 1. Capsule
+
+A **Capsule** is the persistence layer. It wraps a function into a portable object that can be stored, transmitted, and restored later.
+
+### 1.1. Wrap and Run
+
+```python
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+from ahvn.utils.capsule import Capsule
+
+
+cap = Capsule.from_func(add)
+
+# A Capsule is itself callable.
+print(cap(a=2, b=3))    # 5
+
+# Every capsule also has a stable id for storage and lookup.
+print(cap.id[:12])
+```
+
+If all we want is persistence plus normal execution, `Capsule` is already enough. It captures the function's behavior and can restore it later, even in a different environment. The `from_func()` method captures the function, and calling the capsule executes the function as expected. Alternatively, you can use the decorator syntax (these two approaches are equivalent):
+
+```python
+from ahvn.utils.capsule import Capsule
+
+
+@Capsule.capsule
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+print(add(a=2, b=3))    # 5
+print(add.id[:12])
+```
+
+<br/>
+
+### 1.2. Export and Restore
+
+`Capsule.to_dict()` gives us a plain data payload. To restore it, go back through `Capsule.from_dict()`:
+
+```python
+from ahvn.utils.basic.serialize_utils import dumps_json, loads_json
+
+payload = add.to_dict()
+json_str = dumps_json(payload)
+restored_payload = loads_json(json_str)
+restored = Capsule.from_dict(restored_payload)
+
+print(restored(a=4, b=5))   # 9
+```
+
+This is the normal round-trip when a capsule is saved to JSON, a database, or sent over the network.
+
+<br/>
+
+## 2. CP_AHVN — Global Capsule Manager
+
+`CP_AHVN` stores capsules by id and name and can restore them back as callable tools:
+
+```python
+from ahvn.utils.capsule import CP_AHVN, Capsule
+
+
+@Capsule.capsule
+def my_awesome_add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+restored = CP_AHVN.get("my_awesome_add")
+print(restored(a=4, b=5))  # 9
+```
+
+<br/>
+
+## 3. Recovery Layers
+
+Most users can ignore recovery layers on day one, but they explain how capsules actually work under the hood and how to customize the persistence and restoration process when needed.
+
+Capsule uses a layered recovery strategy to maximize the chances of successfully restoring a function in different environments. Depending on the function's complexity, dependencies, and the target environment's capabilities, some strategies may work better than others. An ordered list of recovery layers are tried when restoring a capsule, and the first successful one is used.
+
+By default, `Capsule.from_func()` tries the following layers in order:
+
+| Layer | Strategy | Best for |
+|-------|----------|----------|
+| **source** | Re-execute captured source code | Simple, self-contained functions |
+| **cloudpickle** | Binary serialization | Closures, lambdas, complex objects |
+| **snapshot** | Snapshot the local module tree | Functions with local package dependencies |
+| **runner** | Delegate execution to a remote MCP endpoint | Cross-machine execution |
+
+`source` and `cloudpickle` are the most commonly used layers, and they work in most cases.
+
+We can also choose specific layers when building or restoring:
+
+```python
+from ahvn.utils.capsule import Capsule
+
+
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+# Note: `layers` is respected only when starting from a plain function.
+# If `add` were already a Capsule object, the layers argument would be silently ignored.
+cap = Capsule.from_func(add, layers=["source", "cloudpickle"])
+spec = cap.to_tool(layers=["source"])
+
+print(spec(a=2, b=3))  # 5
+```
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Next:**
+    - [Tools](/features/tools) — give functions a structured interface for LLM tool use
+    - [Toolkits](/features/toolkits) — group tools, manage them globally, and serve as MCP servers
+</Tip>
+
+<Tip>
+    **Related:**
+    - [Prompts](/features/prompts) — prompts as persistable functions
+    - [Caching](/features/caching) — cache function results across sessions
+</Tip>

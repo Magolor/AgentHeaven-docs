@@ -1,0 +1,39 @@
+---
+title: "Unified Knowledge Format"
+description: "The UKF protocol: a structured data model for all knowledge types in agentic workflows."
+---
+
+{/* TODO: Write UKF deep dive */}
+
+{/*
+Planned sections:
+1. BaseUKF — the core protocol
+   - Separates extraction, storage, management, retrieval, and utilization
+   - Semantic layer that unifies all components in agentic workflows as structured data
+2. UKF field types
+   - UKFIdType, UKFIntegerType, UKFBooleanType
+   - UKFShortTextType, UKFMediumTextType, UKFLongTextType
+   - UKFTimestampType, UKFDurationType, UKFJsonType
+   - UKFTagsType, UKFAuthsType, UKFSynonymsType, UKFRelatedType, UKFVectorType
+3. Built-in UKF templates (UKFT)
+   - KnowledgeUKFT — general knowledge entries
+   - ExperienceUKFT — cached function results as structured experience
+   - DocumentUKFT — document representations
+   - ResourceUKFT — external resource references
+   - SkillUKFT — agent skill descriptions
+   - PromptUKFT — prompt persistence format
+   - ToolUKFT — tool persistence format
+   - TemplateUKFT — reusable templates
+   - DummyUKFT — testing
+4. Defining custom UKF types
+   - register_ukft, UKFTypeRegistry, HEAVEN_UR
+5. Tags, versioning, and relationships
+   - tag_s, tag_v, tag_t, ptags, gtags
+   - has_tag, has_related, next_ver
+   - default_trigger, default_composer
+6. Adapters: UKF ↔ storage mapping
+   - BaseUKFAdapter, ORMUKFAdapter, VdbUKFAdapter, MongoUKFAdapter
+   - parse_ukf_include
+*/}
+
+The Unified Knowledge Format (UKF) is a structured data model that normalizes all knowledge types — documents, experiences, tools, prompts, skills — into a common protocol. UKF instances can be stored, searched, and utilized through any supported backend.

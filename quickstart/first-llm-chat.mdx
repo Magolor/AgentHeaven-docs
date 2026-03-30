@@ -1,0 +1,430 @@
+---
+title: "First LLM Chat"
+description: "Set up a provider API key and send a first message through AgentHeaven."
+---
+
+<Note>
+    *No one wants to see `output = client.chat.completions.create(...).choices[0].message.content`.*
+</Note>
+
+AgentHeaven routes LLM calls through [LiteLLM](https://www.litellm.ai/), so it supports any provider LiteLLM covers. The default preset uses [OpenRouter](https://openrouter.ai/), which gives you access to most major models through a single API key. You are free to choose any provider you like and configure it in the AgentHeaven config.
+
+More aggressively, we believe model choices and provider choices should **NEVER** appear once in your code. With the LLM configs persisted in database (see [ConfigManager](/features/configuration)), your code just calls `llm = LLM(preset="chat"/"sys"/"reason"/"embedder"/"translator"/...)` and use it with simple `output = llm(query)`. Only logical roles and task-specific presets should be referenced in code, and the actual model and provider can be swapped freely in the config without changing a single line of code.
+
+<br/>
+
+## 1. API Key Setup
+
+AgentHeaven configures certain default providers and they recognize environment variables. So a direct LLM call may work out of the box if the right env vars are already set. However, we can still explicitly set the API key in the config via `ahvn cfg set` to avoid relying on env vars and ensure the value is stored in the database.
+
+<Tabs>
+    <Tab title="OpenRouter (default)">
+        OpenRouter is the default provider. No additional config is needed — the `sys` and `chat` presets and most models route through it automatically.
+        The default api_key is `<OPENROUTER_API_KEY>` which automatically resolves to your env var. To set it manually:
+
+        ```bash
+        ahvn cfg set llm.providers.openrouter.api_key "sk-or-v1-..."
+        ahvn cfg set llm.default_provider openrouter
+
+        ahvn cfg set llm.presets.sys.provider openrouter
+        ahvn cfg set llm.presets.sys.model gemini-flash     # google/gemini-3-flash-preview
+
+        ahvn cfg set llm.presets.chat.provider openrouter
+        ahvn cfg set llm.presets.chat.model dsv3            # deepseek/deepseek-v3.2
+
+        ahvn cfg set llm.presets.reason.provider openrouter
+        ahvn cfg set llm.presets.reason.model gpt           # openai/gpt-5.4
+        ```
+    </Tab>
+    <Tab title="OpenAI">
+        ```bash
+        ahvn cfg set llm.providers.openai.api_key "sk-..."
+        ahvn cfg set llm.default_provider openai
+
+        ahvn cfg set llm.presets.sys.provider openai
+        ahvn cfg set llm.presets.sys.model gpt              # gpt-5.4
+        ahvn cfg set llm.presets.sys.default_args.reasoning_effort medium
+
+        ahvn cfg set llm.presets.chat.provider openai
+        ahvn cfg set llm.presets.chat.model gpt             # gpt-5.4
+        ahvn cfg set llm.presets.chat.default_args.reasoning_effort none
+
+        ahvn cfg set llm.presets.reason.provider openai
+        ahvn cfg set llm.presets.reason.model gpt           # gpt-5.4
+        ahvn cfg set llm.presets.reason.default_args.reasoning_effort xhigh
+        ```
+    </Tab>
+    <Tab title="Anthropic">
+        ```bash
+        ahvn cfg set llm.providers.anthropic.api_key "sk-ant-..."
+        ahvn cfg set llm.default_provider anthropic
+
+        ahvn cfg set llm.presets.sys.provider anthropic
+        ahvn cfg set llm.presets.sys.model sonnet           # claude-sonnet-4-6
+        ahvn cfg set llm.presets.sys.default_args.reasoning_effort medium
+
+        ahvn cfg set llm.presets.chat.provider anthropic
+        ahvn cfg set llm.presets.chat.model sonnet          # claude-sonnet-4-6
+        ahvn cfg set llm.presets.chat.default_args.reasoning_effort low
+
+        ahvn cfg set llm.presets.reason.provider anthropic
+        ahvn cfg set llm.presets.reason.model opus          # claude-opus-4-6
+        ahvn cfg set llm.presets.reason.default_args.reasoning_effort max
+        ```
+    </Tab>
+    <Tab title="Google Gemini">
+        ```bash
+        ahvn cfg set llm.providers.gemini.api_key "AIza..."
+        ahvn cfg set llm.default_provider gemini
+
+        ahvn cfg set llm.presets.sys.provider gemini
+        ahvn cfg set llm.presets.sys.model gemini-flash     # gemini-3.0-flash
+        ahvn cfg set llm.presets.sys.default_args.reasoning_effort medium
+
+        ahvn cfg set llm.presets.chat.provider gemini
+        ahvn cfg set llm.presets.chat.model gemini-flash    # gemini-3.0-flash
+        ahvn cfg set llm.presets.chat.default_args.reasoning_effort none
+
+        ahvn cfg set llm.presets.reason.provider gemini
+        ahvn cfg set llm.presets.reason.model gemini-pro    # gemini-3.1-pro-preview
+        ahvn cfg set llm.presets.reason.default_args.reasoning_effort high
+        ```
+    </Tab>
+    <Tab title="DeepSeek">
+        ```bash
+        ahvn cfg set llm.providers.deepseek.api_key "sk-..."
+        ahvn cfg set llm.default_provider deepseek
+
+        ahvn cfg set llm.presets.sys.provider deepseek
+        ahvn cfg set llm.presets.sys.model dsv3             # deepseek-chat
+
+        ahvn cfg set llm.presets.chat.provider deepseek
+        ahvn cfg set llm.presets.chat.model dsv3            # deepseek-chat
+
+        ahvn cfg set llm.presets.reason.provider deepseek
+        ahvn cfg set llm.presets.reason.model dsr1          # deepseek-reasoner
+        ```
+    </Tab>
+    <Tab title="xAI">
+        ```bash
+        # xAI is not default configured in the providers, we'll need to set the api_base and backend manually
+        ahvn cfg set llm.providers.xai.backend xai
+        ahvn cfg set llm.providers.xai.api_base "https://api.grok.x.ai/v1"
+        ahvn cfg set llm.providers.xai.api_key "xai-..."
+        ahvn cfg set llm.default_provider xai
+
+        ahvn cfg set llm.presets.sys.provider xai
+        ahvn cfg set llm.presets.sys.model grok-4.20-0309-non-reasoning
+
+        ahvn cfg set llm.presets.chat.provider xai
+        ahvn cfg set llm.presets.chat.model grok-4.20-0309-non-reasoning
+
+        ahvn cfg set llm.presets.reason.provider xai
+        ahvn cfg set llm.presets.reason.model grok-4.20-0309-reasoning
+        ```
+    </Tab>
+    <Tab title="Z.AI">
+        ```bash
+        # Z.AI is not default configured in the providers, we'll need to set the backend manually
+        ahvn cfg set llm.providers.zai.backend zai
+        # CN users and Non-CN users have different API bases, set accordingly
+        # for CN users:
+        #   ahvn cfg set llm.providers.zai.api_base "https://open.bigmodel.cn/api/paas/v4"
+        # for Non-CN users:
+        ahvn cfg set llm.providers.zai.api_base "https://api.z.ai/api/paas/v4"
+        ahvn cfg set llm.providers.zai.api_key "..."
+        ahvn cfg set llm.default_provider zai
+
+        ahvn cfg set llm.presets.sys.provider zai
+        ahvn cfg set llm.presets.sys.model glm-4.7-flash
+        ahvn cfg set llm.presets.sys.thinking.type disabled
+
+        ahvn cfg set llm.presets.chat.provider zai
+        ahvn cfg set llm.presets.chat.model glm-4.7-flash
+        ahvn cfg set llm.presets.chat.thinking.type disabled
+
+        ahvn cfg set llm.presets.reason.provider zai
+        ahvn cfg set llm.presets.reason.model glm-5
+        ahvn cfg set llm.presets.reason.thinking.type enabled
+        ```
+    </Tab>
+    <Tab title="Moonshot">
+        ```bash
+        # Moonshot is not default configured in the providers, we'll need to set the backend manually
+        ahvn cfg set llm.providers.moonshot.backend moonshot
+        # CN users and Non-CN users have different API bases, set accordingly
+        # for CN users:
+        #   ahvn cfg set llm.providers.moonshot.api_base "https://api.moonshot.cn/v1"
+        # for Non-CN users:
+        ahvn cfg set llm.providers.moonshot.api_base "https://api.moonshot.ai/v1"
+        ahvn cfg set llm.providers.moonshot.api_key "sk-..."
+        ahvn cfg set llm.default_provider moonshot
+
+        ahvn cfg set llm.presets.sys.provider moonshot
+        ahvn cfg set llm.presets.sys.model kimi-k2.5
+        ahvn cfg set llm.presets.sys.thinking.type disabled
+
+        ahvn cfg set llm.presets.chat.provider moonshot
+        ahvn cfg set llm.presets.chat.model kimi-k2.5
+        ahvn cfg set llm.presets.chat.thinking.type disabled
+
+        ahvn cfg set llm.presets.reason.provider moonshot
+        ahvn cfg set llm.presets.reason.model kimi-k2.5
+        ahvn cfg set llm.presets.reason.thinking.type enabled
+        ```
+
+        Moonshot uses the `moonshot/` LiteLLM prefix. For users in China, override the API base:
+        ```bash
+        ahvn cfg set llm.providers.moonshot.api_base "https://api.moonshot.cn/v1"
+        ```
+    </Tab>
+    <Tab title="Ollama (local)">
+        Ollam uses the `ollama/` LiteLLM prefix. If you're running Ollama locally, no API key is needed and the default api_base is `http://localhost:11434/v1`, so no config change is needed to get started. To switch to Ollama explicitly:
+
+        ```bash
+        # Ollama is local and does not need an api_key, and api_base defaults to http://localhost:11434/v1
+        # ahvn cfg set llm.providers.ollama.api_base "http://localhost:11434/v1"
+        ahvn cfg set llm.default_provider ollama
+
+        ahvn cfg set llm.presets.sys.provider ollama
+        ahvn cfg set llm.presets.sys.model qwen3.5          # qwen3.5:35b
+        # Qwen3.5 defaults to thinking mode, disable it for faster responses on simple tasks
+        ahvn cfg set llm.presets.sys.default_args.extra_body.chat_template_kwargs.enable_thinking false
+
+        ahvn cfg set llm.presets.chat.provider ollama
+        ahvn cfg set llm.presets.chat.model qwen3.5         # qwen3.5:35b
+        # Qwen3.5 defaults to thinking mode, disable it for faster responses on simple tasks
+        ahvn cfg set llm.presets.chat.default_args.extra_body.chat_template_kwargs.enable_thinking false
+
+        ahvn cfg set llm.presets.reason.provider ollama
+        ahvn cfg set llm.presets.reason.model qwen3.5       # qwen3.5:35b
+        ```
+
+        A local model should not go through network proxy, so to make sure network proxy is disabled for Ollama exclusively, set:
+        ```bash
+        ahvn cfg set llm.providers.ollama.http_proxy ""
+        ahvn cfg set llm.providers.ollama.https_proxy ""
+        ```
+    </Tab>
+    <Tab title="LM Studio (local)">
+        LM Studio uses the `lm_studio/` LiteLLM prefix. If you're running LM Studio locally, no API key is needed and the default api_base is `http://localhost:1234/v1`, so no config change is needed to get started. To switch to LM Studio  explicitly:
+
+        ```bash
+        # LM Studio is local and does not need an api_key, and api_base defaults to http://localhost:1234/v1
+        # ahvn cfg set llm.providers.lmstudio.api_base "http://localhost:1234/v1"
+        ahvn cfg set llm.default_provider lmstudio
+
+        ahvn cfg set llm.presets.sys.provider lmstudio
+        ahvn cfg set llm.presets.sys.model qwen3.5          # qwen/qwen3.5-35b-a3b
+        # Qwen3.5 defaults to thinking mode, disable it for faster responses on simple tasks
+        ahvn cfg set llm.presets.sys.default_args.extra_body.chat_template_kwargs.enable_thinking false
+
+        ahvn cfg set llm.presets.chat.provider lmstudio
+        ahvn cfg set llm.presets.chat.model qwen3.5         # qwen/qwen3.5-35b-a3b
+        # Qwen3.5 defaults to thinking mode, disable it for faster responses on simple tasks
+        ahvn cfg set llm.presets.chat.default_args.extra_body.chat_template_kwargs.enable_thinking false
+
+        ahvn cfg set llm.presets.reason.provider lmstudio
+        ahvn cfg set llm.presets.reason.model qwen3.5       # qwen/qwen3.5-35b-a3b
+        ```
+
+        A local model should not go through network proxy, so to make sure network proxy is disabled for LM Studio exclusively, set:
+        ```bash
+        ahvn cfg set llm.providers.lmstudio.http_proxy ""
+        ahvn cfg set llm.providers.lmstudio.https_proxy ""
+        ```
+    </Tab>
+    <Tab title="vLLM (local)">
+        vLLM uses the `hosted_vllm/` LiteLLM prefix. If you're running vLLM locally, no API key is needed and the default api_base is `<VLLM_API_BASE>`. As different deployments likely have different ports, it is recommended to manually set the api_base by model.
+
+        ```bash
+        # vLLM is local and does not need an api_key, and api_base defaults to <VLLM_API_BASE>
+        # For example, if you only use one vLLM deployment for all models at default port 8000, set:
+        ahvn cfg set llm.providers.vllm.api_base "http://localhost:8000/v1"
+        ahvn cfg set llm.default_provider vllm
+
+        ahvn cfg set llm.presets.sys.provider vllm
+        ahvn cfg set llm.presets.sys.model qwen3.5          # qwen/qwen3.5-35b-a3b
+        # Qwen3.5 defaults to thinking mode, disable it for faster responses on simple tasks
+        ahvn cfg set llm.presets.sys.default_args.extra_body.chat_template_kwargs.enable_thinking false
+
+        ahvn cfg set llm.presets.chat.provider vllm
+        ahvn cfg set llm.presets.chat.model qwen3.5         # qwen/qwen3.5-35b-a3b
+        # Qwen3.5 defaults to thinking mode, disable it for faster responses on simple tasks
+        ahvn cfg set llm.presets.chat.default_args.extra_body.chat_template_kwargs.enable_thinking false
+
+        ahvn cfg set llm.presets.reason.provider vllm
+        ahvn cfg set llm.presets.reason.model qwen3.5       # qwen/qwen3.5-35b-a3b
+        ```
+    </Tab>
+</Tabs>
+
+In principle, we can set up any provider supported by LiteLLM. If you want to use a different provider, check the [LiteLLM Providers Doc](https://docs.litellm.ai/docs/providers/) for the provider-specific setup and then mirror that config in AgentHeaven.
+
+<Tip>For full LLM configuration options, see the [LLM feature page](/features/llm).</Tip>
+
+<br/>
+
+## 2. First CLI Message
+
+`ahvn chat` sends a one-shot message and prints the response. The `-v` flag shows which model and provider are being used (as well as inference kwargs and your api key, encrypted):
+
+```bash
+ahvn chat -v "Hello! Who are you?"
+```
+
+Using deepseek as an example:
+```
+HTTP  Proxy: None
+HTTPS Proxy: None
+Request: {'seed': 42, 'timeout': 120, 'enforce_non_stream_structured': False, 'api_key': 'sk-1******11', 'api_base': 'https://api.deepseek.com/beta', 'model': 'deepseek/deepseek-chat', 'messages': [{'role': 'user', 'content': 'Hello! Who are you?'}], 'stream': True}
+Hello! I'm DeepSeek, an AI assistant...
+```
+
+<Tip>
+For the full list of CLI flags (`--stream`, `--no-stream`, `-s`, `-p`, `-m`, etc.), see the [LLM CLI reference](/reference/cli/overview).
+</Tip>
+
+<br/>
+
+## 3. Related CLI Commands
+
+Two other commands extend the same underlying `LLM` interface:
+
+- **`ahvn embed "<text>"`** — returns a vector embedding for the given text, using the `embedder` preset (Ollama by default). Useful for testing your embedding setup before wiring it into a knowledge pipeline.
+
+- **`ahvn session`** — starts an interactive multi-turn chat session in the terminal. Supports slash commands (`/save`, `/load`, `/clear`, `/regen`, `/back`) and history search. Press `Ctrl+C` or type `/bye` to exit.
+
+### Configure the embedding provider
+
+The `embedder` preset controls which model `ahvn embed` uses. By default it runs [EmbeddingGemma](https://ollama.com/library/embeddinggemma) (a lightweight 300M-parameter Google model) on Ollama locally. To switch providers:
+
+<Tabs>
+    <Tab title="OpenAI">
+        ```bash
+        ahvn cfg set llm.presets.embedder.provider openai
+        ahvn cfg set llm.presets.embedder.model text-embedding-3-small  # text-embedding-3-small (1536)
+        ```
+    </Tab>
+    <Tab title="Voyage">
+        ```bash
+        # if voyage is not set up as a provider yet, set it up with the correct backend and api_key first
+        ahvn cfg set llm.providers.voyage.backend voyage
+        ahvn cfg set llm.providers.voyage.api_key "pa-..."
+        ahvn cfg set llm.presets.embedder.provider voyage
+        ahvn cfg set llm.presets.embedder.model voyage-4                # voyage-4 (1024)
+        ```
+    </Tab>
+    <Tab title="Google">
+        ```bash
+        ahvn cfg set llm.presets.embedder.provider google
+        ahvn cfg set llm.presets.embedder.model gemini-embedding-001    # gemini-embedding-001 (3072)
+        ```
+    </Tab>
+    <Tab title="Ollama (local)">
+        ```bash
+        ahvn cfg set llm.presets.embedder.provider ollama
+        ahvn cfg set llm.presets.embedder.model embeddinggemma          # embeddinggemma (768)
+        ```
+    </Tab>
+    <Tab title="LM Studio (local)">
+        ```bash
+        ahvn cfg set llm.presets.embedder.provider lmstudio
+        ahvn cfg set llm.presets.embedder.model embeddinggemma          # text-embedding-embeddinggemma-300m (768)
+        ```
+    </Tab>
+</Tabs>
+
+Again, theoretically, you can set up any provider supported by LiteLLM. If you want to use a different provider, check out the [LiteLLM Providers Doc](https://docs.litellm.ai/docs/providers/) for instructions on how to configure it and then mirror that config in AgentHeaven.
+
+<br/>
+
+## 4. Python API
+
+The `LLM` class in `ahvn.utils.llm` is the same engine the CLI uses. Construct one with no arguments to use the active preset:
+
+```python
+from ahvn.utils.llm import LLM
+
+
+llm = LLM()  # uses the configured default preset
+```
+
+**`oracle`** collects the full response and returns it as a string:
+
+```python
+answer = llm.oracle("What programming language is AgentHeaven written in?")
+print(answer)
+# Python
+```
+
+Pass a conversation history as a list of message dicts when you need multi-turn context:
+
+```python
+messages = [
+    {"role": "system", "content": "You are a concise assistant."},
+    {"role": "user", "content": "Name three Python web frameworks."},
+]
+answer = llm.oracle(messages)
+print(answer)
+# Flask, Django, FastAPI
+```
+
+**`stream`** yields text deltas as they arrive, which lets you print output incrementally:
+
+```python
+for chunk in llm.stream("Explain recursion in two sentences."):
+    print(chunk, end="", flush=True)
+print()
+```
+
+**`embed`** returns a vector embedding for the given text:
+
+```python
+vector = llm.embed("AgentHeaven is a framework for building agentic applications.")
+print(vector[:100])
+print(len(vector))
+```
+
+You can pass a specific preset, model, provider, backend at construction time to override the defaults, or add any inference parameters (e.g., temperature, seed, max_tokens, etc.) at either construction or call time. For example:
+
+```python
+fast_llm = LLM(preset="tiny")
+local_llm = LLM(preset="local")
+specific_llm = LLM(model="sonnet", provider="anthropic")
+highly_customized_llm = LLM(
+    preset="chat", model="gemini-flash", provider="google", backend="google",
+    temperature=0.7, seed=42, max_tokens=4096,  # ... add more inference kwargs as needed
+)
+```
+
+<Tip>For full LLM features, see the [LLM feature page](/features/llm).</Tip>
+
+<br/>
+
+## 5. What's Next — Prompt Management
+
+AgentHeaven treats prompts as callable, versioned functions — not string templates. With `PromptSpec`, you can register, persist, translate, and retrieve prompts globally without hard-coding strings.
+
+<Tip>
+See [Prompts](/features/prompts) for a full walkthrough of `PromptSpec`, `PM_AHVN`, translation, and template-style prompts.
+</Tip>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Quickstart flow:**
+    - [Installation](/quickstart/installation) — verify environment and setup
+    - [Quick Setup](/quickstart/quick-setup) — manage config and defaults
+</Tip>
+
+<Tip>
+    **LLM references:**
+    - [LLM](/features/llm) — model, provider, and session workflows
+    - [Prompts](/features/prompts) — PromptSpec, PM_AHVN, translation
+    - [CLI Reference](/reference/cli/overview) — complete command reference
+</Tip>
+
+<br/>

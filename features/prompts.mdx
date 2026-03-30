@@ -1,0 +1,135 @@
+---
+title: "Prompts"
+description: "Function-based prompt management with persistence, versioning, and built-in translation."
+---
+
+<Note>
+    *A prompt is a function, not a string.*
+</Note>
+
+{/*
+Planned sections for future expansion:
+5. Prompt persistence and PromptStore
+6. TranslationDict, TranslationStore, TranslationMatcher internals
+7. System prompts: setup_system_prompts, get_system_prompt_spec
+8. Prompt composers: default_prompt_composer, toolspec_prompt_composer, experience_prompt_composer
+*/}
+
+In AgentHeaven, a prompt is a callable, versioned unit — not a string template. Prompts can be persisted, retrieved, translated, and swapped without changing application code.
+
+<br/>
+
+## 1. What is a Prompt?
+
+In AgentHeaven, prompt is not just a string or a string template, we believe a prompt is a function that maps from structured inputs to a list of messages that can be directly consumed by the LLM.
+
+```python
+# ===== Pseudocode =====
+def tr(text: str, lang: Optional[str] = None) -> str:
+    ...
+
+def prompt(**kwargs, tr: Callable = str) -> Messages:
+    ...
+```
+
+Where `tr` is a translation function. Very often, prompts vary by language or specific LLM model, which motivates the need for a separate translation module.
+
+For prompt management, identity, persistence, versioning, and localization are important concerns. Before 0.9.4, AgentHeaven relies on Jinja + Babel with file-system persistence for traditional template-based prompts and localization. Now, based on python functions and [capsules](/features/capsules), AgentHeaven provides `PromptSpec` which is a unified way to manage prompts with dynamic translation capabilities. This design also allows you to easily switch between template-based prompts and more complex programmatic prompts without changing how you manage or call them.
+
+<br/>
+
+## 2. @PromptSpec.prompt Decorator
+
+AgentHeaven supports a decorator-based `@PromptSpec.prompt()` approach to register a function to a global prompt manager (`PM_AHVN` singleton):
+
+```python
+from typing import Callable
+from ahvn.utils.prompt import PromptSpec
+from ahvn.utils.basic.config_utils import CM_AHVN
+
+
+@PromptSpec.prompt      # equivalent to @PromptSpec.prompt(id="greet")
+def greet(name: str, *, tr: Callable = str) -> str:
+    return f"{tr('Hello')}, {name}!"
+
+
+# Add translation entries
+greet.tr.set(key="Hello", lang="zh", value="你好")
+
+# Per-call language override
+print(greet("Alice", lang="zh"))
+# 你好, Alice!
+
+# Scoped default language for this block (Experimental)
+with CM_AHVN.scoped("zh"):
+    CM_AHVN.set("prompts.lang", "zh")
+    print(greet("Bob"))
+    # 你好, Bob!
+```
+
+<br/>
+
+## 3. PromptManager (PM_AHVN) — Global Retrieval
+
+You can retrieve and call the prompt function by its id from the `PM_AHVN` prompt manager **anywhere**:
+
+```python
+# This could be another file, another package, or even another machine
+# as long as the `PM_AHVN`'s database is accessible, and python environment is set up
+# Even if the original function definition file is deleted, the registered version in the database still works
+from ahvn.utils.prompt import PM_AHVN
+
+
+# Load by prompt id from PromptManager
+fn_en = PM_AHVN.get("greet")                # default language is en
+fn_zh = PM_AHVN.get("greet", lang="zh")     # default language is zh
+
+print(fn_en("Carol"))
+print(fn_zh("Carol"))
+```
+
+<br/>
+
+## 4. PromptSpec.from_str — Template-Style Prompts
+
+`PromptSpec.from_str(...)` is the fastest way to create a template-style prompt without writing a function. You can even delay translations with runtime elicitation:
+
+```python
+from ahvn.utils.prompt import PromptSpec
+
+
+welcome = PromptSpec.from_str(
+    "Hello, {name}! Welcome to {place}",
+    trs=["place"],      # specify that not only the whole prompt needs translation, but also the value of {place} needs translation
+    id="welcome",
+)
+# Add translation entries later
+welcome.tr.set(
+    key="Hello, {name}! Welcome to {place}",
+    lang="jp",
+    value="こんにちは, {name}! {place}へようこそ",
+)
+# Even further delay the translation with elicit
+print("  Eliciting translation for 'Tokyo' via elicit='human'...")
+print("  Please type in the Japanese translation for 'Tokyo' (you can copy and paste the japanese characters: 東京):")
+print(f"  jp: {welcome(name='Alice', place='Tokyo', lang='jp', elicit='human')}")
+print()
+
+# The elicitation happens only the first time, and the elicited translation is stored for future reuse
+print("  The elicited translation is now stored and reused:")
+print(f"  jp: {welcome(name='Alice', place='Tokyo', lang='jp')}")
+print()
+
+# If you run this same demo again, you will see that the translation is already stored and no elicit is needed
+```
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related features:**
+    - [Capsules](/features/capsules) — the function abstraction that PromptSpec builds on
+    - [Configuration](/features/configuration) — ConfigManager and language settings
+    - [First LLM Chat](/quickstart/first-llm-chat) — quick setup and first API call
+</Tip>

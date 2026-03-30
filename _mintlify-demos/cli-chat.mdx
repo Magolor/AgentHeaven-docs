@@ -1,0 +1,169 @@
+---
+title: "Chat and session commands"
+description: "Send single-turn prompts, run interactive multi-turn sessions, and embed text with AgentHeaven's LLM commands."
+---
+
+AgentHeaven provides three commands for interacting with LLMs:
+
+- **`ahvn chat`** — single-turn: send a prompt, get a response, exit.
+- **`ahvn session`** — multi-turn: stay in an interactive loop until you quit.
+- **`ahvn embed`** — generate a vector embedding from text or a file.
+
+## `ahvn chat`
+
+Send a single prompt to an LLM and print the response. Supports streaming, file context, system prompts, and cache control.
+
+```bash
+ahvn chat [PROMPT] [OPTIONS]
+```
+
+| Argument / Flag | Description |
+|---|---|
+| `PROMPT` | The prompt text. Can be provided as a positional argument. |
+| `--prompt` | The prompt text as a named option (alternative to positional). |
+| `-s`, `--system` | System prompt to set assistant behavior. |
+| `-i PATH`, `--input-files PATH` | File(s) to include as context. Repeatable (`-i a.txt -i b.txt`). |
+| `--cache` / `--no-cache` | Enable or disable response caching. Default: enabled. |
+| `--stream` / `--no-stream` | Enable or disable streaming output. Default: enabled. |
+| `-p`, `--preset` | LLM preset name to use. Default: `chat`. |
+| `-m`, `--model` | LLM model name to use. |
+| `-b`, `--provider` | LLM provider to use. |
+| `-v`, `--verbose` | Show detailed config and debug information. |
+
+**Examples**
+
+```bash
+# Basic prompt
+ahvn chat "What is the capital of France?"
+
+# With a system prompt
+ahvn chat --system "You are a terse assistant." "Explain recursion."
+
+# Include files as context
+ahvn chat -i notes.txt -i outline.md "Summarize these files."
+
+# Disable cache and streaming
+ahvn chat --no-cache --no-stream "Quick question"
+
+# Use a specific model and provider
+ahvn chat --model gpt-4o --provider openai "Hello!"
+
+# Use a named preset
+ahvn chat --preset fast "Translate: hello"
+```
+
+<Note>
+When `--input-files` are provided, each file's content is wrapped in `=== Content from <path> Start ===` / `End ===` markers and prepended to the prompt.
+</Note>
+
+## `ahvn session`
+
+Start an interactive multi-turn chat session. Messages accumulate across turns until you exit. Uses `prompt_toolkit` for rich input with history navigation and command completion.
+
+```bash
+ahvn session [PROMPT] [OPTIONS]
+```
+
+All flags are identical to `ahvn chat`:
+
+| Argument / Flag | Description |
+|---|---|
+| `PROMPT` | Optional opening prompt. |
+| `--prompt` | Optional opening prompt as a named option. |
+| `-s`, `--system` | System prompt to set assistant behavior. |
+| `-i PATH`, `--input-files PATH` | File(s) to include as initial context. Repeatable. |
+| `--cache` / `--no-cache` | Enable or disable response caching. Default: enabled. |
+| `--stream` / `--no-stream` | Enable or disable streaming output. Default: enabled. |
+| `-p`, `--preset` | LLM preset name to use. Default: `chat`. |
+| `-m`, `--model` | LLM model name to use. |
+| `-b`, `--provider` | LLM provider to use. |
+| `-v`, `--verbose` | Show detailed config and debug information. |
+
+**Examples**
+
+```bash
+# Start a bare session
+ahvn session
+
+# Start with a system prompt
+ahvn session --system "You are a Python expert."
+
+# Pre-load files into context
+ahvn session -i main.py -i README.md
+
+# Use a specific preset without cache
+ahvn session --preset gpt4 --no-cache
+```
+
+### Session commands
+
+Once inside a session, type any of the following commands at the `>>>` prompt:
+
+| Command | Aliases | Description |
+|---|---|---|
+| `/exit` | `/quit`, `/bye`, `/e`, `/q` | Exit the session. |
+| `/help` | `/h`, `/?`, `/commands` | Show available commands. |
+| `/save [path]` | `/s [path]` | Save session messages to a file. Defaults to `session.json`. |
+| `/load [path]` | `/l [path]` | Load session messages from a file. Defaults to `session.json`. |
+| `/clear` | `/c` | Clear the session context and start fresh. |
+| `/regen [seed]` | `/r [seed]` | Regenerate the last assistant response. Optionally provide an integer seed. |
+| `/back` | `/b` | Remove the last user message and assistant response. |
+
+### Keyboard shortcuts
+
+| Key | Action |
+|---|---|
+| `Up` / `Down` arrows | Navigate input history. |
+| `Ctrl+C` | Exit the session. |
+| `Ctrl+D` | Exit the session. |
+
+<Tip>
+Use `/save` before switching tasks to preserve your conversation, then `/load` to resume it later.
+</Tip>
+
+## `ahvn embed`
+
+Embed text or a file using AgentHeaven's LLM embedding API. The resulting vector (a list of floats) is printed to stdout.
+
+```bash
+ahvn embed [PROMPT] [OPTIONS]
+```
+
+| Argument / Flag | Description |
+|---|---|
+| `PROMPT` | Text to embed. Can be provided as a positional argument. |
+| `--prompt` | Text to embed as a named option. |
+| `-i PATH`, `--input-file PATH` | File whose content should be embedded. Mutually exclusive with `PROMPT`. |
+| `--cache` / `--no-cache` | Enable or disable embedding caching. Default: enabled. |
+| `-p`, `--preset` | LLM preset name to use. Default: `embedder`. |
+| `-m`, `--model` | Embedding model to use. |
+| `-b`, `--provider` | LLM provider to use. |
+| `-v`, `--verbose` | Show detailed config and debug information. |
+
+<Note>
+`--input-file` and a positional/named prompt are mutually exclusive. Use one or the other.
+</Note>
+
+**Examples**
+
+```bash
+# Embed a string
+ahvn embed "The quick brown fox"
+
+# Embed from a file
+ahvn embed -i document.txt
+
+# Use a specific model
+ahvn embed --model text-embedding-3-small "hello world"
+
+# Disable caching
+ahvn embed --no-cache "fresh embedding"
+```
+
+The output is a Python list representation of the embedding vector, suitable for piping or capturing in a script:
+
+```bash
+vector=$(ahvn embed "hello world")
+echo $vector
+# [0.012345, -0.067890, 0.034512, ...]
+```

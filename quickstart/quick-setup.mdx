@@ -1,0 +1,113 @@
+---
+title: "Quick Setup"
+description: "Initialize AgentHeaven's configuration and learn the essential commands."
+---
+
+<Note>
+    *TLDR: `ahvn setup` is all you need.*
+</Note>
+
+AgentHeaven stores its configuration in a versioned SQLite database. We interact with it through the `ahvn config` subcommand (aliased `ahvn cfg`), using dot-separated key paths like `llm.providers.openrouter.api_key`.
+
+<br/>
+
+## 1. Initialization
+
+Run `ahvn setup` once after installation to initialize the ahvn under user home (`~/.ahvn/`) and create the default config files.
+
+```bash
+ahvn setup [--reset/-r]
+```
+
+Using `--reset` will overwrite existing configuration files and clean up any existing data. Use with caution.
+
+<br/>
+
+## 2. Config Inspection
+
+`ahvn config show` (aliased `ahvn cfg show` or `ahvn cfg ls`) prints the full merged config as YAML. Pass a dot-separated key path to inspect a specific value:
+
+```bash
+# Show the full merged config
+ahvn cfg show
+
+# Show a specific value
+ahvn cfg show llm.default_preset
+#   # sys
+ahvn cfg show llm.default_provider
+#   # openrouter
+
+# Show a nested section
+ahvn cfg show llm.presets.sys
+#   # desc: Ahvn's default system preset, suitable for general-purpose use cases. Moderate
+#   #     intelligence with fast response time.
+#   # model: dsv3
+ahvn cfg show llm.providers.openrouter
+#   # backend: openrouter
+#   # api_key: <OPENROUTER_API_KEY>
+#   # api_base: https://openrouter.ai/api/v1
+```
+
+<br/>
+
+## 3. Config Editing
+
+`ahvn config set` writes a single value. Values are auto-typed — booleans, integers, and strings are inferred automatically:
+
+```bash
+# Enable debug mode
+ahvn cfg set core.debug true
+ahvn cfg set core.debug false
+
+# Set the LLM API key
+ahvn cfg set llm.providers.openrouter.api_key "sk-or-v1-..."
+
+# Set ahvn language (to English)
+ahvn cfg set prompts.lang "en"
+```
+
+`ahvn config unset` (aliased `ahvn cfg unset`, `ahvn cfg rm` or `ahvn cfg del`) removes a key from the current config (which is different from setting it to `null` or an empty string). Unsetting a key causes it to fall back to the default value if available:
+
+```bash
+ahvn cfg show core.http_proxy
+# null
+
+ahvn cfg unset core.http_proxy
+ahvn cfg show core.http_proxy
+# ⚠ Key "core.http_proxy" not found.
+
+ahvn cfg set core.http_proxy null
+ahvn cfg show core.http_proxy
+# null
+```
+
+<br/>
+
+## 4. Edit Config in Editor
+
+For bulk edits, `ahvn config edit` opens the current config in the system editor (env `$EDITOR`) as a temporary YAML file. Changes are written back to the database on save:
+
+```bash
+ahvn cfg edit
+```
+
+<Note>
+On Windows with no `$EDITOR` set, `notepad` opens. On macOS and Linux, `nano` is likely the fallback.
+</Note>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+	**Next step:**
+	- [First LLM Chat](/quickstart/first-llm-chat) — set a provider API key and send a first message
+</Tip>
+
+<Tip>
+	**Configuration references:**
+	- [Configuration](/features/configuration) — understand config scopes and defaults
+	- [CLI Reference](/reference/cli/overview) — browse all command groups
+</Tip>
+
+<br/>

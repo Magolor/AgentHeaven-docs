@@ -1,0 +1,32 @@
+---
+title: "Databases"
+description: "SQL database integration through SQLAlchemy with query compilation and healing."
+---
+
+{/*
+Source modules: ahvn.utils.db (Database, SQLCompiler, SQLProcessor, SQLHealer, SchemaIndex, DatabaseEngineRegistry)
+
+Planned sections:
+1. Database abstraction — DatabaseConfigSpec, DatabaseConfigEngine, Database class
+2. SQL compilation — SQLCompiler, SQLProcessor, SQLGlotProcessor, SQLResponse
+3. SQL healing — SQLHealer, create_sql_healer (LLM-assisted auto-fix)
+4. Schema utilities — SchemaIndex, split_sqls, transpile_sql, prettify_sql, compare_sqls
+5. Database field types — ExportableEntity, DatabaseIdType, TextType, etc.
+6. Configuration — database backend config in ahvn config system
+*/}
+
+AgentHeaven integrates with SQL databases through [SQLAlchemy](https://www.sqlalchemy.org/), providing a unified interface for connection management, query compilation, schema inspection, and LLM-assisted SQL healing.
+
+See individual database pages for backend-specific setup:
+
+<CardGroup cols={3}>
+  <Card title="SQLite" icon="database" href="/features/databases/sqlite">
+    Default backend for config, caching, and local development.
+  </Card>
+  <Card title="PostgreSQL" icon="elephant" href="/features/databases/postgresql">
+    Production-grade relational storage.
+  </Card>
+  <Card title="MongoDB" icon="leaf" href="/features/databases/mongodb">
+    Document-oriented storage via pymongo/motor.
+  </Card>
+</CardGroup>

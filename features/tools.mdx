@@ -1,0 +1,148 @@
+---
+title: "Tools"
+description: "Give functions a structured interface that LLMs can understand and call."
+---
+
+<Note>
+    *Tool = Function + Description.*
+</Note>
+
+A [Capsule](/features/capsules) is just a persistable function — it doesn't give the function a structured interface that LLMs can understand and call reliably.
+For AI-native infrastructures, we want to add more structure and metadata on top of the raw function — a stable interface that LLMs and agents can understand and call without ambiguity. That is the role of a **ToolSpec**.
+
+A **ToolSpec** adds a stable tool interface on top: name, description, input schema, and export formats for LLM tool use. Centered around [FastMCP](https://gofastmcp.com/) 3.x, it can flexibly convert between code strings, Python functions, JSON schemas, MCPs, FastMCPs, Tools, and AgentHeaven entities (Capsules, PromptSpecs, UKFs, etc.).
+
+<br/>
+
+## 1. Promote a Function/Capsule into a Tool
+
+To construct a ToolSpec, the easiest way is to start from a Python function or an existing Capsule:
+
+```python
+from ahvn.tool import ToolSpec
+from ahvn.utils.basic.serialize_utils import dumps_json
+
+
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+spec = ToolSpec.from_func(add)              # ToolSpec
+```
+
+Or equivalently:
+```python
+
+```python
+from ahvn.utils.capsule import Capsule
+from ahvn.tool import ToolSpec
+from ahvn.utils.basic.serialize_utils import dumps_json
+
+
+@Capsule.capsule
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+spec = add.to_tool()                        # ToolSpec
+
+print(spec(a=2, b=3))                       # 5
+print(spec.signature(a=2, b=3))             # add(a=2, b=3)
+print(dumps_json(spec.to_jsonschema()))     # OpenAI-format json schema
+# {
+#     "type": "function",
+#     "function": {
+#         "name": "add",
+#         "description": "Add two integers.",
+#         "parameters": {
+#             "additionalProperties": false,
+#             "properties": {
+#                 "a": {
+#                     "type": "integer"
+#                 },
+#                 "b": {
+#                     "type": "integer"
+#                 }
+#             },
+#             "required": [
+#                 "a",
+#                 "b"
+#             ],
+#             "type": "object"
+#         }
+#     }
+# }
+```
+
+This is where `to_tool() -> ToolSpec` becomes useful: the function is no longer just portable, it is now described in a way that other systems can understand and call safely. With signature export, LLMs can learn to call it by name with the right arguments, and unit tests through assertions become easier to write; with jsonschema export, it can be directly used as an OpenAI function calling tool.
+
+<Tip>
+    Currently `ToolSpec` class supports parsing annotations and google-style docstrings for description and argument metadata.
+</Tip>
+
+<br/>
+
+## 2. Round-Trip Between ToolSpec and Capsule
+
+We can also start from a `ToolSpec`, serialize it as a capsule, and restore it back:
+
+```python
+# @Capsule.capsule              # No matter if we start from a Capsule or a Function
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+from ahvn.tool import ToolSpec
+
+
+spec = ToolSpec.from_func(add)
+
+cap_dict = spec.to_capsule()
+spec2 = ToolSpec.from_capsule(cap_dict)
+
+print(spec2(a=7, b=8))      # 15
+```
+
+So the relationship is simple:
+
+1. `Capsule` preserves executable behavior.
+2. `ToolSpec` preserves executable behavior **plus** a tool interface.
+3. We can convert in both directions.
+
+<br/>
+
+## 3. Create a ToolSpec from a Code String
+
+If the function starts as source code instead of a live Python object, we can still turn it into a tool directly:
+
+```python
+code = """
+def add(a: int, b: int) -> int:
+    \"\"\"Add two integers.\"\"\"
+    return a + b
+"""
+
+spec = ToolSpec.from_code(code, func_name="add")
+print(spec(a=10, b=20))     # 30
+```
+
+`Capsule.from_code()` works the same way when persistence is our primary goal.
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Next:**
+    - [Toolkits](/features/toolkits) — group tools, manage them globally, and serve as MCP servers
+    - [Capsules](/features/capsules) — the persistence layer behind ToolSpec
+</Tip>
+
+<Tip>
+    **Related:**
+    - [Prompts](/features/prompts) — prompts as persistable functions
+    - [Caching](/features/caching) — cache function results across sessions
+</Tip>

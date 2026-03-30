@@ -1,0 +1,169 @@
+---
+title: "Caching"
+description: "Memoize function results and LLM calls for efficiency, monitoring, and data collection."
+---
+
+<Note>
+    *Memoization ≠ Memory.*
+</Note>
+
+Memoization focuses on caching rather than agentic behaviors.
+
+For any deterministic function, if we call it with the same inputs, we get the same output. Memoization stores the result of the first call and returns it for every later call with the same inputs. When we work on deterministic tasks rather than creative generation, memoization also works well for LLM calls and agent outputs.
+
+In AgentHeaven, memoization is not only about saving time or tokens. More importantly, it enables **monitoring**. By treating every function call, tool use, LLM response, and agent output as a cacheable event, we can track what happened, when it happened, and what came back in a unified way. Memoized **cache entries** can then be persisted as **experiences**, annotated, reused as **examples** or **training data**, or consolidated into **knowledge**. Memoization is the bridge between existing systems, humans, and agents, and memory can be built on top of it.
+
+<br/>
+
+## 1. Simple Cache
+
+The simplest starting point is `InMemCache`. It stores results in a Python dictionary — no setup, no files, instant reads.
+
+We can think of this as a plain key-value store with no purging or expiration. For memoized calls, AgentHeaven formalizes each stored value as a `CacheEntry`, a structured record for function calls. It includes the function identifier, inputs, output, expected output if we add an annotation, and metadata.
+
+```python
+from ahvn.cache import InMemCache
+
+cache = InMemCache()
+
+
+@cache.memoize
+def fibonacci(n: int) -> int:
+    return n if n <= 1 else fibonacci(n - 1) + fibonacci(n - 2)
+
+
+print(fibonacci(35))  # 9227465, computed once
+print(fibonacci(35))  # 9227465, returned from cache instantly
+
+print(len(cache))   # 36 (n=0 ~ 35)
+```
+
+Without memoization, `fibonacci(35)` triggers millions of recursive calls. With it, every sub-result is stored the first time it is computed, so the whole tree does not execute again. Besides efficiency, this also gives us a complete record of every call and result. `CacheEntry.to_str()` gives us a human-readable and LLM-friendly summary of the inputs and outputs for that call, which is useful for monitoring, annotation, and prompting:
+
+```python
+print(cache.get("fibonacci", n=30))
+# 832040
+
+print(cache.retrieve("fibonacci", n=30).to_str())
+# Inputs:
+# - n: 30
+# Output:
+# <output>832040</output>
+
+print(cache.retrieve("fibonacci", n=30).annotate(expected=832040, metadata={"notes": "fib(30) = fib(29) + fib(28)"}).to_str())
+# Inputs:
+# - n: 30
+# Output:
+# <output>832040</output>
+# Expected:
+# <output>832040</output>
+# Note:
+# - fib(30) = fib(29) + fib(28)
+```
+
+`InMemCache` lives only in RAM. Once the process exits, the cache is gone. That is fine for short-lived scripts or sessions where we would recompute anyway, but not when we want results to survive restarts.
+
+<br/>
+
+## 2. Persistent Cache
+
+`DatabaseCache` backs the cache with a SQL database. Switch to it and the results persist across runs:
+
+```python
+from ahvn.cache import DatabaseCache
+
+cache = DatabaseCache(provider="sqlite", database="./fibonacci.db")
+
+@cache.memoize
+def fibonacci(n: int) -> int:
+    if n <= 1:
+        return n
+    return fibonacci(n - 2) + fibonacci(n - 1)
+
+print(fibonacci(35))  # computed and saved to ./fibonacci.db
+
+# To clean up the database file after the demo, we can simply delete it:
+#   from ahvn.utils.basic.file_utils import delete_file
+#   delete_file("./fibonacci.db")
+```
+
+Restart the script and call `fibonacci(35)` again — it reads from the database and returns without doing any work.
+
+The interface is identical to `InMemCache`. We swap the backend and everything else stays the same.
+
+<Tip>
+    There are other cache providers: `DiskCache`, `JsonCache`, `CallbackCache`, `MongoCache`, and `NoCache`.
+</Tip>
+
+<br/>
+
+## 3. Caching LLM Calls
+
+The current `ahvn` `LLM` class enables caching by default, using a SQLite database at `~/.ahvn/cache/llm_default.db`. That means repeated calls to the same LLM with the same prompt and hyperparameters are memoized automatically. Different hyperparameters are cached separately, and calls with `temperature > 0` are treated as non-deterministic and are not cached.
+
+That makes repeated development and testing much cheaper.
+
+```python
+from ahvn.utils.llm import LLM
+llm = LLM(cache=True)   # equivalent to `llm = LLM()`, as cache is enabled by default
+print(llm.oracle("Hello! Who are you?"))
+print(llm.oracle("Hello! Who are you?"))            # cached
+print(llm.oracle("Hello! Who are you?"))            # cached
+print(llm.oracle("Hello! Who are you?"))            # cached
+print(llm.oracle("Hello! Who are you?"))            # cached
+# Cache results work across stream/non-stream calls, the following stream is still cached
+for chunk in llm.stream("Hello! Who are you?"):     # cached
+    print(chunk, end='', flush=True)
+print()
+
+# Embeddings are also cached
+print(llm.embed("Hello!"))
+print(llm.embed("Hello!"))                          # cached
+print(llm.embed("Hello!"))                          # cached
+# Cache results are instance-level, so batching calls will also be cached
+print(llm.embed(["Hello!", "World!"]))              # first result cached, only the second call is executed
+print(llm.embed(["Hello!", "World!"]))              # both results cached, no LLM call executed
+
+# If we run this same demo again, there will be no LLM calls at all
+# as long as the default preset is deterministic
+```
+
+Different from LiteLLM's built-in caching, which is global, the cache in AgentHeaven is per LLM.
+
+1. When LLMs are called with different hyperparameters (e.g., seed, repetition_penalty, reasoning_effort), they are always cached separately, automatically.
+2. Even with the same hyperparameters, inputs and tools, you can manually designate different cache for LLMs to separate roles (easier for cache management and monitoring). 
+
+For example:
+```python
+llm1 = LLM(cache=DatabaseCache(database="llm_cache_1.db"))
+llm2 = LLM(cache=DatabaseCache(database="llm_cache_2.db"))
+```
+
+Then calls to `llm1` and `llm2` are cached separately in different databases, even if the prompts and hyperparameters are the same. This lets us safely annotate, clean, or export the cache for one LLM without affecting the other. Note that the `LLM` instance simply stores connection args, not a physical LLM, so both instances may still send requests to the same backend service. If that service caches results on its side, it may still speed up calls independently of the ahvn cache.
+
+<br/>
+
+## 4. Exporting Cache
+
+The typical workflow in AgentHeaven is to start with a simple function or LLM, enable memoization, and then, as cache entries accumulate, review, annotate, and export them as training data or knowledge. Over time, we can gradually bypass the original function or LLM with a learning agent that learns from the knowledge consolidated from the cache.
+
+To export the cache, we can simply use `CacheEntry.to_dict()`:
+
+```python
+exported = [entry.to_dict() for entry in cache]
+```
+
+<Tip>
+    After understanding [Knowledge](/features/knowledge/overview), you can also export cache entries as knowledge directly with `ExperienceUKFT.from_cache_entry()`, which will convert the raw input-output pairs into more structured and consolidated knowledge pieces, with full AgentHeaven knowledgebase support, retrieval, life-cycle management, authentication, etc.
+</Tip>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Next concepts:**
+    - [First LLM Chat](/quickstart/first-llm-chat) — make a first provider-backed LLM call
+    - [LLM](/features/llm) — understand what makes two LLM calls cache-identical
+    - [Knowledge](/features/knowledge/overview) — turn cached experience into reusable knowledge
+</Tip>

@@ -1,0 +1,33 @@
+---
+title: "Knowledge retrieval"
+description: "KLEngine: retrieval and utilization engines for querying stored knowledge."
+---
+
+{/* TODO: Write KLEngine documentation */}
+
+{/*
+Planned sections:
+1. BaseKLEngine — the retrieval interface
+   - Query UKF instances from KLStore backends
+   - Pluggable strategies for different search paradigms
+2. ScanKLEngine — full-scan retrieval
+   - Brute-force search over all entries
+   - Useful for small datasets or debugging
+3. FacetKLEngine — structured faceted search
+   - ORM-based, SQL-based, and natural-language search modes
+   - Faceted filtering by tags, types, metadata
+4. DAACKLEngine — string automaton search
+   - Double-Array Aho-Corasick for fast multi-pattern matching
+   - Efficient for keyword extraction and entity recognition
+5. VectorKLEngine — semantic vector search
+   - LlamaIndex integration, embedding-based similarity
+   - Configurable distance metrics and top-k retrieval
+6. MongoKLEngine — MongoDB-native queries
+   - Document-oriented query patterns
+7. KLOp — unified filter IR
+   - Cross-backend filter expression builder
+   - Same filter works on SQL, VDB, and MongoDB backends
+8. Combining engines for hybrid search
+*/}
+
+KLEngine provides retrieval strategies for querying stored knowledge. Choose from full-scan, faceted, string-automaton, vector, or MongoDB-native search — or combine them for hybrid retrieval.

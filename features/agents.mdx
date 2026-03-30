@@ -1,0 +1,26 @@
+---
+title: "Agents"
+description: "Base agent specifications and experience-based replay."
+---
+
+{/* TODO: Write agents documentation */}
+
+{/*
+Planned sections:
+1. BaseAgentSpec — the agent interface
+   - Abstract base for all agent types
+   - Lifecycle: init, plan, act, observe, reflect
+2. BasePromptAgentSpec — prompt-driven agents
+   - Agent behavior defined by prompt functions
+   - Integration with PromptSpec and PM_AHVN
+3. AgentStreamChunk — streaming agent outputs
+4. Imitator — experience replay
+   - Replay cached trajectories from KLBase
+   - Gradually replace original functions with learned behavior
+   - ExperienceUKFT as training data
+5. Building custom agents
+   - Extending BaseAgentSpec
+   - Wiring agents with toolkits and knowledge bases
+*/}
+
+AgentHeaven provides base agent specifications for building prompt-driven agents and experience-based imitators. Agents consume tools, knowledge, and prompts through the framework's unified interfaces.

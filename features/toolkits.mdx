@@ -1,0 +1,235 @@
+---
+title: "Toolkits"
+description: "Group tools, manage them globally, and serve them as MCP servers."
+---
+
+<Note>
+    *One tool solves a problem; a toolkit solves a domain.*
+</Note>
+
+When several [tools](/features/tools) belong together, package them as a **Toolkit**. A toolkit may contain shared state between tools, and it has a specialized manager (`TK_AHVN`) for global storage and retrieval. Toolkits are often the basic unit of agent orchestration, with MCP serving as the standard interface for agents to discover and call them.
+
+<br/>
+
+## 1. Build a Toolkit Directly
+
+```python
+from ahvn.tool import ToolSpec, Toolkit
+
+
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+def multiply(a: int, b: int) -> int:
+    """Multiply two integers."""
+    return a * b
+
+
+toolkit = Toolkit(
+    name="math_tools",
+    description="Basic arithmetic tools.",
+    tools={
+        "add": ToolSpec.from_func(add),
+        "multiply": ToolSpec.from_func(multiply),
+    },
+)
+
+print(toolkit.run("add", a=2, b=3))         # 5
+print(toolkit.run("multiply", a=2, b=3))    # 6
+
+print(toolkit.get_tool("add"))              # <ahvn.tool.base.ToolSpec object at 0x...>
+```
+
+This is the most direct way to build a toolkit: define some functions, wrap them as `ToolSpec`s, and put them in a `Toolkit`. But if we have many toolkits with the same structure, we can define a factory to avoid repeating the same pattern.
+
+<br/>
+
+## 2. Reuse the Same Pattern with a Factory
+
+If we want to create many toolkits with the same structure (attached to different workspaces or entities), define a `ToolkitFactory` once and register it:
+
+```python
+from typing import Dict
+from ahvn.tool import ToolSpec, ToolkitFactory, TK_AHVN
+
+
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+def multiply(a: int, b: int) -> int:
+    """Multiply two integers."""
+    return a * b
+
+
+class MathToolkitFactory(ToolkitFactory):
+    name = "math"
+    description = "Basic arithmetic tools."
+
+    @classmethod
+    def tools(cls, **args) -> Dict[str, ToolSpec]:
+        return {
+            "add": ToolSpec.from_func(add),
+            "multiply": ToolSpec.from_func(multiply),
+        }
+
+toolkit = MathToolkitFactory.create("math_tools")
+restored_add = toolkit.get_tool("add")
+print(restored_add.signature(a=5, b=6))                 # "add(a=5, b=6)"
+
+# (Optional) Register the toolkit for global retrieval and MCP serving.
+TK_AHVN.add(toolkit)
+print(TK_AHVN.run("math_tools.add", a=3, b=4))          # 7
+print(TK_AHVN.run("math_tools.multiply", a=3, b=4))     # 12
+restored_add = TK_AHVN.get("math_tools").get_tool("add")
+print(restored_add.signature(a=5, b=6))                 # "add(a=5, b=6)"
+```
+
+Factories matter when toolkits become reusable building blocks instead of one-off Python objects. For example, if we have a `DatabaseToolkitFactory`, we can create toolkits for each database instance, overriding descriptions and connection parameters without affecting the tools' core logic.
+
+<Tip>
+    `ToolkitFactory` is **NOT** persisted. While global managers like `CP_AHVN`, `TK_AHVN`, etc., persist their contents on-disk and restore them across sessions, the factory registry is currently in-memory only. Toolkit instances created via a factory and registered with `TK_AHVN.add()` are persisted normally — only the factory class itself requires a code import to be available each session. You can use helper interfaces like `@register_factory` and `get_factory` to manage factories, but that requires the `ToolkitFactory` classes to be defined and imported.
+    This is a temporary behavior and may change in the future.
+</Tip>
+
+<br/>
+
+## 3. Export Toolkits as MCP Servers
+
+Given the `toolkit` we created above, we can directly serve it as an MCP server:
+
+```python
+# HTTP — blocking (foreground), logs MCP client config via logger.info().
+# toolkit.serve()
+
+# HTTP — non-blocking (background), returns a ServeHandle.
+with toolkit.serve(transport="http", host="127.0.0.1", port=7001, wait=False) as handle:
+    print("MCP Client Config:\n" + handle.mcp_json)
+    print("MCP URL:", handle.url)
+    # ... your application logic using the live server here ...
+    print("Press Any Key To Stop Serving...")
+    input()
+    # Server stops automatically when the 'with' block exits (calls handle.stop())
+
+# {
+#   "mcpServers": {
+#     "math_tools": {
+#       "url": "http://127.0.0.1:7001/math_tools/mcp",
+#       "transport": "http"
+#     }
+#   }
+# }
+# http://127.0.0.1:7001/math_tools/mcp
+# Press Any Key To Stop Serving...
+```
+
+Directly copy the `handle.mcp_json` into your MCP client settings, and it can discover and call the toolkit's tools immediately. Use `handle.mcp_config` if you want the raw dict instead of a JSON string; use `handle.url` if you just want the server URL.
+
+You can also use **stdio** transport, which is more portable and firewall-friendly since it doesn't require opening a network port.
+```python
+toolkit.serve(transport="stdio")
+```
+
+However, directly starting a stdio server is kinda useless as it just enters its MCP event loop, reads UTF-8 JSON-RPC messages from stdin and writes responses/events to stdout. The more common way of using stdio transport is to let it emit a mcp config with a command that spawns the server on demand, and let the MCP client handle the process management. This way, the toolkit can be served when needed without keeping a server process running all the time.
+
+However, that requires first persisting the toolkit in the global toolkit manager: `TK_AHVN` (see [Section 4](#4-tk_ahvn--global-toolkit-manager)) so the subprocess can find it and serve it when called.
+```python
+from ahvn.tool import TK_AHVN
+
+
+# Register the toolkit so the stdio subprocess can locate it via TK_AHVN.get()
+TK_AHVN.add(toolkit)
+
+print(toolkit.to_mcp_json(transport="stdio"))
+# {
+#   "mcpServers": {
+#     "math_tools": {
+#       "command": "<YOUR_PYTHON_EXECUTABLE_PATH>",
+#       "args": [
+#         "-c",
+#         "from ahvn.tool import TK_AHVN; TK_AHVN.get('math_tools').serve(transport='stdio')"
+#       ]
+#     }
+#   }
+# }
+```
+
+Similarly, copy the generated config into your MCP client, and it will spawn the server process when needed. The toolkit will be served through stdio, and the client will communicate with it through the standard input/output streams.
+
+<br/>
+
+## 4. TK_AHVN — Global Toolkit Manager
+
+`TK_AHVN` stores, and runs toolkit instances by qualified names:
+
+```python
+from typing import Dict
+from ahvn.tool import TK_AHVN, ToolSpec, ToolkitFactory
+
+
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+
+def multiply(a: int, b: int) -> int:
+    """Multiply two integers."""
+    return a * b
+
+
+class MathToolkitFactory(ToolkitFactory):
+    name = "math"
+    description = "Basic arithmetic tools."
+
+    @classmethod
+    def tools(cls, **args) -> Dict[str, ToolSpec]:
+        return {
+            "add": ToolSpec.from_func(add),
+            "multiply": ToolSpec.from_func(multiply),
+        }
+
+toolkit = MathToolkitFactory.create("math_tools")
+
+print(TK_AHVN.run("math_tools.add", a=3, b=4))       # 7
+print(TK_AHVN.run("math_tools.multiply", a=3, b=4))  # 12
+print(TK_AHVN.list())
+```
+
+Toolkits created through `TK_AHVN` are persisted and can be reused across sessions. `TK_AHVN` is essential for using stdio MCP servers, as the subprocess needs to locate the toolkit through `TK_AHVN.get()` in order to serve it on demand.
+
+<br/>
+
+## 5. Export as a Skill
+
+A toolkit is already ready to share or serve as an MCP server. For LLM-friendly presenting, we can also export it as a [Skill](https://github.com/anthropics/skills), which is a natural-language-centric protocol for presenting tools and knowledge to LLMs, allowing customizations to demonstrate the toolkit's capabilities and interfaces.
+
+Specifically, each Skill is a folder containing a `SKILL.md` file with the description and usage instructions, and optionally subfolders to contain Python scripts, reference documentation, resources, license, etc. AgentHeaven's `Toolkit.export()` method can generate this structure automatically if the toolkits are properly annotated with docstrings and descriptions:
+
+```python
+toolkit.export("./skills/")
+```
+
+<Tip>
+    Skills is a very flexible protocol, so toolkit export is not a one-size-fits-all solution. Currently it only exports the `SKILL.md` file with the built-in descriptions of the toolkit. Depending on the target LLM and use case, you may want to customize the generated `SKILL.md` and folder structure to better fit the needs. It is more recommended to use `SkillUKFT` (see [Knowledge](/features/knowledge/overview)) and finetune your skill descriptions, resources and usage instructions for better LLM understanding and performance.
+</Tip>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Next:**
+    - [Capsules](/features/capsules) — the persistence layer behind functions
+    - [Tools](/features/tools) — the structured interface on top of capsules
+    - [MCP Clients](/ecosystem/mcp-clients) — connect toolkits to external MCP clients
+    - [Skills](/ecosystem/skills) — the skill protocol and ecosystem
+</Tip>
+
+<Tip>
+    **Related:**
+    - [Prompts](/features/prompts) — prompts as persistable functions
+    - [Caching](/features/caching) — cache function results across sessions
+</Tip>

@@ -1,0 +1,350 @@
+---
+title: "Agents"
+description: "Agent specifications and streaming execution for multi-step LLM workflows"
+---
+
+## Overview
+
+AgentHeaven's agent system provides a flexible framework for building multi-step LLM workflows with tool calling, streaming output, and composable agent specs.
+
+```python
+from ahvn.agent import BaseAgentSpec, BasePromptAgentSpec, AgentStreamChunk
+from ahvn.agent.conv_agent import ConvToolAgentSpec
+from ahvn.agent.submit_agent import SubmitToolAgentSpec
+from ahvn.agent.oracle_agent import OracleAgentSpec
+```
+
+---
+
+## BaseAgentSpec
+
+Abstract base class for all agent specifications. Subclasses implement `encode`, `is_done`, and `decode` to define the agent's behavior.
+
+### Constructor
+
+<ParamField path="tools" type="list[ToolSpec]" default="[]">
+  List of `ToolSpec` instances available to the agent during execution.
+</ParamField>
+
+<ParamField path="llm_args" type="dict">
+  Arguments forwarded to the `LLM` constructor (e.g. `{"preset": "chat", "model": "gpt-4o"}`). Defaults to the global LLM configuration.
+</ParamField>
+
+<ParamField path="max_steps" type="int">
+  Maximum number of LLM steps before the agent is forced to stop with `msg='max_steps_reached'`. Defaults to `agent.max_steps` config key (20).
+</ParamField>
+
+### Abstract Methods
+
+Subclasses must implement these three methods:
+
+#### `encode(**inputs) -> Messages`
+
+Convert arbitrary input arguments into an initial `Messages` list (list of OpenAI-style message dicts) for the agent.
+
+```python
+def encode(self, query: str) -> Messages:
+    return [{"role": "user", "content": query}]
+```
+
+#### `is_done(messages, delta_messages) -> (bool, dict)`
+
+Decide whether the agent has completed its task after each step.
+
+<ParamField path="messages" type="Messages">
+  Full conversation history so far.
+</ParamField>
+
+<ParamField path="delta_messages" type="list[dict]">
+  New messages produced in the last step.
+</ParamField>
+
+Returns a tuple of `(done: bool, finish_state: dict)`. When `done=True`, the agent stops and `finish_state` is merged with `{"steps": ..., "max_steps": ...}`.
+
+#### `decode(messages, finish_state) -> Any`
+
+Extract the final output from the completed conversation.
+
+### Concrete Methods
+
+#### `stream(messages, include) -> Generator[AgentStreamChunk]`
+
+The core execution loop. Streams chunks as the agent runs step by step.
+
+```python
+for chunk in agent.stream(encoded_messages, include=["text", "tool_calls"]):
+    ...
+```
+
+<ParamField path="messages" type="Messages" required>
+  Initial messages produced by `encode()`.
+</ParamField>
+
+<ParamField path="include" type="list[str]">
+  Fields to request in stream chunks. Defaults to `["text", "think", "tool_calls", "tool_messages", "delta_messages"]`.
+</ParamField>
+
+**Stream chunk format:**
+
+Each chunk is an `AgentStreamChunk` (`Dict[str, Any]`). Different chunks carry different keys:
+
+<ResponseField name="step" type="int">
+  The current step index (0-based).
+</ResponseField>
+
+<ResponseField name="step_status" type="'start' | 'end'">
+  Whether this is the start or end of a step.
+</ResponseField>
+
+<ResponseField name="done" type="bool">
+  `True` only on the final `step_status='end'` chunk.
+</ResponseField>
+
+<ResponseField name="finish_state" type="dict">
+  Present on the final chunk.
+  <Expandable title="finish_state keys">
+    <ResponseField name="msg" type="str">
+      `'stale'` (no output produced), `'max_steps_reached'`, or a subclass-specific value like `'success'`.
+    </ResponseField>
+    <ResponseField name="steps" type="int">
+      Number of steps completed.
+    </ResponseField>
+    <ResponseField name="max_steps" type="int">
+      The configured maximum.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="messages" type="Messages">
+  Full conversation history. Present on the final chunk.
+</ResponseField>
+
+<ResponseField name="text" type="str">
+  LLM text delta for this chunk (streaming).
+</ResponseField>
+
+<ResponseField name="think" type="str">
+  LLM internal reasoning/thinking delta.
+</ResponseField>
+
+<ResponseField name="tool_calls" type="list[dict]">
+  Tool call objects from the LLM.
+</ResponseField>
+
+<ResponseField name="tool_messages" type="list[dict]">
+  Tool execution result messages.
+</ResponseField>
+
+<ResponseField name="delta_messages" type="list[dict]">
+  All new messages produced in this step (LLM response + tool results).
+</ResponseField>
+
+#### `run(messages, include) -> (Messages, dict)`
+
+Blocking wrapper around `stream()`. Returns `(final_messages, finish_state)` after the agent completes.
+
+```python
+final_messages, finish_state = agent.run(encoded_messages)
+```
+
+#### `__call__(**inputs) -> Any`
+
+Convenience method: calls `encode(**inputs)`, `run()`, and `decode()` in sequence.
+
+```python
+result = agent(query="What is Fib(10)?")
+```
+
+#### `step(messages, include) -> Generator`
+
+Execute a single LLM call with streaming. Used internally by `stream()`.
+
+#### `user_proxy(messages, delta_messages, finish_state) -> Messages`
+
+Called between steps when the agent has not finished. Returns messages appended to the conversation to prompt continuation. Default implementation returns a generic `"Please continue"` message.
+
+---
+
+## BasePromptAgentSpec
+
+Extends `BaseAgentSpec` with `PromptUKFT`-based message encoding.
+
+### Constructor
+
+<ParamField path="prompt" type="PromptUKFT" required>
+  The prompt template used by `encode()`. A clone is stored internally so the original is not mutated.
+</ParamField>
+
+<ParamField path="tools" type="list[ToolSpec]" default="[]">
+  Same as `BaseAgentSpec`.
+</ParamField>
+
+<ParamField path="llm_args" type="dict">
+  Same as `BaseAgentSpec`.
+</ParamField>
+
+<ParamField path="max_steps" type="int">
+  Same as `BaseAgentSpec`.
+</ParamField>
+
+`encode(**inputs)` renders the prompt template with `{"inputs": inputs}` as the template context and passes the result to `format_messages()`.
+
+---
+
+## ConvToolAgentSpec
+
+Conversational tool-calling agent for LLMs that do not support native function calls. The agent parses tool invocations from LLM markdown output and executes them manually.
+
+<Warning>
+  `ConvToolAgentSpec` is designed for LLMs without native tool-calling support. For best performance, prefer `LLM.tooluse`, `SubmitToolAgentSpec`, or native function-calling agents when your LLM supports them.
+</Warning>
+
+### Constructor
+
+<ParamField path="prompt" type="PromptUKFT" required>
+  Prompt template. The tool specs are automatically bound to it at construction time.
+</ParamField>
+
+<ParamField path="tools" type="list[ToolSpec]" default="[]">
+  Tools available to the agent. Their names and parameters are injected into the prompt.
+</ParamField>
+
+<ParamField path="llm_args" type="dict">
+  LLM configuration.
+</ParamField>
+
+<ParamField path="max_steps" type="int">
+  Maximum steps.
+</ParamField>
+
+**Behavior:**
+- `encode(**inputs)`: Renders the prompt with tool specifications and input bindings.
+- `is_done()`: Returns `True` when the LLM's response contains a markdown `output` section.
+- `decode()`: Returns the parsed `output` value from `finish_state`.
+- `step()`: Streams LLM output, detects markdown tool calls (`tool` section), executes them, and appends results as user messages.
+
+---
+
+## SubmitToolAgentSpec
+
+Agent that continues until a designated `submit` tool is called. The submit tool's return value becomes the final output.
+
+```python
+from ahvn.agent.submit_agent import SubmitToolAgentSpec
+
+agent = SubmitToolAgentSpec(
+    prompt=prompt,
+    tools=[search_tool, calculate_tool, submit_tool],
+    submit_name="submit",   # name of the tool that signals completion
+    max_steps=10,
+)
+```
+
+<ParamField path="prompt" type="PromptUKFT" required>
+  Prompt template.
+</ParamField>
+
+<ParamField path="tools" type="list[ToolSpec]">
+  Tools available. Should include a tool with the `submit_name`.
+</ParamField>
+
+<ParamField path="submit_name" type="str" default="submit">
+  Name of the tool whose successful call signals task completion.
+</ParamField>
+
+<ParamField path="error_signal" type="str" default="[ERROR]">
+  If the submit tool's result contains this string, the call is not treated as successful.
+</ParamField>
+
+<ParamField path="tool_instructions" type="bool" default="True">
+  When `True`, automatically injects tool usage and submit instructions into the prompt.
+</ParamField>
+
+---
+
+## OracleAgentSpec
+
+Single-step agent with no tools. Useful for simple question-answering or prompt evaluation tasks.
+
+```python
+from ahvn.agent.oracle_agent import OracleAgentSpec
+
+agent = OracleAgentSpec(prompt=prompt, llm_args={"preset": "chat"})
+result = agent(query="What is the capital of France?")
+```
+
+Always completes in exactly one step. `decode()` returns the raw text of the last assistant message.
+
+---
+
+## AgentStreamChunk
+
+```python
+AgentStreamChunk = Dict[str, Any]
+```
+
+A type alias for the dict yielded by `agent.stream()`. Fields depend on the current point in execution. See the `stream()` section above for the full field reference.
+
+---
+
+## Full Streaming Example
+
+From `demo_nlfc.py`:
+
+```python
+from ahvn.ukf.templates.basic.prompt import PromptUKFT
+from ahvn.tool import ToolSpec
+from ahvn.agent.conv_agent import ConvToolAgentSpec
+from ahvn.cache import InMemCache
+
+cache = InMemCache()
+
+@cache.memoize()
+def fibonacci(n: int) -> int:
+    """Compute the nth Fibonacci number."""
+    return n if n <= 1 else fibonacci(n - 2) + fibonacci(n - 1)
+
+def multiply(a: int, b: int) -> int:
+    """Multiply two integers."""
+    return a * b
+
+fib_tool = ToolSpec.from_function(fibonacci)
+mul_tool = ToolSpec.from_function(multiply)
+
+# Build the prompt
+p = PromptUKFT.from_path("& prompts/system", default_entry="prompt.jinja")
+p.bind(system="You are a helpful math assistant, use the tools to answer user queries.")
+
+# Create the agent
+agent = ConvToolAgentSpec(
+    prompt=p,
+    tools=[fib_tool, mul_tool],
+    llm_args={"preset": "chat"},
+)
+
+# Stream execution
+query = "What is `Fib(32) * Fib(64)` ?"
+encoded = agent.encode(query=query)
+finish_state = None
+final_messages = None
+
+for chunk in agent.stream(encoded, include=["text", "think", "tool_calls", "tool_messages", "delta_messages"]):
+    if "step" in chunk and "step_status" in chunk:
+        if chunk["step_status"] == "start":
+            print(f"--- Step {chunk['step'] + 1} ---")
+        if chunk["step_status"] == "end" and chunk.get("done"):
+            finish_state = chunk.get("finish_state")
+            final_messages = chunk.get("messages")
+        continue
+    if chunk.get("text"):
+        print(chunk["text"], end="", flush=True)
+    if chunk.get("tool_calls"):
+        for tc in chunk["tool_calls"]:
+            print(f"\n  → {tc.get('function', tc).get('name', 'unknown')}(...)")
+    if chunk.get("tool_messages"):
+        for tm in chunk["tool_messages"]:
+            print(f"  ← {tm.get('name', 'unknown')}: {tm.get('content', '')}")
+
+print()
+print("Result:", agent.decode(final_messages, finish_state=finish_state))
+```

@@ -1,0 +1,31 @@
+---
+title: "Vector Databases"
+description: "Vector database integration through LlamaIndex for semantic search and embeddings."
+---
+
+{/*
+Source: ahvn.utils.vdb (VectorDatabase, VectorCompiler), field types (VdbIdType, VdbTextType, etc.)
+
+Planned sections:
+1. VectorDatabase abstraction — connection, indexing, querying
+2. VectorCompiler — compile vector queries
+3. Configuration — resolve_vdb_config, parse_encoder_embedder
+4. Vector field types — VdbIdType, VdbTextType, VdbTagsType, etc.
+5. Integration with KLStore/KLEngine — VectorKLStore, VectorKLEngine
+*/}
+
+AgentHeaven connects to vector databases through [LlamaIndex](https://www.llamaindex.ai/), supporting multiple backends for semantic search and embedding storage.
+
+See individual pages for backend-specific setup:
+
+<CardGroup cols={3}>
+  <Card title="LanceDB" icon="database" href="/features/vector-databases/lancedb">
+    Default local vector storage, zero-config.
+  </Card>
+  <Card title="ChromaDB" icon="palette" href="/features/vector-databases/chromadb">
+    Lightweight open-source embedding database.
+  </Card>
+  <Card title="Milvus" icon="server" href="/features/vector-databases/milvus">
+    Scalable vector database for production.
+  </Card>
+</CardGroup>

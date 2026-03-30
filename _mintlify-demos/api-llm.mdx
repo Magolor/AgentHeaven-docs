@@ -1,0 +1,480 @@
+---
+title: "LLM"
+description: "High-level chat LLM client with retry, caching, proxy, and streaming support."
+---
+
+```python
+from ahvn.llm import LLM, format_messages, gather_assistant_message, gather_stream, exec_tool_calls
+```
+
+## LLM
+
+The `LLM` class wraps a litellm-compatible chat API and provides streaming and non-streaming access modes, automatic retries, memoization caching, optional proxy support, and flexible output shaping.
+
+```python
+llm = LLM(model="gpt-4o", name="my-agent")
+response = llm.oracle("Summarize the Pythagorean theorem in one sentence.")
+print(response)  # "The Pythagorean theorem states that..."
+```
+
+### Constructor
+
+<ParamField path="preset" type="str">
+  Named preset from your AgentHeaven configuration. When provided, model, provider, and default args are read from the preset. Falls back to the default preset (`sys`) if not specified.
+</ParamField>
+
+<ParamField path="model" type="str">
+  Model identifier (e.g., `"gpt-4o"`, `"claude-3-5-sonnet-20241022"`). Overrides the model set by `preset`.
+</ParamField>
+
+<ParamField path="provider" type="str">
+  Provider name used by the underlying litellm client (e.g., `"openai"`, `"anthropic"`, `"openrouter"`). Overrides the provider set by `preset` or model defaults.
+</ParamField>
+
+<ParamField path="cache" type="bool | str | BaseCache" default="True">
+  Cache backend for memoizing successful responses.
+
+  - `True` — uses `DiskCache` at the default path (`core.cache_path/llm_default`).
+  - A string path — uses `DiskCache` at that path.
+  - A `BaseCache` instance — uses the provided cache directly.
+  - `False` / `None` — disables caching (`NoCache`).
+</ParamField>
+
+<ParamField path="cache_exclude" type="list[str]">
+  Keys to exclude from cache key construction. Overrides `llm.cache_exclude_keys` from global config.
+</ParamField>
+
+<ParamField path="name" type="str" default='llm'>
+  Logical name for this instance. Used as a namespace in the cache, so different use-cases should use distinct names to avoid cache collisions.
+</ParamField>
+
+<ParamField path="kwargs" type="Any">
+  Additional provider/client config that becomes the default for every call: `temperature`, `top_p`, `n`, `tools`, `tool_choice`, `http_proxy`, `https_proxy`, `response_format`, and any litellm option. Per-call kwargs override these.
+</ParamField>
+
+---
+
+## Methods
+
+### oracle()
+
+Get the final aggregated LLM response for the given messages. Internally streams and collects the full result.
+
+```python
+# Simple string response
+text = llm.oracle("What is 2 + 2?")
+print(text)  # "4"
+
+# Multiple output fields
+result = llm.oracle(
+    messages=[{"role": "user", "content": "Solve x^2 = 9"}],
+    include=["text", "think"],
+)
+print(result["think"])  # reasoning trace
+print(result["text"])   # final answer
+
+# With tools
+from ahvn.tool import ToolSpec
+
+@ToolSpec(name="add", description="Add two numbers")
+def add(a: int, b: int) -> int:
+    return a + b
+
+result = llm.oracle(
+    "Add 17 and 25",
+    tools=[add],
+    include=["text", "tool_calls", "tool_messages"],
+)
+```
+
+<ParamField path="messages" type="Messages" required>
+  Conversation content. Accepts:
+
+  - A plain string — treated as a single user message.
+  - A list of dicts with `"role"` keys.
+  - A list of strings — each treated as a user message.
+  - `litellm.Message` objects.
+
+  All formats are normalized to OpenAI message format by `format_messages`.
+</ParamField>
+
+<ParamField path="tools" type="list[ToolSpec | dict]">
+  Tools the model may call. Each entry can be a `ToolSpec` instance or a raw OpenAI-format JSON schema dict. When provided, `include` defaults to `["think", "text", "tool_calls"]`.
+</ParamField>
+
+<ParamField path="tool_choice" type="str">
+  Tool choice setting passed to the model. Defaults to `"auto"` when tools are present.
+</ParamField>
+
+<ParamField path="include" type="list[LLMIncludeType]">
+  Fields to include in the final result. Defaults to `["text"]` without tools, `["think", "text", "tool_calls"]` with tools. See [LLMIncludeType](#llmincludetype) for all allowed values.
+</ParamField>
+
+<ParamField path="verbose" type="bool" default="False">
+  If `True`, logs the resolved request configuration and proxy settings.
+</ParamField>
+
+<ParamField path="reduce" type="bool" default="True">
+  If `True` and `len(include) == 1`, returns the single value directly instead of a one-key dict.
+</ParamField>
+
+<ParamField path="kwargs" type="Any">
+  Per-call overrides for LLM config (e.g., `temperature=0.2`, `http_proxy="http://..."`). Merged on top of instance-level config.
+</ParamField>
+
+**Returns** `LLMResponse` — `str` when `reduce=True` and a single text field is included; `dict` when multiple fields or `reduce=False`; `list` for list-type fields under reduction.
+
+---
+
+### stream()
+
+Stream LLM responses as incremental deltas. Tool calls and structured output are buffered and yielded in a final delta after the text stream ends.
+
+```python
+# Print tokens as they arrive
+for delta in llm.stream("Tell me a short story."):
+    print(delta, end="", flush=True)
+
+# Streaming with reduce=False to get dict deltas
+for delta in llm.stream("Think step by step: 7 * 8", include=["text", "think"], reduce=False):
+    if delta.get("text"):
+        print(delta["text"], end="", flush=True)
+
+# Collect a full result from a stream
+from ahvn.llm import gather_stream
+
+stream = llm.stream("Describe quantum entanglement.", reduce=False)
+result = gather_stream(stream)
+print(result)  # full text string
+```
+
+<ParamField path="messages" type="Messages" required>
+  Same format as `oracle`. Accepts strings, lists of dicts/strings, or litellm Message objects.
+</ParamField>
+
+<ParamField path="tools" type="list[ToolSpec | dict]">
+  Optional tools. Tool calls are not yielded incrementally — they are buffered and yielded in a single final delta.
+</ParamField>
+
+<ParamField path="tool_choice" type="str">
+  Tool choice setting. Defaults to `"auto"` when tools are present.
+</ParamField>
+
+<ParamField path="include" type="list[LLMIncludeType]">
+  Fields to include in each yielded delta. Only streaming-compatible values are valid mid-stream: `"text"`, `"think"`, `"content"`, `"message"`. Non-streaming fields (`"tool_calls"`, `"tool_messages"`, `"tool_results"`, `"structured"`, `"messages"`, `"delta_messages"`) are yielded in the final delta only.
+</ParamField>
+
+<ParamField path="reduce" type="bool" default="True">
+  If `True` and `len(include) == 1`, each yielded delta is a plain value instead of a dict.
+</ParamField>
+
+<ParamField path="verbose" type="bool" default="False">
+  Log resolved request config.
+</ParamField>
+
+<ParamField path="kwargs" type="Any">
+  Per-call config overrides.
+</ParamField>
+
+**Yields** `LLMResponse` — one value per token delta, plus a final delta containing buffered fields like tool calls.
+
+---
+
+### astream() / aoracle()
+
+Async equivalents of `stream` and `oracle`. Use `async for` and `await` respectively.
+
+```python
+async def run():
+    async for delta in llm.astream("Hello"):
+        print(delta, end="", flush=True)
+
+    result = await llm.aoracle("What is the capital of France?")
+    print(result)  # "Paris"
+```
+
+<Note>
+  `astream` does not yet support `tools`. Passing `tools` to `astream` raises `NotImplementedError`.
+</Note>
+
+---
+
+### tooluse()
+
+Convenience method that forces the model to call tools and returns the executed tool result messages. Sets `tool_choice="required"` and `include=["tool_messages"]` by default.
+
+```python
+@ToolSpec(name="fibonacci", description="Compute the nth Fibonacci number")
+def fibonacci(n: int) -> int:
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+tool_messages = llm.tooluse("Compute fib(10)", tools=[fibonacci])
+print(tool_messages)
+# [{"role": "tool", "tool_call_id": "...", "name": "fibonacci", "content": "55"}]
+
+# Continue the conversation with the tool results
+msgs = [{"role": "user", "content": "Compute fib(10)"}]
+msgs.append({"role": "assistant", "tool_calls": [...]})
+msgs.extend(tool_messages)
+next_tool_messages = llm.tooluse(msgs, tools=[fibonacci])
+```
+
+<ParamField path="messages" type="Messages" required>
+  Conversation content.
+</ParamField>
+
+<ParamField path="tools" type="list[ToolSpec]" required>
+  Tools to execute. Must be `ToolSpec` instances (not raw dicts) because execution requires the bound callable.
+</ParamField>
+
+<ParamField path="tool_choice" type="str" default='required'>
+  Defaults to `"required"` to force a tool call.
+</ParamField>
+
+<ParamField path="include" type="str | list[str]">
+  Fields to include. Defaults to `["tool_messages"]`.
+</ParamField>
+
+<ParamField path="verbose" type="bool" default="False">
+  Log request config.
+</ParamField>
+
+<ParamField path="reduce" type="bool" default="True">
+  Reduce single-field output.
+</ParamField>
+
+**Returns** `list[dict]` — tool result messages in OpenAI format:
+
+```python
+[
+    {
+        "role": "tool",
+        "tool_call_id": "call_abc123",
+        "name": "fibonacci",
+        "content": "55",
+    }
+]
+```
+
+---
+
+### embed()
+
+Get embedding vectors for one or more input strings.
+
+```python
+# Single string
+vec = llm.embed("Hello world")
+print(len(vec))  # e.g. 1536
+
+# Batch
+vecs = llm.embed(["foo", "bar", "baz"])
+print(len(vecs))   # 3
+print(len(vecs[0]))  # embedding dimension
+```
+
+<ParamField path="inputs" type="str | list[str]" required>
+  One or more texts to embed. Empty strings produce a zero vector without a network call.
+</ParamField>
+
+<ParamField path="verbose" type="bool" default="False">
+  Log request config and inputs.
+</ParamField>
+
+<ParamField path="kwargs" type="Any">
+  Additional parameters forwarded to the embedding endpoint.
+</ParamField>
+
+**Returns** `List[float]` for a single string input; `List[List[float]]` for a list input.
+
+`aembed()` is the async equivalent with the same signature.
+
+---
+
+### dim
+
+Property. Returns the embedding dimension by making a single test call on first access. The result is cached on the instance.
+
+```python
+print(llm.dim)  # e.g. 1536
+```
+
+---
+
+## LLMIncludeType
+
+Literal type controlling which fields are returned by `oracle`, `stream`, and related methods.
+
+| Value | Type | Description |
+| --- | --- | --- |
+| `"text"` | `str` | The model's text response (default). |
+| `"think"` | `str` | Reasoning/thinking trace (reasoning models). |
+| `"content"` | `str` | Combined content with `<think>` tags inlined. |
+| `"tool_calls"` | `list` | Raw tool call objects from the model. |
+| `"tool_messages"` | `list` | Executed tool result messages in OpenAI format. Requires all tools to be `ToolSpec` instances. |
+| `"tool_results"` | `list` | Plain string results from executed tool calls. |
+| `"message"` | `dict` | Assistant message dict (`{"role": "assistant", "content": ..., "tool_calls": ...}`). |
+| `"structured"` | `dict` | Parsed JSON output when `response_format` is set. |
+| `"delta_messages"` | `list` | New messages produced in this turn (assistant + tool). For appending to a conversation. |
+| `"messages"` | `list` | Full updated conversation including input messages and new messages. |
+
+<Note>
+  `"tool_messages"`, `"tool_results"`, `"delta_messages"`, and `"messages"` require all entries in `tools` to be `ToolSpec` instances, not raw dicts. Raw dicts cannot be executed.
+</Note>
+
+---
+
+## Helper functions
+
+### format_messages()
+
+Normalize diverse message formats to a list of OpenAI-format dicts.
+
+```python
+from ahvn.llm import format_messages
+
+messages = format_messages("Hello")
+# [{"role": "user", "content": "Hello"}]
+
+messages = format_messages([
+    "First message",
+    {"role": "assistant", "content": "Response"},
+    "Follow-up",
+])
+```
+
+<ParamField path="messages" type="Messages" required>
+  Input in any supported format:
+
+  1. `str` — wrapped into a single user message.
+  2. `list` — each item processed as follows:
+     - `str` → user message.
+     - `dict` → used as-is; must contain a `"role"` key.
+     - `litellm.Message` → converted via `.json()`.
+</ParamField>
+
+**Returns** `List[dict]` — list of normalized OpenAI-format message dicts.
+
+**Raises** `ValueError` if a dict lacks a `"role"` field. `TypeError` if an unsupported type is encountered.
+
+---
+
+### gather_stream()
+
+Collect an iterable of `stream` deltas (produced with `reduce=False`) into a single consolidated response matching the shape of `oracle`.
+
+```python
+from ahvn.llm import gather_stream
+
+# Must stream with reduce=False to get dict deltas
+stream = llm.stream("Explain recursion.", reduce=False)
+result = gather_stream(stream)
+print(result)  # full text string
+
+# With explicit include to ensure keys are present even on empty stream
+stream = llm.stream("...", include=["text", "tool_calls"], reduce=False)
+result = gather_stream(stream, include=["text", "tool_calls"], reduce=False)
+print(result["text"])
+print(result["tool_calls"])
+```
+
+<ParamField path="stream" type="Iterable[LLMResponse]" required>
+  Iterable of delta dicts from `LLM.stream` called with `reduce=False`.
+</ParamField>
+
+<ParamField path="include" type="list[LLMIncludeType]">
+  Fields to include in the final output. If `None`, includes all keys found in the stream. Providing `include` is recommended to guarantee expected keys are present even when the stream is empty.
+</ParamField>
+
+<ParamField path="reduce" type="bool" default="True">
+  Return a single value when only one field is included.
+</ParamField>
+
+**Returns** `LLMResponse` — consolidated response.
+
+---
+
+### gather_assistant_message()
+
+Merge a list of streamed assistant message dicts (from `_LLMChunk.to_message()`) into a single assistant message.
+
+```python
+from ahvn.llm import gather_assistant_message
+
+chunks = [
+    {"role": "assistant", "content": "Hello "},
+    {"role": "assistant", "content": "world"},
+]
+assistant_msg = gather_assistant_message(chunks)
+# {"role": "assistant", "content": "Hello world"}
+```
+
+<ParamField path="message_chunks" type="list[dict]" required>
+  List of assistant message dicts. `"tool_calls"` lists from each chunk are concatenated; `"content"` strings are concatenated.
+</ParamField>
+
+**Returns** `dict` — a single assembled assistant message. The `"tool_calls"` key is omitted when there are no tool calls.
+
+---
+
+### exec_tool_calls()
+
+Execute a list of tool call dicts returned by the LLM and produce tool result messages.
+
+```python
+from ahvn.llm import exec_tool_calls
+
+tool_calls = [
+    {
+        "id": "call_001",
+        "type": "function",
+        "function": {"name": "add", "arguments": '{"a": 3, "b": 5}'},
+    }
+]
+toolspec_dict = {"add": add_toolspec}  # name -> ToolSpec
+
+tool_messages, tool_results = exec_tool_calls(tool_calls, toolspec_dict)
+print(tool_messages)
+# [{"role": "tool", "tool_call_id": "call_001", "name": "add", "content": "8"}]
+print(tool_results)  # ["8"]
+```
+
+<ParamField path="tool_calls" type="list[dict]" required>
+  Tool call dicts from an LLM response. Accepts both the nested `{"function": {"name": ..., "arguments": ...}}` format and the flat `{"name": ..., "arguments": ...}` format. `arguments` may be a JSON string or a parsed dict.
+</ParamField>
+
+<ParamField path="toolspec_dict" type="dict[str, ToolSpec]" required>
+  Mapping from tool name to `ToolSpec`. Every name referenced in `tool_calls` must have a corresponding (non-`None`) `ToolSpec` entry.
+</ParamField>
+
+**Returns** `tuple[list[dict], list[str]]`:
+
+<ResponseField name="tool_messages" type="list[dict]">
+  Tool result messages in OpenAI format, ready to append to a conversation.
+
+  <Expandable title="message fields">
+    <ResponseField name="role" type="string">Always `"tool"`.</ResponseField>
+    <ResponseField name="tool_call_id" type="string">The `id` from the original tool call.</ResponseField>
+    <ResponseField name="name" type="string">The tool function name.</ResponseField>
+    <ResponseField name="content" type="string">String-coerced return value of the tool, or an error description.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="tool_results" type="list[str]">
+  Plain string values returned by each tool, in the same order as `tool_calls`.
+</ResponseField>
+
+**Raises** `ValueError` if a tool name is missing, the function name is blank, or the `ToolSpec` for a name is `None`.
+
+---
+
+## Type aliases
+
+```python
+Message  = Union[str, Dict[str, Any], Any]          # single message
+Messages = Union[Message, List[Message]]             # one or many messages
+LLMResponse = Union[str, Dict[str, Any], List[...]] # oracle / stream return
+```

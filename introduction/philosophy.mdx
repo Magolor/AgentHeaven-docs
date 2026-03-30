@@ -1,0 +1,94 @@
+---
+title: "Philosophy"
+description: "The design principles and vision behind AgentHeaven."
+---
+
+<Note>
+    *"Ask not what your agents can do for you, ask what you can do for your agents."*
+</Note>
+
+AgentHeaven is not another agent framework. It is a knowledge management approach designed for the era of AI — one that prepares everything an agent needs **before** it acts, so agents can work in a friendly, context-rich environment.
+
+<br/>
+
+## 1. Vision
+
+Imagine a future where we and our agents can integrate with diverse data sources, enabling intelligent access and management of domain-specific knowledge. AgentHeaven makes this possible by centering around the **Unified Knowledge Format (UKF)** — a standardized way to represent domain knowledge, rules, and historical data. When we pour data into UKF, it becomes instantly AI-ready.
+
+Built on top of UKF, the **Knowledge Base (KLBase)** is a configurable system where knowledge extraction, storage, search, and utilization are completely decoupled. We can mix and match backends to create custom knowledge management workflows. Want in-memory storage with vector search? Or disk storage with string automaton search? The possibilities stay open. We can design an application-specific KLBase by defining the data model, knowledge sources, and maintenance methods, then integrate any LLM or agent workflow with it.
+
+The result is a **stateful system that evolves with your application**, enabling intelligent and adaptable agents that grow over time.
+
+<br/>
+
+## 2. Design Principles
+
+### 2.1. Knowledge as a First-Class Asset
+
+Most agent frameworks treat knowledge as an afterthought — something fetched from a vector database when needed. AgentHeaven treats knowledge as the foundation. Every piece of information — documents, schemas, functions, tools, prompts, results, users, skills, ... — flows through the UKF protocol. UKF normalizes all knowledge into structured data, enabling backend-agnostic storage and retrieval.
+
+With unified storage and retrieval, **search is intelligence** — orchestrating agents is equivalent to searching for the right orchestration, context engineering is equivalent to searching for the right context, RAG is equivalent to searching for the right data, and so on. By treating knowledge as a first-class asset, we create a system where agents can learn, adapt, and evolve over time via just knowledge updates and search.
+
+That also changes how we think about prompts. Prompts should not live as scattered strings or hard-wired template files buried in application code. They should be executable, versioned assets that can be persisted, retrieved, translated, and swapped just like any other part of the system.
+
+This is also different from an agent's memory layer. Memory is **agent's** capability that runs on any environment, while our knowledge system is the **data's** capability that any agent can make use of. The agents may update, and the memory system may evolve, but the knowledge base remains a stable, evolving source of truth for both humans and agents, available to all ecosystem participants.
+
+<br/>
+
+### 2.2. Provider-agnostic
+
+AgentHeaven connects to external services through integration layers:
+
+- LLMs via [LiteLLM](https://www.litellm.ai/) — swap providers by changing a config preset
+- Databases via [SQLAlchemy](https://www.sqlalchemy.org/) — any supported relational database
+- Vector stores via [LlamaIndex](https://www.llamaindex.ai/) — any supported vector backend
+- Tools via [FastMCP](https://gofastmcp.com/) 3.x — standardized tool protocol
+
+Application code stays the same when you switch providers.
+
+<br/>
+
+### 2.3. Configuration-driven
+
+AgentHeaven is built for stateless, serverless applications. You should not hard-code prompts, model names, providers, or storage backends across your codebase. Persist them in a versioned config database, define a strong default once, and let scoped ContextVars resolve the active configuration at runtime.
+
+A request can enter with one scope, an app can add another, and a specific user or experiment can add one more. The code below that boundary does not need to change. LLM calls, prompt lookups, prompt language, database adapters, and vector stores all read the right runtime state automatically from the current scope chain.
+
+- Default config rules all: most code should work without passing knobs around.
+- Scope only the delta: child scopes inherit from parent scopes and override only what is different.
+- Keep handlers stateless: set scope at the edge, then reuse the same code path everywhere.
+- Switch agents, models, prompts, or backends by editing config, not by rewriting business logic.
+
+Configuration is data, context is runtime, and your application code stays clean.
+
+<br/>
+
+### 2.4. Agents for Agents
+
+We are building the knowledge base for agents while using agents to help us build it. Domain knowledge extraction, data cleaning, and knowledge maintenance are all tasks that agents themselves can handle — creating a virtuous loop where the framework improves itself through the agents it supports.
+
+<br/>
+
+## 3. Human-AI Collaboration
+
+AgentHeaven is designed for long-term collaboration between humans and AI agents. It provides interfaces for both humans (CLI, config files) and agents (structured APIs, UKF protocol) to view, edit, and manage shared knowledge.
+
+The goal is to create an environment where agents can be born, live, grow, and thrive — a heaven for agents.
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Architecture and implementation:**
+    - [Architecture](/introduction/architecture) — system architecture and components
+    - [What is AgentHeaven?](/introduction/overview) — feature overview
+</Tip>
+
+<Tip>
+    **Getting started:**
+    - [Installation](/quickstart/installation) — install AgentHeaven
+    - [Quick Setup](/quickstart/quick-setup) — first steps
+</Tip>
+
+<br/>

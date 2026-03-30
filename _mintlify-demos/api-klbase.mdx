@@ -1,0 +1,252 @@
+---
+title: "KLBase"
+description: "Unified knowledge base that orchestrates storages and engines"
+---
+
+## Overview
+
+`KLBase` is the top-level knowledge management object. It coordinates one or more `KLStore` storage backends and one or more `KLEngine` search engines, providing a single unified interface for all read/write/search operations.
+
+```python
+from ahvn.klbase import KLBase
+
+# Built-in AgentHeaven knowledge base
+from ahvn import HEAVEN_KB, AhvnKLBase
+```
+
+---
+
+## KLBase
+
+`KLBase` inherits from `ToolRegistry`, so it can expose its search engines as tools for LLM agents.
+
+### Constructor
+
+```python
+from ahvn.klbase import KLBase
+from ahvn.klstore import CacheKLStore, DatabaseKLStore
+from ahvn.klengine import ScanKLEngine, FacetKLEngine
+
+kb = KLBase(
+    storages=[store1, store2],   # or {"name": store}
+    engines=[engine1, engine2],  # or {"name": engine}
+    name="my_kb",
+)
+```
+
+<ParamField path="storages" type="list[BaseKLStore] | dict[str, BaseKLStore]">
+  Storage backends. If a list is given, each store's `.name` attribute is used as the key.
+</ParamField>
+
+<ParamField path="engines" type="list[BaseKLEngine] | dict[str, BaseKLEngine]">
+  Search engines. If a list is given, each engine's `.name` attribute is used as the key.
+</ParamField>
+
+<ParamField path="name" type="str" default="default">
+  Name of this `KLBase` instance.
+</ParamField>
+
+---
+
+### Storage Management
+
+```python
+kb.add_storage(store, name="my_store")   # register a storage backend
+kb.del_storage("my_store")              # remove a storage backend
+```
+
+<ParamField path="storage" type="BaseKLStore" required>
+  The storage backend to add.
+</ParamField>
+
+<ParamField path="name" type="str">
+  Key to register under. Defaults to `storage.name`.
+</ParamField>
+
+---
+
+### Engine Management
+
+```python
+kb.add_engine(engine, name="my_engine", desync=False)
+kb.del_engine("my_engine")
+
+kb.set_default_engine("my_engine")   # used when engine=None in search()
+```
+
+<ParamField path="engine" type="BaseKLEngine" required>
+  The search engine to add.
+</ParamField>
+
+<ParamField path="name" type="str">
+  Key to register under. Defaults to `engine.name`.
+</ParamField>
+
+<ParamField path="desync" type="bool" default="False">
+  When `True`, the engine is marked as desynced and will not receive write operations until explicitly synced.
+</ParamField>
+
+---
+
+### Desync Tracking
+
+When engines are added with `desync=True` (or via `kb.desync_engine(name)`), all write operations (`upsert`, `insert`, `remove`) skip that engine. This is useful when an engine needs to be rebuilt from scratch later.
+
+```python
+kb.desync_engine("vector_idx")    # mark engine as desynced
+kb.resync_engine("vector_idx")    # sync and re-enable
+kb.sync()                          # sync all non-desynced engines
+kb.sync_desynced()                 # sync only desynced engines
+```
+
+---
+
+### CRUD Operations
+
+All write operations propagate to all registered (non-desynced) storages and engines by default. Optionally scope to specific stores/engines:
+
+```python
+# Upsert to all storages and engines
+kb.upsert(kl)
+
+# Upsert to specific storages only
+kb.upsert(kl, storages=["db_store"], engines=[])
+
+# Insert (skip if already present)
+kb.insert(kl)
+
+# Batch operations
+kb.batch_upsert(kls)
+kb.batch_insert(kls)
+
+# Remove
+kb.remove(key)
+kb.batch_remove(keys)
+
+# Clear
+kb.clear()
+kb.clear(storages=["db_store"])   # clear specific storage only
+```
+
+<ParamField path="storages" type="list[str]">
+  Storage names to target. If `None` and `engines` is also `None`, all storages are targeted.
+</ParamField>
+
+<ParamField path="engines" type="list[str]">
+  Engine names to target. If `None` and `storages` is also `None`, all non-desynced engines are targeted.
+</ParamField>
+
+---
+
+### Search
+
+```python
+# Search using the default engine
+results = kb.search(**search_kwargs)
+
+# Search using a named engine
+results = kb.search(engine="vector_idx", query="...", topk=5)
+
+# List all available (engine, mode) pairs
+kb.list_search()   # -> [("vector_idx", None), ("facet_idx", None), ...]
+```
+
+<ParamField path="engine" type="str">
+  Name of the engine to use. If `None`, uses `default_engine`. Raises `ValueError` if no default is set.
+</ParamField>
+
+All remaining `*args` and `**kwargs` are forwarded to the engine's `search()` method. See the [KLEngine reference](/api/klengine) for per-engine parameters.
+
+<ResponseField name="results" type="list[dict]">
+  Each result has at minimum `id` (int) and `kl` (BaseUKF). Engine-specific fields (scores, matches, etc.) are also included.
+</ResponseField>
+
+---
+
+### Flush and Close
+
+```python
+kb.flush()   # flush all storages and engines
+kb.close()   # close all connections
+```
+
+---
+
+## HEAVEN_KB
+
+`HEAVEN_KB` is the built-in `AhvnKLBase` instance that ships with AgentHeaven. It stores the built-in prompt templates used by `autocode`, `autofunc`, and `autotask`.
+
+```python
+from ahvn import HEAVEN_KB, AhvnKLBase
+```
+
+`AhvnKLBase` is a thin `KLBase` subclass with:
+- A `CacheKLStore` backed by a JSON cache at `& ukfs/prompts`
+- A `ScanKLEngine` named `"prompts"` over that store
+
+### `get_prompt()`
+
+Convenience method to fetch a single `PromptUKFT` by name:
+
+```python
+prompt = HEAVEN_KB.get_prompt("autocode")
+prompt = HEAVEN_KB.get_prompt("autotask")
+prompt = HEAVEN_KB.get_prompt("prompt")
+```
+
+<ParamField path="name" type="str" required>
+  Name of the prompt to retrieve. Raises `ValueError` if not found or if multiple results match.
+</ParamField>
+
+<ParamField path="kwargs">
+  Additional search facets passed to `engine.search()` to disambiguate results.
+</ParamField>
+
+<Note>
+  `HEAVEN_KB` is auto-populated on first import if the prompt store is empty. To force a full rebuild, import and call `setup_heaven_kb()` from `ahvn.resources`:
+
+  ```python
+  from ahvn.resources import setup_heaven_kb
+  setup_heaven_kb()
+  ```
+</Note>
+
+---
+
+## Example
+
+```python
+from ahvn.klbase import KLBase
+from ahvn.klstore import CacheKLStore, DatabaseKLStore
+from ahvn.klengine import ScanKLEngine, FacetKLEngine
+from ahvn.cache import InMemCache
+from ahvn.ukf import KnowledgeUKFT, ptags
+
+# Set up stores and engines
+cache_store = CacheKLStore(cache=InMemCache(), name="cache")
+
+# Create a KLBase with both a cache store and a scan engine
+kb = KLBase(
+    storages=[cache_store],
+    engines=[ScanKLEngine(storage=cache_store, name="scan")],
+    name="demo_kb",
+)
+kb.set_default_engine("scan")
+
+# Add knowledge items
+kls = [
+    KnowledgeUKFT(name=f"item_{i}", content=f"Content {i}", priority=i)
+    for i in range(10)
+]
+kb.batch_upsert(kls)
+
+# Search
+results = kb.search(topk=3)   # uses default engine
+for r in results:
+    print(r["kl"].name)
+
+# Use HEAVEN_KB to fetch a built-in prompt
+from ahvn import HEAVEN_KB
+prompt = HEAVEN_KB.get_prompt("autocode")
+print(prompt.name)   # "autocode"
+```

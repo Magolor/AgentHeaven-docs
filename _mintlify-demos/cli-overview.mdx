@@ -1,0 +1,102 @@
+---
+title: "CLI overview"
+description: "The ahvn CLI manages AgentHeaven configurations and projects from your terminal."
+---
+
+The `ahvn` CLI provides a familiar interface inspired by `conda` and `git` for managing LLM configurations, project repos, and AI agent workflows.
+
+## Usage
+
+```bash
+ahvn [OPTIONS] COMMAND [ARGS]...
+```
+
+| Flag | Description |
+|---|---|
+| `-v`, `--version` | Show the AgentHeaven version and exit. |
+| `-h`, `--help` | Show help and exit. |
+
+<Tip>
+All commands and subcommands support prefix-based aliases via `AliasedGroup`. You can type a unique prefix of any command name instead of the full name — for example, `ahvn co` instead of `ahvn config`.
+</Tip>
+
+## Top-level commands
+
+<CardGroup cols={2}>
+  <Card title="ahvn setup" icon="wrench">
+    Initialize or reset the global AgentHeaven configuration. Run this once after installation, or with `--reset` to restore defaults.
+  </Card>
+  <Card title="ahvn clean" icon="trash">
+    Clear AgentHeaven cache and temporary directories to free disk space or resolve cache issues.
+  </Card>
+  <Card title="ahvn pj" icon="folder">
+    Join path strings using AgentHeaven's path utility, returning an absolute path.
+  </Card>
+  <Card title="ahvn repo" icon="database">
+    Repository management subcommands: initialize, list, inspect, rename, and remove registered repos.
+  </Card>
+  <Card title="ahvn config" icon="sliders">
+    Configuration management subcommands: show, set, unset, copy, edit, and open config files at any level.
+  </Card>
+  <Card title="ahvn chat" icon="message-circle">
+    Send a single-turn prompt to an LLM and print the response.
+  </Card>
+  <Card title="ahvn session" icon="messages-square">
+    Start an interactive multi-turn chat session with an LLM.
+  </Card>
+  <Card title="ahvn embed" icon="vector">
+    Embed text or file content and print the resulting vector to stdout.
+  </Card>
+  <Card title="ahvn babel" icon="languages">
+    Babel localization subcommands: init, compile, translate, and register translatable strings.
+  </Card>
+</CardGroup>
+
+## Command reference
+
+### `ahvn setup`
+
+Initialize AgentHeaven globally, similar to `conda init`. Creates the global config if it does not exist.
+
+```bash
+ahvn setup [--reset/-r]
+```
+
+| Flag | Description |
+|---|---|
+| `-r`, `--reset` | Reset the global configuration to default values. |
+
+### `ahvn clean`
+
+Remove all files in the configured `cache_path` and `tmp_path` directories.
+
+```bash
+ahvn clean [--dry-run/-n]
+```
+
+| Flag | Description |
+|---|---|
+| `-n`, `--dry-run` | Print what would be deleted without actually deleting anything. |
+
+### `ahvn pj`
+
+Join one or more path strings using `hpj()`, with proper handling of `~`, `&`, `>`, and forward slashes. Prints the resulting absolute path.
+
+```bash
+ahvn pj STRING [STRING ...]
+```
+
+```bash
+ahvn pj "~/projects" "myrepo"
+# /home/user/projects/myrepo
+```
+
+## Getting help
+
+Append `--help` or `-h` to any command or subcommand to view its options:
+
+```bash
+ahvn --help
+ahvn repo --help
+ahvn config set --help
+```

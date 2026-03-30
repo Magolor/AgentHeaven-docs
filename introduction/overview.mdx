@@ -1,0 +1,75 @@
+---
+title: "What is AgentHeaven?"
+description: "An overview of AgentHeaven and the problems it solves."
+---
+
+<Note>
+    *Create a heaven for your agents to live, grow, and thrive.*
+</Note>
+
+AgentHeaven is a composable Python framework that brings together LLM inference, tool orchestration, knowledge management, and agent construction into one place. Rather than being yet another agent framework, it focuses on preparing everything an agent needs **before** it acts — creating a context-rich, well-organized environment where agents can work effectively.
+
+<br/>
+
+## 1. The Problem
+
+Building AI agent applications today means stitching together many separate concerns:
+
+- **LLM access** — connecting to different providers, managing presets, handling sessions
+- **Tool orchestration** — defining, converting, and exposing tools across protocols (MCP, function calling, etc.)
+- **Knowledge management** — storing, indexing, and retrieving domain knowledge from various backends
+- **Prompt engineering** — defining, versioning, and localizing prompts as persistent runtime assets
+- **Agent construction** — combining all of the above into coherent, maintainable workflows
+
+Most frameworks address one or two of these. AgentHeaven addresses all of them in a unified, composable design.
+
+<br/>
+
+## 2. What AgentHeaven Provides
+
+| Layer | What it does | Key modules |
+|-------|-------------|-------------|
+| **LLMs** | Unified inference across providers with configurable presets | `ahvn.utils.llm` via [LiteLLM](https://www.litellm.ai/) |
+| **Prompts** | Function-based prompt specs with database persistence and built-in translation dictionaries | `ahvn.utils.prompt` via `PromptSpec`, `PromptManager`, and `TranslationDict` |
+| **Tools** | Convert between functions, MCP tools, JSON schemas, and code | `ahvn.tool` via [FastMCP](https://gofastmcp.com/) 3.x |
+| **Knowledge** | Unified Knowledge Format (UKF) with pluggable storage and retrieval | `ahvn.ukf`, `ahvn.klstore`, `ahvn.klengine`, `ahvn.klbase` |
+| **Cache** | Monitor and record function calls for data collection and learning | `ahvn.cache` |
+| **CLI** | Command-line interface for setup, configuration, and management | `ahvn.cli` (`ahvn` command) |
+
+<br/>
+
+## 3. Key Design Principles
+
+- **Composable, not monolithic** — each module works independently and can be mixed and matched
+- **Provider-agnostic** — swap LLM providers, databases, or vector stores without changing application code
+- **Knowledge-first** — treat domain knowledge as a first-class asset via the Unified Knowledge Format (UKF)
+- **Agent-friendly** — design APIs and data structures that work well for both humans and AI agents
+- **Configuration-driven** — versioned, scoped config resolved through runtime context keeps code stateless and portable
+
+<Tip>For the design principles in depth, see [Philosophy](/introduction/philosophy).</Tip>
+
+<br/>
+
+## 4. Who is AgentHeaven for?
+
+- **Developers** building AI-powered applications that need structured knowledge management
+- **Researchers** experimenting with agent architectures, tool use, and retrieval strategies
+- **Teams** that need a shared, configurable foundation for multiple agent projects
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Getting started:**
+    - [Installation](/quickstart/installation) — install AgentHeaven
+    - [Quick Setup](/quickstart/quick-setup) — configure and run a first example
+</Tip>
+
+<Tip>
+    **Architecture and design:**
+    - [Architecture](/introduction/architecture) — system architecture and component overview
+    - [Philosophy](/introduction/philosophy) — design principles and vision
+</Tip>
+
+<br/>

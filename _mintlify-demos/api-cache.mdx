@@ -1,0 +1,372 @@
+---
+title: "Cache"
+description: "Cache backends for memoizing LLM calls and other expensive function outputs."
+---
+
+```python
+from ahvn.cache import InMemCache, DiskCache, JsonCache, NoCache
+```
+
+AgentHeaven ships four ready-to-use cache backends that all implement `BaseCache`. The cache layer integrates directly with `LLM` and can be applied to any Python function via the `memoize` decorator.
+
+---
+
+## CacheEntry
+
+The universal object that stores a single cache record.
+
+```python
+from ahvn.cache import CacheEntry
+
+entry = CacheEntry.from_args(
+    func="my_func",
+    output="result",
+    query="What is 2+2?",
+)
+print(entry.key)    # md5 hash int
+print(entry.value)  # "result" (output, or expected if annotated)
+```
+
+<ResponseField name="func" type="str" required>
+  Name of the cached function (used as a salt in the key hash).
+</ResponseField>
+
+<ResponseField name="inputs" type="dict[str, Any]">
+  Keyword arguments that were passed to the function. Forms the hash input together with `func`.
+</ResponseField>
+
+<ResponseField name="output" type="Any">
+  The actual return value of the function. Uses `...` (Ellipsis) as sentinel when absent.
+</ResponseField>
+
+<ResponseField name="expected" type="Any">
+  An annotated "ground truth" value. Uses `...` as sentinel when absent. Accessed via `.value` (preferred over `.expected` if annotated).
+</ResponseField>
+
+<ResponseField name="metadata" type="dict[str, Any]">
+  Arbitrary metadata dict stored alongside the entry.
+</ResponseField>
+
+<ResponseField name="key" type="int">
+  Read-only. MD5 hash of `(func, inputs)` computed on construction.
+</ResponseField>
+
+<ResponseField name="value" type="Any">
+  Read-only. Returns `expected` if annotated, otherwise `output`.
+</ResponseField>
+
+<ResponseField name="annotated" type="bool">
+  Read-only. `True` if `expected` has been set.
+</ResponseField>
+
+### Class methods
+
+**`CacheEntry.from_args(func, output=..., expected=..., metadata=None, exclude=None, **inputs)`**
+
+Construct an entry from keyword arguments. `func` can be a callable or a string.
+
+**`CacheEntry.from_dict(data, exclude=None)`**
+
+Construct an entry from a dict with keys `func`, `inputs`, `output`, `expected`, `metadata`.
+
+### Instance methods
+
+**`entry.to_dict()`** → `dict` — Serialize to a plain dict (for storage).
+
+**`entry.clone(**updates)`** → `CacheEntry` — Copy with field overrides.
+
+**`entry.annotate(expected=..., metadata=None)`** → `CacheEntry` — Return a new entry with `expected` set. If `expected` is `...`, uses `output` as the annotation.
+
+---
+
+## BaseCache
+
+Abstract base class for all cache backends. Provides the `memoize` decorator, CRUD methods, and iteration.
+
+### memoize()
+
+Decorator (or decorator factory) that transparently caches a function's output keyed on its arguments.
+
+```python
+cache = InMemCache()
+
+# Bare decorator
+@cache.memoize
+def expensive(x: int) -> int:
+    return x * x
+
+expensive(4)  # computed
+expensive(4)  # returned from cache
+
+# With explicit name (used as function identifier in the key)
+@cache.memoize(name="square")
+def expensive_v2(x: int) -> int:
+    return x * x
+```
+
+The decorator automatically handles all four function types:
+
+| Function type | Behaviour |
+| --- | --- |
+| Sync, non-generator | Caches the return value. |
+| Sync generator | Caches the complete list of yielded items; replays on cache hit. |
+| Async non-generator | Caches the awaited return value. |
+| Async generator | Caches all yielded items; replays with `async for` on hit. |
+
+<ParamField path="func" type="Callable">
+  The function to wrap. Pass directly for bare decorator usage; omit (pass `None`) when using the factory form `@cache.memoize(name="...")`.
+</ParamField>
+
+<ParamField path="name" type="str">
+  Override the function identifier used in the cache key. Useful when the same underlying logic is registered under different names.
+</ParamField>
+
+### batch_memoize()
+
+Like `memoize`, but caches individual items in a list-in / list-out function. Only uncached items are passed to the underlying function; cached results are merged back in order.
+
+```python
+@cache.batch_memoize(name="embed")
+def embed_batch(batch: list[str], model: str) -> list[list[float]]:
+    return expensive_api_call(batch, model)
+
+# First call: all 3 items are computed
+vecs = embed_batch(["a", "b", "c"], model="text-embedding-3-small")
+
+# Second call: only "d" is sent to the API; "a" and "c" are served from cache
+vecs = embed_batch(["a", "d", "c"], model="text-embedding-3-small")
+```
+
+<Note>
+  `batch_memoize` does not support streaming (generator) functions.
+</Note>
+
+### get() / set() / unset() / remove()
+
+Manual cache CRUD methods.
+
+```python
+# Write
+cache.set(func="summarize", output="Paris is...", question="Capital of France?")
+
+# Read (returns Ellipsis if not found, not None, to avoid collisions)
+value = cache.get(func="summarize", question="Capital of France?")
+if value is not ...:
+    print(value)  # "Paris is..."
+
+# Delete by function + inputs
+cache.unset(func="summarize", question="Capital of France?")
+
+# Delete by entry object
+entry = cache.retrieve(func="summarize", question="Capital of France?")
+if entry is not ...:
+    cache.remove(entry)
+```
+
+<ParamField path="func" type="Callable | str" required>
+  The function or its name to look up.
+</ParamField>
+
+<ParamField path="output" type="Any">
+  (`set` only) The value to store.
+</ParamField>
+
+<ParamField path="expected" type="Any">
+  (`set` only) Optional annotated expected value.
+</ParamField>
+
+<ParamField path="metadata" type="dict[str, Any]">
+  (`set` only) Optional metadata.
+</ParamField>
+
+<ParamField path="kwargs" type="Any">
+  The function's input arguments, used to compute the cache key.
+</ParamField>
+
+**`get()` returns** `Any` — the cached value, or `...` (Ellipsis) if not found.
+
+**`retrieve()` returns** `CacheEntry | ...` — the full entry object, or `...` if not found.
+
+### exists()
+
+Check whether an entry is present without reading it.
+
+```python
+if cache.exists(func="summarize", question="Capital of France?"):
+    print("cached")
+```
+
+### annotate()
+
+Set or update the `expected` field on an existing cache entry, optionally with metadata. If the entry does not exist, you must supply an `expected` value explicitly.
+
+```python
+cache.annotate(
+    func="summarize",
+    expected="Paris",
+    question="Capital of France?",
+)
+```
+
+### add() / pop() / popall()
+
+```python
+cache.add(entry)      # insert a CacheEntry directly
+entry = cache.pop()   # pop an arbitrary entry (LIFO-unordered)
+all_entries = cache.popall()  # drain the cache
+```
+
+### Exclusions
+
+Keys excluded from cache key construction (e.g., timestamps, verbose flags).
+
+```python
+cache = DiskCache(path="/tmp/cache", exclude=["verbose", "stream"])
+cache.add_exclude(["http_proxy"])  # add at runtime
+cache.set_exclude(["temperature"])  # replace exclusion set
+```
+
+### Other methods
+
+| Method | Description |
+| --- | --- |
+| `clear()` | Remove all entries. |
+| `close()` | Release resources (backend-specific). |
+| `flush()` | Flush pending writes (backend-specific). |
+| `len(cache)` | Number of entries. |
+| `entry in cache` | Membership test by key or `CacheEntry`. |
+| `iter(cache)` | Iterate over all `CacheEntry` objects. |
+
+---
+
+## InMemCache
+
+Stores all entries in a Python dict. Fast and simple, but data is lost when the process exits.
+
+```python
+from ahvn.cache import InMemCache
+
+cache = InMemCache()
+
+@cache.memoize
+def summarize(text: str) -> str:
+    return llm.oracle(text)
+```
+
+<ParamField path="exclude" type="list[str]">
+  Keys to exclude from cache key construction.
+</ParamField>
+
+---
+
+## DiskCache
+
+Persistent cache backed by the [`diskcache`](https://grantjenks.com/docs/diskcache/) library. Survives process restarts. Used as the default cache for `LLM`.
+
+```python
+from ahvn.cache import DiskCache
+
+cache = DiskCache(path="/tmp/my_project_cache")
+
+@cache.memoize(name="llm_calls")
+def call_llm(prompt: str) -> str:
+    return llm.oracle(prompt)
+```
+
+<ParamField path="path" type="str" required>
+  Directory where cache files are stored. Created automatically if it does not exist.
+</ParamField>
+
+<ParamField path="size_limit" type="int" default="34359738368">
+  Maximum cache size in bytes. Defaults to 32 GB.
+</ParamField>
+
+<ParamField path="exclude" type="list[str]">
+  Keys to exclude from cache key construction.
+</ParamField>
+
+---
+
+## JsonCache
+
+Persistent cache that stores each entry as an individual JSON file. Human-readable; useful for inspecting or editing cached results by hand.
+
+```python
+from ahvn.cache import JsonCache
+
+cache = JsonCache(path="/tmp/json_cache")
+
+@cache.memoize
+def analyze(doc: str) -> dict:
+    return llm.oracle(doc, include=["structured"])
+```
+
+<ParamField path="path" type="str" required>
+  Directory where `.json` files are stored. One file per cache entry, named by key hash.
+</ParamField>
+
+<ParamField path="exclude" type="list[str]">
+  Keys to exclude from cache key construction.
+</ParamField>
+
+---
+
+## NoCache
+
+No-op cache that always misses and never stores anything. Use it to disable caching without changing call sites.
+
+```python
+from ahvn.cache import NoCache
+
+# Disable caching for this LLM instance
+llm = LLM(model="gpt-4o", cache=False)  # uses NoCache internally
+
+# Or pass directly
+cache = NoCache()
+```
+
+---
+
+## CallbackCache
+
+A cache that does not store data but calls registered callbacks on every `set` operation. Useful for observation and logging.
+
+```python
+from ahvn.cache import CallbackCache
+
+def on_set(key: int, value: dict):
+    print(f"Cache set: key={key}, func={value.get('func')}")
+
+cache = CallbackCache(callbacks=[on_set])
+```
+
+<ParamField path="callbacks" type="list[Callable]">
+  Functions called on every `_set` event with signature `callback(key: int, value: dict)`.
+</ParamField>
+
+<ParamField path="feeds" type="list[Callable]">
+  Functions called on `_get`. Each feed has signature `feed(func, **kwargs)` and should return the cached value or `...` if not found. The first non-Ellipsis result is used.
+</ParamField>
+
+---
+
+## DatabaseCache and MongoCache
+
+Opt-in backends for production deployments. Installed via the `exp` extras:
+
+```bash
+pip install "agent-heaven[exp]"
+```
+
+```python
+from ahvn.cache import DatabaseCache  # SQL-backed (SQLAlchemy)
+from ahvn.cache import MongoCache     # MongoDB-backed
+
+# DatabaseCache: provider='sqlite', 'pg', 'duckdb', etc.
+db_cache = DatabaseCache(provider="sqlite", database="/tmp/cache.db")
+
+# MongoCache: database and collection name
+mongo_cache = MongoCache(database="agentcache", collection="cache")
+```
+
+These backends implement the full `BaseCache` interface. They are loaded lazily — importing `ahvn.cache` does not import their dependencies unless you access these classes.

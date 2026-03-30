@@ -1,0 +1,401 @@
+---
+title: "Agentic Extensions"
+description: "autocode, autofunc, and autotask for LLM-powered function generation"
+---
+
+## Overview
+
+Agentic extensions provide three levels of LLM-driven function automation. All three use `PromptUKFT` templates and the `ExampleSource` abstraction for few-shot examples.
+
+```python
+# Short import
+from ahvn import autocode, autofunc, autotask
+
+# Full import
+from ahvn.utils.exts import autocode, autofunc, autotask
+```
+
+---
+
+## ExampleSource
+
+```python
+ExampleType = Union[Dict[str, Any], CacheEntry, ExperienceUKFT]
+ExampleSource = Union[
+    Iterable[ExampleType],   # list of dicts, CacheEntry, or ExperienceUKFT
+    BaseKLStore,             # iterate all items
+    BaseKLEngine,            # search() then iterate
+    KLBase,                  # search() then iterate
+]
+```
+
+When `examples` is a `KLStore`, `KLEngine`, or `KLBase`, the `search_args` parameter controls how items are retrieved (passed directly to `.search()`).
+
+Example dicts must follow the `CacheEntry` format: `{"inputs": {...}, "output": ..., "expected": ...}`.
+
+---
+
+## autocode
+
+Generates a **static Python implementation** of a function using an LLM. The LLM runs once at generation time — subsequent calls to the returned function execute the generated code directly (no LLM involved).
+
+<Tip>
+  Use a high-quality LLM for `autocode`. Enable caching (`llm_args={"cache": ...}` or wrap with `@cache.memoize()`) to avoid regenerating code on every process restart.
+</Tip>
+
+### Usage
+
+<Tabs>
+  <Tab title="As a decorator">
+
+```python
+from ahvn import autocode
+
+@autocode(
+    examples=[{"inputs": {"x": 5}, "output": 25}],
+    llm_args={"preset": "chat"},
+)
+def square(x: int) -> int:
+    """Return the square of x."""
+    pass
+
+print(square(x=4))  # -> 16
+```
+
+  </Tab>
+  <Tab title="Direct call">
+
+```python
+from ahvn import autocode
+
+def square(x: int) -> int:
+    """Return the square of x."""
+    pass
+
+square_impl = autocode(
+    func_spec=square,
+    examples=[{"inputs": {"x": 5}, "output": 25}],
+    llm_args={"preset": "chat"},
+)
+print(square_impl(x=4))  # -> 16
+```
+
+  </Tab>
+  <Tab title="README example">
+
+```python
+from ahvn.utils.exts.autocode import autocode
+from ahvn.cache import InMemCache
+
+cache = InMemCache()
+
+@cache.memoize()
+@autocode(
+    descriptions=[
+        "Test description, ignore it.",
+        "Hint: You can deduce the magic number from examples or unit tests.",
+    ],
+    examples=cache,           # use the cache as an ExampleSource
+    llm_args={"preset": "chat"},
+)
+def add_numbers(a: int, b: int) -> int:
+    '''
+    Return a + b + (a constant magic number).
+
+    Args:
+        a (int): The first number.
+        b (int): The second number.
+    '''
+    pass
+
+cache.set(add_numbers, a=2, b=3, expected=47)
+print(add_numbers(a=5, b=10))   # 57  (5 + 10 + 42)
+```
+
+  </Tab>
+</Tabs>
+
+### Parameters
+
+<ParamField path="func_spec" type="Callable | ToolSpec">
+  The function whose signature and docstring define what to implement. When used as a decorator, this is the decorated function.
+</ParamField>
+
+<ParamField path="prompt" type="PromptUKFT">
+  Override the default code-generation prompt template. When provided, `func_spec`, `descriptions`, `system`, `examples`, and `instructions` are ignored (applied separately via `bind()`).
+</ParamField>
+
+<ParamField path="system" type="str">
+  System prompt for the LLM. Defaults to a built-in Python expert system prompt.
+</ParamField>
+
+<ParamField path="descriptions" type="str | list[str]">
+  Additional description(s) of the task appended to the prompt.
+</ParamField>
+
+<ParamField path="examples" type="ExampleSource">
+  Few-shot examples demonstrating the expected input–output behavior. Used to generate `assert` statements in the prompt. See `ExampleSource` above.
+</ParamField>
+
+<ParamField path="instructions" type="str | list[str]">
+  Additional instructions for the LLM (e.g. style requirements).
+</ParamField>
+
+<ParamField path="env" type="dict">
+  Execution environment passed to `exec()` when running the generated code. Useful for injecting imports or globals.
+</ParamField>
+
+<ParamField path="composer" type="str" default="autocode">
+  The prompt composer name to use for rendering.
+</ParamField>
+
+<ParamField path="lang" type="str">
+  Language code for prompt localization.
+</ParamField>
+
+<ParamField path="llm_args" type="dict">
+  Arguments forwarded to the `LLM` constructor.
+</ParamField>
+
+<ParamField path="search_args" type="dict">
+  Arguments passed to `examples.search()` when `examples` is a `KLStore`, `KLEngine`, or `KLBase`.
+</ParamField>
+
+<ParamField path="capture" type="dict">
+  If provided, the constructed `PromptUKFT` is written to `capture['prompt']` for inspection/debugging.
+</ParamField>
+
+**Returns:** A static `Callable` with the same signature as `func_spec`. Raises `AutoFuncError` if the LLM fails to generate valid code.
+
+---
+
+## autofunc
+
+Wraps a function call in an LLM inference step. Unlike `autocode`, the LLM is called on **every invocation** — no code is generated or cached.
+
+The LLM acts as a "Python expert" that produces the output for given inputs based on the function specification and examples.
+
+### Usage
+
+```python
+from ahvn import autofunc
+
+# Usage 1: direct call
+def square(x: int) -> int:
+    """Return the square of x."""
+    pass
+
+f = autofunc(square, llm_args={"preset": "tiny"})
+print(f(x=5))   # -> 25
+
+# Usage 2: decorator with arguments
+@autofunc(
+    examples=[{"inputs": {"x": 5}, "output": 25}],
+    llm_args={"preset": "tiny"},
+)
+def square(x: int) -> int:
+    """Return the square of x."""
+    pass
+
+print(square(x=4))   # -> 16
+
+# Usage 3: bare decorator (no arguments)
+@autofunc
+def add(x: int, y: int) -> int:
+    """Add two numbers."""
+    pass
+
+print(add(x=3, y=4))   # -> 7
+```
+
+### Parameters
+
+<ParamField path="func_spec" type="Callable | ToolSpec">
+  The function specification. When used as a bare decorator, this is the decorated function itself.
+</ParamField>
+
+<ParamField path="prompt" type="PromptUKFT">
+  Override the default prompt template.
+</ParamField>
+
+<ParamField path="system" type="str">
+  System prompt override.
+</ParamField>
+
+<ParamField path="descriptions" type="str | list[str]">
+  Additional description(s) appended to the prompt.
+</ParamField>
+
+<ParamField path="examples" type="ExampleSource">
+  Few-shot examples shown in the prompt.
+</ParamField>
+
+<ParamField path="instructions" type="str | list[str]">
+  Additional instructions for the LLM.
+</ParamField>
+
+<ParamField path="composer" type="str" default="autofunc">
+  Prompt composer name.
+</ParamField>
+
+<ParamField path="lang" type="str">
+  Language code for localization.
+</ParamField>
+
+<ParamField path="llm_args" type="dict">
+  LLM constructor arguments.
+</ParamField>
+
+<ParamField path="search_args" type="dict">
+  Arguments for searching `examples` when it is a KL source.
+</ParamField>
+
+<ParamField path="capture" type="dict">
+  Writes the constructed prompt to `capture['prompt']`.
+</ParamField>
+
+**Returns:** A `Callable` that accepts keyword arguments matching `func_spec` plus an optional `hints` argument (`str | list[str]`). Raises `AutoFuncError` on failure.
+
+<Note>
+  The LLM output is parsed from `<output></output>` tags and evaluated with `eval()`. If `eval()` fails, the raw string is returned.
+</Note>
+
+---
+
+## autotask
+
+Orchestrates an arbitrary task with an LLM using only a natural language description and examples — no explicit function signature required. Also calls the LLM on every invocation.
+
+### Usage
+
+```python
+from ahvn import autotask
+
+# Example: sentiment scoring
+f = autotask(
+    descriptions="Sentiment analysis. Rate the sentiment of the text from 1 to 10.",
+    examples=[
+        {"inputs": {"text": "An absolute masterpiece!"}, "expected": 10},
+        {"inputs": {"text": "What a letdown."}, "expected": 3},
+        {"inputs": {"text": "It was fine."}, "expected": 6},
+    ],
+    output_schema={"mode": "repr"},
+    llm_args={"preset": "tiny"},
+)
+
+print(f(text="The plot was engaging but the ending was predictable."))
+# -> 7  (or similar, depending on LLM)
+```
+
+### Parameters
+
+<ParamField path="prompt" type="PromptUKFT">
+  Override the default prompt template.
+</ParamField>
+
+<ParamField path="descriptions" type="str | list[str]">
+  Task description(s) that explain what the function should do.
+</ParamField>
+
+<ParamField path="system" type="str">
+  System prompt override.
+</ParamField>
+
+<ParamField path="examples" type="ExampleSource">
+  Few-shot examples demonstrating the desired input–output behavior.
+</ParamField>
+
+<ParamField path="instructions" type="str | list[str]">
+  Additional instructions for the LLM.
+</ParamField>
+
+<ParamField path="output_schema" type="dict">
+  Controls how the LLM output is parsed.
+  <Expandable title="output_schema keys">
+    <ParamField path="mode" type="'base' | 'repr' | 'json' | 'code'" default="base">
+      - `base` — returns the raw text inside `<output></output>` tags
+      - `repr` — runs `eval()` on the output (for Python literals like `7`, `True`, `[1,2,3]`)
+      - `json` — parses the output as a JSON object from a ` ```json ` code block
+      - `code` — extracts a code block from the output
+    </ParamField>
+    <ParamField path="args" type="dict">
+      Mode-specific arguments (e.g. `{"language": "python"}` for `code` mode).
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField path="composer" type="str" default="autotask">
+  Prompt composer name.
+</ParamField>
+
+<ParamField path="lang" type="str">
+  Language code for localization.
+</ParamField>
+
+<ParamField path="llm_args" type="dict">
+  LLM constructor arguments.
+</ParamField>
+
+<ParamField path="search_args" type="dict">
+  Arguments for searching `examples` when it is a KL source.
+</ParamField>
+
+<ParamField path="capture" type="dict">
+  Writes the constructed prompt to `capture['prompt']`.
+</ParamField>
+
+**Returns:** A `Callable` that accepts keyword arguments as inputs plus an optional `hints` argument. Returns the parsed output according to `output_schema.mode`.
+
+---
+
+## Comparison
+
+| | `autocode` | `autofunc` | `autotask` |
+|---|---|---|---|
+| LLM called | Once (at generation) | Every call | Every call |
+| Requires function spec | Yes | Yes | No |
+| Output | Static Python code | Python value | Text / JSON / code / repr |
+| Best for | Deterministic functions with clear examples | Simple LLM-in-the-loop functions | Flexible tasks without a formal spec |
+| Caching | Strongly recommended | Optional | Optional |
+
+---
+
+## autoi18n
+
+LLM-powered i18n translation utility. Used by `ahvn babel translate` to translate `.po` files.
+
+```python
+from ahvn.utils.exts.autoi18n import autoi18n
+
+autoi18n(
+    path=".",                  # project directory with _locales.jinja
+    src_lang="en",             # source language
+    tgt_lang="zh",             # target language
+    overwrite=False,           # overwrite existing translations
+    batch_size=20,             # entries per LLM batch
+    hints=["Use formal tone"], # translation hints
+    llm_args={"preset": "translator"},
+)
+```
+
+`autoi18n` is primarily invoked via the CLI with `ahvn babel translate`. See the [Babel CLI reference](/cli/chat) for command details.
+
+---
+
+## normalize_examples
+
+Internal utility that normalizes any `ExampleSource` into a generator of `CacheEntry`:
+
+```python
+from ahvn.utils.exts import normalize_examples
+
+# From a list of dicts
+list(normalize_examples([{"inputs": {"x": 1}, "output": 2}]))
+# -> [CacheEntry(func=..., inputs={"x": 1}, output=2)]
+
+# From a KLStore (all items)
+list(normalize_examples(store))
+
+# From a KLEngine or KLBase (search)
+list(normalize_examples(engine, search_args={"topk": 5, "type": "experience"}))
+```

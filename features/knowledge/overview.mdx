@@ -1,0 +1,26 @@
+---
+title: "Knowledge overview"
+description: "The knowledge-first design: why and how AgentHeaven treats knowledge as a first-class asset."
+---
+
+{/* TODO: Write overview of the knowledge system */}
+
+{/*
+Planned sections:
+1. Why knowledge-first — most frameworks treat knowledge as an afterthought
+   - AgentHeaven treats every piece of information as structured, searchable, persistable knowledge
+   - "Search is intelligence" — orchestration, context engineering, RAG all reduce to search
+2. The knowledge stack
+   - UKF (data model) → KLStore (storage) → KLEngine (retrieval) → KLBase (orchestration)
+   - Adapter layer: UKF ↔ storage backend mapping (ORM, VDB, MongoDB)
+3. Knowledge vs memory
+   - Memory is agent's capability (any environment)
+   - Knowledge is data's capability (any agent can use)
+   - Knowledge base is stable source of truth for both humans and agents
+4. How knowledge flows
+   - Inputs → extraction → UKF instances → KLStore → KLEngine → application layer
+   - Cache entries → ExperienceUKFT → long-term knowledge
+5. Diagram: reference architecture/overview arch_sys_en.png
+*/}
+
+AgentHeaven centers around a knowledge-first design. Every piece of information — documents, schemas, functions, tools, prompts, results — flows through a unified protocol, enabling backend-agnostic storage and intelligent retrieval.

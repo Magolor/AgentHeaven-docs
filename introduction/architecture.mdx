@@ -1,0 +1,112 @@
+---
+title: "Architecture"
+description: "A high-level view of AgentHeaven's system architecture."
+---
+
+<Note>
+    *Just assemble.*
+</Note>
+
+AgentHeaven is organized into layered modules that communicate through well-defined interfaces. This page gives a high-level overview of how the components fit together.
+
+<br/>
+
+## 1. System Architecture
+
+![AgentHeaven system architecture](/images/arch_sys_en.png)
+
+The diagram above shows the data flow from left to right:
+
+1. **Inputs** — domain knowledge (documents, schemas, rules) and functions (existing systems, human workflows) enter the system
+2. **Information extraction and cache** — raw inputs are parsed and monitored; function calls are recorded by the Cache component
+3. **UKF layer** — all information is normalized into Unified Knowledge Format (UKF) instances (Knowledge, Document, Experience, etc.)
+4. **KLStore** — UKF instances are persisted to pluggable storage backends (in-memory, file system, databases, remote, cascading)
+5. **KLEngine** — retrieval and utilization engines query the stored knowledge (string matching, faceted search, vector search, etc.)
+6. **Application layer** — agents, workflows, imitators, and tools consume knowledge through the KLBase orchestration layer
+7. **Interface** — CLI and GUI provide user-facing access to the system
+
+The bottom row shows the foundational services that all layers depend on: utilities, LLMs, databases, data structures and search algorithms, and tool protocols.
+
+<br/>
+
+## 2. Core Components
+
+### 2.1. LLMs
+
+AgentHeaven uses [LiteLLM](https://www.litellm.ai/) to provide a unified interface for various LLM providers. LLMs are configured as **presets** (e.g., `sys`, `chat`, `embedder`, `coder`) in the config system, making them an integral part of the framework rather than external services.
+
+<br/>
+
+### 2.2. Prompts
+
+Prompts use a function-based model centered on `PromptSpec`: a prompt is a callable, versioned unit that can be persisted in a database, retrieved through a prompt manager, and localized through small translation dictionaries stored in the same runtime ecosystem. This keeps prompt logic close to Python while still treating prompts as persistent knowledge assets.
+
+Prompt execution, prompt persistence, and prompt translation are first-class runtime services. Template-style authoring is still possible where useful, but function-based prompt specs are the primary interface.
+
+<br/>
+
+### 2.3. Cache
+
+The Cache component monitors and records function calls and their results. It can be used for logging queries, LLM inputs/outputs, agent trajectories, or collecting data from a running system. Cached entries can be converted to UKF instances (e.g., ExperienceUKFT) for long-term storage.
+
+<br/>
+
+### 2.4. Unified Knowledge Format (UKF)
+
+The UKF protocol separates the extraction, storage, management, retrieval, and utilization of knowledge. As a semantic layer, BaseUKF unifies all components required in agentic workflows as structured data. Users define domain-specific UKF variants to represent their knowledge types.
+
+<Tip>For details on defining and working with UKF, see [Knowledge](/features/knowledge/overview).</Tip>
+
+<br/>
+
+### 2.5. KLStore, KLEngine, and KLBase
+
+- **KLStore** — the storage layer for long-term management of UKF instances. Supports in-memory, file system, database, remote, cascading, and routing backends.
+- **KLEngine** — the utilization layer. Retrieval engines can use string matching, faceted search, vector search, or graph walks. Other engines support fine-tuning and knowledge distillation.
+- **KLBase** — the core orchestrator that integrates one or more KLStore and KLEngine instances, providing a unified interface for agentic workflows built on top.
+
+<Tip>For storage and retrieval configuration, see [Storage](/features/knowledge/storage).</Tip>
+
+<br/>
+
+### 2.6. ToolSpec
+
+ToolSpec is a structured representation of tools (functions, APIs, etc.). Built around [FastMCP](https://gofastmcp.com/) 3.x, it supports conversion from and to: Python functions, code strings, MCP tools, FastMCP tools, function-call JSON schemas, and UKF instances.
+
+<Tip>For tool integration, see [Tools](/features/tools).</Tip>
+
+<br/>
+
+## 3. Integration Points
+
+AgentHeaven connects to external systems through well-defined integration layers:
+
+| Integration | Provider | Purpose |
+|-------------|----------|---------|
+| LLM inference | [LiteLLM](https://www.litellm.ai/) | Unified access to OpenAI, Anthropic, Google, Ollama, and more |
+| Databases | [SQLAlchemy](https://www.sqlalchemy.org/) | Relational database storage for UKF data |
+| Vector databases | [LlamaIndex](https://www.llamaindex.ai/) | Semantic search and vector storage |
+| Tool protocols | [FastMCP](https://gofastmcp.com/) 3.x | Standardized tool definition and communication |
+| Prompt runtime | `ahvn.utils.prompt` | Function-based prompt specs, prompt persistence, and translation lookup |
+
+<Tip>For a complete list of supported providers and backends, see [Ecosystem](/ecosystem/llm-providers).</Tip>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Design and principles:**
+    - [Philosophy](/introduction/philosophy) — design principles and vision
+    - [What is AgentHeaven?](/introduction/overview) — high-level overview
+</Tip>
+
+<Tip>
+    **Deep dives:**
+    - [Configuration](/features/configuration) — configuration system
+    - [LLMs](/features/llm) — LLM setup and presets
+    - [Tools](/features/tools) — ToolSpec and MCP integration
+    - [Knowledge](/features/knowledge/overview) — UKF and knowledge management
+</Tip>
+
+<br/>

@@ -1,0 +1,378 @@
+---
+title: "KLEngine"
+description: "Search and indexing engines for BaseUKF knowledge items"
+---
+
+## Overview
+
+`KLEngine` implementations index `BaseUKF` items and expose search methods. Engines are attached to a `KLStore` (or can hold their own copy of items) and return ranked result lists. Each result is a `dict` with at least `id` (int) and `kl` (BaseUKF).
+
+```python
+from ahvn.klengine import (
+    BaseKLEngine,
+    DAACKLEngine,
+    FacetKLEngine,
+    VectorKLEngine,
+    MongoKLEngine,
+    ScanKLEngine,
+)
+```
+
+---
+
+## BaseKLEngine
+
+Abstract base class for all KLEngine implementations. Also inherits from `ToolRegistry`.
+
+### Constructor
+
+<ParamField path="storage" type="BaseKLStore">
+  Optional attached `KLStore`. When set, the engine falls back to it for KL retrieval after search. Operations on the engine never mutate the store.
+</ParamField>
+
+<ParamField path="inplace" type="bool" default="False">
+  When `True`, the engine does not hold its own copy of items — it operates directly on the attached store. Must be a `DatabaseKLStore` when `inplace=True`.
+</ParamField>
+
+<ParamField path="name" type="str" default="default">
+  Name of this engine instance.
+</ParamField>
+
+<ParamField path="condition" type="Callable[[BaseUKF], bool]">
+  Optional predicate. Items that return `False` are not indexed.
+</ParamField>
+
+### Search
+
+```python
+results = engine.search(
+    *args,
+    include=None,   # list of keys to include: 'id', 'kl', engine-specific keys
+    mode=None,      # named search mode (None = default _search method)
+    **kwargs,       # engine-specific search parameters
+)
+```
+
+<ResponseField name="results" type="list[dict]">
+  Each result dict always contains:
+  <Expandable title="result dict fields">
+    <ResponseField name="id" type="int">
+      The `BaseUKF.id` of the matched item.
+    </ResponseField>
+    <ResponseField name="kl" type="BaseUKF">
+      The full knowledge item. If not returned by the engine directly, it is fetched from the attached storage.
+    </ResponseField>
+    <ResponseField name="metadata['search']" type="dict">
+      Injected into `kl.metadata` after search. Contains `engine` (name), `mode`, `args`, `kwargs`, and `returns` (engine-specific score/match fields).
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+Use `engine.list_search()` to see all available search modes.
+
+### Write operations
+
+```python
+engine.upsert(kl)             # index or update
+engine.insert(kl)             # index only if not present
+engine.batch_upsert(kls)      # batch upsert
+engine.remove(key)            # remove by id or BaseUKF
+engine.clear()                # clear all indexed items
+engine.sync()                 # rebuild index from attached storage
+engine.flush()                # flush pending state
+engine.close()                # close connections
+```
+
+---
+
+## Engine Implementations
+
+<Tabs>
+  <Tab title="ScanKLEngine">
+
+### ScanKLEngine
+
+Brute-force linear scan using `BaseUKF.eval_filter()`. Zero indexing overhead; always inplace.
+
+```python
+from ahvn.klengine import ScanKLEngine
+
+engine = ScanKLEngine(
+    storage=store,
+    name="my_scan",  # defaults to "{storage.name}_scan_idx"
+)
+
+# Search with filter facets
+results = engine.search(
+    topk=10,
+    offset=0,
+    type="knowledge",            # any BaseUKF field
+    priority=KLOp.GT(5),
+)
+```
+
+<ParamField path="storage" type="BaseKLStore" required>
+  Any `BaseKLStore` instance. `ScanKLEngine` iterates it directly.
+</ParamField>
+
+<ParamField path="name" type="str">
+  Defaults to `"{storage.name}_scan_idx"`.
+</ParamField>
+
+**Search parameters:**
+
+<ParamField path="topk" type="int">
+  Maximum number of results. `None` returns all matches.
+</ParamField>
+
+<ParamField path="offset" type="int">
+  Number of results to skip.
+</ParamField>
+
+<ParamField path="kwargs">
+  Field filter conditions using `KLOp` expressions or equality values.
+</ParamField>
+
+**When to use:** Small datasets (< ~10k items), testing, or as a fallback engine.
+
+  </Tab>
+  <Tab title="FacetKLEngine">
+
+### FacetKLEngine
+
+SQL faceted search over a `DatabaseKLStore`. Supports `LIMIT`, `OFFSET`, and `ORDER BY`. When `inplace=True` (default), it queries the store's database table directly.
+
+```python
+from ahvn.klengine import FacetKLEngine
+from ahvn.klstore import DatabaseKLStore
+
+db_store = DatabaseKLStore(database="my_db")
+engine = FacetKLEngine(
+    storage=db_store,
+    inplace=True,               # query the store's DB directly
+    facets={"collection": "python"},  # global filter applied to all searches
+    name="facet_idx",
+)
+
+results = engine.search(
+    topk=20,
+    offset=0,
+    orderby=["-priority", "name"],  # prefix '-' for descending
+    type="knowledge",
+    collection="python",
+)
+```
+
+<ParamField path="storage" type="DatabaseKLStore" required>
+  Must be a `DatabaseKLStore` when `inplace=True`.
+</ParamField>
+
+<ParamField path="inplace" type="bool" default="True">
+  When `True`, queries the storage database directly. When `False`, maintains a separate copy of the data.
+</ParamField>
+
+<ParamField path="facets" type="dict">
+  Global filter conditions applied to every search.
+</ParamField>
+
+<ParamField path="include" type="list[str]">
+  UKF fields to include when `inplace=False`.
+</ParamField>
+
+<ParamField path="exclude" type="list[str]">
+  UKF fields to exclude when `inplace=False`.
+</ParamField>
+
+**Search parameters:**
+
+<ParamField path="topk" type="int">
+  SQL `LIMIT`.
+</ParamField>
+
+<ParamField path="offset" type="int">
+  SQL `OFFSET`.
+</ParamField>
+
+<ParamField path="orderby" type="list[str]">
+  Fields to order by. Prefix with `-` for descending order.
+</ParamField>
+
+<ParamField path="kwargs">
+  Any `BaseUKF` field filters compiled to SQL `WHERE` clauses.
+</ParamField>
+
+**When to use:** Large datasets with SQL storage requiring structured filtering, sorting, and pagination.
+
+  </Tab>
+  <Tab title="DAACKLEngine">
+
+### DAACKLEngine
+
+Double-Array Aho-Corasick automaton for fast multi-pattern string matching. Searches for UKF items by matching their `synonyms` (or a custom `encoder` output) against a text query. Requires `pyahocorasick`.
+
+```python
+from ahvn.klengine import DAACKLEngine
+
+engine = DAACKLEngine(
+    storage=store,
+    path="/path/to/index",        # local directory for persisted automaton
+    encoder=lambda kl: list(kl.synonyms),  # default encoder
+    min_length=2,
+    normalizer=None,              # or True for built-in text normalization
+    name="daac_idx",
+)
+
+# Search
+results = engine.search(
+    query="asyncio coroutine",
+    conflict="overlap",           # 'overlap' | 'longest' | 'longest_distinct'
+    whole_word=False,
+    include=["id", "kl", "strs", "matches"],
+)
+```
+
+<ParamField path="storage" type="BaseKLStore" required>
+  The store from which full UKF items are retrieved after matching.
+</ParamField>
+
+<ParamField path="path" type="str" required>
+  Local directory path where the automaton index files are persisted (`synonyms.json`, `ac.pkl`, `metadata.json`).
+</ParamField>
+
+<ParamField path="encoder" type="Callable[[BaseUKF], list[str]]">
+  Extracts searchable strings from a UKF item. Defaults to `[kl.name] + list(kl.synonyms)`.
+</ParamField>
+
+<ParamField path="min_length" type="int" default="2">
+  Minimum string length to add to the automaton.
+</ParamField>
+
+<ParamField path="inverse" type="bool" default="True">
+  If `True`, builds the automaton on reversed strings for suffix-match efficiency.
+</ParamField>
+
+<ParamField path="normalizer" type="Callable | bool">
+  Text normalization function. `True` uses the built-in normalizer (tokenization, lemmatization, lowercasing). `None`/`False` disables normalization.
+</ParamField>
+
+**Search extra result fields:**
+
+| Key | Type | Description |
+|---|---|---|
+| `strs` | `list[str]` | Matched substrings from the query |
+| `matches` | `list[tuple[int,int]]` | `(start, end)` positions in the normalized query |
+| `query` | `str` | The normalized query string |
+
+**When to use:** Entity recognition in text — finding which knowledge items are mentioned in a user query.
+
+  </Tab>
+  <Tab title="VectorKLEngine">
+
+### VectorKLEngine
+
+Vector similarity search. Encodes items with a `k_encoder` (embedding function) and retrieves the nearest neighbours.
+
+```python
+from ahvn.klengine import VectorKLEngine
+
+engine = VectorKLEngine(
+    storage=store,
+    database="my_vdb",
+    k_encoder=my_embedding_function,  # Callable[[BaseUKF], list[float]]
+    name="vector_idx",
+)
+
+results = engine.search(
+    query="asyncio coroutine",  # or a query vector
+    topk=5,
+)
+```
+
+**When to use:** Semantic similarity search where keyword matching is insufficient.
+
+  </Tab>
+  <Tab title="MongoKLEngine">
+
+### MongoKLEngine
+
+MongoDB-based search with `orderby` support.
+
+```python
+from ahvn.klengine import MongoKLEngine
+
+engine = MongoKLEngine(
+    storage=mongo_store,
+    name="mongo_idx",
+)
+
+results = engine.search(
+    topk=10,
+    orderby=["-priority"],
+    collection="python",
+)
+```
+
+**When to use:** Teams already using MongoDB who want faceted search without SQL.
+
+  </Tab>
+</Tabs>
+
+---
+
+## Search Result Format
+
+All engines return `list[dict]`. The standard keys are:
+
+```python
+result = {
+    "id": 123456789,           # BaseUKF.id (int)
+    "kl": kl_instance,         # BaseUKF (populated from storage if needed)
+    # engine-specific keys...
+}
+
+# After search(), kl.metadata["search"] is also populated:
+result["kl"].metadata["search"] = {
+    "engine": "my_engine",
+    "mode": None,
+    "args": (),
+    "kwargs": {"topk": 5},
+    "returns": {"score": 0.92},  # engine-specific metadata
+}
+```
+
+---
+
+## Engine Selection Guide
+
+| Engine | Index type | Best for |
+|---|---|---|
+| `ScanKLEngine` | None (linear scan) | Small datasets, testing, any store |
+| `FacetKLEngine` | SQL B-tree | Large SQL datasets, faceted filters, sorting |
+| `DAACKLEngine` | Aho-Corasick trie | Entity matching in free text |
+| `VectorKLEngine` | Approximate nearest neighbour | Semantic similarity search |
+| `MongoKLEngine` | MongoDB index | MongoDB-backed faceted search |
+
+---
+
+## Example
+
+```python
+from ahvn.klstore import CacheKLStore
+from ahvn.klengine import ScanKLEngine
+from ahvn.cache import InMemCache
+from ahvn.ukf import KnowledgeUKFT, ptags
+
+store = CacheKLStore(cache=InMemCache(), name="demo")
+engine = ScanKLEngine(storage=store)
+
+# Populate the store
+for i in range(5):
+    kl = KnowledgeUKFT(name=f"item_{i}", content=f"Content {i}", priority=i)
+    store.upsert(kl)
+
+# Search with filter
+results = engine.search(priority=3)
+for r in results:
+    print(r["kl"].name, r["kl"].metadata.get("search", {}).get("engine"))
+    # item_3  default
+```

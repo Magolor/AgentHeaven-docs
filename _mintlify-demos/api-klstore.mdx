@@ -1,0 +1,255 @@
+---
+title: "KLStore"
+description: "Storage backends for BaseUKF knowledge items"
+---
+
+## Overview
+
+`KLStore` implementations provide persistent storage for `BaseUKF` knowledge items. Each item is identified by its `BaseUKF.id` (a deterministic integer hash). Stores expose a unified interface for CRUD operations, iteration, and batch processing.
+
+```python
+from ahvn.klstore import (
+    BaseKLStore,
+    CacheKLStore,
+    DatabaseKLStore,
+    MongoKLStore,
+    VectorKLStore,
+    CascadeKLStore,
+)
+```
+
+---
+
+## BaseKLStore
+
+Abstract base class that all KLStore implementations extend. Also inherits from `ToolRegistry` to support search-as-tool patterns.
+
+### Constructor
+
+<ParamField path="name" type="str" default="default">
+  Name of this store instance. Used for logging and identification.
+</ParamField>
+
+<ParamField path="condition" type="Callable[[BaseUKF], bool]">
+  Optional predicate applied before every `upsert` or `insert`. Items that return `False` are silently skipped. Defaults to accepting everything.
+</ParamField>
+
+### Core Methods
+
+#### Retrieval
+
+```python
+# Get by id (int, str, or BaseUKF)
+kl = store.get(key, default=...)       # returns default if not found
+kl = store[key]                        # returns ... if not found
+bool_val = key in store                # existence check
+bool_val = store.exists(key)
+
+# Batch retrieval
+results = store.batch_get([key1, key2], default=None)
+```
+
+#### Write
+
+```python
+store.upsert(kl)                       # insert or update
+store.insert(kl)                       # insert only if not present
+store.batch_upsert(kls)               # batch upsert
+store.batch_insert(kls)               # batch insert
+```
+
+#### Delete
+
+```python
+store.remove(key)                      # remove by id or BaseUKF
+del store[key]                         # __delitem__
+store.batch_remove(keys)
+store.clear()                          # remove all items
+```
+
+#### Iteration
+
+```python
+for kl in store:                       # iterate all items
+    ...
+
+for batch in store.batch_iter(batch_size=256):  # iterate in batches
+    ...
+
+len(store)                             # total count
+```
+
+#### Lifecycle
+
+```python
+store.flush()    # flush pending writes (if applicable)
+store.close()    # close connections (if applicable)
+```
+
+<Note>
+  The default `__len__`, `_has`, and `batch_get` implementations iterate the full store and may be slow for large datasets. Override them in subclasses for better performance.
+</Note>
+
+---
+
+## Store Implementations
+
+<Tabs>
+  <Tab title="CacheKLStore">
+
+### CacheKLStore
+
+Backed by any `BaseCache` instance (in-memory, JSON file, SQLite, etc.). Ideal for small-to-medium datasets where data locality is acceptable.
+
+```python
+from ahvn.klstore import CacheKLStore
+from ahvn.cache import InMemCache, JsonCache
+
+# In-memory
+store = CacheKLStore(cache=InMemCache(), name="my_store")
+
+# Persisted JSON cache
+store = CacheKLStore(cache=JsonCache("/path/to/cache"), name="my_store")
+```
+
+<ParamField path="cache" type="BaseCache" required>
+  The cache backend to use. Can be any `BaseCache` subclass.
+</ParamField>
+
+<ParamField path="name" type="str" default="default">
+  Name of this store instance.
+</ParamField>
+
+<ParamField path="condition" type="Callable">
+  Optional upsert/insert condition.
+</ParamField>
+
+**When to use:** Development, testing, or production workloads where the full dataset fits in memory or a local JSON/SQLite file.
+
+  </Tab>
+  <Tab title="DatabaseKLStore">
+
+### DatabaseKLStore
+
+SQL database storage via SQLAlchemy. Supports DuckDB, SQLite, PostgreSQL, and other SQLAlchemy-compatible databases. Optimized for bulk operations using `bulk_insert_mappings`.
+
+```python
+from ahvn.klstore import DatabaseKLStore
+
+store = DatabaseKLStore(
+    database="my_db",    # database name or path
+    name="my_store",
+    provider="duckdb",   # optional: overrides config default
+)
+```
+
+<ParamField path="database" type="str">
+  Database name or path. Falls back to `db.providers.{provider}.database` config key if `None`.
+</ParamField>
+
+<ParamField path="name" type="str">
+  Name of this store instance. Defaults to the database name.
+</ParamField>
+
+<ParamField path="condition" type="Callable">
+  Optional upsert/insert condition.
+</ParamField>
+
+<ParamField path="provider" type="str">
+  Database provider (e.g. `'duckdb'`, `'sqlite'`, `'postgresql'`). Falls back to `db.default_provider` config key.
+</ParamField>
+
+**When to use:** Production workloads requiring durability, querying, and large datasets. Required for `FacetKLEngine`.
+
+  </Tab>
+  <Tab title="MongoKLStore">
+
+### MongoKLStore
+
+MongoDB-backed storage.
+
+```python
+from ahvn.klstore import MongoKLStore
+
+store = MongoKLStore(
+    database="my_db",
+    collection="knowledge",
+    name="my_store",
+)
+```
+
+**When to use:** Teams already using MongoDB, or when flexible schema evolution is needed.
+
+  </Tab>
+  <Tab title="VectorKLStore">
+
+### VectorKLStore
+
+Vector database storage (e.g. Chroma, Qdrant, Weaviate). Stores embeddings alongside UKF data for semantic retrieval.
+
+```python
+from ahvn.klstore import VectorKLStore
+
+store = VectorKLStore(
+    database="my_vdb",
+    name="my_store",
+)
+```
+
+**When to use:** When you need vector similarity search as the primary retrieval method.
+
+  </Tab>
+  <Tab title="CascadeKLStore">
+
+### CascadeKLStore
+
+Chains multiple stores together. Reads fall through from the first store to the last; writes propagate to all stores.
+
+```python
+from ahvn.klstore import CascadeKLStore
+
+store = CascadeKLStore(
+    stores=[fast_cache_store, persistent_db_store],
+    name="cascaded",
+)
+```
+
+**When to use:** Tiered storage patterns — e.g. an in-memory cache in front of a database store for read performance.
+
+  </Tab>
+</Tabs>
+
+---
+
+## Example
+
+```python
+from ahvn.klstore import CacheKLStore
+from ahvn.cache import InMemCache
+from ahvn.ukf import KnowledgeUKFT, ptags
+
+# Set up store
+store = CacheKLStore(cache=InMemCache(), name="demo")
+
+# Create and store a knowledge item
+kl = KnowledgeUKFT(
+    name="async guide",
+    content="Use asyncio.run() to start event loops.",
+    tags=ptags(LANGUAGE="en"),
+)
+store.upsert(kl)
+
+# Retrieve
+assert kl.id in store
+retrieved = store.get(kl.id)
+print(retrieved.name)   # "async guide"
+
+# Iterate
+for item in store:
+    print(item.name)
+
+print(len(store))  # 1
+
+store.remove(kl)
+print(len(store))  # 0
+```

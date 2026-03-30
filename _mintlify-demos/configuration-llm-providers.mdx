@@ -1,0 +1,244 @@
+---
+title: "LLM provider configuration"
+description: "Configure LLM providers, models, and presets — including OpenAI, OpenRouter, DeepSeek, and Ollama."
+---
+
+AgentHeaven routes every LLM call through a **preset** — a named slot that maps to a specific provider and model. Presets let you swap out the model behind each role (chat, embeddings, coding, etc.) without changing any application code.
+
+## LLM presets
+
+A preset is a named configuration that specifies a `provider` and a `model`. AgentHeaven ships with the following built-in presets:
+
+| Preset | Purpose |
+|--------|---------|
+| `chat` | General-purpose conversational model. Default for most agent tasks. |
+| `tiny` | Lightweight model for fast, low-cost tasks. |
+| `embedder` | Text embedding model. Used by the knowledge base and vector store. |
+| `coder` | Code-specialised model. Used by agentic programming features. |
+| `reason` | Reasoning / chain-of-thought model. |
+| `translator` | Translation tasks. |
+
+You configure a preset by setting its `provider` and `model` keys:
+
+```bash
+ahvn config set --global llm.presets.chat.provider openai
+ahvn config set --global llm.presets.chat.model gpt-4o
+```
+
+## Provider configuration
+
+Each provider needs an `api_key` (or equivalent credentials). Set keys globally so they apply across all your projects:
+
+```bash
+ahvn config set --global llm.providers.<provider>.api_key YOUR_KEY
+```
+
+The providers built into AgentHeaven are:
+
+| Provider key | Description |
+|---|---|
+| `openai` | OpenAI API |
+| `openrouter` | OpenRouter (access to many models via one key) |
+| `deepseek` | DeepSeek API |
+| `gemini` | Google Gemini API |
+| `anthropic` | Anthropic Claude API |
+| `ollama` | Local Ollama runtime (no API key required) |
+| `lmstudio` | Local LM Studio server (no API key required) |
+| `vllm` | Self-hosted vLLM (set `api_base` instead of `api_key`) |
+
+## Setup by provider
+
+<Tabs>
+  <Tab title="OpenAI">
+    <Steps>
+      <Step title="Set your API key">
+        ```bash
+        ahvn config set --global llm.providers.openai.api_key YOUR_OPENAI_API_KEY
+        ```
+      </Step>
+      <Step title="Configure the chat preset">
+        ```bash
+        ahvn config set --global llm.presets.chat.provider openai
+        ahvn config set --global llm.presets.chat.model gpt-5.2
+        ```
+      </Step>
+      <Step title="Configure the embedder preset">
+        ```bash
+        ahvn config set --global llm.presets.embedder.provider openai
+        ahvn config set --global llm.presets.embedder.model text-embedding-3-small
+        ```
+      </Step>
+    </Steps>
+
+    <Tip>
+      OpenAI is a good choice when you also need high-quality embeddings — `text-embedding-3-small` is fast and cost-effective.
+    </Tip>
+  </Tab>
+
+  <Tab title="OpenRouter">
+    OpenRouter gives you access to hundreds of models (GPT, Claude, Gemini, DeepSeek, and more) through a single API key.
+
+    <Steps>
+      <Step title="Set your API key">
+        ```bash
+        ahvn config set --global llm.providers.openrouter.api_key YOUR_OPENROUTER_API_KEY
+        ```
+      </Step>
+      <Step title="Configure the chat preset">
+        ```bash
+        ahvn config set --global llm.presets.chat.provider openrouter
+        ahvn config set --global llm.presets.chat.model google/gemini-2.5-flash
+        ```
+      </Step>
+    </Steps>
+
+    <Note>
+      OpenRouter is the default provider in AgentHeaven's system config. When using OpenRouter, supply the full `<org>/<model>` identifier as the model name (e.g. `deepseek/deepseek-v3.2`, `anthropic/claude-opus-4.5`).
+    </Note>
+  </Tab>
+
+  <Tab title="DeepSeek">
+    <Steps>
+      <Step title="Set your API key">
+        ```bash
+        ahvn config set --global llm.providers.deepseek.api_key YOUR_DEEPSEEK_API_KEY
+        ```
+      </Step>
+      <Step title="Configure the chat preset">
+        ```bash
+        ahvn config set --global llm.presets.chat.provider deepseek
+        ahvn config set --global llm.presets.chat.model deepseek-chat
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Ollama (local)">
+    Ollama lets you run models entirely on your own machine with no API key required.
+
+    <Steps>
+      <Step title="Install Ollama">
+        Download and install [Ollama](https://ollama.com/) for your platform, then start the Ollama server.
+      </Step>
+      <Step title="Pull the models you need">
+        ```bash
+        ollama pull gpt-oss:20b        # General model (larger)
+        ollama pull qwen3:4b           # General model (smaller)
+        ollama pull embeddinggemma     # Text embedding
+        ollama pull qwen3-coder:30b    # Code generation
+        ```
+      </Step>
+      <Step title="Configure all four presets">
+        ```bash
+        ahvn config set --global llm.presets.chat.provider ollama
+        ahvn config set --global llm.presets.chat.model gpt-oss:20b
+
+        ahvn config set --global llm.presets.tiny.provider ollama
+        ahvn config set --global llm.presets.tiny.model qwen3:4b
+
+        ahvn config set --global llm.presets.embedder.provider ollama
+        ahvn config set --global llm.presets.embedder.model embeddinggemma
+
+        ahvn config set --global llm.presets.coder.provider ollama
+        ahvn config set --global llm.presets.coder.model qwen3-coder:30b
+        ```
+      </Step>
+    </Steps>
+
+    <Tip>
+      Ollama is the default provider for the `tiny`, `embedder`, and local presets in AgentHeaven's system config. It is ideal for offline or privacy-sensitive workloads.
+    </Tip>
+  </Tab>
+</Tabs>
+
+## Config structure reference
+
+The full path structure for LLM config under the `llm` section:
+
+```yaml
+llm:
+  default_preset: chat          # Preset used when none is specified
+  default_provider: openrouter  # Fallback provider
+
+  providers:
+    openai:
+      api_key: sk-...
+    openrouter:
+      api_key: sk-or-...
+    deepseek:
+      api_key: sk-...
+    ollama: {}                  # No key needed for local Ollama
+
+  presets:
+    chat:
+      provider: openai
+      model: gpt-4o
+    tiny:
+      provider: ollama
+      model: qwen3:4b
+    embedder:
+      provider: openai
+      model: text-embedding-3-small
+    coder:
+      provider: ollama
+      model: qwen3-coder:30b
+```
+
+### Setting values with CLI commands
+
+All of the above YAML keys map directly to dot-separated CLI arguments:
+
+| YAML path | CLI key |
+|-----------|---------|
+| `llm.providers.openai.api_key` | `llm.providers.openai.api_key` |
+| `llm.presets.chat.provider` | `llm.presets.chat.provider` |
+| `llm.presets.chat.model` | `llm.presets.chat.model` |
+| `llm.default_preset` | `llm.default_preset` |
+
+## Advanced options
+
+### Retry behaviour
+
+AgentHeaven automatically retries failed LLM calls on transient errors (timeouts, rate limits, server errors). You can tune the retry policy:
+
+```bash
+ahvn config set --global llm.retry.max_attempts 5
+ahvn config set --global llm.retry.max 120
+```
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `llm.retry.max_attempts` | `3` | Maximum number of retry attempts. |
+| `llm.retry.multiplier` | `1` | Exponential backoff multiplier. |
+| `llm.retry.max` | `60` | Maximum wait time between retries (seconds). |
+
+### LiteLLM debug output
+
+AgentHeaven uses [LiteLLM](https://github.com/BerriAI/litellm) as its LLM backend. To see raw LiteLLM request and response logs, enable both `core.debug` and `llm.litellm_debug`:
+
+```bash
+ahvn config set --global core.debug true
+ahvn config set --global llm.litellm_debug true
+```
+
+<Warning>
+  LiteLLM debug output includes the full request payload. Avoid enabling this in shared or production environments as it may log sensitive data such as API keys and prompt contents.
+</Warning>
+
+### Default request arguments
+
+You can set default parameters that are sent with every LLM request:
+
+```bash
+ahvn config set --global llm.default_args.seed 42
+ahvn config set --global llm.default_args.timeout 120
+```
+
+## Verify your setup
+
+After configuring a provider, check that the effective config looks correct:
+
+```bash
+ahvn config show llm.providers
+ahvn config show llm.presets
+```

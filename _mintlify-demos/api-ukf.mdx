@@ -1,0 +1,459 @@
+---
+title: "UKF (Universal Knowledge Fragments)"
+description: "Core data model for structured knowledge in AgentHeaven"
+---
+
+## Overview
+
+The Universal Knowledge Framework (UKF) is the fundamental data unit in AgentHeaven. Every piece of knowledge — a prompt, an experience record, a tool description, a document — is represented as a `BaseUKF` instance with rich metadata, content, provenance, tagging, and relationship fields.
+
+```python
+from ahvn.ukf import (
+    BaseUKF,
+    KnowledgeUKFT, ExperienceUKFT, PromptUKFT,
+    ToolUKFT, DocumentUKFT, ResourceUKFT, TemplateUKFT,
+    UKFTypeRegistry, HEAVEN_UR, register_ukft,
+    UKFIdType, UKFShortTextType, UKFMediumTextType,
+    UKFLongTextType, UKFTimestampType, UKFTagsType, UKFJsonType,
+    tag_s, tag_v, tag_t, ptags, gtags, has_tag, has_related, next_ver,
+)
+```
+
+---
+
+## BaseUKF
+
+`BaseUKF` is the Pydantic base model for all knowledge items. It is organized into logical sections: **Metadata**, **Content**, **Provenance**, **Retrieval**, **Relationships**, **Lifecycle**, and **System**.
+
+### Constructor
+
+All fields below are keyword arguments. Only `name` is required.
+
+<ParamField path="name" type="str" required>
+  Stable, descriptive identifier for this knowledge item. Not unique, but should be distinguishable. Max 2047 chars (`UKFMediumTextType`).
+</ParamField>
+
+<ParamField path="type" type="str" default="general">
+  Knowledge category for routing and processing (`'experience'`, `'knowledge'`, `'resource'`, etc.). Frozen after construction. Subclasses set this via `type_default`.
+</ParamField>
+
+<ParamField path="version" type="str" default="v0.1.0">
+  Semantic version string. Frozen after construction. Use `next_ver()` to auto-increment.
+</ParamField>
+
+<ParamField path="variant" type="str" default="default">
+  Distinguishes implementations of the same knowledge (e.g. language variants `'en'`, `'zh'`, or model-specific variants). Frozen.
+</ParamField>
+
+<ParamField path="content" type="str" default="">
+  Raw text content fed directly to LLMs. Max 65535 chars (`UKFLongTextType`).
+</ParamField>
+
+<ParamField path="content_resources" type="dict" default="{}">
+  Free-form semi-structured data supporting or replacing `content`. Referenced by `content_composers`. Use `get/set/unset/setdef` helpers for nested access.
+</ParamField>
+
+<ParamField path="content_composers" type="dict" default="{}">
+  Mapping of composer names to callables `f(kl: BaseUKF, **kwargs) -> str`. Each produces an alternative text rendering of the knowledge.
+</ParamField>
+
+<ParamField path="tags" type="set[str]" default="set()">
+  Structured tags for filtering and classification. Use format `[SLOT:value]` (e.g. `[LANGUAGE:en]`). Frozen after construction.
+</ParamField>
+
+<ParamField path="synonyms" type="set[str]" default="set()">
+  Alternative names and aliases for string-based search systems.
+</ParamField>
+
+<ParamField path="priority" type="int" default="0">
+  Ranking importance. Higher values sort first in search results.
+</ParamField>
+
+<ParamField path="collection" type="str" default="general">
+  Category or theme grouping within a workspace. Frozen.
+</ParamField>
+
+<ParamField path="source" type="str" default="unknown">
+  Origin: `'system'`, `'user'`, `'auto'`, `'tool'`, `'derived'`, or `'unknown'`. Frozen.
+</ParamField>
+
+<ParamField path="creator" type="str" default="unknown">
+  Who or what created this item. Frozen.
+</ParamField>
+
+<ParamField path="owner" type="str" default="unknown">
+  Who maintains this item. Frozen.
+</ParamField>
+
+<ParamField path="workspace" type="str" default="unknown">
+  Organizational context for multi-tenancy isolation. Frozen.
+</ParamField>
+
+<ParamField path="timestamp" type="datetime" >
+  Creation timestamp (UTC, auto-set). Frozen.
+</ParamField>
+
+<ParamField path="last_verified" type="datetime">
+  When content was last confirmed accurate (UTC, auto-set).
+</ParamField>
+
+<ParamField path="expiration" type="int | timedelta" default="-1">
+  Seconds content remains valid after `last_verified`. Negative means never expires.
+</ParamField>
+
+<ParamField path="inactive_mark" type="bool" default="False">
+  Manual deactivation flag. When `True`, the item is always inactive regardless of expiration.
+</ParamField>
+
+<ParamField path="related" type="set" default="set()">
+  Relationship tuples `(subject_id, relation, object_id, relation_id?, resources?)`.
+</ParamField>
+
+<ParamField path="metadata" type="dict" default="{}">
+  Free-form application-specific data. Not processed by systems.
+</ParamField>
+
+<ParamField path="notes" type="str" default="">
+  Human-readable description. Not processed by systems.
+</ParamField>
+
+<ParamField path="description" type="str" default="">
+  Detailed explanation of content, usage, and purpose for retrieval systems.
+</ParamField>
+
+<ParamField path="short_description" type="str" default="">
+  One-sentence summary (under 200 chars) optimized for LLMs and previews.
+</ParamField>
+
+### Computed Properties
+
+<ResponseField name="id" type="int">
+  Deterministic integer hash derived from identity fields (`type`, `name`, `version`, `variant`, `source`, `creator`, `owner`, `workspace`, `collection`, `tags`, `timefluid`). Cached.
+</ResponseField>
+
+<ResponseField name="id_str" type="str">
+  Zero-padded string representation of `id`.
+</ResponseField>
+
+<ResponseField name="content_hash" type="int">
+  Hash of `content` and `content_resources`. Used for change detection.
+</ResponseField>
+
+<ResponseField name="is_active" type="bool">
+  `True` when not expired and `inactive_mark` is `False`.
+</ResponseField>
+
+<ResponseField name="is_inactive" type="bool">
+  `True` when `inactive_mark` is `True` or the item has expired.
+</ResponseField>
+
+<ResponseField name="expiration_timestamp" type="datetime">
+  UTC datetime when the item expires. Returns year 2500 sentinel when expiration is disabled.
+</ResponseField>
+
+<ResponseField name="slots" type="dict[str, set[str]]">
+  Mapping from tag slot names to their values, parsed from `tags`.
+</ResponseField>
+
+### Key Methods
+
+#### Content access
+
+```python
+# Get a nested value from content_resources
+kl.get("level1.level2.key", default=None)
+
+# Set a nested value in content_resources
+kl.set("level1.level2.key", value)
+
+# Remove a nested value from content_resources
+kl.unset("level1.level2.key")
+
+# Set only if the key does not already exist
+kl.setdef("level1.level2.key", value)
+```
+
+#### Text rendering
+
+```python
+# Render via a named composer (defaults to 'default')
+kl.text(composer="my_composer", **kwargs)  # -> str
+
+# Register a new composer
+kl.set_composer("my_composer", lambda kl, **kw: kl.content.upper())
+```
+
+#### Serialization
+
+```python
+# To/from dict
+d = kl.to_dict()
+kl2 = BaseUKF.from_dict(d)           # polymorphic: returns correct subclass
+kl3 = BaseUKF.from_dict(d, polymorphic=False)  # always BaseUKF
+
+# From another instance
+kl4 = BaseUKF.from_ukf(other_kl)
+```
+
+#### Filtering and triggers
+
+```python
+# Evaluate filter expressions (used internally by ScanKLEngine)
+kl.eval_filter(priority=KLOp.GT(5), type="knowledge")
+
+# Evaluate named triggers
+kl.eval_triggers(["my_trigger"], contexts={"my_trigger": {"user": "admin"}})
+```
+
+### Polymorphic deserialization
+
+`BaseUKF.from_dict()` and `BaseUKF.model_validate()` support polymorphic deserialization: they check the `type` field and return the registered `UKFT` subclass from `HEAVEN_UR`.
+
+```python
+data = {"name": "my_kl", "type": "knowledge", "content": "...", ...}
+kl = BaseUKF.from_dict(data)  # returns KnowledgeUKFT instance
+```
+
+---
+
+## UKF Type Hierarchy
+
+All built-in templates live in `ahvn.ukf.templates.basic` and are registered in `HEAVEN_UR` via `@register_ukft`.
+
+<CardGroup cols={2}>
+  <Card title="KnowledgeUKFT" icon="book">
+    `type='knowledge'` — General-purpose knowledge entity for storing diverse information.
+  </Card>
+  <Card title="ExperienceUKFT" icon="flask">
+    `type='experience'` — Stores function input–output pairs for few-shot learning and evaluation.
+  </Card>
+  <Card title="PromptUKFT" icon="terminal">
+    `type='prompt'` — Jinja2 template folder resource for structured prompt management.
+  </Card>
+  <Card title="ToolUKFT" icon="wrench">
+    `type='tool'` — Tool/function specification knowledge.
+  </Card>
+  <Card title="DocumentUKFT" icon="file-text">
+    `type='document'` — Long-form document storage.
+  </Card>
+  <Card title="ResourceUKFT" icon="folder">
+    `type='resource'` — File or folder resource with path serialization.
+  </Card>
+  <Card title="TemplateUKFT" icon="code">
+    `type='template'` — Reusable template structures.
+  </Card>
+</CardGroup>
+
+The `content_resources` dict is the extension point for each type. For example, `ExperienceUKFT` stores `{"func": ..., "inputs": ..., "output": ...}` there, and `PromptUKFT` stores `{"path": ..., "data": ..., "default_entry": ..., "binds": ...}`.
+
+---
+
+## PromptUKFT
+
+PromptUKFT is the primary type for working with Jinja2 template folders.
+
+### `PromptUKFT.from_path()`
+
+```python
+prompt = PromptUKFT.from_path(
+    path="& prompts/system",         # '&' resolves to the ahvn resources folder
+    default_entry="prompt.jinja",    # default template file
+    name="my_prompt",                # optional: inferred from path basename
+    lang="en",                       # optional: overrides config
+    binds={"system": "You are ..."},  # pre-bound template variables
+)
+```
+
+<ParamField path="path" type="str" required>
+  Path to the Jinja2 template folder. Prefix `&` resolves to the AgentHeaven resources directory.
+</ParamField>
+
+<ParamField path="default_entry" type="str" default="default.jinja">
+  The default template file used by the `prompt` composer.
+</ParamField>
+
+<ParamField path="name" type="str">
+  Resource name. If `None`, inferred from the basename of the path. Required when `path` is a file.
+</ParamField>
+
+<ParamField path="lang" type="str">
+  Default rendering language. Falls back to `prompts.lang` config key.
+</ParamField>
+
+<ParamField path="binds" type="dict">
+  Default template variables bound at creation time.
+</ParamField>
+
+### `PromptUKFT.from_jinja()`
+
+Create a `PromptUKFT` directly from a Jinja2 template string:
+
+```python
+prompt = PromptUKFT.from_jinja(
+    content="You are a helpful assistant.\n\nUser query: {{ query }}",
+    name="simple_prompt",
+    lang="en",
+)
+```
+
+### Rendering
+
+```python
+# Render directly
+text = prompt.render(entry="prompt.jinja", system="...", query="hello")
+
+# Via .text() using the default composer
+text = prompt.text(system="...", query="hello")
+
+# Via .format() (alias for .text())
+text = prompt.format(composer="prompt", system="...", query="hello")
+```
+
+### Binding variables
+
+`bind()` stores default template variables that are merged at render time:
+
+```python
+prompt.bind(system="You are a helpful assistant.", lang="en")
+prompt.unbind("lang")  # remove a binding
+```
+
+---
+
+## ExperienceUKFT
+
+### `ExperienceUKFT.from_cache_entry()`
+
+Create an `ExperienceUKFT` from a cache entry or plain dict:
+
+```python
+from ahvn.cache import CacheEntry
+
+entry = CacheEntry.from_args(a=1, b=2, output=3)  # func name is inferred
+exp = ExperienceUKFT.from_cache_entry(entry)
+
+print(exp.name)           # "func_name(a=1, b=2)"
+print(exp.text("assertion"))    # "assert (func_name(a=1, b=2) == 3)"
+print(exp.text("instance"))    # structured prompt with inputs/output
+```
+
+The pre-configured composers are:
+- `assertion` — generates `assert (func(args) == expected)` strings for test cases
+- `instance` / `default` — generates a structured prompt with inputs, output, and hints
+
+---
+
+## Field Types
+
+| Type | Python type | Max length / notes |
+|---|---|---|
+| `UKFIdType` | `int` | Integer hash ID |
+| `UKFIntegerType` | `int` | General integer |
+| `UKFBooleanType` | `bool` | Accepts `true/false/1/0/yes/no` strings |
+| `UKFShortTextType` | `str` | 255 chars |
+| `UKFMediumTextType` | `str` | 2047 chars |
+| `UKFLongTextType` | `str` | 65535 chars |
+| `UKFTimestampType` | `datetime` | UTC, microseconds stripped |
+| `UKFDurationType` | `timedelta` | Accepts seconds (int) or ISO 8601 strings |
+| `UKFTagsType` | `set[str]` | Tags must be in `[SLOT:value]` format |
+| `UKFJsonType` | `dict` | Accepts dict or JSON string |
+
+Limits are configurable via `ukf.text` in `config.yaml`.
+
+---
+
+## Tag Utilities
+
+Tags must follow the format `[SLOT:value]`.
+
+```python
+from ahvn.ukf import tag_s, tag_v, tag_t, ptags, gtags, has_tag, has_related, next_ver
+
+# Parse a tag
+tag_s("[LANGUAGE:en]")          # -> "LANGUAGE"
+tag_v("[LANGUAGE:en]")          # -> "en"
+tag_t("[LANGUAGE:en]")          # -> ["LANGUAGE", "en"]
+
+# Build tags from kwargs
+ptags(LANGUAGE="en", UKF_TYPE=["knowledge", "general"])
+# -> {'[LANGUAGE:en]', '[UKF_TYPE:knowledge]', '[UKF_TYPE:general]'}
+
+# Group tags by slot
+gtags({'[LANGUAGE:en]', '[UKF_TYPE:knowledge]'})
+# -> {'LANGUAGE': {'en'}, 'UKF_TYPE': {'knowledge'}}
+
+# Check if a set of tags satisfies a condition
+has_tag(kl.tags, slot="LANGUAGE", operator="ANY_OF", value=["en", "zh"])
+# Operators: EXACT, NONE_OF, ANY_OF, ANY_IF_EXISTS, ONE_OF, MANY_OF,
+#            ALL_OF, ALL_IN, HAS_NONE, HAS_ANY, HAS_ONE, HAS_MANY,
+#            int (at least N), float (Jaccard similarity)
+
+# Version bumping
+next_ver("v1.2.3")   # -> "v1.2.4"
+next_ver("v1.2.beta") # -> "v1.2.beta.1"
+```
+
+### `has_related()`
+
+Check if a `related` set contains a matching relation tuple:
+
+```python
+has_related(
+    kl.related,
+    subject_id=kl.id,
+    relation="derived_from",
+)
+```
+
+---
+
+## UKFTypeRegistry
+
+The global registry `HEAVEN_UR` maps `type` strings to `BaseUKF` subclasses for polymorphic deserialization.
+
+```python
+from ahvn.ukf import UKFTypeRegistry, HEAVEN_UR, register_ukft
+
+# Register a custom type
+@register_ukft
+class MyCustomUKFT(BaseUKF):
+    type_default = "my_custom_type"
+
+# Look up a registered class
+klass = HEAVEN_UR.get("my_custom_type")  # -> MyCustomUKFT
+
+# List all registered types
+HEAVEN_UR.list_types()  # -> ['general', 'knowledge', 'experience', ...]
+
+# Check registration
+HEAVEN_UR.is_registered("knowledge")  # -> True
+```
+
+Once registered, `BaseUKF.from_dict({"type": "my_custom_type", ...})` returns a `MyCustomUKFT` instance automatically.
+
+---
+
+## Example
+
+```python
+from ahvn.ukf import BaseUKF, KnowledgeUKFT, ptags
+
+# Create a knowledge item
+kl = KnowledgeUKFT(
+    name="Python async guide",
+    content="Use asyncio.run() to run coroutines from synchronous code...",
+    tags=ptags(LANGUAGE="en", TOPIC="python"),
+    synonyms={"async", "asyncio", "coroutine", "await"},
+    priority=10,
+    collection="python",
+)
+
+print(kl.id)          # deterministic integer
+print(kl.is_active)   # True
+print(kl.text())      # raw content string
+
+# Polymorphic round-trip
+d = kl.to_dict()
+kl2 = BaseUKF.from_dict(d)  # returns KnowledgeUKFT
+assert type(kl2) is KnowledgeUKFT
+```

@@ -1,0 +1,207 @@
+---
+title: "Configuration overview"
+description: "Understand AgentHeaven's three-level configuration system and how to read and write config values."
+---
+
+AgentHeaven uses a **three-level hierarchical configuration system** — system, global, and local. Values at a higher-priority level override those at a lower-priority level, so you can set machine-wide defaults globally and then tune individual repositories locally.
+
+## Configuration levels
+
+<CardGroup cols={2}>
+  <Card title="System" icon="server">
+    Shipped with AgentHeaven. Read-only defaults that define every available key. Located inside the installed package.
+  </Card>
+  <Card title="Global" icon="globe">
+    Your personal machine-wide settings. Stored at `~/.ahvn/config.yaml`. Overrides system defaults.
+  </Card>
+  <Card title="Local" icon="folder">
+    Repository-level settings. Stored at `.ahvn/config.yaml` inside your project directory. Overrides both global and system values.
+  </Card>
+  <Card title="Effective config" icon="layer-group">
+    The config AgentHeaven actually uses — the result of merging system → global → local, with local taking highest priority.
+  </Card>
+</CardGroup>
+
+### Override order
+
+```
+system (lowest priority)
+  └── global
+        └── local (highest priority)
+```
+
+Nested keys are merged recursively. A local key only overrides the specific keys it defines; it does not wipe out sibling keys from the global config.
+
+## Config file locations
+
+| Level | Path |
+|-------|------|
+| System | Inside the `ahvn` package (`ahvn/resources/configs/default_config.yaml`) |
+| Global | `~/.ahvn/config.yaml` |
+| Local | `.ahvn/config.yaml` (in your repo root or any ancestor up to `~`) |
+
+<Note>
+AgentHeaven walks up the directory tree from your current working directory to find the nearest `.ahvn/` folder, following the same convention as Git. If none is found, the local config defaults to `.ahvn/config.yaml` in the current directory.
+</Note>
+
+## Viewing config
+
+Use `ahvn config show` to inspect config values at each level.
+
+```bash
+# Show the effective (merged) local config
+ahvn config show
+
+# Show only your global config
+ahvn config show --global
+
+# Show the system defaults
+ahvn config show --system
+
+# Show a specific key from the effective config
+ahvn config show llm.presets.chat
+
+# Show a specific key from the global config
+ahvn config show --global llm.providers.openai
+```
+
+## Setting values
+
+Use `ahvn config set` to write a value. Without flags it writes to the local config; add `--global` to write machine-wide.
+
+```bash
+# Set a value in the local config
+ahvn config set KEY VALUE
+
+# Set a value in the global config
+ahvn config set --global KEY VALUE
+
+# Set a value parsed as JSON (for lists, objects, booleans, numbers)
+ahvn config set --global --json KEY VALUE
+```
+
+<Tip>
+Use `--global` for settings that should apply across all your projects, such as API keys and LLM provider defaults. Use local config for project-specific overrides like a different model or prompt language.
+</Tip>
+
+## Unsetting values
+
+Use `ahvn config unset` to remove a key from the local or global config. Removing a key causes the lower-priority value (global or system default) to apply again.
+
+```bash
+# Remove a key from the local config
+ahvn config unset KEY
+
+# Remove a key from the global config
+ahvn config unset --global KEY
+```
+
+## Editing config in your editor
+
+`ahvn config edit` opens the config file directly in your `$EDITOR` (defaults to `vim`).
+
+```bash
+# Open the local config file
+ahvn config edit
+
+# Open the global config file
+ahvn config edit --global
+
+# Open the system defaults (read-only reference)
+ahvn config edit --system
+```
+
+## Copying config between levels
+
+Use `ahvn config copy` to copy a key (or the entire config) from the global or system level into the local config. This is useful when you want to start from your global settings and customise from there.
+
+```bash
+# Copy a key from global to local
+ahvn config copy llm.presets.chat
+
+# Copy a key from system defaults to local
+ahvn config copy --global llm.presets.embedder
+
+# Copy the entire global config to local (will prompt for confirmation)
+ahvn config copy
+
+# Copy the entire global config to local, skip confirmation
+ahvn config copy --yes
+```
+
+## Key config sections
+
+The config is organised into top-level sections. The most commonly used keys are listed below.
+
+### `core.*`
+
+Core runtime settings.
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `core.debug` | `false` | Enable debug logging. |
+| `core.encoding` | `utf-8` | Default text encoding. |
+| `core.cache_path` | `~/.ahvn/cache/` | Directory for persistent LLM and tool caches. |
+| `core.tmp_path` | `~/.ahvn/tmp/` | Directory for temporary files. |
+| `core.http_proxy` | `null` | HTTP proxy URL (propagated to LiteLLM). |
+| `core.https_proxy` | `null` | HTTPS proxy URL (propagated to LiteLLM). |
+
+### `llm.*`
+
+LLM provider, model, and preset configuration. See [LLM provider configuration](/configuration/llm-providers) for the full reference.
+
+| Key | Description |
+|-----|-------------|
+| `llm.providers.<name>.api_key` | API key for a provider. |
+| `llm.presets.<preset>.provider` | Provider to use for a preset. |
+| `llm.presets.<preset>.model` | Model to use for a preset. |
+| `llm.litellm_debug` | Enable LiteLLM debug output (requires `core.debug: true`). |
+
+### `agent.*`
+
+Agent execution settings.
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `agent.max_steps` | `20` | Maximum number of steps an agent can take before halting. |
+
+### `repos.*`
+
+Per-repository metadata and settings. Empty by default; populated when you run `ahvn repo init` in a project.
+
+## Example: bootstrap a project
+
+A typical first-time setup looks like this:
+
+<Steps>
+  <Step title="Run setup">
+    Initialise the global AgentHeaven environment:
+
+    ```bash
+    ahvn setup --reset
+    ```
+  </Step>
+  <Step title="Set your API key globally">
+    ```bash
+    ahvn config set --global llm.providers.openai.api_key YOUR_API_KEY
+    ```
+  </Step>
+  <Step title="Set your preferred preset globally">
+    ```bash
+    ahvn config set --global llm.presets.chat.provider openai
+    ahvn config set --global llm.presets.chat.model gpt-4o
+    ```
+  </Step>
+  <Step title="Override the model locally for a specific project">
+    Inside your project directory:
+
+    ```bash
+    ahvn config set llm.presets.chat.model gpt-4o-mini
+    ```
+  </Step>
+  <Step title="Verify the effective config">
+    ```bash
+    ahvn config show llm.presets.chat
+    ```
+  </Step>
+</Steps>

@@ -1,0 +1,225 @@
+---
+title: "Building agents"
+description: "Design and stream multi-step tool-calling agents with AgentHeaven's BaseAgentSpec interface."
+---
+
+AgentHeaven provides a structured agent framework built around `BaseAgentSpec`. An agent encodes input, loops through LLM steps with optional tool calls, decides when it's done, then decodes the final output.
+
+## The Agent Loop
+
+<Steps>
+  <Step title="encode">
+    Convert raw inputs (strings, dicts, any kwargs) into a list of `Messages` for the LLM.
+  </Step>
+  <Step title="step loop">
+    Repeatedly call the LLM (with tools attached). After each step, check `is_done`. If not done, append a user-proxy message and continue.
+  </Step>
+  <Step title="is_done">
+    Inspect the latest delta messages and return `(True, finish_state)` when the task is complete.
+  </Step>
+  <Step title="decode">
+    Extract the meaningful result from the final conversation and return it to the caller.
+  </Step>
+</Steps>
+
+## BaseAgentSpec
+
+Subclass `BaseAgentSpec` and implement three abstract methods:
+
+```python
+from ahvn.agent.base import BaseAgentSpec
+from ahvn.llm import Messages
+from ahvn.tool import ToolSpec
+from typing import Any, Dict, List, Tuple
+
+class MyAgent(BaseAgentSpec):
+    def encode(self, **inputs) -> Messages:
+        # Turn your inputs into a list of messages
+        return [{"role": "user", "content": inputs["query"]}]
+
+    def is_done(
+        self,
+        messages: Messages,
+        delta_messages: List[Dict],
+    ) -> Tuple[bool, Dict]:
+        # Return (True, finish_state) when satisfied
+        last = delta_messages[-1] if delta_messages else {}
+        if last.get("role") == "assistant" and "DONE" in last.get("content", ""):
+            return True, {"msg": "success", "output": last["content"]}
+        return False, None
+
+    def decode(self, messages: Messages, finish_state: Dict = None) -> Any:
+        return finish_state.get("output") if finish_state else None
+
+agent = MyAgent(
+    tools=[tool1, tool2],          # list of ToolSpec
+    llm_args={"preset": "chat"},   # passed to LLM()
+    max_steps=10,                  # default: from config (agent.max_steps, usually 20)
+)
+```
+
+## Built-in Agent Types
+
+<Tabs>
+  <Tab title="ConvToolAgentSpec">
+    A conversational agent for LLMs that **do not support native function calling**. It parses tool calls from the model's markdown output.
+
+    ```python
+    from ahvn.agent.conv_agent import ConvToolAgentSpec
+    from ahvn.ukf.templates.basic.prompt import PromptUKFT
+
+    # "& prompts/system" resolves to AgentHeaven's built-in system prompt template
+    p = PromptUKFT.from_path("& prompts/system", default_entry="prompt.jinja")
+    p.bind(system="You are a helpful math assistant, use the tools to answer user queries.")
+
+    agent = ConvToolAgentSpec(
+        prompt=p,
+        tools=[fib_tool, mul_tool],
+        llm_args={"preset": "chat"},
+    )
+    ```
+
+    <Warning>
+    `ConvToolAgentSpec` is only for LLMs without native tool calling. For all other cases prefer `SubmitToolAgentSpec` or `LLM.oracle(tools=...)`.
+    </Warning>
+  </Tab>
+  <Tab title="SubmitToolAgentSpec">
+    A native-tool-calling agent that runs until the model invokes a dedicated `submit` tool. The `submit` tool's return value becomes the final answer.
+
+    ```python
+    from ahvn.agent.submit_agent import SubmitToolAgentSpec
+
+    agent = SubmitToolAgentSpec(
+        prompt=p,
+        tools=[fib_tool, mul_tool, submit_tool],
+        llm_args={"preset": "chat"},
+        submit_name="submit",   # name of the tool that signals completion
+    )
+    ```
+  </Tab>
+  <Tab title="OracleAgentSpec">
+    A single-step agent with no tools. It runs exactly one LLM call and returns the text response.
+
+    ```python
+    from ahvn.agent.oracle_agent import OracleAgentSpec
+
+    agent = OracleAgentSpec(prompt=p, llm_args={"preset": "chat"})
+    result = agent(query="Summarize this document.")
+    ```
+  </Tab>
+</Tabs>
+
+## Streaming Interface
+
+`agent.stream(messages, include=[...])` is the primary way to drive an agent. It yields `AgentStreamChunk` dicts throughout the entire run.
+
+```python
+from ahvn.tool import ToolSpec
+from ahvn.cache import InMemCache
+
+cache = InMemCache()
+
+@cache.memoize()
+def fibonacci(n: int) -> int:
+    """Compute the nth Fibonacci number."""
+    return n if n <= 1 else fibonacci(n - 2) + fibonacci(n - 1)
+
+def multiply(a: int, b: int) -> int:
+    """Multiply two integers."""
+    return a * b
+
+fib_tool = ToolSpec.from_function(fibonacci)
+mul_tool = ToolSpec.from_function(multiply)
+
+agent = ConvToolAgentSpec(
+    prompt=p,
+    tools=[fib_tool, mul_tool],
+    llm_args={"preset": "chat"},
+)
+
+query = "What is Fib(32) * Fib(64)?"
+encoded = agent.encode(query=query)
+finish_state = None
+final_messages = None
+
+for chunk in agent.stream(
+    encoded,
+    include=["text", "think", "tool_calls", "tool_messages", "delta_messages"],
+):
+    # Step lifecycle signals
+    if "step" in chunk and "step_status" in chunk:
+        if chunk["step_status"] == "start":
+            print(f"\n--- Step {chunk['step'] + 1} ---")
+        if chunk["step_status"] == "end" and chunk.get("done"):
+            finish_state = chunk.get("finish_state")
+            final_messages = chunk.get("messages")
+        continue
+
+    # LLM output
+    if chunk.get("text"):
+        print(chunk["text"], end="", flush=True)
+    if chunk.get("tool_calls"):
+        for tc in chunk["tool_calls"]:
+            print(f"\n  → {tc.get('function', tc).get('name', 'unknown')}(...)")
+    if chunk.get("tool_messages"):
+        for tm in chunk["tool_messages"]:
+            print(f"  ← {tm.get('name', 'unknown')}: {tm.get('content', '')}")
+
+print()
+print("Answer:", agent.decode(final_messages, finish_state=finish_state))
+```
+
+### Stream chunk fields
+
+| Field | Present when | Description |
+|---|---|---|
+| `step` | always (on step events) | Zero-based step index |
+| `step_status` | always (on step events) | `"start"` or `"end"` |
+| `done` | on `step_status == "end"` | `True` when agent has finished |
+| `finish_state` | on final `done=True` chunk | Dict with `msg`, `steps`, `max_steps` |
+| `messages` | on final `done=True` chunk | Full conversation history |
+| `text` | LLM chunks | Streamed assistant text delta |
+| `think` | LLM chunks | Reasoning/thinking delta |
+| `tool_calls` | after stream ends (if tools used) | Final list of tool calls |
+| `tool_messages` | after stream ends (if tools used) | Executed tool result messages |
+| `delta_messages` | end of each step | New messages added this step |
+
+### `finish_state` messages
+
+| `msg` | Meaning |
+|---|---|
+| `"success"` | Agent completed normally |
+| `"stale"` | LLM produced no output — loop broken |
+| `"max_steps_reached"` | Hit the `max_steps` limit |
+| `"oracle"` | `OracleAgentSpec` single-step completion |
+
+## Non-Streaming: `run` and `__call__`
+
+For simpler use cases that don't need incremental output:
+
+```python
+# run() returns (final_messages, finish_state)
+final_messages, finish_state = agent.run(encoded)
+result = agent.decode(final_messages, finish_state=finish_state)
+
+# __call__ does encode → run → decode in one shot
+result = agent(query="What is Fib(32) * Fib(64)?")
+```
+
+## Configuring `max_steps`
+
+Set the step limit globally in your AgentHeaven config:
+
+```bash
+ahvn config set --global agent.max_steps 30
+```
+
+Or per-agent at construction time:
+
+```python
+agent = SubmitToolAgentSpec(
+    prompt=p,
+    tools=[...],
+    max_steps=5,
+)
+```

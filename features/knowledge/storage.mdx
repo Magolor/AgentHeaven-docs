@@ -1,0 +1,31 @@
+---
+title: "Knowledge storage"
+description: "KLStore: pluggable storage backends for persisting UKF instances."
+---
+
+{/* TODO: Write KLStore documentation */}
+
+{/*
+Planned sections:
+1. BaseKLStore — the storage interface
+   - CRUD operations on UKF instances
+   - Backend-agnostic: same interface regardless of storage type
+2. CacheKLStore — in-memory storage
+   - Fast reads, no persistence
+   - Good for transient or session-scoped knowledge
+3. DatabaseKLStore — SQL-backed storage
+   - SQLAlchemy-compatible, any relational database
+   - ORM mapping via ORMUKFAdapter
+4. VectorKLStore — vector database storage
+   - LlamaIndex integration, semantic search support
+   - VdbUKFAdapter for UKF ↔ vector mapping
+5. MongoKLStore — MongoDB storage
+   - Document-oriented storage
+   - MongoUKFAdapter for UKF ↔ document mapping
+6. CascadeKLStore — multi-backend cascading
+   - Chain multiple stores: fast cache → persistent DB → vector search
+   - Read-through and write-through strategies
+7. Configuration: choosing and configuring backends
+*/}
+
+KLStore is the storage layer for UKF instances. It provides a uniform interface over pluggable backends — in-memory, SQL databases, vector stores, MongoDB, or cascading combinations.

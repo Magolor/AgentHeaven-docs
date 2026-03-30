@@ -1,0 +1,127 @@
+---
+title: "Installation"
+description: "Install AgentHeaven and its dependencies."
+---
+
+<Note>
+    **Current Version**: v0.9.4
+</Note>
+
+## 1. System Requirements
+
+- **Operating system**: Platform-independent
+    - Tested on Windows 11, macOS Sequoia
+- **Python**: 3.10 or higher (below 3.14)
+    - Tested on Python 3.10, 3.11, 3.12, 3.13
+- **Hardware**: No specific requirements; runs on standard consumer hardware
+    - Certain optional dependencies, especially LLM serving packages (e.g., Ollama or LM Studio), may have their own hardware requirements
+
+<br/>
+
+## 2. Recommended Software
+
+The following tools are optional but recommended for a complete experience:
+
+- [Ollama](https://ollama.com/) or [LM Studio](https://lmstudio.ai/) — local large model services (including embeddings)
+- [Docker](https://www.docker.com/) — self-hosting databases and sandboxes
+
+<br/>
+
+## 3. Package manager installation
+
+AgentHeaven supports multiple package managers. Choose based on your workflow preferences.
+
+<br/>
+
+### 3.1. Install from PyPI
+
+```bash
+pip install agent-heaven
+```
+
+```bash
+uv pip install agent-heaven
+```
+
+```bash
+poetry add agent-heaven
+```
+
+```bash
+conda install -c conda-forge agent-heaven
+```
+
+<br/>
+
+### 3.2. Install from source
+
+```bash
+git clone https://github.com/RubikSQL/AgentHeaven.git
+cd AgentHeaven
+```
+
+Then install using your preferred package manager:
+
+```bash
+pip install -e "."
+```
+
+```bash
+uv pip install -e "."
+```
+
+```bash
+poetry install
+```
+
+```bash
+conda env create -f environment.yml
+conda activate ahvn
+```
+
+<br/>
+
+## 4. Verification and initial setup
+
+Run `ahvn setup` once after installation to initialize the ahvn under user home (`~/.ahvn/`) and create the default config files.
+
+```bash
+ahvn setup [--reset/-r]
+```
+
+Using `--reset` will overwrite existing configuration files and clean up any existing data. Use with caution.
+
+After installation, verify that AgentHeaven is working correctly:
+
+```bash
+ahvn --version   # or: ahvn -v
+```
+
+<Tip>For a walkthrough of what happens after setup, see [Quick Setup](/quickstart/quick-setup).</Tip>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Next steps:**
+    - [Quick Setup](/quickstart/quick-setup) — configure providers and defaults
+    - [First LLM Chat](/quickstart/first-llm-chat) — send a first message
+</Tip>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Getting started:**
+    - [Quick Setup](/quickstart/quick-setup) — fast path to basic usage
+    - [First LLM Chat](/quickstart/first-llm-chat) — start chatting with LLMs
+</Tip>
+
+<Tip>
+    **Configuration:**
+    - [Configuration](/features/configuration) — core configuration concepts
+</Tip>
+
+<br/>
