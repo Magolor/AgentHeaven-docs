@@ -4,7 +4,13 @@ description: "Build a toolkit and serve it as an MCP server in 5 minutes."
 sidebarTitle: "First MCP Toolkit"
 ---
 
+<Note>
+    *No one wants to see `output = client.chat.completions.create(...).choices[0].message.content`.*
+</Note>
+
 Turn any Python function into an MCP-compatible tool that works with Claude Desktop, VS Code Copilot, Cursor, and other MCP clients.
+
+The benefit of using ahvn Toolkits as MCP servers lies in its persistence and lifecycle management. Once registered, your toolkit can be easily fetched, updated, and transferred across processes and machines without needing to re-define, re-register, or re-import your tool functions. This makes it ideal for building reusable toolkits that can be shared across projects and teams. Also, based on FastMCP and ahvn Capsule system, you can convert from any source (e.g., python function, existing MCP, code-string, etc.) to MCP easily, and ahvn handles the rest (e.g., serialization, transport, etc.) for you.
 
 <br/>
 
@@ -156,6 +162,67 @@ Copy the MCP config from `ahvn mcp serve weather_tools` output:
         For stdio, choose `stdio` and paste the single-line command.
     </Tab>
 </Tabs>
+
+<br/>
+
+## 6. Export as a Skill (Optional)
+
+You can export your toolkit as a reusable skill for easy sharing and integration across projects:
+
+```bash
+ahvn mcp export weather_tools -o ./skills/
+# The skill will be exported to ./skills/weather_tools/ with a SKILL.md containing the toolkit definition and usage instructions.
+```
+
+Exported skill:
+``````markdown
+---
+name: weather_tools
+description: Weather utilities — lookup and temperature conversion.
+tools:
+- get_weather
+- convert_temp
+---
+# The `weather_tools` Toolkit
+Weather utilities — lookup and temperature conversion.
+
+## Tools (2)
+
+
+### get_weather
+Get the current weather for a city.
+
+**Parameters:**
+
+- `city`: string *(required)*
+
+**Usage:**
+
+```bash
+ahvn mcp run weather_tools.get_weather "city=<city>"
+```
+```python
+get_weather(city=<city>)
+```
+
+### convert_temp
+Convert Celsius to Fahrenheit.
+
+**Parameters:**
+
+- `celsius`: number *(required)*
+
+**Usage:**
+
+```bash
+ahvn mcp run weather_tools.convert_temp "celsius=<celsius>"
+```
+```python
+convert_temp(celsius=<celsius>)
+```
+
+``````
+
 
 <br/>
 
