@@ -128,8 +128,8 @@ def multiply(a: int, b: int) -> int:
     """Multiply two integers."""
     return a * b
 
-fib_tool = ToolSpec.from_function(fibonacci)
-mul_tool = ToolSpec.from_function(multiply)
+fib_tool = ToolSpec.from_func(fibonacci)
+mul_tool = ToolSpec.from_func(multiply)
 
 agent = ConvToolAgentSpec(
     prompt=p,

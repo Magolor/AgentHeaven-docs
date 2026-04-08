@@ -1,0 +1,73 @@
+---
+title: "LLMs"
+description: "Unified LLM inference across providers with configurable presets."
+---
+
+<Note>
+    *Model choices and provider choices never appear in your code — only logical preset names.*
+</Note>
+
+{/*
+Source: ahvn.utils.llm (LLM, LLMSpec, LLMConfigEngine)
+
+Planned sections for future expansion:
+- LLMSpec and LLMConfigEngine internals
+- Custom backends and provider registration
+*/}
+
+AgentHeaven routes all LLM calls through [LiteLLM](https://www.litellm.ai/), supporting any provider it covers. Rather than hard-coding model names or API keys in your code, you define **presets** — logical roles like `sys`, `chat`, `reason`, `embedder` — and configure each preset to point at whichever provider and model you want via [Configuration](/features/configuration).
+
+```python
+from ahvn.utils.llm import LLM
+
+llm = LLM(preset="chat")      # uses whatever model/provider you configured for "chat"
+answer = llm.oracle("Hello!")  # full response as a string
+```
+
+This design means your application code never changes when you swap from GPT to Claude to a local Ollama model — you just update the config.
+
+<br/>
+
+## Core Concepts
+
+| Concept | What it is | Example |
+|---------|-----------|---------|
+| **Preset** | Logical role | `sys`, `chat`, `reason`, `embedder`, `coder`, `translator`, `tiny`, `local` |
+| **Provider** | Backend connection | `openrouter`, `openai`, `anthropic`, `gemini`, `deepseek`, `ollama`, `lmstudio`, `vllm` |
+| **Model alias** | Short name → full ID | `dsv3` → `deepseek/deepseek-v3.2`, `sonnet` → `claude-sonnet-4-6` |
+| **Backend** | LiteLLM routing prefix | `openai/`, `anthropic/`, `ollama/`, `hosted_vllm/` |
+
+See [Quick Setup](/quickstart/quick-setup) for how to configure providers and presets.
+
+<br/>
+
+## LLM Features
+
+<CardGroup cols={2}>
+    <Card title="Chat & Streaming" icon="message" href="/features/llm/chat">
+        oracle(), stream(), message formats, and per-call parameters.
+    </Card>
+    <Card title="Sessions" icon="comments" href="/features/llm/sessions">
+        Multi-turn conversations, history, slash commands.
+    </Card>
+    <Card title="Embeddings" icon="vector-square" href="/features/llm/embeddings">
+        embed(), embedding providers, vector dimensions.
+    </Card>
+    <Card title="Tool Use" icon="wrench" href="/features/llm/tool-use">
+        Function calling, tool schemas, exec_tool_calls.
+    </Card>
+    <Card title="Advanced" icon="flask-vial" href="/features/llm/advanced">
+        Image generation, include finetuning, custom backends.
+    </Card>
+</CardGroup>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [Quick Setup](/quickstart/quick-setup) — configure providers and presets
+    - [First LLM Chat](/quickstart/first-llm-chat) — your first API call
+    - [Integrations: LLM Providers](/integrations/llm-providers) — full provider matrix
+</Tip>

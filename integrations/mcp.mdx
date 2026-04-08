@@ -1,0 +1,97 @@
+---
+title: "MCP"
+description: "Integrate AgentHeaven toolkits with MCP-compatible clients."
+---
+
+{/*
+Planned sections for future expansion:
+1. HTTP vs stdio transport — when to use each
+2. Advanced configuration — auth, CORS, custom routes
+3. Debugging MCP connections
+*/}
+
+Expose AgentHeaven toolkits to any [Model Context Protocol](https://modelcontextprotocol.io/) client. Build a toolkit once, then serve it as an MCP server that any compatible host can connect to.
+
+<Note>
+    See [Toolkits](/features/toolkits) for how to build toolkits and [First MCP Toolkit](/quickstart/first-mcp-toolkit) for a step-by-step quickstart.
+</Note>
+
+<br/>
+
+## Serving a Toolkit via MCP
+
+After building a toolkit (see [Toolkits](/features/toolkits)), serve it as an MCP server:
+
+```bash
+# stdio transport (for local clients like Claude Desktop, VS Code)
+ahvn mcp serve <toolkit_name>
+
+# HTTP transport (for remote clients or browser-based tools)
+ahvn mcp serve <toolkit_name> --http --port 8080
+```
+
+<br/>
+
+## Claude Desktop
+
+Add the server to your Claude Desktop configuration (`claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "my_toolkit": {
+      "command": "ahvn",
+      "args": ["mcp", "serve", "my_toolkit"]
+    }
+  }
+}
+```
+
+Restart Claude Desktop — the toolkit's tools will appear in the tool picker.
+
+<br/>
+
+## VS Code (GitHub Copilot)
+
+Add to your `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "my_toolkit": {
+      "command": "ahvn",
+      "args": ["mcp", "serve", "my_toolkit"]
+    }
+  }
+}
+```
+
+The tools appear in Copilot Chat when agent mode is enabled.
+
+<br/>
+
+## Cursor
+
+Add to Cursor's MCP settings (Settings → MCP Servers → Add):
+
+```json
+{
+  "mcpServers": {
+    "my_toolkit": {
+      "command": "ahvn",
+      "args": ["mcp", "serve", "my_toolkit"]
+    }
+  }
+}
+```
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [First MCP Toolkit](/quickstart/first-mcp-toolkit) — step-by-step quickstart
+    - [Toolkits](/features/toolkits) — building and registering toolkits
+    - [Skills](/integrations/skills) — export toolkits as shareable skills
+</Tip>

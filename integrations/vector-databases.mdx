@@ -1,0 +1,71 @@
+---
+title: "Vector Databases"
+description: "Vector database integration through LlamaIndex for semantic search and embeddings."
+---
+
+{/*
+Source: ahvn.utils.vdb (VectorDatabase, VectorCompiler), field types (VdbIdType, VdbTextType, etc.)
+
+Planned sections for future expansion:
+1. VectorDatabase abstraction — connection, indexing, querying
+2. VectorCompiler — compile vector queries
+3. Configuration — resolve_vdb_config, parse_encoder_embedder
+4. Vector field types — VdbIdType, VdbTextType, VdbTagsType, etc.
+5. Integration with KLStore/KLEngine — VectorKLStore, VectorKLEngine
+*/}
+
+AgentHeaven connects to vector databases through [LlamaIndex](https://www.llamaindex.ai/), supporting multiple backends for semantic search and embedding storage.
+
+<br/>
+
+## LanceDB
+
+The default local vector store — zero-config, file-based, and fast for prototyping.
+
+```bash
+pip install lancedb
+```
+
+LanceDB is used automatically when you create a `VectorKLStore` without specifying a backend.  No server process is needed — data is stored in a local directory.
+
+<br/>
+
+## ChromaDB
+
+Lightweight open-source embedding database with a simple Python API.
+
+```bash
+pip install chromadb
+```
+
+```bash
+ahvn cfg set vdb.backend chromadb
+ahvn cfg set vdb.chromadb.host "localhost"
+ahvn cfg set vdb.chromadb.port 8000
+```
+
+<br/>
+
+## Milvus
+
+Scalable vector database for production workloads. Supports distributed deployment and billion-scale vector search.
+
+```bash
+pip install pymilvus
+```
+
+```bash
+ahvn cfg set vdb.backend milvus
+ahvn cfg set vdb.milvus.uri "http://localhost:19530"
+```
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [Embeddings](/features/llm/embeddings) — generating vectors to store and query
+    - [Knowledge Storage](/features/knowledge/storage) — VectorKLStore integration
+    - [LLM Providers](/integrations/llm-providers) — embedding provider setup
+</Tip>

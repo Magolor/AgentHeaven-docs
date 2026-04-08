@@ -32,7 +32,7 @@ result = llm.oracle("What is 3 + 5?", tools=[add])
 
 ### ToolSpec() — decorator form
 
-When `ToolSpec` is called with keyword arguments it returns a decorator. The decorator calls `ToolSpec.from_function` internally.
+When `ToolSpec` is called with keyword arguments it returns a decorator. The decorator calls `ToolSpec.from_func` internally.
 
 ```python
 @ToolSpec(name="search", description="Search the web")
@@ -40,11 +40,11 @@ def web_search(query: str) -> str:
     ...
 ```
 
-All keyword arguments are forwarded to `ToolSpec.from_function`.
+All keyword arguments are forwarded to `ToolSpec.from_func`.
 
 ---
 
-### ToolSpec.from_function()
+### ToolSpec.from_func()
 
 Create a `ToolSpec` from a Python function or callable class instance.
 
@@ -61,7 +61,7 @@ def multiply(a: float, b: float) -> float:
     """
     return a * b
 
-tool = ToolSpec.from_function(multiply)
+tool = ToolSpec.from_func(multiply)
 print(tool.name)  # "multiply"
 print(tool.binded.description)  # "Multiply two numbers."
 ```
@@ -79,7 +79,7 @@ print(tool.binded.description)  # "Multiply two numbers."
 </ParamField>
 
 <ParamField path="kwargs" type="Any">
-  Additional keyword arguments forwarded to `fastmcp.tools.Tool.from_function`, such as `name`, `description`, `output_schema`.
+  Additional keyword arguments forwarded to `fastmcp.tools.Tool.from_func`, such as `name`, `description`, `output_schema`.
 </ParamField>
 
 **Returns** `ToolSpec`.
@@ -118,7 +118,7 @@ print(tool(name="Alice"))  # "Hello, Alice!"
 </ParamField>
 
 <ParamField path="kwargs" type="Any">
-  Additional kwargs forwarded to `from_function`.
+  Additional kwargs forwarded to `from_func`.
 </ParamField>
 
 **Returns** `ToolSpec`.
@@ -267,12 +267,12 @@ schema = add_tool.to_jsonschema()
 
 ---
 
-### to_function()
+### to_func()
 
 Return a callable with the same signature as the synthesized `code` property. Useful when you need a typed callable for introspection or to pass to code that does not accept `ToolSpec`.
 
 ```python
-func = add_tool.to_function()
+func = add_tool.to_func()
 import inspect
 print(inspect.signature(func))  # (a: int, b: int) -> int
 print(func(a=3, b=5))           # 8 — delegates to ToolSpec.__call__
@@ -285,8 +285,8 @@ print(func(a=3, b=5))           # 8 — delegates to ToolSpec.__call__
 Return a function-call string with the tool's name and default/provided arguments.
 
 ```python
-print(add_tool.signature())           # add(a=0, b=0)
-print(add_tool.signature(a=3, b=5))  # add(a=3, b=5)
+print(add_tool.to_sig())           # add(a=0, b=0)
+print(add_tool.to_sig(a=3, b=5))  # add(a=3, b=5)
 ```
 
 ---
@@ -337,7 +337,7 @@ if spec.available():
 Create a shallow copy of the `ToolSpec`, preserving call interfaces, examples, binds, and state.
 
 ```python
-base_tool = ToolSpec.from_function(my_func)
+base_tool = ToolSpec.from_func(my_func)
 variant = base_tool.clone()
 variant.bind("db", default=other_db)
 ```
@@ -409,7 +409,7 @@ def my_method(self, x: int) -> str: ...
 </ParamField>
 
 <ParamField path="kwargs" type="Any">
-  Additional keyword arguments forwarded to `ToolSpec.from_function`.
+  Additional keyword arguments forwarded to `ToolSpec.from_func`.
 </ParamField>
 
 **Returns** the original function with `_is_toolspec = True` metadata attached.

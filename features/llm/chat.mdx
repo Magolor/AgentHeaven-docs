@@ -1,0 +1,109 @@
+---
+title: "Chat & Streaming"
+description: "Send messages and stream responses with the LLM class."
+---
+
+<Note>
+    *One call for the full answer, one call for real-time deltas.*
+</Note>
+
+{/*
+Source: ahvn.utils.llm.base — LLM.oracle(), LLM.stream(), message types
+
+Planned sections for future expansion:
+- Async variants (aoracle, astream)
+- Structured output / JSON mode
+- Response caching integration
+*/}
+
+The `LLM` class is the central inference interface. Construct one with a preset (or explicit model/provider), then call `oracle()` for a complete response or `stream()` for incremental deltas.
+
+<br/>
+
+## 1. oracle() — Full Response
+
+```python
+from ahvn.utils.llm import LLM
+
+llm = LLM(preset="chat")
+answer = llm.oracle("What programming language is AgentHeaven written in?")
+print(answer)
+# Python
+```
+
+Pass a conversation history as a list of message dicts for multi-turn context:
+
+```python
+messages = [
+    {"role": "system", "content": "You are a concise assistant."},
+    {"role": "user", "content": "Name three Python web frameworks."},
+]
+answer = llm.oracle(messages)
+print(answer)
+# Flask, Django, FastAPI
+```
+
+<br/>
+
+## 2. stream() — Streaming Deltas
+
+```python
+for chunk in llm.stream("Explain recursion in two sentences."):
+    print(chunk, end="", flush=True)
+print()
+```
+
+Each `chunk` is a text string delta. Streaming is useful for interactive UIs or long responses.
+
+<br/>
+
+## 3. Per-Call Parameters
+
+Override inference parameters at call time without changing the preset:
+
+```python
+# At construction
+fast_llm = LLM(preset="chat", temperature=0.0, max_tokens=100)
+
+# Or at call time
+answer = llm.oracle("Be creative.", temperature=1.2, seed=42)
+```
+
+You can also override the model and provider per-call:
+
+```python
+specific_llm = LLM(model="sonnet", provider="anthropic")
+local_llm = LLM(preset="local")
+highly_customized = LLM(
+    preset="chat", model="gemini-flash", provider="google", backend="google",
+    temperature=0.7, seed=42, max_tokens=4096,
+)
+```
+
+<br/>
+
+## 4. Message Types
+
+AgentHeaven uses standard OpenAI-format message dicts:
+
+```python
+messages = [
+    {"role": "system", "content": "System instructions here."},
+    {"role": "user", "content": "User query."},
+    {"role": "assistant", "content": "Previous response."},
+    {"role": "user", "content": "Follow-up question."},
+]
+```
+
+The `oracle()` and `stream()` methods accept both a plain string (converted to a single user message) and a list of message dicts.
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Next:**
+    - [Sessions](/features/llm/sessions) — multi-turn conversations
+    - [Embeddings](/features/llm/embeddings) — vector representations
+    - [Tool Use](/features/llm/tool-use) — function calling with LLMs
+</Tip>

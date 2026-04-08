@@ -82,7 +82,7 @@ def multiply(a: int, b: int) -> int:
     """Multiply two integers."""
     return a * b
 
-tool = ToolSpec.from_function(multiply)
+tool = ToolSpec.from_func(multiply)
 
 # Force the model to call the tool and get back the result
 tool_messages = llm.tooluse("What is 42 * 37?", tools=[tool])

@@ -182,7 +182,7 @@ def get_weather(city: str) -> str:
     """Return the current weather for a city."""
     return f"Sunny in {city}, 24 °C"
 
-weather_tool = ToolSpec.from_function(get_weather)
+weather_tool = ToolSpec.from_func(get_weather)
 
 result = llm.oracle(
     "What's the weather in Paris?",

@@ -214,7 +214,7 @@ from ahvn.utils.exts.autocode import autocode
 from ahvn.cache import DiskCache
 
 # 1. Persistent cache so generated code survives restarts
-cache = DiskCache(path="~/.ahvn/cache/my_functions")
+cache = DiskCache(path="~/.ahvn/cache/my_funcs")
 
 # 2. Seed expected outputs before code is generated
 cache.set("parse_date", text="January 3rd 2025", expected="2025-01-03")

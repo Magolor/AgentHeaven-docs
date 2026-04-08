@@ -1,0 +1,67 @@
+---
+title: "Advanced LLM"
+description: "Image generation, include finetuning, custom backends, and other advanced LLM features."
+---
+
+<Note>
+    *Beyond text — images, finetuning, and custom providers.*
+</Note>
+
+{/*
+Source: ahvn.utils.llm — advanced features
+
+Planned sections for future expansion:
+- Image generation API (DALL-E, Stable Diffusion via providers)
+- Include finetuning — on-the-fly prompt/config adaptation
+- Custom backend registration
+- Retry and fallback strategies
+- Rate limiting and cost tracking
+*/}
+
+This page covers LLM features beyond standard text generation — image generation, experimental finetuning approaches, and custom backend integration.
+
+<br/>
+
+## 1. Image Generation
+
+{/* TODO: Document image generation API once stabilized */}
+
+AgentHeaven supports image generation through providers that offer it (e.g., OpenAI's DALL-E, Google's Imagen). Configuration follows the same preset pattern:
+
+```bash
+ahvn cfg set llm.presets.image.provider openai
+ahvn cfg set llm.presets.image.model dall-e-3
+```
+
+<br/>
+
+## 2. Include Finetuning
+
+{/* TODO: Document include-based finetuning approach */}
+
+The `include` finetuning approach augments prompts with cached experience and examples at inference time, without modifying model weights. This is the same pattern used in the [IMDb Sentiment Analysis](/blog/imdb-sentiment-analysis) blog post — inject relevant prior outputs to improve accuracy.
+
+<br/>
+
+## 3. Custom Backends
+
+Any provider supported by LiteLLM can be configured. For providers not in the default list:
+
+```bash
+ahvn cfg set llm.providers.custom_name.backend <litellm_prefix>
+ahvn cfg set llm.providers.custom_name.api_base "https://your-endpoint/v1"
+ahvn cfg set llm.providers.custom_name.api_key "..."
+```
+
+See [LiteLLM Providers](https://docs.litellm.ai/docs/providers/) for the full list of supported backends.
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [LLM Overview](/features/llm/overview) — presets, providers, and model aliases
+    - [Integrations: LLM Providers](/integrations/llm-providers) — provider matrix
+    - [Knowledge: Retrieval](/features/knowledge/retrieval) — experience-augmented inference
+</Tip>

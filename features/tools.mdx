@@ -49,7 +49,7 @@ def add(a: int, b: int) -> int:
 spec = add.to_tool()                        # ToolSpec
 
 print(spec(a=2, b=3))                       # 5
-print(spec.signature(a=2, b=3))             # add(a=2, b=3)
+print(spec.to_sig(a=2, b=3))             # add(a=2, b=3)
 print(dumps_json(spec.to_jsonschema()))     # OpenAI-format json schema
 # {
 #     "type": "function",

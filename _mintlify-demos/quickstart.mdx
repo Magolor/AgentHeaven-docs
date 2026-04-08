@@ -138,8 +138,8 @@ description: "Get a working AgentHeaven agent running in under five minutes."
 
 
     # Create ToolSpec objects from functions
-    fib_tool = ToolSpec.from_function(fibonacci)
-    mul_tool = ToolSpec.from_function(multiply)
+    fib_tool = ToolSpec.from_func(fibonacci)
+    mul_tool = ToolSpec.from_func(multiply)
 
     # Use the LLM with tools
     llm = LLM(preset="chat")

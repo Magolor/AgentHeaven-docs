@@ -1,0 +1,59 @@
+---
+title: "LLM Providers"
+description: "Supported LLM providers and how AgentHeaven integrates with each."
+---
+
+{/*
+Source: ahvn.utils.llm — LiteLLM integration, provider presets, custom endpoints
+
+Planned sections for future expansion:
+- Provider comparison table (capabilities, pricing)
+- Rate limiting and fallback configuration
+- Custom endpoint registration
+*/}
+
+AgentHeaven connects to LLM providers through [LiteLLM](https://docs.litellm.ai/), supporting a wide range of providers out of the box. See [LLM](/features/llm/overview) for the core LLM abstraction and [Quick Setup](/quickstart/quick-setup) for provider configuration.
+
+<br/>
+
+## Supported Providers
+
+| Provider | Backend prefix | Chat | Embedding | Local | Notes |
+|----------|---------------|------|-----------|-------|-------|
+| **OpenRouter** | `openrouter/` | ✅ | ❌ | ❌ | Default provider — routes to most major models |
+| **OpenAI** | `openai/` | ✅ | ✅ | ❌ | GPT-5.4, text-embedding-3-small |
+| **Anthropic** | `anthropic/` | ✅ | ❌ | ❌ | Claude Opus 4.6, Claude Sonnet 4.6 |
+| **Google Gemini** | `gemini/` | ✅ | ✅ | ❌ | Gemini 3.0 Flash, gemini-embedding-001 |
+| **DeepSeek** | `deepseek/` | ✅ | ❌ | ❌ | DeepSeek V3, DeepSeek Reasoner |
+| **xAI** | `xai/` | ✅ | ❌ | ❌ | Grok 4.20 |
+| **Z.AI** | `zai/` | ✅ | ❌ | ❌ | GLM-4.7, GLM-5 |
+| **Moonshot** | `moonshot/` | ✅ | ❌ | ❌ | Kimi K2.5 |
+| **Voyage** | `voyage/` | ❌ | ✅ | ❌ | voyage-4 (dedicated embedding provider) |
+| **Ollama** | `ollama/` | ✅ | ✅ | ✅ | Any model from Ollama library |
+| **LM Studio** | `lm_studio/` | ✅ | ✅ | ✅ | Local GUI for running models |
+| **vLLM** | `hosted_vllm/` | ✅ | ✅ | ✅ | High-throughput local serving |
+
+<br/>
+
+## Adding a Custom Provider
+
+Any provider supported by LiteLLM can be configured:
+
+```bash
+ahvn cfg set llm.providers.<name>.backend <litellm_prefix>
+ahvn cfg set llm.providers.<name>.api_base "https://your-endpoint/v1"
+ahvn cfg set llm.providers.<name>.api_key "..."
+```
+
+See [LiteLLM Providers](https://docs.litellm.ai/docs/providers/) for the full list of supported backends and their required configuration.
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [Quick Setup](/quickstart/quick-setup) — configure provider API keys and presets
+    - [LLM](/features/llm/overview) — the core LLM abstraction
+    - [Embeddings](/features/llm/embeddings) — embedding-specific provider setup
+</Tip>

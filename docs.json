@@ -82,14 +82,25 @@
                                 "pages": [
                                     "quickstart/installation",
                                     "quickstart/quick-setup",
-                                    "quickstart/first-llm-chat"
+                                    "quickstart/first-llm-chat",
+                                    "quickstart/first-mcp-toolkit"
                                 ]
                             },
                             {
                                 "group": "Features",
                                 "pages": [
                                     "features/configuration",
-                                    "features/llm",
+                                    {
+                                        "group": "LLM",
+                                        "pages": [
+                                            "features/llm/overview",
+                                            "features/llm/chat",
+                                            "features/llm/sessions",
+                                            "features/llm/embeddings",
+                                            "features/llm/tool-use",
+                                            "features/llm/advanced"
+                                        ]
+                                    },
                                     "features/prompts",
                                     "features/caching",
                                     "features/capsules",
@@ -103,24 +114,6 @@
                                             "features/knowledge/storage",
                                             "features/knowledge/retrieval",
                                             "features/knowledge/klbase"
-                                        ]
-                                    },
-                                    {
-                                        "group": "Databases",
-                                        "pages": [
-                                            "features/databases/overview",
-                                            "features/databases/sqlite",
-                                            "features/databases/postgresql",
-                                            "features/databases/mongodb"
-                                        ]
-                                    },
-                                    {
-                                        "group": "Vector Databases",
-                                        "pages": [
-                                            "features/vector-databases/overview",
-                                            "features/vector-databases/lancedb",
-                                            "features/vector-databases/chromadb",
-                                            "features/vector-databases/milvus"
                                         ]
                                     },
                                     {
@@ -144,11 +137,14 @@
                                 ]
                             },
                             {
-                                "group": "Ecosystem",
+                                "group": "Integrations",
                                 "pages": [
-                                    "ecosystem/llm-providers",
-                                    "ecosystem/mcp-clients",
-                                    "ecosystem/skills"
+                                    "integrations/overview",
+                                    "integrations/llm-providers",
+                                    "integrations/databases",
+                                    "integrations/vector-databases",
+                                    "integrations/mcp",
+                                    "integrations/skills"
                                 ]
                             },
                             {
@@ -244,14 +240,25 @@
                                 "pages": [
                                     "zh/quickstart/installation",
                                     "zh/quickstart/quick-setup",
-                                    "zh/quickstart/first-llm-chat"
+                                    "zh/quickstart/first-llm-chat",
+                                    "zh/quickstart/first-mcp-toolkit"
                                 ]
                             },
                             {
                                 "group": "功能",
                                 "pages": [
                                     "zh/features/configuration",
-                                    "zh/features/llm",
+                                    {
+                                        "group": "LLM",
+                                        "pages": [
+                                            "zh/features/llm/overview",
+                                            "zh/features/llm/chat",
+                                            "zh/features/llm/sessions",
+                                            "zh/features/llm/embeddings",
+                                            "zh/features/llm/tool-use",
+                                            "zh/features/llm/advanced"
+                                        ]
+                                    },
                                     "zh/features/prompts",
                                     "zh/features/caching",
                                     "zh/features/capsules",
@@ -265,24 +272,6 @@
                                             "zh/features/knowledge/storage",
                                             "zh/features/knowledge/retrieval",
                                             "zh/features/knowledge/klbase"
-                                        ]
-                                    },
-                                    {
-                                        "group": "数据库",
-                                        "pages": [
-                                            "zh/features/databases/overview",
-                                            "zh/features/databases/sqlite",
-                                            "zh/features/databases/postgresql",
-                                            "zh/features/databases/mongodb"
-                                        ]
-                                    },
-                                    {
-                                        "group": "向量数据库",
-                                        "pages": [
-                                            "zh/features/vector-databases/overview",
-                                            "zh/features/vector-databases/lancedb",
-                                            "zh/features/vector-databases/chromadb",
-                                            "zh/features/vector-databases/milvus"
                                         ]
                                     },
                                     {
@@ -306,11 +295,14 @@
                                 ]
                             },
                             {
-                                "group": "生态",
+                                "group": "集成",
                                 "pages": [
-                                    "zh/ecosystem/llm-providers",
-                                    "zh/ecosystem/mcp-clients",
-                                    "zh/ecosystem/skills"
+                                    "zh/integrations/overview",
+                                    "zh/integrations/llm-providers",
+                                    "zh/integrations/databases",
+                                    "zh/integrations/vector-databases",
+                                    "zh/integrations/mcp",
+                                    "zh/integrations/skills"
                                 ]
                             },
                             {

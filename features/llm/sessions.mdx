@@ -1,0 +1,71 @@
+---
+title: "Sessions"
+description: "Interactive multi-turn chat sessions with history and slash commands."
+---
+
+<Note>
+    *A session remembers context so you don't have to.*
+</Note>
+
+{/*
+Source: ahvn.cli.session — interactive terminal session
+
+Planned sections for future expansion:
+- Session persistence and loading
+- Programmatic session API
+- Session hooks and middleware
+*/}
+
+`ahvn session` starts an interactive multi-turn chat in the terminal. The session maintains conversation history across turns and supports slash commands for managing the conversation flow.
+
+<br/>
+
+## 1. Starting a Session
+
+```bash
+ahvn session
+```
+
+The session uses the `chat` preset by default. Override with flags:
+
+```bash
+ahvn session -p reason          # use the "reason" preset
+ahvn session -m sonnet          # override model
+ahvn session --no-stream        # disable streaming
+```
+
+<br/>
+
+## 2. Slash Commands
+
+Inside a session, the following commands are available:
+
+| Command | Description |
+|---------|-------------|
+| `/save` | Save current conversation history |
+| `/load` | Load a previously saved conversation |
+| `/clear` | Clear the conversation history |
+| `/regen` | Regenerate the last assistant response |
+| `/back` | Remove the last user–assistant turn |
+| `/bye` or `Ctrl+C` | Exit the session |
+
+<br/>
+
+## 3. CLI Chat (One-Shot)
+
+For a single question–answer without entering a session, use `ahvn chat`:
+
+```bash
+ahvn chat "Hello! Who are you?"
+ahvn chat -v "Hello!"           # verbose: shows model, provider, api_key (encrypted)
+```
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [Chat & Streaming](/features/llm/chat) — the Python API behind sessions
+    - [CLI Reference](/reference/cli/overview) — full command reference
+</Tip>

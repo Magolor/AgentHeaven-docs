@@ -11,6 +11,10 @@ AgentHeaven routes LLM calls through [LiteLLM](https://www.litellm.ai/), so it s
 
 More aggressively, we believe model choices and provider choices should **NEVER** appear once in your code. With the LLM configs persisted in database (see [ConfigManager](/features/configuration)), your code just calls `llm = LLM(preset="chat"/"sys"/"reason"/"embedder"/"translator"/...)` and use it with simple `output = llm(query)`. Only logical roles and task-specific presets should be referenced in code, and the actual model and provider can be swapped freely in the config without changing a single line of code.
 
+<Note>
+    *We are planning to transform our current LiteLLM-centric LLM system towards [Portkey](https://portkey.ai/)-centric, multi-gateway support (including Portkey, Bifrost, LiteLLM, and native OpenAI formatted calls) in the near future. The goal is to allow you to choose the best gateway for your specific considerations of latency, throughput, features, and data safety without being locked in.*
+</Note>
+
 <br/>
 
 ## 1. API Key Setup
@@ -261,7 +265,7 @@ AgentHeaven configures certain default providers and they recognize environment 
 
 In principle, we can set up any provider supported by LiteLLM. If you want to use a different provider, check the [LiteLLM Providers Doc](https://docs.litellm.ai/docs/providers/) for the provider-specific setup and then mirror that config in AgentHeaven.
 
-<Tip>For full LLM configuration options, see the [LLM feature page](/features/llm).</Tip>
+<Tip>For full LLM configuration options, see the [LLM feature page](/features/llm/overview).</Tip>
 
 <br/>
 
@@ -398,7 +402,7 @@ highly_customized_llm = LLM(
 )
 ```
 
-<Tip>For full LLM features, see the [LLM feature page](/features/llm).</Tip>
+<Tip>For full LLM features, see the [LLM feature page](/features/llm/overview).</Tip>
 
 <br/>
 
@@ -422,7 +426,7 @@ See [Prompts](/features/prompts) for a full walkthrough of `PromptSpec`, `PM_AHV
 
 <Tip>
     **LLM references:**
-    - [LLM](/features/llm) — model, provider, and session workflows
+    - [LLM](/features/llm/overview) — model, provider, and session workflows
     - [Prompts](/features/prompts) — PromptSpec, PM_AHVN, translation
     - [CLI Reference](/reference/cli/overview) — complete command reference
 </Tip>

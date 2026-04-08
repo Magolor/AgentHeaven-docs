@@ -1,0 +1,178 @@
+---
+title: "First MCP Toolkit"
+description: "Build a toolkit and serve it as an MCP server in 5 minutes."
+sidebarTitle: "First MCP Toolkit"
+---
+
+Turn any Python function into an MCP-compatible tool that works with Claude Desktop, VS Code Copilot, Cursor, and other MCP clients.
+
+<br/>
+
+## 1. Define Your Tools
+
+```python
+from ahvn import ToolSpec
+
+def get_weather(city: str) -> str:
+    """Get the current weather for a city."""
+    # Replace with a real API call
+    return f"Weather in {city}: 22°C, sunny"
+
+def convert_temp(celsius: float) -> float:
+    """Convert Celsius to Fahrenheit."""
+    return celsius * 9 / 5 + 32
+```
+
+<br/>
+
+## 2. Build a Toolkit
+
+```python
+from ahvn.tool import Toolkit
+
+toolkit = Toolkit(
+    name="weather_tools",
+    description="Weather utilities — lookup and temperature conversion.",
+    tools={
+        "get_weather": ToolSpec.from_func(get_weather),
+        "convert_temp": ToolSpec.from_func(convert_temp),
+    },
+)
+```
+
+<br/>
+
+## 3. Register with TK_AHVN
+
+For MCP stdio transport, the subprocess needs to locate your toolkit. Register it globally:
+
+```python
+from ahvn import TK_AHVN
+
+TK_AHVN.add(toolkit, overwrite=True)
+```
+
+<br/>
+
+## 4. Serve via MCP
+
+```bash
+ahvn mcp serve weather_tools --host 127.0.0.1 --port 7001
+```
+
+This starts an MCP server exposing your toolkit on `127.0.0.1:7001`. You can change the host and port as needed.
+
+```json
+{
+  "mcpServers": {
+    "weather_tools": {
+      "url": "http://127.0.0.1:7001/weather_tools/mcp",
+      "transport": "http"
+    }
+  }
+}
+```
+
+Or via stdio:
+
+```bash
+ahvn mcp serve weather_tools --stdio
+```
+
+This prints MCP JSON config and a single-line command:
+
+```json
+{
+  "mcpServers": {
+    "weather_tools": {
+      "command": "<path_to_your_python>/python",
+      "args": [
+        "<path_to_your_ahvn>/_mcp_stdio.py",
+        "weather_tools"
+      ]
+    }
+  }
+}
+```
+
+```bash
+<path_to_your_python>/python <path_to_your_ahvn>/_mcp_stdio.py weather_tools
+```
+
+<br/>
+
+## 5. Connect a Client
+
+Copy the MCP config from `ahvn mcp serve weather_tools` output:
+
+**HTTP MCP JSON**
+
+```json
+{
+  "mcpServers": {
+    "weather_tools": {
+      "url": "http://127.0.0.1:7001/weather_tools/mcp",
+      "transport": "http"
+    }
+  }
+}
+```
+
+**Stdio MCP JSON**
+
+```json
+{
+  "mcpServers": {
+    "weather_tools": {
+      "command": "<path_to_your_python>/python",
+      "args": [
+        "<path_to_your_ahvn>/_mcp_stdio.py",
+        "weather_tools"
+      ]
+    }
+  }
+}
+```
+
+**Stdio single-line command**
+
+```bash
+<path_to_your_python>/python <path_to_your_ahvn>/_mcp_stdio.py weather_tools
+```
+
+<Tabs>
+    <Tab title="LM Studio">
+        In Developer > `mcp.json`, paste the full server MCP JSON in either HTTP or stdio format.
+    </Tab>
+    <Tab title="Claude Code">
+        `claude mcp add --transport http weather_tools http://127.0.0.1:7001/weather_tools/mcp`
+    </Tab>
+    <Tab title="Codex">
+        In Settings > MCP Servers > Add Server, set Name to "weather_tools", choose Streamable HTTP, and paste `http://127.0.0.1:7001/weather_tools/mcp`.
+        For stdio, choose Stdio and paste the single-line command.
+    </Tab>
+    <Tab title="VS Code">
+        Run `MCP: Add Server` from the Command Palette, choose `HTTP`, paste `http://127.0.0.1:7001/weather_tools/mcp`, and name it "weather_tools".
+        For stdio, choose `stdio` and paste the single-line command.
+    </Tab>
+</Tabs>
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Quickstart flow:**
+    - [Quick Setup](/quickstart/quick-setup) — initialize config and defaults
+    - [First LLM Chat](/quickstart/first-llm-chat) — configure a provider and make a first call
+</Tip>
+
+<Tip>
+    **Toolkit references:**
+    - [Toolkits](/features/toolkits) — toolkit factories, persistence, and lifecycle
+    - [Tools](/features/tools) — ToolSpec and tool construction
+    - [MCP](/integrations/mcp) — transports, clients, and debugging
+    - [Skills](/integrations/skills) — export a toolkit as a reusable skill
+</Tip>
+
+<br/>

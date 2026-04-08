@@ -1,0 +1,78 @@
+---
+title: "Databases"
+description: "SQL database integration through SQLAlchemy with query compilation and healing."
+---
+
+{/*
+Source modules: ahvn.utils.db (Database, SQLCompiler, SQLProcessor, SQLHealer, SchemaIndex, DatabaseEngineRegistry)
+
+Planned sections for future expansion:
+1. Database abstraction — DatabaseConfigSpec, DatabaseConfigEngine, Database class
+2. SQL compilation — SQLCompiler, SQLProcessor, SQLGlotProcessor, SQLResponse
+3. SQL healing — SQLHealer, create_sql_healer (LLM-assisted auto-fix)
+4. Schema utilities — SchemaIndex, split_sqls, transpile_sql, prettify_sql, compare_sqls
+5. Database field types — ExportableEntity, DatabaseIdType, TextType, etc.
+6. Configuration — database backend config in ahvn config system
+*/}
+
+AgentHeaven integrates with SQL databases through [SQLAlchemy](https://www.sqlalchemy.org/), providing a unified interface for connection management, query compilation, schema inspection, and LLM-assisted SQL healing.
+
+<br/>
+
+## SQLite
+
+The default backend for config, caching, and local development. Works out of the box with zero configuration.
+
+```bash
+pip install aiosqlite   # async support (optional)
+```
+
+SQLite is used by default whenever a persistent store is needed — including [ConfigManager](/features/configuration), [Caching](/features/caching), and [KLStore](/features/knowledge/storage). No explicit database setup is required.
+
+<br/>
+
+## PostgreSQL
+
+Production-grade relational storage for multi-user and high-throughput scenarios.
+
+```bash
+pip install asyncpg psycopg2-binary
+```
+
+Configure via the AgentHeaven config system:
+
+```bash
+ahvn cfg set db.backend postgresql
+ahvn cfg set db.postgresql.host "localhost"
+ahvn cfg set db.postgresql.port 5432
+ahvn cfg set db.postgresql.database "ahvn"
+ahvn cfg set db.postgresql.user "your_user"
+ahvn cfg set db.postgresql.password "your_password"
+```
+
+<br/>
+
+## MongoDB
+
+Document-oriented storage via pymongo / motor for flexible schema use cases.
+
+```bash
+pip install pymongo motor
+```
+
+```bash
+ahvn cfg set db.backend mongodb
+ahvn cfg set db.mongodb.uri "mongodb://localhost:27017"
+ahvn cfg set db.mongodb.database "ahvn"
+```
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [Caching](/features/caching) — persistent cache backed by database storage
+    - [Knowledge Storage](/features/knowledge/storage) — KLStore database layer
+    - [Configuration](/features/configuration) — how AgentHeaven's config system uses databases
+</Tip>

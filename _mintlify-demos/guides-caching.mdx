@@ -85,7 +85,7 @@ Every cached item is stored as a `CacheEntry`:
 from ahvn.cache import CacheEntry
 
 entry = CacheEntry(
-    func="my_function",          # function name (cache namespace)
+    func="my_func",          # function name (cache namespace)
     inputs={"x": 5, "y": 10},    # keyword arguments (cache key)
     output=15,                    # actual return value
     expected=...,                 # annotated ground-truth (optional)

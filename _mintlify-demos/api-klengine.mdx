@@ -278,7 +278,7 @@ from ahvn.klengine import VectorKLEngine
 engine = VectorKLEngine(
     storage=store,
     database="my_vdb",
-    k_encoder=my_embedding_function,  # Callable[[BaseUKF], list[float]]
+    k_encoder=my_embedding_func,  # Callable[[BaseUKF], list[float]]
     name="vector_idx",
 )
 

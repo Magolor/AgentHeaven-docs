@@ -97,7 +97,7 @@
     "LLM.embed(text) -> List[float]",
     "BaseCache / InMemCache / DiskCache / JsonCache / DatabaseCache / MongoCache",
     "BaseCache.memoize() decorator",
-    "ToolSpec.from_function(func) -> ToolSpec",
+    "ToolSpec.from_func(func) -> ToolSpec",
     "BaseUKF / KnowledgeUKFT / ExperienceUKFT / PromptUKFT / ToolUKFT / DocumentUKFT",
     "KLBase(storages, engines)",
     "KLBase.add / get / search / sync",

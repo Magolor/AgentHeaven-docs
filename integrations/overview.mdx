@@ -1,0 +1,30 @@
+---
+title: "Integrations"
+description: "Connect AgentHeaven with external systems — LLM providers, databases, vector stores, MCP clients, and more."
+---
+
+<Note>
+    *Plug-and-play backends — swap any external system without changing application code.*
+</Note>
+
+AgentHeaven is designed to be backend-agnostic. Your application code references logical names (presets, providers, collection names), and the actual external system can be swapped via [Configuration](/features/configuration).
+
+<br/>
+
+<CardGroup cols={2}>
+    <Card title="LLM Providers" icon="microchip" href="/integrations/llm-providers">
+        OpenAI, Anthropic, Google, DeepSeek, Ollama, and more via LiteLLM.
+    </Card>
+    <Card title="Databases" icon="database" href="/integrations/databases">
+        SQLite, PostgreSQL, MongoDB — SQL compilation, schema inspection, healing.
+    </Card>
+    <Card title="Vector Databases" icon="magnifying-glass" href="/integrations/vector-databases">
+        LanceDB, ChromaDB, Milvus — semantic search and embedding storage.
+    </Card>
+    <Card title="MCP" icon="plug" href="/integrations/mcp">
+        Serve toolkits to Claude Desktop, VS Code Copilot, Cursor, and other MCP clients.
+    </Card>
+    <Card title="Skills" icon="puzzle-piece" href="/integrations/skills">
+        Export toolkits as Skills — the LLM-friendly protocol for tool discovery.
+    </Card>
+</CardGroup>

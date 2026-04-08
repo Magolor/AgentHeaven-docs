@@ -78,14 +78,14 @@ class MathToolkitFactory(ToolkitFactory):
 
 toolkit = MathToolkitFactory.create("math_tools")
 restored_add = toolkit.get_tool("add")
-print(restored_add.signature(a=5, b=6))                 # "add(a=5, b=6)"
+print(restored_add.to_sig(a=5, b=6))                 # "add(a=5, b=6)"
 
 # (Optional) Register the toolkit for global retrieval and MCP serving.
 TK_AHVN.add(toolkit)
 print(TK_AHVN.run("math_tools.add", a=3, b=4))          # 7
 print(TK_AHVN.run("math_tools.multiply", a=3, b=4))     # 12
 restored_add = TK_AHVN.get("math_tools").get_tool("add")
-print(restored_add.signature(a=5, b=6))                 # "add(a=5, b=6)"
+print(restored_add.to_sig(a=5, b=6))                 # "add(a=5, b=6)"
 ```
 
 Factories matter when toolkits become reusable building blocks instead of one-off Python objects. For example, if we have a `DatabaseToolkitFactory`, we can create toolkits for each database instance, overriding descriptions and connection parameters without affecting the tools' core logic.
@@ -224,8 +224,8 @@ toolkit.export("./skills/")
     **Next:**
     - [Capsules](/features/capsules) — the persistence layer behind functions
     - [Tools](/features/tools) — the structured interface on top of capsules
-    - [MCP Clients](/ecosystem/mcp-clients) — connect toolkits to external MCP clients
-    - [Skills](/ecosystem/skills) — the skill protocol and ecosystem
+    - [MCP](/integrations/mcp) — connect toolkits to external MCP clients
+    - [Skills](/integrations/skills) — the skill protocol and ecosystem
 </Tip>
 
 <Tip>

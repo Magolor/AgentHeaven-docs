@@ -1,0 +1,87 @@
+---
+title: "Skills"
+description: "Extend agent capabilities with pluggable skills and the skill protocol."
+---
+
+{/*
+Source: ahvn.utils.basic.skill_utils — parse_skill_md, load_skill
+Also: Toolkit.export() generates SKILL.md, SkillUKFT for knowledge-enriched skills
+
+Planned sections for future expansion:
+1. SkillUKFT — enriched skill descriptions using UKF
+2. Discovering and installing third-party skills
+3. Security considerations
+*/}
+
+Discover and install skills that extend what your agents can do. AgentHeaven can export toolkits as [Skills](https://github.com/anthropics/skills) — a natural-language-centric protocol for presenting tools and knowledge to LLMs.
+
+<br/>
+
+## What is a Skill?
+
+A Skill is a folder containing a `SKILL.md` file that describes what the skill does, how to invoke it, and what resources it needs. Optionally, a skill folder can include Python scripts, reference documentation, resources, and licenses.
+
+Skills are intended for LLM consumption — unlike traditional API docs, the descriptions are written in natural language so that an LLM can understand when and how to use the tools.
+
+<br/>
+
+## Creating Skills from Toolkits
+
+Any AgentHeaven toolkit can be exported as a skill:
+
+```python
+from ahvn import Toolkit, ToolSpec
+
+toolkit = Toolkit(
+    name="weather",
+    description="Get current weather for any city.",
+    tools={"get_weather": ToolSpec.from_func(get_weather)},
+)
+
+# Export to a skill folder
+toolkit.export("./skills/")
+```
+
+This generates a `skills/weather/SKILL.md` file with the toolkit's name, description, and tool signatures.
+
+<Tip>
+    The built-in export covers basic descriptions. For production-quality skills, customize the generated `SKILL.md` or use `SkillUKFT` (see [Knowledge](/features/knowledge/overview)) to enrich descriptions with domain knowledge.
+</Tip>
+
+<br/>
+
+## Skill Structure
+
+```
+skills/weather/
+├── SKILL.md          # Required — name, description, triggers, tool signatures
+├── scripts/          # Optional — Python helper scripts
+├── resources/        # Optional — reference data, examples
+└── LICENSE           # Optional
+```
+
+The `SKILL.md` frontmatter follows the [Skills protocol](https://github.com/anthropics/skills) convention:
+
+```markdown
+---
+name: weather
+description: Get current weather for any city.
+---
+
+## Tools
+
+### get_weather
+Get the current weather for a given city name.
+...
+```
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [Toolkits](/features/toolkits) — build the toolkits that become skills
+    - [MCP](/integrations/mcp) — serve toolkits as MCP servers instead of skills
+    - [Knowledge](/features/knowledge/overview) — SkillUKFT for enriched skill descriptions
+</Tip>

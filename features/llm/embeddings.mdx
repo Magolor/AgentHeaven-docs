@@ -1,0 +1,98 @@
+---
+title: "Embeddings"
+description: "Generate vector embeddings for semantic search and similarity."
+---
+
+<Note>
+    *Same LLM class, different method — embed() instead of oracle().*
+</Note>
+
+{/*
+Source: ahvn.utils.llm.base — LLM.embed()
+
+Planned sections for future expansion:
+- Batch embeddings
+- Embedding cache integration
+- Dimension reduction and normalization
+*/}
+
+The `LLM` class provides an `embed()` method that returns a vector embedding for a given text, using the `embedder` preset (or any other configured preset with embedding capability).
+
+<br/>
+
+## 1. Basic Usage
+
+```python
+from ahvn.utils.llm import LLM
+
+llm = LLM(preset="embedder")
+vector = llm.embed("AgentHeaven is a framework for building agentic applications.")
+print(len(vector))    # e.g., 768 for embeddinggemma
+print(vector[:5])     # [0.0234, -0.0451, ...]
+```
+
+<br/>
+
+## 2. CLI
+
+```bash
+ahvn embed "Some text to embed"
+```
+
+<br/>
+
+## 3. Provider Configuration
+
+The `embedder` preset controls which model is used. By default it runs [EmbeddingGemma](https://ollama.com/library/embeddinggemma) (a lightweight 300M-parameter Google model) on Ollama locally.
+
+To switch providers:
+
+```bash
+# OpenAI
+ahvn cfg set llm.presets.embedder.provider openai
+ahvn cfg set llm.presets.embedder.model text-embedding-3-small    # 1536 dims
+
+# Voyage
+ahvn cfg set llm.providers.voyage.backend voyage
+ahvn cfg set llm.providers.voyage.api_key "pa-..."
+ahvn cfg set llm.presets.embedder.provider voyage
+ahvn cfg set llm.presets.embedder.model voyage-4                  # 1024 dims
+
+# Google
+ahvn cfg set llm.presets.embedder.provider google
+ahvn cfg set llm.presets.embedder.model gemini-embedding-001      # 3072 dims
+
+# Ollama (local, default)
+ahvn cfg set llm.presets.embedder.provider ollama
+ahvn cfg set llm.presets.embedder.model embeddinggemma             # 768 dims
+```
+
+<br/>
+
+## 4. Integration with Knowledge System
+
+Embeddings are primarily used by [VectorKLStore](/features/knowledge/storage) and [VectorKLEngine](/features/knowledge/retrieval) for semantic search and retrieval:
+
+```python
+from ahvn.utils.llm import LLM
+from ahvn.klstore import VectorKLStore
+
+embedder = LLM(preset="embedder")
+vecstore = VectorKLStore(
+    collection="my_knowledge",
+    provider="lancedb",
+    uri="./data/lancedb",
+    embedder=embedder,
+)
+```
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [Knowledge: Storage](/features/knowledge/storage) — VectorKLStore uses embeddings
+    - [Knowledge: Retrieval](/features/knowledge/retrieval) — VectorKLEngine for semantic search
+    - [Integrations: LLM Providers](/integrations/llm-providers) — embedding provider options
+</Tip>

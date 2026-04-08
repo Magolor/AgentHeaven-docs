@@ -1,0 +1,92 @@
+---
+title: "Tool Use"
+description: "Function calling, tool schemas, and automated tool execution with LLMs."
+---
+
+<Note>
+    *The LLM proposes tool calls; AgentHeaven executes them.*
+</Note>
+
+{/*
+Source: ahvn.utils.llm.base — exec_tool_calls, repair_tool_call
+Source: ahvn.utils.llm.llm_utils — tool formatting, tool_to_schema
+
+Planned sections for future expansion:
+- Parallel tool calling
+- Tool call validation and repair
+- Multi-step tool chains
+- Async tool execution
+*/}
+
+When LLMs support function calling (tool use), AgentHeaven handles the full loop: format tool schemas for the model, parse the model's tool call requests, execute the functions, and return results.
+
+<br/>
+
+## 1. Providing Tools to the LLM
+
+Pass a list of `ToolSpec` objects to the LLM call. The schemas are automatically formatted for the provider:
+
+```python
+from ahvn.utils.llm import LLM
+from ahvn.tool import ToolSpec
+
+
+def get_weather(city: str) -> str:
+    """Get the current weather for a city."""
+    return f"Sunny, 25°C in {city}"
+
+tool = ToolSpec.from_func(get_weather)
+llm = LLM(preset="chat")
+
+# The LLM will decide whether to call the tool
+response = llm.oracle("What's the weather in Tokyo?", tools=[tool])
+```
+
+<br/>
+
+## 2. exec_tool_calls
+
+When the LLM requests tool calls, `exec_tool_calls` executes them and returns the results:
+
+```python
+from ahvn.utils.llm import LLM
+
+llm = LLM(preset="chat")
+
+# exec_tool_calls handles the tool-call → execution → result loop
+result = llm.exec_tool_calls(
+    messages=[{"role": "user", "content": "What's the weather in Tokyo?"}],
+    tools=[tool],
+)
+```
+
+<br/>
+
+## 3. ToolSpec Schema Generation
+
+Each `ToolSpec` can generate the JSON schema that LLMs expect:
+
+```python
+from ahvn.tool import ToolSpec
+
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+tool = ToolSpec.from_func(add)
+print(tool.to_schema())
+# {"type": "function", "function": {"name": "add", "description": "Add two integers.", "parameters": {...}}}
+```
+
+See [Tools](/features/tools) for creating ToolSpecs and [Toolkits](/features/toolkits) for grouping them.
+
+<br/>
+
+## Further Exploration
+
+<Tip>
+    **Related:**
+    - [Tools](/features/tools) — creating ToolSpec from functions
+    - [Toolkits](/features/toolkits) — grouping tools and serving via MCP
+    - [Chat & Streaming](/features/llm/chat) — the core inference API
+</Tip>
