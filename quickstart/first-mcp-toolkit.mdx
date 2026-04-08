@@ -5,12 +5,14 @@ sidebarTitle: "First MCP Toolkit"
 ---
 
 <Note>
-    *Everyone wants to build MCPs for no reason.*
+    *If I have seen further, it is by standing on the shoulders of MCP developers.*
 </Note>
 
 Turn any Python function into an MCP-compatible tool that works with Claude Desktop, VS Code Copilot, Cursor, and other MCP clients.
 
-The benefit of using ahvn Toolkits as MCP servers lies in its persistence and lifecycle management. Once registered, your toolkit can be easily fetched, updated, and transferred across processes and machines without needing to re-define, re-register, or re-import your tool functions. This makes it ideal for building reusable toolkits that can be shared across projects and teams. Also, based on FastMCP and ahvn Capsule system, you can convert from any source (e.g., python function, existing MCP, code-string, etc.) to MCP easily, and ahvn handles the rest (e.g., serialization, transport, etc.) for you.
+The benefit of using ahvn Toolkits as MCP servers lies in its persistence and lifecycle management. Once registered, your toolkit can be easily fetched, updated, and transferred across processes and machines without needing to re-define, re-register, or re-import your tool functions. This makes it ideal for building reusable toolkits that can be shared across projects and teams.
+
+Also, based on FastMCP and ahvn Capsule system, you can convert from any source (e.g., python function, existing MCP, code-string, etc.) to MCP easily, and ahvn handles the rest (e.g., serialization, transport, etc.) for you.
 
 <br/>
 
@@ -188,41 +190,114 @@ Weather utilities — lookup and temperature conversion.
 
 ## Tools (2)
 
-
 ### get_weather
 Get the current weather for a city.
 
 **Parameters:**
-
 - `city`: string *(required)*
 
 **Usage:**
-
 ```bash
 ahvn mcp run weather_tools.get_weather "city=<city>"
 ```
 ```python
-get_weather(city=<city>)
+from ahvn.tool import TK_AHVN
+get_weather = TK_AHVN.get('weather_tools').get_tool('get_weather')
+print(get_weather(city=<city>))
 ```
 
 ### convert_temp
 Convert Celsius to Fahrenheit.
 
 **Parameters:**
-
 - `celsius`: number *(required)*
 
 **Usage:**
-
 ```bash
 ahvn mcp run weather_tools.convert_temp "celsius=<celsius>"
 ```
 ```python
-convert_temp(celsius=<celsius>)
+from ahvn.tool import TK_AHVN
+convert_temp = TK_AHVN.get('weather_tools').get_tool('convert_temp')
+print(convert_temp(celsius=<celsius>))
 ```
 
 ``````
 
+## 7. Importing an Existing MCP (Optional)
+
+If you already have an MCP server running, you can import it as a toolkit without needing to re-define your tools. The imported toolkit is persisted in `TK_AHVN` — once registered, it survives across processes and machines.
+
+### 7.1. From a URL
+
+```python
+from ahvn.tool import Toolkit, TK_AHVN
+
+toolkit = Toolkit.from_url(
+    "http://127.0.0.1:7002/weather_tools/mcp",
+    name="weather_tools",
+)
+TK_AHVN.add(toolkit, overwrite=True)
+```
+
+### 7.2. From an MCP JSON config
+
+Use the same config format as Claude Desktop, VS Code, etc.:
+
+```python
+toolkit = Toolkit.from_mcp_config({
+    "mcpServers": {
+        "weather_tools": {
+            "url": "http://127.0.0.1:7002/weather_tools/mcp",
+            "type": "http"
+        }
+    }
+})
+TK_AHVN.add(toolkit, overwrite=True)
+```
+
+Either way, the toolkit round-trips cleanly:
+
+```python
+print(TK_AHVN.get("weather_tools").to_mcp_config())
+# {'mcpServers': {'weather_tools': {'url': 'http://127.0.0.1:7002/weather_tools/mcp', 'transport': 'http'}}}
+```
+
+### 7.3. Example: Tavily Search
+
+Any public MCP endpoint works. As a common example, here we import [Tavily Search](https://tavily.com/) — a web-search MCP with 6 tools:
+
+```python
+from ahvn.tool import Toolkit, TK_AHVN
+
+TAVILY_URL = "https://mcp.tavily.com/mcp/?tavilyApiKey=<YOUR_KEY>"
+
+toolkit = Toolkit.from_url(TAVILY_URL, name="tavily")
+TK_AHVN.add(toolkit, overwrite=True)
+```
+
+```bash
+ahvn mcp list
+# ┃ Name   ┃ Tools ┃ Serving ┃
+# │ tavily │       │         │
+
+ahvn mcp export tavily -o ./skills/
+# ✓ Exported 'tavily' to ./skills/tavily
+```
+
+Or register from a config dict:
+
+```python
+toolkit = Toolkit.from_mcp_config({
+    "mcpServers": {
+        "tavily": {
+            "url": TAVILY_URL,
+            "type": "http",
+        }
+    }
+})
+TK_AHVN.add(toolkit, overwrite=True)
+```
 
 <br/>
 
