@@ -224,7 +224,7 @@ print(convert_temp(celsius=<celsius>))
 
 ``````
 
-## 7. Importing an Existing MCP (Optional)
+## 7. Import an Existing MCP (Optional)
 
 If you already have an MCP server running, you can import it as a toolkit without needing to re-define your tools. The imported toolkit is persisted in `TK_AHVN` — once registered, it survives across processes and machines.
 
@@ -270,19 +270,10 @@ Any public MCP endpoint works. As a common example, here we import [Tavily Searc
 ```python
 from ahvn.tool import Toolkit, TK_AHVN
 
-TAVILY_URL = "https://mcp.tavily.com/mcp/?tavilyApiKey=<YOUR_KEY>"
+TAVILY_URL = "https://mcp.tavily.com/mcp/?tavilyApiKey=<TAVILY_API_KEY>"
 
 toolkit = Toolkit.from_url(TAVILY_URL, name="tavily")
 TK_AHVN.add(toolkit, overwrite=True)
-```
-
-```bash
-ahvn mcp list
-# ┃ Name   ┃ Tools ┃ Serving ┃
-# │ tavily │       │         │
-
-ahvn mcp export tavily -o ./skills/
-# ✓ Exported 'tavily' to ./skills/tavily
 ```
 
 Or register from a config dict:
@@ -297,6 +288,24 @@ toolkit = Toolkit.from_mcp_config({
     }
 })
 TK_AHVN.add(toolkit, overwrite=True)
+```
+
+Then you can use it in ahvn just like any other toolkit, or export it as a skill for use by agent clients:
+
+```bash
+ahvn mcp list
+#                             Toolkits                            
+# ┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┓
+# ┃ Name          ┃ Tools                              ┃ Serving ┃
+# ┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━┩
+# │ tavily        │ tavily_crawl, tavily_extract,      │         │
+# │               │ tavily_map, tavily_research,       │         │
+# │               │ tavily_search, tavily_skill        │         │
+# │ weather_tools │ convert_temp, get_weather          │         │
+# └───────────────┴────────────────────────────────────┴─────────┘
+
+ahvn mcp export tavily -o ./skills/
+# ✓ Exported 'tavily' to ./skills/tavily
 ```
 
 <br/>
