@@ -12,11 +12,13 @@ Turn any Python function into an MCP-compatible tool that works with Claude Desk
 
 The benefit of using ahvn Toolkits as MCP servers lies in its persistence and lifecycle management. Once registered, your toolkit can be easily fetched, updated, and transferred across processes and machines without needing to re-define, re-register, or re-import your tool functions. This makes it ideal for building reusable toolkits that can be shared across projects and teams.
 
-Also, based on FastMCP and ahvn Capsule system, you can convert from any source (e.g., python function, existing MCP, code-string, etc.) to MCP easily, and ahvn handles the rest (e.g., serialization, transport, etc.) for you.
+Also, based on [FastMCP](https://gofastmcp.com/getting-started/welcome/) and ahvn's [Capsule](/features/capsules) system, you can convert from any source (e.g., python function, existing MCP, code-string, etc.) to MCP easily, and ahvn handles the rest (e.g., serialization, transport, etc.) for you.
 
 <br/>
 
 ## 1. Define Your Tools
+
+For example, let's define two simple tools: one to get the weather for a city, and another to convert Celsius to Fahrenheit.
 
 ```python
 from ahvn import ToolSpec
@@ -35,6 +37,8 @@ def convert_temp(celsius: float) -> float:
 
 ## 2. Build a Toolkit
 
+In ahvn, a `Toolkit` is a collection of tools that can be served together. They can have shared state, descriptions, metadata, and more. Let's create a toolkit for our weather tools:
+
 ```python
 from ahvn.tool import Toolkit
 
@@ -48,11 +52,15 @@ toolkit = Toolkit(
 )
 ```
 
+Notice that the description is optional but recommended — it helps the LLMs to understand the purpose of your toolkit and how to use it effectively. It is often worth spending a bit of time crafting clear descriptions for your toolkits and tools to get the best results from LLMs or exporting as skills to use with other ecosystems.
+
 <br/>
 
 ## 3. Register with TK_AHVN
 
-For MCP stdio transport, the subprocess needs to locate your toolkit. Register it globally:
+ahvn has a global `TK_AHVN` registry for toolkits. This allows you to register your toolkit once and access it from anywhere in your codebase, or even across machines. This is achieved via [Capsules](/features/capsules) and MCP stdio transport, which allows you to store the toolkit definition and tool functions in a database and fetch them on demand without needing to re-import or re-define your tools.
+
+For example, let's register our `weather_tools` toolkit as a toolkit:
 
 ```python
 from ahvn import TK_AHVN
@@ -60,15 +68,26 @@ from ahvn import TK_AHVN
 TK_AHVN.add(toolkit, overwrite=True)
 ```
 
+Now you can get it from anywhere in your codebase:
+
+```python
+weather_tools = TK_AHVN.get("weather_tools")
+```
+
+When the `TK_AHVN` database is migrated to a new machine or shared as a service, your registered toolkits come along with it and are available anywhere.
+
 <br/>
 
 ## 4. Serve via MCP
+
+After registering your toolkit as `weather_tools`, you can serve it as an MCP server with a single command:
 
 ```bash
 ahvn mcp serve weather_tools --host 127.0.0.1 --port 7001
 ```
 
-This starts an MCP server exposing your toolkit on `127.0.0.1:7001`. You can change the host and port as needed.
+This starts an MCP server exposing your toolkit on `127.0.0.1:7001`. You can change the host and port as needed for the HTTP transport (default transport is HTTP, and the default host and port are `127.0.0.1` and `7001` respectively).
+This prints the MCP JSON config (http) for your server, which you can use to connect with any MCP-compatible client:
 
 ```json
 {
@@ -81,14 +100,15 @@ This starts an MCP server exposing your toolkit on `127.0.0.1:7001`. You can cha
 }
 ```
 
-Or via stdio:
+Or you can serve it via stdio transport:
 
 ```bash
 ahvn mcp serve weather_tools --stdio
 ```
 
-This prints MCP JSON config and a single-line command:
+This prints MCP JSON config as well as a single-line command.
 
+MCP JSON (stdio):
 ```json
 {
   "mcpServers": {
@@ -103,6 +123,7 @@ This prints MCP JSON config and a single-line command:
 }
 ```
 
+Single-line command (stdio):
 ```bash
 <path_to_your_python>/python <path_to_your_ahvn>/_mcp_stdio.py weather_tools
 ```
@@ -111,42 +132,7 @@ This prints MCP JSON config and a single-line command:
 
 ## 5. Connect a Client
 
-Copy the MCP config from `ahvn mcp serve weather_tools` output:
-
-**HTTP MCP JSON**
-
-```json
-{
-  "mcpServers": {
-    "weather_tools": {
-      "url": "http://127.0.0.1:7001/weather_tools/mcp",
-      "transport": "http"
-    }
-  }
-}
-```
-
-**Stdio MCP JSON**
-
-```json
-{
-  "mcpServers": {
-    "weather_tools": {
-      "command": "<path_to_your_python>/python",
-      "args": [
-        "<path_to_your_ahvn>/_mcp_stdio.py",
-        "weather_tools"
-      ]
-    }
-  }
-}
-```
-
-**Stdio single-line command**
-
-```bash
-<path_to_your_python>/python <path_to_your_ahvn>/_mcp_stdio.py weather_tools
-```
+So, we can obtain http MCP config JSON, http MCP config URL, stdio MCP config JSON, or stdio single-line command from the previous step. Generally you can paste the config JSON into the client's MCP server configuration, but the exact steps depend on the client. Here are instructions for some popular clients:
 
 <Tabs>
     <Tab title="LM Studio">
@@ -156,12 +142,14 @@ Copy the MCP config from `ahvn mcp serve weather_tools` output:
         `claude mcp add --transport http weather_tools http://127.0.0.1:7001/weather_tools/mcp`
     </Tab>
     <Tab title="Codex">
-        In Settings > MCP Servers > Add Server, set Name to "weather_tools", choose Streamable HTTP, and paste `http://127.0.0.1:7001/weather_tools/mcp`.
+        In Settings > MCP Servers > Add Server, set Name to "weather_tools".
+        For http, choose Streamable HTTP, and paste `http://127.0.0.1:7001/weather_tools/mcp`.
         For stdio, choose Stdio and paste the single-line command.
     </Tab>
     <Tab title="VS Code">
-        Run `MCP: Add Server` from the Command Palette, choose `HTTP`, paste `http://127.0.0.1:7001/weather_tools/mcp`, and name it "weather_tools".
-        For stdio, choose `stdio` and paste the single-line command.
+        Run `MCP: Add Server` from the Command Palette.
+        For http, choose `HTTP`, paste `http://127.0.0.1:7001/weather_tools/mcp`, and name it "weather_tools".
+        For stdio, choose `stdio`, paste the single-line command, and name it "weather_tools".
     </Tab>
 </Tabs>
 
