@@ -76,6 +76,18 @@ weather_tools = TK_AHVN.get("weather_tools")
 
 When the `TK_AHVN` database is migrated to a new machine or shared as a service, your registered toolkits come along with it and are available anywhere.
 
+Notice that this tool is registered in the TK_AHVN and is now persistent, even if you remove the original code that defined it. To view all registered toolkits, you can run:
+
+```bash
+ahvn mcp ls
+```
+
+To remove this toolkit from the registry, you can use:
+
+```bash
+ahvn mcp rm weather_tools
+```
+
 <br/>
 
 ## 4. Serve via MCP
@@ -147,7 +159,7 @@ So, we can obtain http MCP config JSON, http MCP config URL, stdio MCP config JS
         For stdio, choose Stdio and paste the single-line command.
     </Tab>
     <Tab title="VS Code">
-        Run `MCP: Add Server` from the Command Palette.
+        Run `MCP: Add Server` from the Command Palette (Ctrl+Shift+P / Cmd+Shift+P on Mac).
         For http, choose `HTTP`, paste `http://127.0.0.1:7001/weather_tools/mcp`, and name it "weather_tools".
         For stdio, choose `stdio`, paste the single-line command, and name it "weather_tools".
     </Tab>

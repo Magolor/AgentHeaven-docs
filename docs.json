@@ -12,7 +12,7 @@
     "logo": {
         "light": "/images/logo-light.png",
         "dark": "/images/logo-dark.png",
-        "href": "https://rubiksql.github.io/AgentHeaven-docs/"
+        "href": "https://ahvn.top"
     },
     "appearance": {
         "default": "dark",
@@ -47,7 +47,10 @@
         "prompt": "Search AgentHeaven docs..."
     },
     "seo": {
-        "indexing": "navigable"
+        "indexing": "navigable",
+        "metatags": {
+            "canonical": "https://ahvn.top"
+        }
     },
     "navbar": {
         "primary": {
@@ -90,68 +93,16 @@
                                 "group": "Features",
                                 "pages": [
                                     "features/configuration",
-                                    {
-                                        "group": "LLM",
-                                        "pages": [
-                                            "features/llm/overview",
-                                            "features/llm/chat",
-                                            "features/llm/sessions",
-                                            "features/llm/embeddings",
-                                            "features/llm/tool-use",
-                                            "features/llm/advanced"
-                                        ]
-                                    },
                                     "features/prompts",
-                                    "features/caching",
                                     "features/capsules",
                                     "features/tools",
-                                    "features/toolkits",
-                                    {
-                                        "group": "Knowledge",
-                                        "pages": [
-                                            "features/knowledge/overview",
-                                            "features/knowledge/ukf",
-                                            "features/knowledge/storage",
-                                            "features/knowledge/retrieval",
-                                            "features/knowledge/klbase"
-                                        ]
-                                    },
-                                    {
-                                        "group": "Utilities",
-                                        "pages": [
-                                            "features/utilities/overview",
-                                            "features/utilities/serialization",
-                                            "features/utilities/file-and-path",
-                                            "features/utilities/functions",
-                                            "features/utilities/strings",
-                                            "features/utilities/common"
-                                        ]
-                                    },
-                                    {
-                                        "group": "Advanced",
-                                        "pages": [
-                                            "features/agents",
-                                            "features/extensions"
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "group": "Integrations",
-                                "pages": [
-                                    "integrations/overview",
-                                    "integrations/llm-providers",
-                                    "integrations/databases",
-                                    "integrations/vector-databases",
-                                    "integrations/mcp",
-                                    "integrations/skills"
+                                    "features/toolkits"
                                 ]
                             },
                             {
                                 "group": "Blog",
                                 "icon": "newspaper",
                                 "pages": [
-                                    "blog/imdb-sentiment-analysis",
                                     "blog/index"
                                 ]
                             },
@@ -168,53 +119,12 @@
                         ]
                     },
                     {
-                        "tab": "Reference",
-                        "groups": [
-                            {
-                                "group": "API",
-                                "pages": [
-                                    "reference/api/overview"
-                                ]
-                            },
-                            {
-                                "group": "CLI",
-                                "pages": [
-                                    "reference/cli/overview"
-                                ]
-                            },
-                            {
-                                "group": "MCP Toolkit",
-                                "pages": [
-                                    "reference/mcp-toolkit/overview"
-                                ]
-                            },
-                            {
-                                "group": "Other",
-                                "pages": [
-                                    "reference/glossary"
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "tab": "Blog",
                         "groups": [
                             {
                                 "group": "Blog",
                                 "pages": [
-                                    "blog/index",
-                                    "blog/imdb-sentiment-analysis"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "tab": "Demos",
-                        "groups": [
-                            {
-                                "group": "Demos",
-                                "pages": [
-                                    "demos/index"
+                                    "blog/index"
                                 ]
                             }
                         ]
@@ -248,68 +158,16 @@
                                 "group": "功能",
                                 "pages": [
                                     "zh/features/configuration",
-                                    {
-                                        "group": "LLM",
-                                        "pages": [
-                                            "zh/features/llm/overview",
-                                            "zh/features/llm/chat",
-                                            "zh/features/llm/sessions",
-                                            "zh/features/llm/embeddings",
-                                            "zh/features/llm/tool-use",
-                                            "zh/features/llm/advanced"
-                                        ]
-                                    },
                                     "zh/features/prompts",
-                                    "zh/features/caching",
                                     "zh/features/capsules",
                                     "zh/features/tools",
-                                    "zh/features/toolkits",
-                                    {
-                                        "group": "知识系统",
-                                        "pages": [
-                                            "zh/features/knowledge/overview",
-                                            "zh/features/knowledge/ukf",
-                                            "zh/features/knowledge/storage",
-                                            "zh/features/knowledge/retrieval",
-                                            "zh/features/knowledge/klbase"
-                                        ]
-                                    },
-                                    {
-                                        "group": "工具集",
-                                        "pages": [
-                                            "zh/features/utilities/overview",
-                                            "zh/features/utilities/serialization",
-                                            "zh/features/utilities/file-and-path",
-                                            "zh/features/utilities/functions",
-                                            "zh/features/utilities/strings",
-                                            "zh/features/utilities/common"
-                                        ]
-                                    },
-                                    {
-                                        "group": "进阶",
-                                        "pages": [
-                                            "zh/features/agents",
-                                            "zh/features/extensions"
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "group": "集成",
-                                "pages": [
-                                    "zh/integrations/overview",
-                                    "zh/integrations/llm-providers",
-                                    "zh/integrations/databases",
-                                    "zh/integrations/vector-databases",
-                                    "zh/integrations/mcp",
-                                    "zh/integrations/skills"
+                                    "zh/features/toolkits"
                                 ]
                             },
                             {
                                 "group": "博客",
                                 "icon": "newspaper",
                                 "pages": [
-                                    "zh/blog/imdb-sentiment-analysis",
                                     "zh/blog/index"
                                 ]
                             },
@@ -326,53 +184,12 @@
                         ]
                     },
                     {
-                        "tab": "参考",
-                        "groups": [
-                            {
-                                "group": "API",
-                                "pages": [
-                                    "zh/reference/api/overview"
-                                ]
-                            },
-                            {
-                                "group": "CLI",
-                                "pages": [
-                                    "zh/reference/cli/overview"
-                                ]
-                            },
-                            {
-                                "group": "MCP 工具包",
-                                "pages": [
-                                    "zh/reference/mcp-toolkit/overview"
-                                ]
-                            },
-                            {
-                                "group": "其他",
-                                "pages": [
-                                    "zh/reference/glossary"
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "tab": "博客",
                         "groups": [
                             {
                                 "group": "博客",
                                 "pages": [
-                                    "zh/blog/index",
-                                    "zh/blog/imdb-sentiment-analysis"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "tab": "演示",
-                        "groups": [
-                            {
-                                "group": "演示",
-                                "pages": [
-                                    "zh/demos/index"
+                                    "zh/blog/index"
                                 ]
                             }
                         ]
